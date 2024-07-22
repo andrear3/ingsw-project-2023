@@ -27,7 +27,7 @@ export function createModel(database){
         },
         descrizioneAsta:{
             type:DataTypes.STRING(250),
-            allowNull:
-         }
-        })
+            allowNull:true,
+         },
+        });
 }

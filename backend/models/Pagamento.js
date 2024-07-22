@@ -11,5 +11,5 @@ export function createModel(database) {
         type: DataTypes.DOUBLE(30),
         allowNull: false,
       },
-  }
+  });
 }
