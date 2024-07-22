@@ -7,5 +7,5 @@ export function createModel(database) {
       allowNull: false,
       primaryKey: true,
     },
-  }
+  });
 }
