@@ -29,5 +29,18 @@ export function createModel(database){
             type:DataTypes.STRING(250),
             allowNull:true,
          },
+         prezzofinale:{
+            type: DataTypes.DOUBLE,
+            allowNull:false,
+         },
+         dataFineAsta:{
+            type: DataTypes.DATE,
+            allowNull:false,
+         },
+         statusAsta:{
+            type:Sequelize.ENUM,
+            values:["venduto","inVendita","nonVenduto"],
+            allowNull:false,
+         },
         });
 }
