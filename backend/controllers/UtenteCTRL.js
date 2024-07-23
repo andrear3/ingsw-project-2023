@@ -24,7 +24,7 @@ export class UtenteCTRL {
             console.log(utente.toJSON());
           });
         } catch (error) {
-          console.error("Errore nel recupero degli Utenti!:", error);
+          console.error("Errore nel recupero degli Utenti!", error);
         }
       }
 }
