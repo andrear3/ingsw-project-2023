@@ -5,6 +5,7 @@ export function createModel(database) {
     valore: {
       type: DataTypes.DOUBLE(30),
       allowNull: false,
+      autoIncrement: true,
       primaryKey: true,
     },
   });

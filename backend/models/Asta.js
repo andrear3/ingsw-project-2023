@@ -4,6 +4,7 @@ export function createModel(database){
     database.define("Asta", {
         astaID: { 
             type:DataTypes.INTEGER(5),
+            autoIncrement: true,
             allowNull: false,
             primaryKey: true,
         },

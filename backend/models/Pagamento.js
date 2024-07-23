@@ -5,6 +5,7 @@ export function createModel(database) {
     id: {
       type: DataTypes.INTEGER(30),
       allowNull: false,
+      autoIncrement: true,
       primaryKey: true,
     },
     cifra: {
