@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Webpage</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .Metamorphous-regular {
+        font-family: "Metamorphous", cursive;
+      }
+      .toolbarcolor {
+        background: #007bff;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <mat-toolbar class="toolbarcolor">
+      <mat-toolbar-row>
+        <span class="Metamorphous-regular">DietiDeals24</span>
+        <input
+          type="text"
+          placeholder="Pick one"
+          aria-label="Number"
+          matInput
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          @for (option of options; track option) {
+          <mat-option [value]="option">{{ option }}</mat-option>
+          }
+        </mat-autocomplete>
+        <mat-icon
+          class="example-icon"
+          aria-hidden="false"
+          aria-label="Example user verified icon"
+          >verified_user</mat-icon
+        >
+        <span>Third Line</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </body>
+</html>

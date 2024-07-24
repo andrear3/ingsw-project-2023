@@ -48,8 +48,8 @@ AstaAlRibasso.Asta = AstaAlRibasso.belongsTo(Asta);
 Asta.AstaInversa = Asta.hasOne(AstaInversa); //opzionale
 AstaInversa.Asta = AstaInversa.belongsTo(Asta);
 
-database.sync().then( () => {
+database.sync(/*{ force: true, alter: true }*/).then( () => {
     console.log("Database synced correctly");
   }).catch( err => {
-    console.err("Error with database synchronization: " + err.message);
+    console.error("Error with database synchronization: " + err.message);
 });
