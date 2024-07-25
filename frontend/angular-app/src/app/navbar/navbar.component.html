@@ -20,9 +20,18 @@
     <mat-toolbar class="toolbarcolor">
       <mat-toolbar-row>
         <span class="Metamorphous-regular">DietiDeals24</span>
+        <form action="">
+          <label for="search"></label>
+          <input
+            type="text"
+            id="search"
+            name="searchQuery"
+            placeholder="Cerca Asta..."
+          />
+        </form>
         <input
           type="text"
-          placeholder="Pick one"
+          placeholder="Categoria"
           aria-label="Number"
           matInput
           [matAutocomplete]="auto"
@@ -38,7 +47,6 @@
           aria-label="Example user verified icon"
           >verified_user</mat-icon
         >
-        <span>Third Line</span>
       </mat-toolbar-row>
     </mat-toolbar>
   </body>

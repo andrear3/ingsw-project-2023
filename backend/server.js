@@ -3,8 +3,17 @@ import { Utente } from "./models/Database.js";
 import { UtenteCTRL } from "./controllers/UtenteCTRL.js";
 import { homepageRouter } from "./routers/Homepage.js";
 
-const app = express();
+//imports per immagini
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from "path";
 
+//usato per mandare immagini
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+
+const app = express();
 const PORT = 3000;
 
 
@@ -25,6 +34,13 @@ setInterval(checkValue, 6000);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
+});
+
+
+
+app.get('/test', (req, res) => {
+  //res.sendFile(__dirname + '/gameboy.jpg');
+  res.sendFile(path.join(__dirname, '.', 'resources', 'images', 'gameboy.jpg'));
 });
 
 app.use(homepageRouter);
