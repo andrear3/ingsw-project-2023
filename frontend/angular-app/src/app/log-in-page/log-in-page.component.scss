@@ -1,0 +1,86 @@
+body{
+    background-color:white ;
+}
+//box superiore login
+.square{
+    width: 550px;
+    height: 500px;
+    border:2px solid ie-hex-str($color: #AAAA);
+    border-radius: 20px;
+    margin:0px auto;
+    text-align: center;
+
+}
+//box inferiore login
+.square2{
+    width: 550px;
+    height: 200px;
+    border: 2px solid ie-hex-str($color: #AAAA);
+    border-radius: 20px;
+    margin:10px auto;
+}
+//logo diviso in sezioni per modificare grandezza singole lettere 
+.D{
+    color: #22A2EA;
+    font-family:"Metamorphos";
+    font-size: 75px;
+    position:relative;
+    top: 20px                                                                                   ;
+}
+.ieti{
+    color: #22A2EA;
+    font-family:"Metamorphos";
+    font-size: 65px;
+    position:relative;
+    top: 20px                                                                                   ;
+}
+.D2{
+    color: #22A2EA;
+    font-family:"Metamorphos";
+    font-size: 75px;
+    position:relative;
+    top: 20px                                                                                   ;
+}
+.eals24{
+    color: #22A2EA;
+    font-family:"Metamorphos";
+    font-size: 65px;
+    position:relative;
+    top: 20px                                                                                   ;
+}
+//box doce inserie email
+.box1{
+    width:300px;
+    height: 25px;
+    border:2px solid #22A2EA;
+    border-radius: 20px;
+    position:relative;
+    margin: auto;
+    top: 50px;
+    text-align: left;
+    color:#AAAA;
+}
+//box dover inserire la password
+.box2{
+    width:300px;
+    height: 25px;
+    border:2px solid #22A2EA;
+    border-radius: 20px;
+    position:relative;
+    margin: auto;
+    top: 60px;
+    text-align: left;
+    color:#AAAA;
+}
+//box per accedere ,da capire se usare un pulsante o semplicemnte lincare il box alla pagina succesiva
+.boxAccedi{
+    width:100px;
+    height: 25px;
+    background-color: #22A2EA;
+    border-radius: 20px;
+    position:relative;
+    margin: auto;
+    top: 70px;
+    color:white;
+}
+
