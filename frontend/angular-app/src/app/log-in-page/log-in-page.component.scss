@@ -4,7 +4,7 @@ body{
 //box superiore login
 .square{
     width: 550px;
-    height: 500px;
+    height: 450px;
     border:2px solid ie-hex-str($color: #AAAA);
     border-radius: 20px;
     margin:0px auto;
@@ -14,7 +14,7 @@ body{
 //box inferiore login
 .square2{
     width: 550px;
-    height: 200px;
+    height: 170px;
     border: 2px solid ie-hex-str($color: #AAAA);
     border-radius: 20px;
     margin:10px auto;
@@ -48,7 +48,7 @@ body{
     position:relative;
     top: 20px;
 }
-//box doce inserie email
+//box (cambiati in tipo input) inserie email
 .box1{
     width:300px;
     height: 25px;
@@ -60,7 +60,7 @@ body{
     text-align: left;
     color:#AAAA;
 }
-//box dover inserire la password
+//box(cambiati in tipo input) dove inserire la password
 .box2{
     width:300px;
     height: 25px;
@@ -71,6 +71,8 @@ body{
     top: 60px;
     text-align: left;
     color:#AAAA;
+    //overflow: hidden;
+    //clip: rect(0,0,0,0);
 }
 //box per accedere ,da capire se usare un pulsante o semplicemnte lincare il box alla pagina succesiva
 .boxAccedi{
@@ -78,9 +80,54 @@ body{
     height: 25px;
     background-color: #22A2EA;
     border-radius: 20px;
-    position:relative;
-    margin: auto;
-    top: 70px;
+    position:absolute;
+    text-align: center;
+    top: 250px;
     color:white;
+    left: 50%;//posiziona il centro del bottone al 50% della larghezza del contenitore .square.
+    transform: translateX(-50%);//sposta il bottone verso sinistra della metà della sua larghezza per centrarlo esattamente.
 }
+.O{
+    color: #AAAA;
+    position: absolute;
+    top:300px;
+    align-self: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+//da capire se sostituire con "accedi con google " usando il client google o aggioungere icona .
+//suggerisco client google se facile da inserire (sarebbe un flexino)
+.accediCon{
+    color: #AAAA;
+    position: absolute;
+    top:340px;
+    align-self: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.noAcc{
+    color: #AAAA;
+    position: absolute;
+    top:550px;
+    align-self: center;
+    left: 45%;
+    transform: translateX(-50%);
+}
+.iscriviti{
+    color:#22A2EA ;
+    position: absolute;
+    top:550px;
+    align-self: center;
+    left: 55%;
+    transform: translateX(-50%);
+}
+.iscriviti a{
+    color: #22A2EA;
+    text-decoration: none;
+}
+.iscriviti a:hover{
+    text-decoration: underline;
+}
+.O2{
 
+}
