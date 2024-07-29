@@ -1,3 +1,4 @@
+//prima pagina creata , presenta modi diversi e poco ordinati di posizionamento degli oggetti 
 body{
     background-color:white ;
 }
@@ -48,31 +49,21 @@ body{
     top: 20px;
 }
 //box (cambiati in tipo input) inserie email
-.box1{
-    width:300px;
+.box1,.box2{
+    width:250px;
     height: 25px;
     border:2px solid #22A2EA;
     border-radius: 20px;
     position:relative;
-    margin: auto;
-    top: 50px;
     text-align: left;
     color:#AAAA;
+    display: block;
+    left: 25%;   
+    margin-top: 20px; 
+    top: 20px;
 }
 //box(cambiati in tipo input) dove inserire la password
-.box2{
-    width:300px;
-    height: 25px;
-    border:2px solid #22A2EA;
-    border-radius: 20px;
-    position:relative;
-    margin: auto;
-    top: 60px;
-    text-align: left;
-    color:#AAAA;
-    left: 50px;    //overflow: hidden;
-    //clip: rect(0,0,0,0);
-}
+
 //box per accedere ,da capire se usare un pulsante o semplicemnte lincare il box alla pagina succesiva
 .boxAccedi{
     width:100px;
@@ -81,15 +72,14 @@ body{
     border-radius: 20px;
     position:relative;
     text-align: center;
-    top: 100px;
+    top: 40px;
     color:white;
-    left: 0%;//posiziona il centro del bottone al 50% della larghezza del contenitore .square.
-    transform: translateX(-150%);//sposta il bottone verso sinistra della metà della sua larghezza per centrarlo esattamente.
+    margin-right:5px ;
 }
 .O{
     color: #AAAA;
     position: absolute;
-    top:270px;
+    top:250px;
     align-self: center;
     left: 50%;
     transform: translateX(-50%);
