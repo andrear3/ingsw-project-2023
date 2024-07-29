@@ -7,14 +7,15 @@ body{
     height: 450px;
     border:2px solid ie-hex-str($color: #AAAA);
     border-radius: 20px;
-    margin:0px auto;
+    margin:20px auto;
     text-align: center;
+    
 
 }
 //box inferiore login
 .square2{
     width: 550px;
-    height: 170px;
+    height: 200px;
     border: 2px solid ie-hex-str($color: #AAAA);
     border-radius: 20px;
     margin:10px auto;
@@ -110,7 +111,7 @@ body{
     position: relative;
     top:20px;
     align-self: center;
-    left: 20%;
+    left: 15%;
    
 }
 .iscriviti{
@@ -118,7 +119,7 @@ body{
     position: relative ;
     top:20px;
     align-self: center;
-    left: 30%;
+    left: 35%;
    
 }
 .iscriviti a{
@@ -142,5 +143,17 @@ body{
 
 */
 .O2{
-
+color: #AAAA;
+position: relative;
+align-self: center;
+top: 50px;
+left: 10%;
+transform: translateX(-50%);
+}
+.iscrivitiCon{
+color: #AAAA;
+position: relative;
+align-self: center;
+top: 80px;
+left: 1%;
 }
