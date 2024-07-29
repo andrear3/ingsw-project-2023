@@ -71,7 +71,7 @@ body{
     top: 60px;
     text-align: left;
     color:#AAAA;
-    //overflow: hidden;
+    left: 50px;    //overflow: hidden;
     //clip: rect(0,0,0,0);
 }
 //box per accedere ,da capire se usare un pulsante o semplicemnte lincare il box alla pagina succesiva
@@ -80,12 +80,12 @@ body{
     height: 25px;
     background-color: #22A2EA;
     border-radius: 20px;
-    position:absolute;
+    position:relative;
     text-align: center;
-    top: 250px;
+    top: 100px;
     color:white;
-    left: 50%;//posiziona il centro del bottone al 50% della larghezza del contenitore .square.
-    transform: translateX(-50%);//sposta il bottone verso sinistra della metà della sua larghezza per centrarlo esattamente.
+    left: 0%;//posiziona il centro del bottone al 50% della larghezza del contenitore .square.
+    transform: translateX(-150%);//sposta il bottone verso sinistra della metà della sua larghezza per centrarlo esattamente.
 }
 .O{
     color: #AAAA;
@@ -107,24 +107,25 @@ body{
 }
 .noAcc{
     color: #AAAA;
-    position: absolute;
-    top:550px;
+    position: relative;
+    top:20px;
     align-self: center;
-    left: 45%;
-    transform: translateX(-50%);
+    left: 20%;
+   
 }
 .iscriviti{
     color:#22A2EA ;
-    position: absolute;
-    top:550px;
+    position: relative ;
+    top:20px;
     align-self: center;
-    left: 55%;
-    transform: translateX(-50%);
+    left: 30%;
+   
 }
 .iscriviti a{
     color: #22A2EA;
     text-decoration: none;
 }
+//sottolinea quando papssi il cursore su iscriviti 
 .iscriviti a:hover{
     text-decoration: underline;
 }
