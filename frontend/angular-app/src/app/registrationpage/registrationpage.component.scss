@@ -1,3 +1,83 @@
 body{
     background-color: white;
 }
+.square{
+    width: 600px;
+    height: 650px;
+    border:2px solid ie-hex-str($color: #AAAA);
+    border-radius: 20px;
+    margin:20px auto;
+    text-align: center;
+    position: relative;
+    //right: 5%;
+  
+}
+.logo{
+    position: relative;
+    left: 0%;
+}
+.D{
+    color: #22A2EA;
+    font-family:"Metamorphos";
+    font-size: 75px;
+    position:relative;
+    top: 20px;
+}
+.ieti{
+    color: #22A2EA;
+    font-family:"Metamorphos";
+    font-size: 65px;
+    position:relative;
+    top: 20px;
+}
+.D2{
+    color: #22A2EA;
+    font-family:"Metamorphos";
+    font-size: 75px;
+    position:relative;
+    top: 20px;
+}
+.eals24{
+    color: #22A2EA;
+    font-family:"Metamorphos";
+    font-size: 65px;
+    position:relative;
+    top: 20px;
+}
+
+.boxNome,.boxCognome,.boxDataNascita,.boxPassword,.boxNickname,.boxTipoAccount,.boxRegione,.boxIndirizzo
+{
+    width:300px;
+    height: 25px;
+    border:2px solid #22A2EA;
+    border-radius: 20px;
+    position:relative;
+    text-align: left;
+    color:#AAAA;
+    display: block;
+    left: 25%;   
+    margin-top: 40px; 
+   
+}
+.textNome,.textCognome,.textPassword,.textTipoProfilo,.textDataNascita,.textNickname,.textRegione,.textIndirizzo
+{
+    color: #AAAA;
+    display:block;
+    position: relative;
+    margin-left: 3%;
+    margin-top: 47px; 
+    bottom: 570px;
+    text-align: left;
+    
+}
+.iscrivitiButton{
+    width:100px;
+    height: 25px;
+    background-color: #22A2EA;
+    border-radius: 20px;
+    position:relative;
+    text-align: center;
+    bottom: 560px;
+    margin-left: 75%;
+    color:white;
+}

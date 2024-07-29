@@ -6,8 +6,37 @@
         <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap">
     </head>
     <body>
-        <div calss="square">
-            
-             </div>
+        
+        <div class="square"> 
+            <div class="logo">
+                <span class="D">D</span>
+                <span class="ieti">ieti</span>
+                <span class="D2">D</span>
+                <span class="eals24">eals24</span>
+                 </div>
+            <input type="text" class="boxNome" placeholder="Nome">
+            <input type="text" class="boxCognome" placeholder="Cognome">
+            <input type="password" class="boxPassword" placeholder="ex1242">
+            <input type="text" class="boxTipoAccount" placeholder="Tipo"  matInput [matAutocomplete]="auto"> 
+            <mat-autocomplete #auto="matAutocomplete">
+                @for (option of options; track option) {
+                <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-autocomplete>
+            <input type="text" class="boxDataNascita" placeholder="gg/mm/aaaa">
+            <input type="text" class="boxNickname" placeholder="Nickname">
+            <input type="text" class="boxRegione" placeholder="Regione">
+            <input type="text" class="boxIndirizzo" placeholder="VIA GIUSEPPE VERDI, 10, 20900, MONZA">
+            <span class="textNome">Nome</span>
+            <span class="textCognome">Cognome</span>
+            <span class="textPassword">Password</span>
+            <span class="textTipoProfilo">Tipo Profilo</span>
+            <span class="textDataNascita">Data di Nascita</span>
+            <span class="textNickname">Nickname</span>
+            <span class="textRegione">Regione</span>
+            <span class="textIndirizzo">Indirizzo</span>
+            <button class="iscrivitiButton">Iscriviti</button>
+
+        </div>
     </body>
 </html>
