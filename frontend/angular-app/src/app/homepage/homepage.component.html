@@ -4,6 +4,9 @@
     <title>homepage</title>
   </head>
   <body>
+    <nav>
+      <app-navbar></app-navbar>
+    </nav>
     @for (utente of utenti; track utente) {
       <p class="">{{ utente.nickname }}</p>
       <p class="">{{ utente.password }}</p>

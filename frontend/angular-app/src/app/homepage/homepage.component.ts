@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RestService } from '../_services/rest-api.service';
 import { Utente } from '../_models/utente-model';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [],
+  imports: [NavbarComponent],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
 })
