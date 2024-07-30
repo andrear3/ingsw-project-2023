@@ -14,11 +14,12 @@
                 <span class="D2">D</span>
                 <span class="eals24">eals24</span>
                  </div>
-            <input type="text" class="boxNome" placeholder="Nome">
-            <input type="text" class="boxCognome" placeholder="Cognome">
-            <input type="password" class="boxPassword" placeholder="ex1242">
-            <input type="text" class="boxTipoAccount" placeholder="Tipo"  matInput [matAutocomplete]="auto"> 
-            <mat-autocomplete #auto="matAutocomplete">
+                 <input type="text" class="boxEmail" placeholder="Email">
+                 <input type="text" class="boxNome" placeholder="Nome">
+                 <input type="text" class="boxCognome" placeholder="Cognome">
+                 <input type="password" class="boxPassword" placeholder="ex1242">
+                 <input type="text" class="boxTipoAccount" placeholder="Tipo"  matInput [matAutocomplete]="auto"> 
+                 <mat-autocomplete #auto="matAutocomplete">
                 @for (option of options; track option) {
                 <mat-option [value]="option">{{ option }}</mat-option>
                 }
@@ -27,6 +28,7 @@
             <input type="text" class="boxNickname" placeholder="Nickname">
             <input type="text" class="boxRegione" placeholder="Regione">
             <input type="text" class="boxIndirizzo" placeholder="VIA GIUSEPPE VERDI, 10, 20900, MONZA">
+            <span class="textEmail">Email</span>
             <span class="textNome">Nome</span>
             <span class="textCognome">Cognome</span>
             <span class="textPassword">Password</span>

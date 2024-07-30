@@ -3,7 +3,7 @@ body{
 }
 .square{
     width: 600px;
-    height: 650px;
+    height: 720px;
     border:2px solid ie-hex-str($color: #AAAA);
     border-radius: 20px;
     margin:20px auto;
@@ -44,8 +44,7 @@ body{
     position:relative;
     top: 20px;
 }
-
-.boxNome,.boxCognome,.boxDataNascita,.boxPassword,.boxNickname,.boxTipoAccount,.boxRegione,.boxIndirizzo
+.boxEmail,.boxNome,.boxCognome,.boxDataNascita,.boxPassword,.boxNickname,.boxTipoAccount,.boxRegione,.boxIndirizzo
 {
     width:300px;
     height: 25px;
@@ -59,14 +58,14 @@ body{
     margin-top: 40px; 
    
 }
-.textNome,.textCognome,.textPassword,.textTipoProfilo,.textDataNascita,.textNickname,.textRegione,.textIndirizzo
+.textEmail,.textNome,.textCognome,.textPassword,.textTipoProfilo,.textDataNascita,.textNickname,.textRegione,.textIndirizzo
 {
     color: #AAAA;
     display:block;
     position: relative;
     margin-left: 3%;
-    margin-top: 47px; 
-    bottom: 570px;
+    margin-top: 46px; 
+    bottom: 635px;
     text-align: left;
     
 }
@@ -77,7 +76,7 @@ body{
     border-radius: 20px;
     position:relative;
     text-align: center;
-    bottom: 560px;
+    bottom: 630px;
     margin-left: 75%;
     color:white;
 }
