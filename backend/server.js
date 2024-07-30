@@ -7,6 +7,7 @@ import { homepageRouter } from "./routers/Homepage.js";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from "path";
+import { loginRouter } from "./routers/Login.js";
 
 //usato per mandare immagini
 const __filename = fileURLToPath(import.meta.url);
@@ -43,7 +44,9 @@ app.get('/test', (req, res) => {
   res.sendFile(path.join(__dirname, '.', 'resources', 'images', 'gameboy.jpg'));
 });
 
+app.use(loginRouter);
 app.use(homepageRouter);
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
