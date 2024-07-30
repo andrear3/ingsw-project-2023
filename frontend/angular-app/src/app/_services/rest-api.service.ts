@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Utente } from '../_models/utente-model';
-
+import { Login } from '../_models/login-model';
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +18,7 @@ export class RestService {
   };
 
   getUtenti(){
-    let url = `${this.apiUrl}/homepage/`;
+    let url = `${this.apiUrl}/homepage`;
     return this.http.get<Utente[]>(url, this.httpOptions);
   }
 }
