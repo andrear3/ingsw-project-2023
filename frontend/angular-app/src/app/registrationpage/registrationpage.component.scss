@@ -44,31 +44,52 @@ body{
     position:relative;
     top: 20px;
 }
-.boxEmail,.boxNome,.boxCognome,.boxDataNascita,.boxPassword,.boxNickname,.boxTipoAccount,.boxRegione,.boxIndirizzo
-{
+.boxEmail, .boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxTipoAccount, .boxRegione, .boxIndirizzo {
+   // display: flex;
+    flex-direction: row;
+    align-items: center; /* Allinea verticalmente gli elementi al centro */
+    margin: 20px auto;
+    width: 80%;
+    max-width: 500px;
+}
+
+.boxEmail input, 
+.boxNome input,
+.boxCognome input,
+.boxDataNascita input,
+.boxPassword input,
+.boxNickname input,
+.boxTipoAccount input,
+.boxRegione input,
+.boxIndirizzo input{
     width:300px;
     height: 25px;
-    border:2px solid #22A2EA;
     border-radius: 20px;
-    position:relative;
-    text-align: left;
-    color:#AAAA;
-    display: block;
-    left: 25%;   
-    margin-top: 40px; 
+    border: 2px solid #22A2EA;
+    color: #AAAA;
+    margin: -2px;
+    align-items: center; 
    
 }
-.textEmail,.textNome,.textCognome,.textPassword,.textTipoProfilo,.textDataNascita,.textNickname,.textRegione,.textIndirizzo
-{
-    color: #AAAA;
-    display:block;
+.boxEmail label, 
+.boxNome label,
+.boxCognome label,
+.boxDataNascita label,
+.boxPassword label,
+.boxNickname label,
+.boxTipoAccount label,
+.boxRegione label,
+.boxIndirizzo label {
+    display: block;
+    font-size: 14px;
+    color: #AAAA; /* Colore del testo delle etichette */
     position: relative;
-    margin-left: 3%;
-    margin-top: 46px; 
-    bottom: 635px;
+    left: 19%;
     text-align: left;
-    
+
+
 }
+
 .iscrivitiButton{
     width:100px;
     height: 25px;
@@ -76,7 +97,7 @@ body{
     border-radius: 20px;
     position:relative;
     text-align: center;
-    bottom: 630px;
-    margin-left: 75%;
+    bottom: 10px;
+    margin-left: 80%;
     color:white;
 }
