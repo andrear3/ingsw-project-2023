@@ -38,18 +38,4 @@ export class UtenteCTRL {
     }
   }
 
-  static async verificaCredenziali(nickname, password) {
-    try {
-      const utente = await Utente.findOne({
-        where: {
-          nickname: nickname,
-          password: password, // Consider using hashed password for security
-        },
-      });
-      return utente !== null; // Returns true if the user exists, false otherwise
-    } catch (error) {
-      console.error("Errore nella verifica delle credenziali!", error);
-      return false;
-    }
-  }
 }

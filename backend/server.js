@@ -7,7 +7,7 @@ import { homepageRouter } from "./routers/Homepage.js";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from "path";
-import { loginRouter } from "./routers/Login.js";
+
 
 //usato per mandare immagini
 const __filename = fileURLToPath(import.meta.url);
@@ -17,6 +17,7 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = 3000;
 
+UtenteCTRL.salvaUtente("rosser34","Rossella", "Trix", "roxtrix@gmail.com","compratore","Lombardia","https://www.passportjs.org/", "ViaGiuseppeVerdi,10,20900,Monza,MB","rossa");
 
 UtenteCTRL.stampaTuttiUtenti();
 
@@ -44,7 +45,6 @@ app.get('/test', (req, res) => {
   res.sendFile(path.join(__dirname, '.', 'resources', 'images', 'gameboy.jpg'));
 });
 
-app.use(loginRouter);
 app.use(homepageRouter);
 
 
