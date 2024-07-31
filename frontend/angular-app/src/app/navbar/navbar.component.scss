@@ -15,7 +15,7 @@
     border-radius: 20px;
     text-align: left;
     position: relative;
-    margin-left: 100%;
+    margin-left: 80%;
   }
   .boxCategoria{
     width: 100px;
@@ -24,6 +24,64 @@
     border-radius: 20px;
     text-align: left;
     position: relative;
-    margin-left: 380px;
+    margin-left: 320px;
   }
-  
+  .icone{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+ }
+  .auctionIcon{
+    width: 25px;
+    height: 25px;
+    position: relative;
+    margin-left: 100px;
+    fill:white;
+  }
+  .auctionIcon label{
+    align-items: center;
+    display: flex;
+    font-size: 10px;
+    flex-direction: column;
+    margin: -10px;
+  }
+  .dashboardIcon{
+    width: 25px;
+    height: 25px;
+    position: relative;
+    //margin-left: 170px;
+    fill:white;
+  }
+  .dashboardIcon label{
+    align-items: center;
+    display: flex;
+    font-size: 10px;
+    flex-direction: column;
+    margin: -10px;
+  }
+  .userIcon{
+    width: 25px;
+    height: 25px;
+    position: relative;
+    fill:white;
+  }
+  .userIcon label{
+    align-items: center;
+    display: flex;
+    font-size: 10px;
+    flex-direction: column;
+    margin: -10px;
+  }
+  .changeProfile{
+    width: 25px;
+    height: 25px;
+    position: relative;
+    fill:white;
+  }
+  .changeProfile label{
+    align-items: center;
+    display: flex;
+    font-size: 10px;
+    flex-direction: column;
+    margin: -10px;
+  }
