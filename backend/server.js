@@ -2,6 +2,7 @@ import express from "express";
 import { Utente } from "./models/Database.js";
 import { UtenteCTRL } from "./controllers/UtenteCTRL.js";
 import { homepageRouter } from "./routers/Homepage.js";
+import { OffertaCTRL } from "./controllers/OffertaCTRL.js";
 
 //imports per immagini
 import { fileURLToPath } from 'url';
@@ -17,9 +18,11 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = 3000;
 
-UtenteCTRL.salvaUtente("rosser34","Rossella", "Trix", "roxtrix@gmail.com","compratore","Lombardia","https://www.passportjs.org/", "ViaGiuseppeVerdi,10,20900,Monza,MB","rossa");
+
 
 UtenteCTRL.stampaTuttiUtenti();
+
+
 
 const checkValue = async () => {
   try {
