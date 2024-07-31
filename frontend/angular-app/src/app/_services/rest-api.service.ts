@@ -21,5 +21,11 @@ export class RestService {
     let url = `${this.apiUrl}/homepage`;
     return this.http.get<Utente[]>(url, this.httpOptions);
   }
+
+  registraUtente(){
+    let url = `${this.apiUrl}/registration`;
+    return this.http.post<Utente[]>(url, this.httpOptions);
+  }
+  
 }
 

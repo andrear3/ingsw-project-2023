@@ -1,62 +1,63 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>login</title> 
-        <link rel="stylesheet"  href="registrationpage.component.scss">
-        <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap">
-    </head>
-    <body>
-        
-        <div class="square"> 
-            <div class="logo">
-                <span class="D">D</span>
-                <span class="ieti">ieti</span>
-                <span class="D2">D</span>
-                <span class="eals24">eals24</span>
-                 </div>
-            <div class="boxEmail">
-                <label>Email</label>
-                <input type="email" placeholder="Email">
-            </div>
-            <div class="boxNome">
-                <label>Nome</label>
-                <input type="text" placeholder="Nome">
-            </div>
-            <div class="boxCognome">
-                <label>Cognome</label>
-                <input type="text" placeholder="Cognome">
-            </div>
-            <div class="boxDataNascita">
-                <label>Data di nascita</label>
-                <input type="date" placeholder="gg/mm/aaaa">
-            </div>
-            <div class="boxPassword">
-                <label>Nome</label>
-                <input type="password" placeholder="password">
-            </div>
-            <div class="boxNickname">
-                <label>Nickname</label>
-                <input type="text" placeholder="Nickname">
-            </div>
-            <div class="boxTipoAccount">
-                <label>Tipo Account</label>
-                <input type="text" placeholder="Tipologia" matInput [matAutocomplete]="auto"> 
-            </div>
-
-                <mat-autocomplete #auto="matAutocomplete">
-               @for (option of options; track option) {
-               <mat-option [value]="option">{{ option }}</mat-option>
-               }
-            </mat-autocomplete>
-            <div class="boxRegione">
-                <label>Regione</label>
-                <input type="text" placeholder="Regione">
-            </div>
-            <div class="boxIndirizzo">
-                <label>Indirizzo</label>
-                <input type="text" placeholder="Indirizzo">
-            </div>
-            <button class="iscrivitiButton">Iscriviti</button>
+  <head>
+    <title>login</title>
+    <link rel="stylesheet" href="registrationpage.component.scss" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap"
+    />
+  </head>
+  <body>
+    <div class="square">
+        <div class="logo">
+          <span class="D">D</span>
+          <span class="ieti">ieti</span>
+          <span class="D2">D</span>
+          <span class="eals24">eals24</span>
         </div>
-    </body>
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+          <div class="boxEmail">
+            <label>Email</label>
+            <input matInput type="email" formControlName="email" placeholder="Email">
+          </div>
+          <div class="boxNome">
+            <label>Nome</label>
+            <input matInput type="text" formControlName="nome" placeholder="Nome">
+          </div>
+          <div class="boxCognome">
+            <label>Cognome</label>
+            <input matInput type="text" formControlName="cognome" placeholder="Cognome">
+          </div>
+          <div class="boxDataNascita">
+            <label>Data di nascita</label>
+            <input matInput type="date" formControlName="dataNascita" placeholder="gg/mm/aaaa">
+          </div>
+          <div class="boxPassword">
+            <label>Password</label>
+            <input matInput type="password" formControlName="password" placeholder="Password">
+          </div>
+          <div class="boxNickname">
+            <label>Nickname</label>
+            <input matInput type="text" formControlName="nickname" placeholder="Nickname">
+          </div>
+          <div class="boxTipoAccount">
+            <label>Tipo Account</label>
+            <input matInput type="text" formControlName="tipoAccount" [matAutocomplete]="auto" placeholder="Tipologia">
+            <mat-autocomplete #auto="matAutocomplete">
+
+              
+            </mat-autocomplete>
+          </div>
+          <div class="boxRegione">
+            <label>Regione</label>
+            <input matInput type="text" formControlName="regione" placeholder="Regione">
+          </div>
+          <div class="boxIndirizzo">
+            <label>Indirizzo</label>
+            <input matInput type="text" formControlName="indirizzo" placeholder="Indirizzo">
+          </div>
+          <button mat-raised-button type="submit" class="iscrivitiButton">Iscriviti</button>
+        </form>
+      </div>
+  </body>
 </html>

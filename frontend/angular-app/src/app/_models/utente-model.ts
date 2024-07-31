@@ -1,8 +1,4 @@
-
-enum tipoEnum{
-    venditore,
-    compratore,
-}
+import { tipoEnum } from "./tipoEnum";
 export interface Utente {
     nickname: string;
     password: string;
@@ -14,7 +10,6 @@ export interface Utente {
     indirizzo: string;
     createdAt?: Date; 
     updatedAt?: Date;
-   
 }
 
   
