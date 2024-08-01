@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
  
 const PORT = 3000;
 
-// Configura il middleware CORS
+// Configura il middleware CORS//cahtgpt
 app.use(cors({
   origin: 'http://localhost:4200', // Sostituisci con l'URL del tuo front-end
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
