@@ -11,9 +11,9 @@
             <span class="ieti">ieti</span>
             <span class="D2">D</span>
             <span class="eals24">eals24</span>
-            <input type="text" class="box1" placeholder="email/nickname">
-            <input type="password" class="box2" placeholder="password">
-            <button class="boxAccedi">accedi</button>
+            <input type="text" class="box1" placeholder="email/nickname" [(ngModel)]="email" name="email" required>
+            <input type="password" class="box2" placeholder="password" [(ngModel)]="password" name="password" required>
+            <button class="boxAccedi" (click)="login()">accedi</button>
             <span class="O">o</span>
             <span class="accediCon">Accedi con</span>
         </div>

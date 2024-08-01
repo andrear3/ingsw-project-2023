@@ -29,3 +29,30 @@ export class RestService {
   
 }
 
+import { Observable } from 'rxjs';
+//login
+@Injectable({
+  providedIn: 'root'
+})
+export class RestApiService {
+  private baseUrl = 'http://localhost:3000';
+
+  constructor(private http: HttpClient) {}
+
+  register(user: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/register`, user);
+  }
+
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, { email, password });
+  }
+
+  logout(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/logout`);
+  }
+
+  getUser(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/user`);
+  }
+}
+

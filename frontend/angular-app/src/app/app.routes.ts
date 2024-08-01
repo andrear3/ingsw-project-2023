@@ -1,9 +1,16 @@
 import { Routes } from '@angular/router';
-//import { NgModule } from '@angular/core';
-//import { RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LogInPageComponent } from './log-in-page/log-in-page.component';
 import { RegistrationpageComponent } from './registrationpage/registrationpage.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
+import { RestApiService } from './_services/rest-api.service';
+
 
 export const routes: Routes = [
   {
@@ -23,3 +30,14 @@ export const routes: Routes = [
   },
   
 ];
+//login
+@NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(routes)  // Usa `routes` qui
+  ],
+  providers: [RestApiService]
+})
+export class AppModule { }
