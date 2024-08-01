@@ -1,15 +1,16 @@
 import { tipoEnum } from "./tipoEnum";
+
 export interface Utente {
+    email: string;
     nickname: string;
     password: string;
     nome: string;
     cognome: string;
-    tipo: tipoEnum;
+    // Removed dataNascita as it's not in the backend model
+    tipo: tipoEnum; // Ensure tipoEnum matches ENUM values in the backend
     regione: string;
     linkEsterni: string;
     indirizzo: string;
     createdAt?: Date; 
     updatedAt?: Date;
 }
-
-  

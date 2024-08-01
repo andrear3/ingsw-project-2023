@@ -27,6 +27,8 @@ export class UtenteCTRL {
     await utente.save();
   }
 
+  
+  
   static async stampaTuttiUtenti() {
     try {
       const utenti = await Utente.findAll();
@@ -37,5 +39,4 @@ export class UtenteCTRL {
       console.error("Errore nel recupero degli Utenti!", error);
     }
   }
-
 }
