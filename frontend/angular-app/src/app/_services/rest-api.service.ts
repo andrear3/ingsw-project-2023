@@ -22,9 +22,9 @@ export class RestService {
     return this.http.get<Utente[]>(url, this.httpOptions);
   }
 
-  registraUtente(){
+  registraUtente(utente: Utente){
     let url = `${this.apiUrl}/registration`;
-    return this.http.post<Utente[]>(url, this.httpOptions);
+    return this.http.post<Utente>(url, this.httpOptions);
   }
   
 }

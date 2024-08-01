@@ -2,6 +2,8 @@ import express from "express";
 import { Utente } from "./models/Database.js";
 import { UtenteCTRL } from "./controllers/UtenteCTRL.js";
 import { homepageRouter } from "./routers/Homepage.js";
+import { registrationRouter } from "./routers/Registration.js";
+
 import { OffertaCTRL } from "./controllers/OffertaCTRL.js";
 import session from 'express-session';
 import cors from 'cors'; // Aggiungi questa importazione
@@ -15,6 +17,10 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from "path";
 
+//temp
+import bodyParser from "body-parser";
+
+
 
 //usato per mandare immagini
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +28,15 @@ const __dirname = dirname(__filename);
 
 
 const app = express();
+
+//MIDDLEWARE PER PARSING BODY DEL CLIENT.
+app.use(express.json());
+
+//temp
+app.use(bodyParser.json()); // To parse JSON bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+
+ 
 const PORT = 3000;
 
 // Configura il middleware CORS
@@ -35,7 +50,7 @@ app.use(cors({
 UtenteCTRL.stampaTuttiUtenti();
 
 
-
+/* FUNZIONE PER ASTA TIMER : >>>>
 const checkValue = async () => {
   try {
     console.log('Checking value...');
@@ -47,12 +62,13 @@ const checkValue = async () => {
 
 
 setInterval(checkValue, 6000);
-
+*/
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+//test per mandare user a db
 
 
 app.get('/test', (req, res) => {
@@ -61,7 +77,8 @@ app.get('/test', (req, res) => {
 });
 
 app.use(homepageRouter);
-
+app.use(registrationRouter);
+app.use(express.json());
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
