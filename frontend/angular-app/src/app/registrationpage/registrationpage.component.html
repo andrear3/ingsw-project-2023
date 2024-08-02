@@ -15,34 +15,30 @@
           <span class="D2">D</span>
           <span class="eals24">eals24</span>
         </div>
-        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+       
           <div class="boxEmail">
             <label>Email</label>
-            <input type="email" formControlName="email" placeholder="Email">
+            <input type="email"  placeholder="Email" [(ngModel)]="email" name="email" required>
           </div>
           <div class="boxNome">
             <label>Nome</label>
-            <input type="text" formControlName="nome" placeholder="Nome">
+            <input type="text"  placeholder="Nome" [(ngModel)]="nome" name="nome" required >
           </div>
           <div class="boxCognome">
             <label>Cognome</label>
-            <input type="text" formControlName="cognome" placeholder="Cognome">
-          </div>
-          <div class="boxDataNascita">
-            <label>Data di nascita</label>
-            <input type="date" formControlName="dataNascita" placeholder="gg/mm/aaaa">
+            <input type="text" placeholder="Cognome"[(ngModel)]="cognome" name="cognome" required>
           </div>
           <div class="boxPassword">
             <label>Password</label>
-            <input type="password" formControlName="password" placeholder="Password">
+            <input type="password"  placeholder="Password"[(ngModel)]="password" name="password" required>
           </div>
           <div class="boxNickname">
             <label>Nickname</label>
-            <input type="text" formControlName="nickname" placeholder="Nickname">
+            <input type="text"  placeholder="Nickname" [(ngModel)]="nickname" name="nickname" required>
           </div>
           <div class="boxTipoAccount">
             <label>Tipo Account</label>
-            <input matInput type="text" formControlName="tipoAccount" [matAutocomplete]="auto" placeholder="Tipologia">
+            <input matInput type="text"  [matAutocomplete]="auto" placeholder="Tipologia" [(ngModel)]="tipo" name="tipo" required>
             <mat-autocomplete #auto="matAutocomplete">
 
               
@@ -50,14 +46,14 @@
           </div>
           <div class="boxRegione">
             <label>Regione</label>
-            <input type="text" formControlName="regione" placeholder="Regione">
+            <input type="text"  placeholder="Regione" [(ngModel)]="regione" name="regione" required>
           </div>
           <div class="boxIndirizzo">
             <label>Indirizzo</label>
-            <input type="text" formControlName="indirizzo" placeholder="Indirizzo">
+            <input type="text"  placeholder="Indirizzo" [(ngModel)]="indirizzo" name="indirizzo" required>
           </div>
           <button mat-raised-button type="submit" class="iscrivitiButton">Iscriviti</button>
-        </form>
+    
       </div>
   </body>
 </html>
