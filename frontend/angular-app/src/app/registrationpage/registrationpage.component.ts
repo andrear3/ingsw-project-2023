@@ -43,3 +43,4 @@ export class RegistrationpageComponent {
   restService = inject(RestService);
 
 }
+
