@@ -17,3 +17,18 @@ registrationRouter.post("/registration", async (req, res) => {
       .json({ message: "Error during registration", error: error.message });
   }
 });
+
+
+registrationRouter.post('/register', async (req, res) => {
+    const { nickname, nome, cognome, email, tipo, regione, linkEsterni, indirizzo, password } = req.body;
+    try {
+      const hashedPassword = createHash('sha256').update(password).digest('hex');
+      const user = await Utente.create({ nickname, nome, cognome, email, tipo, regione, linkEsterni, indirizzo, password: hashedPassword });
+      res.status(201).json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+  
+  
+  

@@ -59,18 +59,24 @@ export class RegistrationpageComponent {
         // Removed dataNascita as it's not in your model
         password: formValues.password,
         nickname: formValues.nickname,
-        tipo: formValues.tipoAccount === 'Venditore' ? tipoEnum.venditore : tipoEnum.compratore, // Ensure this matches ENUM values
+        tipo:
+          formValues.tipoAccount === 'Venditore'
+            ? tipoEnum.venditore
+            : tipoEnum.compratore, // Ensure this matches ENUM values
         regione: formValues.regione,
         indirizzo: formValues.indirizzo,
-        linkEsterni: '' // Default value for linkEsterni
+        linkEsterni: '', // Default value for linkEsterni
       };
 
       console.log(newUser);
-      this.restService.registraUtente(newUser).subscribe(response => {
-        console.log('Registration successful:', response);
-      }, error => {
-        console.error('Error during registration:', error);
-      });
+      this.restService.registraUtente(newUser).subscribe(
+        (response) => {
+          console.log('Registration successful:', response);
+        },
+        (error) => {
+          console.error('Error during registration:', error);
+        }
+      );
     }
   }
 }
