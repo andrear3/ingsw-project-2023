@@ -8,6 +8,7 @@ import { createHash } from "crypto";
 import { Utente } from "./models/Database.js";
 import { UtenteCTRL } from "./controllers/UtenteCTRL.js";
 import { OffertaCTRL } from "./controllers/OffertaCTRL.js";
+import { AstaCTRL } from "./controllers/AstaCTRL.js";
 
 
 import { homepageRouter } from "./routers/Homepage.js";
@@ -52,18 +53,9 @@ app.use(cors());
 
 const PORT = 3000;
 
-// Configura il middleware CORS//chatgpt
-/*
-app.use(cors({
-  origin: 'http://localhost:4200',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true 
-}));
-*/
 
-UtenteCTRL.stampaTuttiUtenti();
+AstaCTRL.stampaTutteAste();
 
-/* FUNZIONE PER ASTA TIMER : >>>>
 const checkValue = async () => {
   try {
     console.log('Checking value...');
@@ -75,13 +67,12 @@ const checkValue = async () => {
 
 
 setInterval(checkValue, 6000);
-*/
+
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-//test per mandare user a db
 
 app.get("/test", (req, res) => {
   //res.sendFile(__dirname + '/gameboy.jpg');

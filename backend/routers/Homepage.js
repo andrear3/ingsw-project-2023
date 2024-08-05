@@ -1,12 +1,28 @@
 import express from "express";
 import { isAuthenticated } from "../middleware/Auth.js";
-import { Utente } from "../models/Database.js";
+import { Asta } from "../models/Database.js";
 
 export const homepageRouter = express.Router();
 
 homepageRouter.get("/homepage", async (req, res) => {
-  console.log("1111111111111111111111111111111111111111111");
-  console.log(req.session.user);
+
+  try {
+    let info = await Asta.findAll();
+    if (info) {
+      res.json(info);
+    } else {
+      res.status(404).json({ message: "Asta not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching asta:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+/* TESTING METHODS
+homepageRouter.get("/homepage", async (req, res) => {
+
   try {
     let info = await Utente.findAll();
     if (info) {
@@ -23,3 +39,4 @@ homepageRouter.get("/homepage", async (req, res) => {
 homepageRouter.get("/user", isAuthenticated, (req, res) => {
   res.json(req.session.user);
 });
+*/

@@ -6,12 +6,21 @@ export class AstaCTRL {
     try {
       const aste = await Asta.findAll();
       aste.forEach((asta) => {
-        console.log(aste.toJSON());
+        console.log(asta.toJSON());
       });
     } catch (error) {
       console.error("Errore nel recupero delle Aste!", error);
     }
   }
+
+  static async creaAsta(req) {
+    let utente = Asta.build(req.body);
+    await utente.save();
+
+    await nuovaOfferta.save();
+    console.log("Offerta Saved to database.");
+  }
+
 
 
 }
