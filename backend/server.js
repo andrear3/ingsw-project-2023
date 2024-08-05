@@ -1,27 +1,27 @@
+//GENERAL IMPORTS
 import express from "express";
 import session from "express-session";
-
+import bodyParser from "body-parser";
 import cors from "cors";
-import { createHash } from "crypto";
 
-import { Utente } from "./models/Database.js";
+//CONTROLLERS
 import { UtenteCTRL } from "./controllers/UtenteCTRL.js";
 import { OffertaCTRL } from "./controllers/OffertaCTRL.js";
 import { AstaCTRL } from "./controllers/AstaCTRL.js";
 
+//ROUTERS
 import { homepageRouter } from "./routers/Homepage.js";
 import { registrationRouter } from "./routers/Registration.js";
 import { loginRouter } from "./routers/LogIn.js";
 
-//imports per immagini
+//IMPORTS PER IMMAGINI
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import path from "path";
 
-//temp
-import bodyParser from "body-parser";
 
-//usato per mandare immagini
+
+//USATO PER MANDARE IMMAGINI
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -41,21 +41,21 @@ app.use(
   })
 );
 
-//temp
-app.use(bodyParser.json()); // To parse JSON bodies
+//GENERAL STATEMENTS
+app.use(bodyParser.json()); // Parsing JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(cors());
+app.use(cors()); //CORS SETTINGS
 
 const PORT = 3000;
 
 //TESTING
 AstaCTRL.stampaTutteAste();
 
-//CONTROLLO OGNI SECONDO DELLA SCADENZA ASTA
-setInterval(AstaCTRL.controllaTempoAsta, 1000);
+//STAMPA DELLE ASTE ATTIVE
+setInterval(AstaCTRL.stampaAsteAttive, 10000);
 
 
+//APP ROUTES
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -69,12 +69,6 @@ app.use(homepageRouter);
 app.use(registrationRouter);
 app.use(loginRouter);
 
-function isAuthenticated(req, res, next) {
-  if (req.session.user) {
-    return next();
-  }
-  res.status(401).json({ message: "Not authenticated" });
-}
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
