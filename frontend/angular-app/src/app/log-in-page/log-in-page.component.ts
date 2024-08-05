@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RestApiService } from '../_services/rest-api.service';
+import { RestService } from '../_services/rest-api.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class LogInPageComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private restApiService: RestApiService) {}
+  constructor(private restApiService: RestService) {}
 
   login() {
     this.restApiService.login(this.email, this.password).subscribe(response => {

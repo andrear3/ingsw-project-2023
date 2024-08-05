@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Utente } from '../_models/utente-model';
+import { Observable } from 'rxjs';
 //import { Login } from '../_models/login-model';
 @Injectable({
   providedIn: 'root',
@@ -26,33 +27,21 @@ export class RestService {
     let url = `${this.apiUrl}/registration`;
     return this.http.post<Utente>(url, this.httpOptions);
   }
-  
-}
-
-import { Observable } from 'rxjs';
-//login
-@Injectable({
-  providedIn: 'root'
-})
-export class RestApiService {
-  private baseUrl = 'http://localhost:3000';
-
-  constructor(private http: HttpClient) {}
 
   register(user: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, user);
+    return this.http.post(`${this.apiUrl}/register`, user);
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, { email, password });
+    return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 
   logout(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/logout`);
+    return this.http.get(`${this.apiUrl}/logout`);
   }
 
   getUser(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/user`);
+    return this.http.get(`${this.apiUrl}/user`);
   }
+  
 }
-

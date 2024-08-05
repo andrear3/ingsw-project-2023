@@ -7,9 +7,9 @@ import { LogInPageComponent } from './log-in-page/log-in-page.component';
 import { RegistrationpageComponent } from './registrationpage/registrationpage.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
-import { RestApiService } from './_services/rest-api.service';
+import { RestService } from './_services/rest-api.service';
+
 
 
 export const routes: Routes = [
@@ -38,6 +38,6 @@ export const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)  // Usa `routes` qui
   ],
-  providers: [RestApiService]
+  providers: [RestService]
 })
 export class AppModule { }
