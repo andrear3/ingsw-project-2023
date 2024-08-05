@@ -22,14 +22,15 @@ export class RestService {
     let url = `${this.apiUrl}/homepage`;
     return this.http.get<Utente[]>(url, this.httpOptions);
   }
-
+  /*
   registraUtente(utente: Utente){
     let url = `${this.apiUrl}/registration`;
     return this.http.post<Utente>(url, this.httpOptions);
   }
+    */
 
-  register(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, user);
+  register(email: string, nome: string, cognome: string, password: string, nickname: string, tipo: string, regione: string, indirizzo: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/registration`, { email, nome, cognome, password, nickname, tipo, regione, indirizzo });
   }
 
   login(email: string, password: string): Observable<any> {

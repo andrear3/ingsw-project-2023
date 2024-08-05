@@ -18,17 +18,19 @@ registrationRouter.post("/registration", async (req, res) => {
   }
 });
 
-
+/* REGISTRATION ALTERNATIVA (NON USATA)
 registrationRouter.post('/register', async (req, res) => {
-    const { nickname, nome, cognome, email, tipo, regione, linkEsterni, indirizzo, password } = req.body;
+    const { email, nome, cognome, password, nickname, tipo, regione, indirizzo } = req.body;
     try {
       const hashedPassword = createHash('sha256').update(password).digest('hex');
-      const user = await Utente.create({ nickname, nome, cognome, email, tipo, regione, linkEsterni, indirizzo, password: hashedPassword });
+      console.log(req.body);
+      const user = await Utente.create({ nickname, nome, cognome, email, tipo, regione, indirizzo, password: hashedPassword });
       res.status(201).json(user);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   });
   
+  */
   
   

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -8,8 +8,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
-import { Utente } from '../_models/utente-model'; // Ensure this path is correct
-import { tipoEnum } from '../_models/tipoEnum'; // Ensure this is correctly imported
 
 @Component({
   selector: 'app-registrationpage',
@@ -21,26 +19,33 @@ import { tipoEnum } from '../_models/tipoEnum'; // Ensure this is correctly impo
     MatInputModule,
     RouterOutlet,
     CommonModule,
-    FormsModule, RouterLink
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './registrationpage.component.html',
   styleUrls: ['./registrationpage.component.scss'],
 })
 export class RegistrationpageComponent {
   options: string[] = ['venditore', 'compratore'];
-  email: string= '';
-  nome: string= '';
-  cognome: string= '';
-  password: string= '';
-  nickname: string= '';
-  tipo: string='';
-  regione: string= '';
-  indirizzo: string= '';
+  email: string = '';
+  nome: string = '';
+  cognome: string = '';
+  password: string = '';
+  nickname: string = '';
+  tipo: string = '';
+  regione: string = '';
+  indirizzo: string = '';
 
+  constructor(private restApiService: RestService) {}
 
-
-
-  restService = inject(RestService);
-
+  register() {
+    this.restApiService.register(this.email, this.nome, this.cognome, this.password, this.nickname, this.tipo, this.regione, this.indirizzo).subscribe(
+      response => {
+        console.log('Registration successful:', response);
+      },
+      error => {
+        console.error('Registration failed:', error);
+      }
+    );
+  }
 }
-
