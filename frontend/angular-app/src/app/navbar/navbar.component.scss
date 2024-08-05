@@ -32,7 +32,6 @@
     gap: 50px;
  }
   .auctionIcon{
-    //background-color: #22A2EA;
     color: white;
     border: none;
     width: 25px;
@@ -41,6 +40,33 @@
     margin-left: 100px;
     fill:white;
   }
+  .popup{
+    width: 200px;
+    height: 200px;
+    border:2px solid ie-hex-str($color: #AAAA);
+    border-radius: 20px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    padding: 0 30px 30px ;
+    color:#22A2EA;
+    align-items: center;
+    background-color: black;
+    margin-top: 300px;
+  }
+  .tipologiaAsta label{
+    margin-top: 100px;
+  }
+.astaRibasso-BTN{
+position: relative;
+margin-top: 100px;
+margin-right:50px ;
+  }
+
+
+
+
+
   .auctionIcon label{
     background-color: #22A2EA;
     color:white;
