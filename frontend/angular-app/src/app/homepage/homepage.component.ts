@@ -1,26 +1,24 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RestService } from '../_services/rest-api.service';
-import { Utente } from '../_models/utente-model';
 import { NavbarComponent } from '../navbar/navbar.component';
-
+import { asta } from '../_models/asta-model';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
   imports: [NavbarComponent],
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.scss',
+  styleUrls: ['./homepage.component.scss'],
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
   restService = inject(RestService);
-  utenti: Utente[] = [];
+  aste: asta[] = [];
 
   ngOnInit() {
-    this.restService.getUtenti().subscribe({
+    this.restService.getAsta().subscribe({
       next: (data: any) => {
         console.log(data);
-        this.utenti = data;
-        console.log(this.utenti[0].nickname);
+        this.aste = data;
       },
       error: (err: any) => {
         console.log(err);

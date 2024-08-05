@@ -8,9 +8,10 @@
       <app-navbar></app-navbar>
     </nav>
     <p>homepage works!</p>
-    @for (utente of utenti; track utente) {
-    <p class="">{{ utente.nickname }}</p>
-    <p class="">{{ utente.password }}</p>
+    @for (asta of aste; track aste) {
+    <p class="">{{ asta.nomeBeneInVendita }}</p>
+    <p class="">{{ asta.categoria }}</p>
+    <p class="">{{ asta.descrizioneAsta }}</p>
     }
   </body>
 </html>

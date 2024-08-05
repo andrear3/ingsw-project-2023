@@ -56,9 +56,7 @@ setInterval(AstaCTRL.stampaAsteAttive, 10000);
 
 
 //APP ROUTES
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+
 
 app.get("/test", (req, res) => {
   //res.sendFile(__dirname + '/gameboy.jpg');

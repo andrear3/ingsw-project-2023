@@ -10,25 +10,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RestService } from './_services/rest-api.service';
 
-
-
 export const routes: Routes = [
   {
-    path: '', 
-    title: 'Home Page', 
-    component: HomepageComponent, 
-  },
-  {
-    path: 'login',
+    path: '',
     title: 'Login',
     component: LogInPageComponent,
   },
   {
-    path:'registration',                                                                                                           
-    title:'Registration',
+    path: 'homepage',
+    title: 'Homepage',
+    component: HomepageComponent,
+  },
+  {
+    path: 'registration',
+    title: 'Registration',
     component: RegistrationpageComponent,
   },
-  
 ];
 //login
 @NgModule({
@@ -36,8 +33,8 @@ export const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)  // Usa `routes` qui
+    RouterModule.forRoot(routes), // Usa `routes` qui
   ],
-  providers: [RestService]
+  providers: [RestService],
 })
-export class AppModule { }
+export class AppModule {}

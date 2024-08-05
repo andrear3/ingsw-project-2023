@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './log-in-page.component.html',
-  styleUrls: ['./log-in-page.component.scss']
+  styleUrls: ['./log-in-page.component.scss'],
 })
 //login
 export class LogInPageComponent {
@@ -19,10 +19,13 @@ export class LogInPageComponent {
   constructor(private restApiService: RestService) {}
 
   login() {
-    this.restApiService.login(this.email, this.password).subscribe(response => {
-      console.log('Login successful:', response);
-    }, error => {
-      console.error('Login failed:', error);
-    });
+    this.restApiService.login(this.email, this.password).subscribe(
+      (response) => {
+        console.log('Login successful:', response);
+      },
+      (error) => {
+        console.error('Login failed:', error);
+      }
+    );
   }
 }

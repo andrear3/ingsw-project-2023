@@ -1,8 +1,7 @@
-
 import express from "express";
 import { Utente } from "../models/Database.js"; // Adjust this import based on your actual model path
 
-export const registrationRouter = new express.Router();
+export const registrationRouter = express.Router();
 
 registrationRouter.post("/registration", async (req, res) => {
   console.log("Received data:", req.body); // Log received data for debugging
@@ -32,5 +31,3 @@ registrationRouter.post('/register', async (req, res) => {
   });
   
   */
-  
-  
