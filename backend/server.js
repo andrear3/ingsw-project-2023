@@ -1,19 +1,17 @@
 import express from "express";
 import session from "express-session";
 
-
-import cors from "cors"; 
+import cors from "cors";
 import { createHash } from "crypto";
 
 import { Utente } from "./models/Database.js";
 import { UtenteCTRL } from "./controllers/UtenteCTRL.js";
 import { OffertaCTRL } from "./controllers/OffertaCTRL.js";
-
+import { AstaCTRL } from "./controllers/AstaCTRL.js";
 
 import { homepageRouter } from "./routers/Homepage.js";
 import { registrationRouter } from "./routers/Registration.js";
 import { loginRouter } from "./routers/LogIn.js";
-
 
 //imports per immagini
 import { fileURLToPath } from "url";
@@ -22,7 +20,6 @@ import path from "path";
 
 //temp
 import bodyParser from "body-parser";
-
 
 //usato per mandare immagini
 const __filename = fileURLToPath(import.meta.url);
@@ -52,36 +49,16 @@ app.use(cors());
 
 const PORT = 3000;
 
-// Configura il middleware CORS//chatgpt
-/*
-app.use(cors({
-  origin: 'http://localhost:4200',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true 
-}));
-*/
+//TESTING
+AstaCTRL.stampaTutteAste();
 
-UtenteCTRL.stampaTuttiUtenti();
+//CONTROLLO OGNI SECONDO DELLA SCADENZA ASTA
+setInterval(AstaCTRL.controllaTempoAsta, 1000);
 
-/* FUNZIONE PER ASTA TIMER : >>>>
-const checkValue = async () => {
-  try {
-    console.log('Checking value...');
- 
-  } catch (error) {
-    console.error('Error checking value:', error);
-  }
-};
-
-
-setInterval(checkValue, 6000);
-*/
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-
-//test per mandare user a db
 
 app.get("/test", (req, res) => {
   //res.sendFile(__dirname + '/gameboy.jpg');
