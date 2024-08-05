@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Utente } from '../_models/utente-model';
@@ -18,9 +17,14 @@ export class RestService {
     }),
   };
 
-  getUtenti(){
+  getUtenti() {
     let url = `${this.apiUrl}/homepage`;
     return this.http.get<Utente[]>(url, this.httpOptions);
+  }
+
+  getAsta(): Observable<any> {
+    const url = `${this.apiUrl}/homepage`;
+    return this.http.get<any>(url, this.httpOptions);
   }
   /*
   registraUtente(utente: Utente){
@@ -29,8 +33,26 @@ export class RestService {
   }
     */
 
-  register(email: string, nome: string, cognome: string, password: string, nickname: string, tipo: string, regione: string, indirizzo: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/registration`, { email, nome, cognome, password, nickname, tipo, regione, indirizzo });
+  register(
+    email: string,
+    nome: string,
+    cognome: string,
+    password: string,
+    nickname: string,
+    tipo: string,
+    regione: string,
+    indirizzo: string
+  ): Observable<any> {
+    return this.http.post(`${this.apiUrl}/registration`, {
+      email,
+      nome,
+      cognome,
+      password,
+      nickname,
+      tipo,
+      regione,
+      indirizzo,
+    });
   }
 
   login(email: string, password: string): Observable<any> {
@@ -44,5 +66,4 @@ export class RestService {
   getUser(): Observable<any> {
     return this.http.get(`${this.apiUrl}/user`);
   }
-  
 }
