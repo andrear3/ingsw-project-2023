@@ -48,6 +48,8 @@ app.use(
 app.use(bodyParser.json()); // To parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(cors());
+
 const PORT = 3000;
 
 // Configura il middleware CORS//chatgpt
