@@ -17,7 +17,7 @@ export class RestService {
     }),
   };
 
-  getUtenti() {
+  getUtenti(): Observable<Utente[]> {
     let url = `${this.apiUrl}/homepage`;
     return this.http.get<Utente[]>(url, this.httpOptions);
   }
@@ -26,12 +26,6 @@ export class RestService {
     const url = `${this.apiUrl}/homepage`;
     return this.http.get<any>(url, this.httpOptions);
   }
-  /*
-  registraUtente(utente: Utente){
-    let url = `${this.apiUrl}/registration`;
-    return this.http.post<Utente>(url, this.httpOptions);
-  }
-    */
 
   register(
     email: string,
@@ -42,7 +36,7 @@ export class RestService {
     tipo: string,
     regione: string,
     indirizzo: string
-  ): Observable<any> {
+  ) {
     return this.http.post(`${this.apiUrl}/registration`, {
       email,
       nome,
@@ -61,9 +55,5 @@ export class RestService {
 
   logout(): Observable<any> {
     return this.http.get(`${this.apiUrl}/logout`);
-  }
-
-  getUser(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user`);
   }
 }

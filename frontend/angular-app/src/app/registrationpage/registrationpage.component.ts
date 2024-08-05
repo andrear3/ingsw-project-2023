@@ -20,7 +20,7 @@ import { RestService } from '../_services/rest-api.service';
     RouterOutlet,
     CommonModule,
     FormsModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './registrationpage.component.html',
   styleUrls: ['./registrationpage.component.scss'],
@@ -39,13 +39,24 @@ export class RegistrationpageComponent {
   constructor(private restApiService: RestService) {}
 
   register() {
-    this.restApiService.register(this.email, this.nome, this.cognome, this.password, this.nickname, this.tipo, this.regione, this.indirizzo).subscribe(
-      response => {
-        console.log('Registration successful:', response);
-      },
-      error => {
-        console.error('Registration failed:', error);
-      }
-    );
+    this.restApiService
+      .register(
+        this.email,
+        this.nome,
+        this.cognome,
+        this.password,
+        this.nickname,
+        this.tipo,
+        this.regione,
+        this.indirizzo
+      )
+      .subscribe(
+        (response) => {
+          console.log('Registration successful:', response);
+        },
+        (error) => {
+          console.error('Registration failed:', error);
+        }
+      );
   }
 }

@@ -18,7 +18,7 @@ enum statusAstaEnum{
     nonVenduto,
 }
 //interfaccia
-export interface asta{
+export interface Asta{
     astaId:number;
     nomeBeneInVendita:string;
     titolo:string;

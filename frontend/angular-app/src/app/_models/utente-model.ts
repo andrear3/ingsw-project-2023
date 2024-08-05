@@ -1,4 +1,4 @@
-import { tipoEnum } from "./tipoEnum";
+import { TipoUtente } from "./tipo-utente-enum";
 
 export interface Utente {
     email: string;
@@ -7,7 +7,7 @@ export interface Utente {
     nome: string;
     cognome: string;
     // Removed dataNascita as it's not in the backend model
-    tipo: tipoEnum; // Ensure tipoEnum matches ENUM values in the backend
+    tipo: TipoUtente; // Ensure tipoEnum matches ENUM values in the backend
     regione: string;
     linkEsterni: string;
     indirizzo: string;
