@@ -50,7 +50,7 @@ export class AstaCTRL {
     }
   }
 
-  static async recuperaAsteAttive() {
+  static async stampaAsteAttive() {
     try {
       const asteAttive = await Asta.findAll({
         where: {
