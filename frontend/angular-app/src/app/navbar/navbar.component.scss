@@ -32,6 +32,9 @@
     gap: 50px;
  }
   .auctionIcon{
+    //background-color: #22A2EA;
+    color: white;
+    border: none;
     width: 25px;
     height: 25px;
     position: relative;
@@ -39,6 +42,9 @@
     fill:white;
   }
   .auctionIcon label{
+    background-color: #22A2EA;
+    color:white;
+    border: none;
     align-items: center;
     display: flex;
     font-size: 10px;
@@ -85,3 +91,47 @@
     flex-direction: column;
     margin: -10px;
   }
+
+  .Popup.overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    height: 200px;
+    background: #22A2EA;
+    z-index: 1;
+  }
+  .Popup.content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background:black;
+    width: 200px;
+    z-index: 2;
+    text-align: center;
+    padding :200px;
+    box-sizing: border-box;
+  }
+  .Popupp.closePopup{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width:30px;
+    height: 30px;
+    background:black;
+    color: #22A2EA;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align:center;
+    border-radius: 50%;
+
+  }
+  .Popup.active.overlay{
+    display: block;
+}
+.Popup.active.content{
+  transition:all 300ms ease-in-out ;
+  transform: translate(-50%,-50%) scale(1);
+}

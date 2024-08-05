@@ -29,3 +29,13 @@ export class NavbarComponent {
     'Collezionismo',
   ];
 }
+// script.ts
+
+// Funzione per mostrare il popup
+function showPopup(): void {
+  const popupElement = document.getElementById('popup');
+  if (popupElement) {
+      popupElement.style.display = 'flex';
+  }
+}
+
