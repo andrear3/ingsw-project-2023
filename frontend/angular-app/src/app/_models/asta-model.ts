@@ -29,4 +29,5 @@ export interface Asta{
     dataFineAsta:Date;
     statusAsta:statusAstaEnum;
     url:string;
+    UtenteNickname: string;
 }

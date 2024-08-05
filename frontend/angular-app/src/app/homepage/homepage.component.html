@@ -1,60 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>homepage</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
     }
 
     .card-container {
       display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: center;
-      padding: 0 16px;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
     }
 
     .card-item {
-      flex: 1 1 calc(50% - 16px);
-      max-width: 300px;
-      box-sizing: border-box;
-      margin-bottom: 16px;
-    }
-
-    mat-card {
-      height: auto;
       display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      padding: 0;
+      align-items: center;
+      width: 100%;
+      max-width: 800px; /* Adjust as needed */
+      margin-bottom: 16px;
       border-radius: 8px;
+      overflow: hidden;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
     }
 
-    .card-item img {
+    .card-image {
+      flex: 0 0 200px; /* Fixed width for the image */
+      height: 200px;   /* Fixed height for the image */
+      overflow: hidden;
+    }
+
+    .card-image img {
       width: 100%;
-      height: 150px;
+      height: 100%;
       object-fit: cover;
     }
 
-    .mat-card-content {
+    .card-content {
       flex: 1;
-      padding: 8px;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      padding: 16px;
     }
 
-    .mat-card-actions {
-      padding: 8px;
+    .card-title {
+      font-size: 1.2em;
+      margin: 0;
+    }
+
+    .card-subtitle {
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .card-info p {
+      margin: 8px 0;
+    }
+
+    .card-actions {
+      padding: 16px;
       text-align: right;
+      background-color: #e0e0e0; /* Lighter gray for better contrast */
     }
 
-    @media (max-width: 800px) {
+    .card-actions button {
+      background-color: #007bff; /* Button color */
+      color: #fff; /* Text color */
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .card-actions button:hover {
+      background-color: #0056b3; /* Darker shade on hover */
+    }
+
+    @media (max-width: 600px) {
       .card-item {
-        flex: 1 1 100%;
-        max-width: 100%;
+        flex-direction: column;
+      }
+
+      .card-image {
+        width: 100%;
+        height: auto;
       }
     }
   </style>
@@ -63,30 +97,29 @@
   <nav>
     <app-navbar></app-navbar>
   </nav>
-  <p>Pagina principale!</p>
-  <div class="card-container">
-    @for (asta of aste; track aste) {
-    <div class="card-item">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>{{ asta.titolo }}</mat-card-title>
-          <mat-card-subtitle>{{ asta.nomeBeneInVendita }}</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image [src]="asta.url" alt="Immagine di {{ asta.nomeBeneInVendita }}" />
-        <mat-card-content>
-          <p><strong>Categoria:</strong> {{ asta.categoria }}</p>
-          <p><strong>Descrizione:</strong> {{ asta.descrizioneAsta }}</p>
-          <p><strong>Tipo:</strong> {{ asta.tipoBeneInVendita }}</p>
-          <p><strong>Status:</strong> {{ asta.statusAsta }}</p>
-          <p><strong>Data di Fine Asta:</strong> {{ asta.dataFineAsta | date }}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>Scopri di più</button>
-          <button mat-button>Aggiungi ai preferiti</button>
-        </mat-card-actions>
-      </mat-card>
+  <main>
+    <div class="card-container">
+      <!-- Use a template loop to render the cards -->
+      @for (asta of aste; track asta) {
+      <div class="card-item">
+        <div class="card-image">
+          <img [src]="asta.url" alt="Immagine di {{ asta.nomeBeneInVendita }}" />
+        </div>
+        <div class="card-content">
+          <h2 class="card-title">{{ asta.titolo }}</h2>
+          <h3 class="card-subtitle">{{ asta.nomeBeneInVendita }}</h3>
+          <div class="card-info">
+            <p><strong>Categoria:</strong> {{ asta.categoria }}</p>
+            <p><strong>Descrizione:</strong> {{ asta.descrizioneAsta }}</p>
+            <p><strong>Tipo:</strong> {{ asta.tipoBeneInVendita }}</p>
+            <p><strong>Status:</strong> {{ asta.statusAsta }}</p>
+            <p><strong>Data di Fine Asta:</strong> {{ asta.dataFineAsta | date }}</p>
+            <p><strong>Creata da:</strong> {{ asta.UtenteNickname }}</p>
+          </div>
+        </div>
+      </div>
+      }
     </div>
-    }
-  </div>
+  </main>
 </body>
 </html>
