@@ -1,5 +1,5 @@
 import { Asta } from "../models/Database.js";
-import { Sequelize } from "sequelize";
+import { Sequelize, Op } from "sequelize";
 
 export class AstaCTRL {
   static async stampaTutteAste() {
@@ -31,15 +31,12 @@ export class AstaCTRL {
   }
 
   //CONTROLLO SCADENZA ASTA (DA CONTINUARE)
-  static async controllaTempoAsta() {
+  static async timerAsta() {
     try {
       let asta = await AstaCTRL.cercaAsta(3); //esempio!
 
       const dataCorrente = new Date();
-      console.log(dataCorrente);
-      console.log(asta.createdAt);
       const dataAsta = new Date(asta.createdAt);
-      console.log(dataAsta);
 
       if (dataAsta.getTime() === dataCorrente.getTime()) {
         console.log("The dates are equal.");
@@ -50,6 +47,26 @@ export class AstaCTRL {
       }
     } catch (error) {
       console.error("Error checking value:", error);
+    }
+  }
+
+  static async recuperaAsteAttive() {
+    try {
+      const asteAttive = await Asta.findAll({
+        where: {
+          createdAt: {
+            [Op.gt]: new Date(), //Più grandi della data attuale
+          },
+        },
+      });
+
+      if (asteAttive.length > 0) {
+        console.log("Aste attive:", asteAttive);
+      } else {
+        console.log("Nessuna asta è attiva");
+      }
+    } catch (error) {
+      console.error("Errore nel recupero aste:", error);
     }
   }
 }

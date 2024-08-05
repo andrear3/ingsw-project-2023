@@ -13,15 +13,15 @@ import { homepageRouter } from "./routers/Homepage.js";
 import { registrationRouter } from "./routers/Registration.js";
 import { loginRouter } from "./routers/LogIn.js";
 
-//imports per immagini
+//IMPORTS PER IMMAGINI
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import path from "path";
 
-//temp
+//TEMP
 import bodyParser from "body-parser";
 
-//usato per mandare immagini
+//USATO PER MANDARE IMMAGINI
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -41,20 +41,20 @@ app.use(
   })
 );
 
-//temp
-app.use(bodyParser.json()); // To parse JSON bodies
+//TEMP
+app.use(bodyParser.json()); // Parsing JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors());
+app.use(cors()); //CORS SETTINGS
 
 const PORT = 3000;
 
 //TESTING
 AstaCTRL.stampaTutteAste();
+AstaCTRL.recuperaAsteAttive();
 
-//CONTROLLO OGNI SECONDO DELLA SCADENZA ASTA
-setInterval(AstaCTRL.controllaTempoAsta, 1000);
-
+//STAMPA DELLE ASTE ATTIVE
+setInterval(AstaCTRL.recuperaAsteAttive, 10000);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
