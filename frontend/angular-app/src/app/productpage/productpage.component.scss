@@ -5,8 +5,15 @@
     border-radius: 20px;
     margin:20px auto;
     text-align: center;
+    align-items: center;
     position: relative;
+    padding: 20px; /* Aggiungi padding per evitare che il contenuto tocchi i bordi */
+    box-sizing: border-box; /* Includi padding e bordo nel calcolo delle dimensioni */
+    display: flex;
+    flex-direction: column;
+
 }
+
 .nomeProdotto,
 .tempoRimanente,
 .offertaCorrente {
@@ -15,6 +22,8 @@
     height: 25px;
     border-radius: 20px;
     border: 2px solid #AAAAAA;
+    
+
 }
 
 .nomeProdotto {
@@ -36,6 +45,8 @@
     left: 75%;
     transform: translate(-50%, 0);
     z-index: 3;
+   
+    
 }
 
 .nomeProdotto label,.tempoRimanente label,.offertaCorrente label{
@@ -70,14 +81,16 @@
 }
 .foto{
     position: absolute;
-    margin: 0px auto;
+    margin: 20px auto;
     width:420px;
-    height: 390px;
+
+    height: 390px; 
     border-radius: 20px;
     border: 2px solid #AAAA; 
      top: 40%;
      left: 50%;
      transform: translate(-50%,-50%);
+     padding: 10px;
 }
 .offerta-BTN{
     width:100px;
