@@ -40,54 +40,8 @@
     margin-left: 100px;
     fill:white;
   }
-  .popup{
-    width: 250px;
-    height: 100px;
-    border:2px solid ie-hex-str($color: #AAAA);
-    border-radius: 20px;
-    position: absolute;
-    transform: translate(-50%,-50%) scale(0);
-    text-align: center;
-     padding: 20px ;
-    color:#22A2EA;
-    align-items: center;
-    background-color: rgb(255, 255, 255);
-    margin-top: 100px;
-    visibility: hidden;
-    transition: transform 0.4s, top 0.4s;
-  }
-  .open-popup{
-    visibility: visible;
-    transform: translate(-50%,-50%)scale(1);
+  
 
-    
-  }
-  .tipologiaAsta {
-    position: relative;
-    align-items: center;
-
-    display: block;
-    margin: 20px;
-  }
-.astaRibasso-BTN ,.astaClassica-BTN{
-position: relative;
-cursor: pointer;
-border-radius: 20px;
-padding: 10px 20px;
-margin: 1px;
-background-color:#22A2EA;
-color: white;
-font-size: 12px;
-margin-bottom: 100px;
-}
-
-.popup-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
 
   .auctionIcon label{
     background-color: #22A2EA;

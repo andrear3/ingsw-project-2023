@@ -63,6 +63,8 @@ app.get("/test", (req, res) => {
   res.sendFile(path.join(__dirname, ".", "resources", "images", "gameboy.jpg"));
 });
 
+app.use('/images', express.static(path.join(__dirname, 'resources', 'images')));
+
 app.use(homepageRouter);
 app.use(registrationRouter);
 app.use(loginRouter);
