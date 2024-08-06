@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import { Asta } from "../models/Database.js";
+
 import { AstaCTRL } from "../controllers/AstaCTRL.js";
 import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
 
@@ -18,19 +18,19 @@ homepageRouter.get("/homepage", async (req, res) => {
     let idAste = asteAttive.map((item) => item.dataValues.astaID);
 
     const offerteMassime = await OffertaCTRL.trovaOffertaMassima(idAste);
+    const timeLeftForAste = await AstaCTRL.getTimeLeftForAsteByIds(idAste);
 
     const mappaOfferteMassime = offerteMassime.reduce((map, offerta) => {
       map[offerta.AstumAstaID] = offerta.offertaMax;
       return map;
     }, {});
 
-    const timeLeftForAste = await AstaCTRL.getTimeLeftForAsteByIds(idAste);
-
     const mappaTimeLeft = timeLeftForAste.reduce((map, timeLeft) => {
       map[timeLeft.id] = timeLeft.timeLeft;
       return map;
     }, {});
 
+    //componi la risposta al client 
     const baseUrl = req.protocol + "://" + req.get("host") + "/images/";
     const datiConOfferteETempo = asteAttive.map((asta) => ({
       ...asta.toJSON(),

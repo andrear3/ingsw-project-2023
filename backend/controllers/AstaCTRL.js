@@ -91,42 +91,33 @@ export class AstaCTRL {
   static async getTimeLeftForAsteByIds(ids) {
     try {
       let timeLeftResults = [];
-  
+
       for (let astaID of ids) {
         let asta = await this.recuperaAstaById(astaID);
         let dataFineAsta = new Date(asta.dataValues.dataFineAsta);
         const dataCorrente = new Date();
-  
-        const timeLeftInMilliseconds = dataFineAsta.getTime() - dataCorrente.getTime();
-  
+
+        const timeLeftInMilliseconds =
+          dataFineAsta.getTime() - dataCorrente.getTime();
+
         if (timeLeftInMilliseconds > 0) {
           const timeLeftInSeconds = Math.floor(timeLeftInMilliseconds / 1000);
-          const timeLeftInMinutes = Math.floor(timeLeftInSeconds / 60);
-          const timeLeftInHours = Math.floor(timeLeftInMinutes / 60);
-  
-          const remainingMinutes = timeLeftInMinutes % 60;
-          const remainingSeconds = timeLeftInSeconds % 60;
-  
-          const formattedTimeLeft = `${timeLeftInHours}h ${remainingMinutes}m ${remainingSeconds}s`;
-  
           timeLeftResults.push({
             id: astaID,
-            timeLeft: formattedTimeLeft
+            timeLeft: timeLeftInSeconds,
           });
         } else {
           timeLeftResults.push({
             id: astaID,
-            timeLeft: 'Auction has ended'
+            timeLeft: 0,
           });
         }
       }
-  
+
       return timeLeftResults;
-  
     } catch (error) {
       console.error("Error calculating time left:", error);
       throw error;
     }
   }
-  
 }
