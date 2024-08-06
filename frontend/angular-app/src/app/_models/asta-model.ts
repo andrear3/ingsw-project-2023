@@ -30,4 +30,5 @@ export interface Asta{
     statusAsta:statusAstaEnum;
     url:string;
     UtenteNickname: string;
+    offertaMax: any;
 }
