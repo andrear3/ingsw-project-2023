@@ -29,3 +29,7 @@ export class NavbarComponent {
     'Collezionismo',
   ];
 }
+// script.ts
+
+
+

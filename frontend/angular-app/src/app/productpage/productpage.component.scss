@@ -1,0 +1,91 @@
+.square{
+    width: 90%;
+    height: 85%;
+    border:2px solid ie-hex-str($color: #AAAA);
+    border-radius: 20px;
+    margin:20px auto;
+    text-align: center;
+    position: relative;
+}
+.nomeProdotto,
+.tempoRimanente,
+.offertaCorrente {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    border-radius: 20px;
+    border: 2px solid #AAAAAA;
+}
+
+.nomeProdotto {
+    top: 15%;
+    left: 75%;
+    transform: translate(-50%, 0);
+    z-index: 1;
+}
+
+.tempoRimanente {
+    top: 30%;
+    left: 75%;
+    transform: translate(-50%, 0);
+    z-index: 2;
+}
+
+.offertaCorrente {
+    top: 45%;
+    left: 75%;
+    transform: translate(-50%, 0);
+    z-index: 3;
+}
+
+.nomeProdotto label,.tempoRimanente label,.offertaCorrente label{
+    display: block;
+    font-size: 14px;
+    color: #727272aa; /* Colore del testo delle etichette */
+    position: absolute;
+    margin-top: -12% ;
+    
+   
+}
+.tuaOfferta{
+    position: absolute;
+    display: block;
+    margin: 0px auto;
+    width:200px;
+    height: 25px;
+    border-radius: 20px;
+    border: 2px solid #AAAA; 
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.tuaOfferta label{
+    display: block;
+    font-size: 14px;
+    color: #727272aa; /* Colore del testo delle etichette */
+    position: relative;
+    left: 3%;
+    text-align: left;
+    margin-top:-12% ;
+}
+.foto{
+    position: absolute;
+    margin: 0px auto;
+    width:420px;
+    height: 390px;
+    border-radius: 20px;
+    border: 2px solid #AAAA; 
+     top: 40%;
+     left: 50%;
+     transform: translate(-50%,-50%);
+}
+.offerta-BTN{
+    width:100px;
+    height: 25px;
+    background-color: #22A2EA;
+    border-radius: 20px;
+    position:absolute;
+    top: 85%;
+    left: 47%;
+    color:white;
+}
