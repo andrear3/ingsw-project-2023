@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RestService } from './_services/rest-api.service';
+import { ProductpageComponent } from './productpage/productpage.component';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,12 @@ export const routes: Routes = [
     title: 'Registration',
     component: RegistrationpageComponent,
   },
+  {
+  path: 'product',
+  title: 'Product',
+  component: ProductpageComponent,
+},
+
 ];
 //login
 @NgModule({
