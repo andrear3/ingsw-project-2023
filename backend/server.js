@@ -52,7 +52,7 @@ const PORT = 3000;
 AstaCTRL.stampaTutteAste();
 
 //STAMPA DELLE ASTE ATTIVE
-setInterval(AstaCTRL.stampaAsteAttive, 10000);
+setInterval(AstaCTRL.recuperaAsteAttive, 10000);
 
 
 //APP ROUTES

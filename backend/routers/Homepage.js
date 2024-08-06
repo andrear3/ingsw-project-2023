@@ -8,12 +8,12 @@ export const homepageRouter = express.Router();
 homepageRouter.get("/homepage", async (req, res) => {
   try {
     //let info = await Asta.findAll();
-    let info = await AstaCTRL.stampaAsteAttive();
+    let info = await AstaCTRL.recuperaAsteAttive();
     if (info) {
       const baseUrl = req.protocol + "://" + req.get("host") + "/images/";
       const dataWithFullUrl = info.map((asta) => ({
         ...asta.toJSON(),
-        url: baseUrl + asta.url,
+        url: baseUrl + asta.url, //spread op to copy all properties, url rewrite.
       }));
       res.json(dataWithFullUrl);
     } else {

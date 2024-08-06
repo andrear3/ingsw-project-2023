@@ -1,4 +1,5 @@
 import { Asta } from "../models/Database.js";
+import { Offerta } from "../models/Database.js";
 import { Sequelize, Op } from "sequelize";
 
 export class AstaCTRL {
@@ -50,7 +51,7 @@ export class AstaCTRL {
     }
   }
 
-  static async stampaAsteAttive() {
+  static async recuperaAsteAttive() {
     try {
       const asteAttive = await Asta.findAll({
         where: {
