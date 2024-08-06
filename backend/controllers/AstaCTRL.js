@@ -54,9 +54,10 @@ export class AstaCTRL {
     try {
       const asteAttive = await Asta.findAll({
         where: {
-          createdAt: {
+          dataFineAsta: {
             [Op.gt]: new Date(), //Più grandi della data attuale
           },
+          statusAsta: "inVendita",
         },
       });
 
@@ -65,6 +66,7 @@ export class AstaCTRL {
       } else {
         console.log("Nessuna asta è attiva");
       }
+      return asteAttive;
     } catch (error) {
       console.error("Errore nel recupero aste:", error);
     }

@@ -1,17 +1,19 @@
 import express from "express";
 import path from "path";
 import { Asta } from "../models/Database.js";
+import { AstaCTRL } from "../controllers/AstaCTRL.js";
 
 export const homepageRouter = express.Router();
 
 homepageRouter.get("/homepage", async (req, res) => {
   try {
-    let info = await Asta.findAll();
+    //let info = await Asta.findAll();
+    let info = await AstaCTRL.stampaAsteAttive();
     if (info) {
       const baseUrl = req.protocol + "://" + req.get("host") + "/images/";
       const dataWithFullUrl = info.map((asta) => ({
         ...asta.toJSON(),
-        url: baseUrl + asta.url, // Assuming asta.url contains the file name
+        url: baseUrl + asta.url,
       }));
       res.json(dataWithFullUrl);
     } else {
@@ -23,7 +25,6 @@ homepageRouter.get("/homepage", async (req, res) => {
   }
 });
 
-// Route to serve image files
 homepageRouter.get("/images/:filename", (req, res) => {
   const filename = req.params.filename;
   const options = {
