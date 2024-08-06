@@ -39,34 +39,4 @@ export class OffertaCTRL {
   }
 
 
-
-  /*
-  static async recuperaOffertaMassima(aste) {
-    const offerteMassime = await Offerta.findAll({
-      where: {
-
-      }
-    })
-  }
-
-  try {
-    const asteAttive = await Asta.findAll({
-      where: {
-        dataFineAsta: {
-          [Op.gt]: new Date(), //Più grandi della data attuale
-        },
-        statusAsta: "inVendita",
-      },
-    });
-
-    if (asteAttive.length > 0) {
-      console.log("Aste attive:", asteAttive);
-    } else {
-      console.log("Nessuna asta è attiva");
-    }
-    return asteAttive;
-  } catch (error) {
-    console.error("Errore nel recupero aste:", error);
-  }
-    */
 }

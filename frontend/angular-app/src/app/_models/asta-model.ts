@@ -31,4 +31,5 @@ export interface Asta{
     url:string;
     UtenteNickname: string;
     offertaMax: any;
+    timeLeft: any;
 }

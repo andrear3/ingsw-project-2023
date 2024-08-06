@@ -3,6 +3,21 @@ import { Offerta } from "../models/Database.js";
 import { Sequelize, Op } from "sequelize";
 
 export class AstaCTRL {
+  static async recuperaAstaById(astaID) {
+    try {
+      const asta = await Asta.findByPk(astaID);
+
+      if (!asta) {
+        throw new Error(`Asta with ID ${astaID} not found`);
+      }
+
+      return asta;
+    } catch (error) {
+      console.error(`Error retrieving auction with ID ${astaID}:`, error);
+      throw error;
+    }
+  }
+
   static async stampaTutteAste() {
     try {
       const aste = await Asta.findAll();
@@ -34,7 +49,7 @@ export class AstaCTRL {
   //CONTROLLO SCADENZA ASTA (DA CONTINUARE)
   static async timerAsta() {
     try {
-      let asta = await AstaCTRL.cercaAsta(3); //esempio!
+      let asta = await AstaCTRL.recuperaAsteAttive();
 
       const dataCorrente = new Date();
       const dataAsta = new Date(asta.createdAt);
@@ -72,5 +87,46 @@ export class AstaCTRL {
       console.error("Errore nel recupero aste:", error);
     }
   }
-}
 
+  static async getTimeLeftForAsteByIds(ids) {
+    try {
+      let timeLeftResults = [];
+  
+      for (let astaID of ids) {
+        let asta = await this.recuperaAstaById(astaID);
+        let dataFineAsta = new Date(asta.dataValues.dataFineAsta);
+        const dataCorrente = new Date();
+  
+        const timeLeftInMilliseconds = dataFineAsta.getTime() - dataCorrente.getTime();
+  
+        if (timeLeftInMilliseconds > 0) {
+          const timeLeftInSeconds = Math.floor(timeLeftInMilliseconds / 1000);
+          const timeLeftInMinutes = Math.floor(timeLeftInSeconds / 60);
+          const timeLeftInHours = Math.floor(timeLeftInMinutes / 60);
+  
+          const remainingMinutes = timeLeftInMinutes % 60;
+          const remainingSeconds = timeLeftInSeconds % 60;
+  
+          const formattedTimeLeft = `${timeLeftInHours}h ${remainingMinutes}m ${remainingSeconds}s`;
+  
+          timeLeftResults.push({
+            id: astaID,
+            timeLeft: formattedTimeLeft
+          });
+        } else {
+          timeLeftResults.push({
+            id: astaID,
+            timeLeft: 'Auction has ended'
+          });
+        }
+      }
+  
+      return timeLeftResults;
+  
+    } catch (error) {
+      console.error("Error calculating time left:", error);
+      throw error;
+    }
+  }
+  
+}

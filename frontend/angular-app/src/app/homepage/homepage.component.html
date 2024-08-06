@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
-</head>
-<body>
-  <nav>
-    <app-navbar></app-navbar>
-  </nav>
-  <main>
-    <div class="card-container">
-      @for (asta of aste; track asta) {
-      <div class="card-item">
-        <div class="card-image">
-          <img [src]="asta.url" alt="Immagine di {{ asta.nomeBeneInVendita }}" />
-        </div>
-        <div class="card-content">
-          <h2 class="card-title">{{ asta.titolo }}</h2>
-          <h3 class="card-subtitle">{{ asta.nomeBeneInVendita }}</h3>
-          <div class="card-info">
-            <p><strong>Categoria:</strong> {{ asta.categoria }}</p>
-            <p><strong>Descrizione:</strong> {{ asta.descrizioneAsta }}</p>
-            <p><strong>Tipo:</strong> {{ asta.tipoBeneInVendita }}</p>
-            <p><strong>Status:</strong> {{ asta.statusAsta }}</p>
-            <p><strong>Data di Fine Asta:</strong> {{ asta.dataFineAsta | date }}</p>
-            <p><strong>Creata da:</strong> {{ asta.UtenteNickname }}</p>
-            <p class="danger"><strong>Offerta corrente: {{ asta.offertaMax }}€</strong></p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+  </head>
+  <body>
+    <nav>
+      <app-navbar></app-navbar>
+    </nav>
+    <main>
+      <div class="card-container">
+        @for (asta of aste; track asta) {
+        <div class="card-item">
+          <div class="card-image">
+            <img
+              [src]="asta.url"
+              alt="Immagine di {{ asta.nomeBeneInVendita }}"
+            />
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">{{ asta.titolo }}</h2>
+            <h3 class="card-subtitle">{{ asta.nomeBeneInVendita }}</h3>
+            <div class="card-info">
+              <p><strong>Categoria:</strong> {{ asta.categoria }}</p>
+              <p><strong>Descrizione:</strong> {{ asta.descrizioneAsta }}</p>
+              <p><strong>Tipo:</strong> {{ asta.tipoBeneInVendita }}</p>
+              <p><strong>Status:</strong> {{ asta.statusAsta }}</p>
+              <p>
+                <strong>Data di Fine Asta:</strong>
+                {{ asta.dataFineAsta | date }}
+              </p>
+              <p><strong>Creata da:</strong> {{ asta.UtenteNickname }}</p>
+              <p class="danger">
+                <strong>Offerta corrente: {{ asta.offertaMax }}€</strong>
+              </p>
+              <p class="danger">
+                <strong>Tempo restante: {{ asta.timeLeft }}€</strong>
+              </p>
+            </div>
           </div>
         </div>
+        }
       </div>
-      }
-    </div>
-  </main>
-</body>
+    </main>
+  </body>
 </html>
