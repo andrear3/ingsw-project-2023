@@ -21,6 +21,7 @@ import { MatFormField } from '@angular/material/input';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+  
   options: string[] = [
     'Informatica',
     'Videogames',

@@ -1,3 +1,6 @@
+.hidden{
+  display: none;
+}
 .logoDieti {
     font-family: "Metamorphous", serif;
     font-size: 38px;
@@ -20,7 +23,6 @@
   .boxCategoria{
     width: 100px;
     height: 25px;
-    position:relative;
     border-radius: 20px;
     text-align: left;
     position: relative;

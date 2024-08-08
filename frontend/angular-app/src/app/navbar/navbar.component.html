@@ -14,10 +14,11 @@
         background: #22A2EA;
         color: #ffffff;
       }
+ 
     </style>
   </head>
   <body>
-
+  <div  id="pVenditore" class="hidden" >
     <mat-toolbar class="toolbarcolor">
       <mat-toolbar-row>
         <span class="logoDieti">
@@ -84,5 +85,31 @@
       </mat-toolbar-row>
     </mat-toolbar>
 
+  </div>
+  <div  id="pCompratore" class="hidden">
+   <label >fsfgowjfoihjweofj</label>
+  </div>
+  <script>
+const tipoUtente = "venditore"; 
+
+// Mostra o nascondi i div in base al tipo di utente
+function mostraContenuti(tipoUtente) {
+    const pVenditore = document.getElementById("pVenditore");
+    const pCompratore = document.getElementById("pCompratore");
+
+   
+
+    if (tipoUtente === "venditore") {
+        pVenditore.classList.remove("hidden");
+        pCompratore.classList.add("hidden");
+    } else if (tipoUtente === "compratore") {
+        pVenditore.classList.add("hidden");
+        pCompratore.classList.remove("hidden");
+    }
+}
+
+
+mostraContenuti(tipoUtente);
+  </script>
   </body>
 </html>
