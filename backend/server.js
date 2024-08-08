@@ -41,7 +41,7 @@ app.use(
   })
 );
 
-//GENERAL STATEMENTS
+//GENERAL STATEMENTS !!!!!!!!
 app.use(bodyParser.json()); // Parsing JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors()); //CORS SETTINGS
