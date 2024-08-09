@@ -33,5 +33,5 @@ export class ProfileComponent {
   tipo: string = '';
   regione: string = '';
   indirizzo: string = '';
-  showModifica: string='venditore';
+  showModifica: string='!modifica';
 }
