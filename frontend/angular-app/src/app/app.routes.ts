@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { RestService } from './_services/rest-api.service';
 import { ProductpageComponent } from './productpage/productpage.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AstaComponent } from './asta/asta.component';
 
 export const routes: Routes = [
   {
