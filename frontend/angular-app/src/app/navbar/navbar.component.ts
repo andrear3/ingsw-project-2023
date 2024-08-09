@@ -35,9 +35,11 @@ export class NavbarComponent {
   constructor(public dialog :MatDialog){}
   openDialog(){
    this.dialog.open(SceltaAstaComponent,{position:{top:'5%',right:'17%'}});
- 
+  
   }
-
+   closeDialog(){
+    this.dialog.closeAll();
+   }
   
 
 
