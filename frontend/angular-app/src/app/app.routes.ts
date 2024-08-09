@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RestService } from './_services/rest-api.service';
 import { ProductpageComponent } from './productpage/productpage.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,12 @@ export const routes: Routes = [
   title: 'Product',
   component: ProductpageComponent,
 },
+{
+path: 'profile',
+  title: 'Profile',
+  component: ProfileComponent,
+},
+
 
 ];
 //login

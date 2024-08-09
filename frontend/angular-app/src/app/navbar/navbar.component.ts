@@ -29,6 +29,7 @@ export class NavbarComponent {
     'Sport',
     'Collezionismo',
   ];
+  showVenditore :string ='venditore';
 }
 // script.ts
 
