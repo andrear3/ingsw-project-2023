@@ -1,0 +1,35 @@
+.background{
+    height:100px;
+    width: 200px;
+    display: flex; /* Usa Flexbox per il layout */
+    flex-direction: column; /* Allinea gli elementi in colonna */
+    align-items: center; /* Centra orizzontalmente gli elementi */
+    justify-content: space-between; /* Distribuisce lo spazio tra gli elementi */
+    text-align: center; /* Centra il testo nella label */
+    margin: 0 auto; /* Centra il div .background orizzontalmente nel suo container */
+}
+
+
+
+.background label{
+    color: #727272aa;
+    margin-bottom: 20px;
+}
+.buttonContainer {
+    display: flex;
+    justify-content: center; /* Centra i bottoni orizzontalmente */
+  
+}
+
+.classica-BTN,.inversa-BTN{
+border-radius:20px ;
+background-color:#22A2EA ;
+color: white;
+color: white;
+padding: 5px 20px; /* Aggiunto padding per migliorare l'aspetto dei bottoni */
+border: none; /* Rimuove i bordi di default dei bottoni */
+cursor: pointer; /* Cambia il cursore per indicare che è cliccabile */
+margin-bottom: 30px;
+margin-left: 10px;
+
+}

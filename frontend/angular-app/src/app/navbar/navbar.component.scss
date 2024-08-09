@@ -53,14 +53,14 @@
     flex-direction: column;
     margin: -10px;
   }
-  .dashboardIcon{
+  .dashboardIcon,.asteIcon{
     width: 25px;
     height: 25px;
     position: relative;
     //margin-left: 170px;
     fill:white;
   }
-  .dashboardIcon label{
+  .dashboardIcon label,.asteIcon label{
     align-items: center;
     display: flex;
     font-size: 10px;

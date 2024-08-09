@@ -38,6 +38,12 @@ path: 'profile',
   title: 'Profile',
   component: ProfileComponent,
 },
+{
+path: 'asta',
+  title: 'Asta',
+  component: AppComponent,
+},
+
 
 
 ];
