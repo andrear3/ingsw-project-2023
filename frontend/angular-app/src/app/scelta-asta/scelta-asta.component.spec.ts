@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AstaClassicaComponent } from './asta-classica.component';
+import { SceltaAstaComponent } from './scelta-asta.component';
 
-describe('AstaClassicaComponent', () => {
-  let component: AstaClassicaComponent;
-  let fixture: ComponentFixture<AstaClassicaComponent>;
+describe('SceltaAstaComponent', () => {
+  let component: SceltaAstaComponent;
+  let fixture: ComponentFixture<SceltaAstaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AstaClassicaComponent]
+      imports: [SceltaAstaComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AstaClassicaComponent);
+    fixture = TestBed.createComponent(SceltaAstaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

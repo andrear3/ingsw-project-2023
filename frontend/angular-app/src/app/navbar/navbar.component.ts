@@ -5,7 +5,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { RouterOutlet } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormField } from '@angular/material/input';
-
+import {MatDialogModule} from '@angular/material/dialog'; 
+import { MatDialog,MatDialogRef } from '@angular/material/dialog';
+import { SceltaAstaComponent } from '../scelta-asta/scelta-asta.component';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -21,6 +23,7 @@ import { MatFormField } from '@angular/material/input';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+  
   options: string[] = [
     'Informatica',
     'Videogames',
@@ -28,8 +31,15 @@ export class NavbarComponent {
     'Sport',
     'Collezionismo',
   ];
+  showUtente :string ='venditore';
+  constructor(public dialog :MatDialog){}
+  openDialog(){
+   this.dialog.open(SceltaAstaComponent,{position:{top:'5%',right:'17%'}});
+ 
+  }
+
+  
+
+
+
 }
-// script.ts
-
-
-

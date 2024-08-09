@@ -10,6 +10,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+import { statusAstaEnum } from '../_models/asta-model';
+import { tipoBeneVenditaEnum } from '../_models/asta-model';
+import { categoriaEnum } from '../_models/asta-model';
+
 @Component({
   selector: 'app-homepage',
   standalone: true,
@@ -31,12 +35,21 @@ export class HomepageComponent implements OnInit, OnDestroy {
   private intervalId: any;
   private subscriptions: Subscription = new Subscription();
 
+  public statusEnum = statusAstaEnum;
+  public tipoBeneVendita = tipoBeneVenditaEnum;
+  public categoria = categoriaEnum;
+
+  public temp: string = "1234";
+    
   ngOnInit() {
     this.subscriptions.add(
       this.restService.getAsta().subscribe({
         next: (data: Asta[]) => {
           this.aste = data;
           this.startDecrementTimer();
+          console.log(this.aste[0].statusAsta);
+          //assegno qui la variabile da server!!!!!!!!!
+          this.temp = "test";
         },
         error: (err: any) => {
           console.error('Error fetching data:', err);
@@ -44,6 +57,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
       })
     );
   }
+
+  
 
   ngOnDestroy() {
     if (this.intervalId) {

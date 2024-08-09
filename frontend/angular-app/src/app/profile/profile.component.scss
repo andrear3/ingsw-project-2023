@@ -1,0 +1,88 @@
+.square{
+    width: 95%;
+    height: 90%;
+    border:2px solid ie-hex-str($color: #AAAA);
+    border-radius: 20px;
+    margin:20px auto;
+    text-align: center;
+    align-items: center;
+    position: relative;
+    padding: 20px; /* Aggiungi padding per evitare che il contenuto tocchi i bordi */
+    box-sizing: border-box; /* Includi padding e bordo nel calcolo delle dimensioni */
+    display: flex;
+    flex-direction: column;
+
+}
+.boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxRegione, .boxIndirizzo {
+     display: flex;
+     flex-direction: row-reverse;
+     flex-wrap: wrap;
+     border-radius: 20px;
+
+     align-items: center; /* Allinea verticalmente gli elementi al centro */
+     margin: 20px auto;
+     width: 80%;
+     max-width: 500px;
+     border-radius: 20px;
+ }
+
+.boxNome label,
+.boxCognome label,
+.boxDataNascita label,
+.boxPassword label,
+.boxNickname label,
+.boxRegione label,
+.boxIndirizzo label {
+    display: block;
+    font-size: 14px;
+    color: #727272aa; /* Colore del testo delle etichette */
+    position: relative;
+    
+    top: -100%;
+    
+   
+
+}
+
+.boxNomeMod, .boxCognomeMod, .boxDataNascitaMod, .boxPasswordMod, .boxNicknameMod, .boxRegioneMod, .boxIndirizzoMod {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    border-radius: 20px;
+
+    align-items: center; /* Allinea verticalmente gli elementi al centro */
+    margin: 20px auto;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 20px;
+}
+
+.boxNomeMod input,
+.boxCognomeMod input,
+.boxDataNascitaMod input,
+.boxPasswordMod input,
+.boxNicknameMod input,
+
+.boxRegioneMod input,
+.boxIndirizzoMod input{
+    width:300px;
+    height: 25px;
+    border-radius: 20px;
+    border: 2px solid #727272aa;
+    color: #AAAA;
+    margin: -2px;
+    align-items: center; 
+   
+}
+.modificaProfilo-BTN{
+    width:150px;
+    height: 25px;
+    background-color: #22A2EA;
+    border-radius: 20px;
+  position: absolute;
+    text-align: center;
+     margin-bottom:100px;
+    
+    
+    color:white;
+}

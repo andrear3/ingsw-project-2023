@@ -101,3 +101,11 @@ body{
     margin-left: 80%;
     color:white;
 }
+.boxEmail, .boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxTipoAccount, .boxRegione, .boxIndirizzo {
+   // display: flex;
+    flex-direction: row;
+    align-items: center; /* Allinea verticalmente gli elementi al centro */
+    margin: 20px auto;
+    width: 80%;
+    max-width: 500px;
+}
