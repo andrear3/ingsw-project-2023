@@ -1,18 +1,18 @@
 import { Data } from "@angular/router";
 
 //enumerazioni 
-enum categoriaEnum{
+export enum categoriaEnum{
     informatica,
     videogames,
     musica,
     sport,
     collezionismo,
 }
-enum tipoBeneVenditaEnum{
+export enum tipoBeneVenditaEnum{
     articolo,
     servizio,
 }
-enum statusAstaEnum{
+export enum statusAstaEnum{
     venduto,
     inVendita,
     nonVenduto,
