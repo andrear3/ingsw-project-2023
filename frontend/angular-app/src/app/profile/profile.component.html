@@ -9,7 +9,11 @@
     />
   </head>
   <body>
+    <nav>
+      <app-navbar></app-navbar>
+    </nav>
     <div>
+      @if (showModifica==="!modifica"){
     <div class="square">
         <div class="boxNome">
             <label>Nome</label>
@@ -36,9 +40,9 @@
            
           </div>
         </div>
-
+      }
         <!-- box modifica  -->
-        @if (showModifica==="venditore"){
+        @else if (showModifica==="modifica"){
     <a  id="boxModifica">
           <div  class="boxNomeMod">
             <label>Nome</label>

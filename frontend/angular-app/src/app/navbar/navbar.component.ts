@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { RouterOutlet } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormField } from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog'; 
 import { MatDialog,MatDialogRef } from '@angular/material/dialog';
 import { SceltaAstaComponent } from '../scelta-asta/scelta-asta.component';
+import { RouteConfigLoadEnd, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -16,8 +17,7 @@ import { SceltaAstaComponent } from '../scelta-asta/scelta-asta.component';
     MatIcon,
     MatAutocompleteModule,
     MatInputModule,
-    MatFormField,
-    RouterOutlet,
+    RouterOutlet,CommonModule,RouterLink,RouterModule
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
@@ -35,9 +35,11 @@ export class NavbarComponent {
   constructor(public dialog :MatDialog){}
   openDialog(){
    this.dialog.open(SceltaAstaComponent,{position:{top:'5%',right:'17%'}});
- 
+  
   }
-
+   closeDialog(){
+    this.dialog.closeAll();
+   }
   
 
 
