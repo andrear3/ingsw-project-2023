@@ -12,110 +12,141 @@
     <nav>
       <app-navbar></app-navbar>
     </nav>
-    <div>
+    
       @if (showModifica==="!modifica"){
-    <div class="square">
-        <div class="boxNome">
-            <label>Nome</label>
-      
-          </div>
-          <div class="boxCognome">
-            <label>Cognome</label>
-       
-          </div>
-          <div class="boxPassword">
-            <label>Password</label>
-       
-          </div>
-          <div class="boxNickname">
-            <label>Nickname</label>
-         
-          </div>
-          <div class="boxRegione">
-            <label>Regione</label>
-         
-          </div>
-          <div class="boxIndirizzo">
-            <label>Indirizzo</label>
-           
-          </div>
-        </div>
+  <div class="square">
+    <div class="row">
+      <div class="box-container">
+        <label for="boxNome">Nome</label>
+        <div class="boxNome" id="boxNome"></div>
+      </div>
+      <div class="box-container">
+        <label for="boxCognome">Cognome</label>
+        <div class="boxCognome" id="boxCognome"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="box-container">
+        <label for="boxPassword">Password</label>
+        <div class="boxPassword" id="boxPassword"></div>
+      </div>
+      <div class="box-container">
+        <label for="boxNickname">Nickname</label>
+        <div class="boxNickname" id="boxNickname"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="box-container">
+        <label for="boxRegione">Regione</label>
+        <div class="boxRegione" id="boxRegione"></div>
+      </div>
+      <div class="box-container">
+        <label for="boxIndirizzo">Indirizzo</label>
+        <div class="boxIndirizzo" id="boxIndirizzo"></div>
+      </div>
+    </div>
+    <div class="row-BTN">
+          <button class="modificaProfilo-BTN" (click)="modificaProfilo()"> modifica profilo</button>
+          <button class="eliminaProfilo-BTN"> elimina profilo</button>
+          <button class="modificaPasswordProfilo-BTN"> modifica password </button>
+    </div>
+  </div>    
       }
+
         <!-- box modifica  -->
         @else if (showModifica==="modifica"){
-    <a  id="boxModifica">
-          <div  class="boxNomeMod">
-            <label>Nome</label>
-            <input 
-              type="text"
-              placeholder="Nome"
-              [(ngModel)]="nome"
-              name="nome"
-              required
-            />
-          </div>
-          <div  class="boxCognomeMod">
-            <label>Cognome</label>
-            <input 
-              type="text"
-              placeholder="Cognome"
-              [(ngModel)]="cognome"
-              name="cognome"
-              required
-            />
-          </div>
-          <div  class="boxPasswordMod">
-            <label>Password</label>
-            <input 
-              type="password"
-              placeholder="Password"
-              [(ngModel)]="password"
-              name="password"
-              required
-            />
-          </div>
-          <div  class="boxNicknameMod">
-            <label>Nickname</label>
-            <input 
-              type="text"
-              placeholder="Nickname"
-              [(ngModel)]="nickname"
-              name="nickname"
-              required
-            />
-          </div>
-          <div class="boxRegioneMod">
-            <label>Regione</label>
-            <input 
-              type="text"
-              placeholder="Regione"
-              [(ngModel)]="regione"
-              name="regione"
-              required
-            />
-          </div>
-          <div  class="boxIndirizzoMod">
-            <label>Indirizzo</label>
-            <input 
-              type="text"
-              placeholder="Indirizzo"
-              [(ngModel)]="indirizzo"
-              name="indirizzo"
-              required
-            />
-          </div> 
-
-        </a>
+      <div class="square">
+  <div class="row">
+    <div class="box-container">
+      <label for="boxNomeMod">Nome</label>
+      <div class="boxNomeMod" id="boxNomeMod">
+        <input 
+          type="text"
+          placeholder="Nome"
+          [(ngModel)]="nome"
+          name="nome"
+          required
+        />
+      </div>
+    </div>
+    <div class="box-container">
+      <label for="boxCognomeMod">Cognome</label>
+      <div class="boxCognomeMod" id="boxCognomeMod">
+        <input 
+          type="text"
+          placeholder="Cognome"
+          [(ngModel)]="cognome"
+          name="cognome"
+          required
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="box-container">
+      <label for="boxPasswordMod">Password</label>
+      <div class="boxPasswordMod" id="boxPasswordMod">
+        <input 
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+      </div>
+    </div>
+    <div class="box-container">
+      <label for="boxNicknameMod">Nickname</label>
+      <div class="boxNicknameMod" id="boxNicknameMod">
+        <input 
+          type="text"
+          placeholder="Nickname"
+          [(ngModel)]="nickname"
+          name="nickname"
+          required
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="box-container">
+      <label for="boxRegioneMod">Regione</label>
+      <div class="boxRegioneMod" id="boxRegioneMod">
+        <input 
+          type="text"
+          placeholder="Regione"
+          [(ngModel)]="regione"
+          name="regione"
+          required
+        />
+      </div>
+    </div>
+    <div class="box-container">
+      <label for="boxIndirizzoMod">Indirizzo</label>
+      <div class="boxIndirizzoMod" id="boxIndirizzoMod">
+        <input 
+          type="text"
+          placeholder="Indirizzo"
+          [(ngModel)]="indirizzo"
+          name="indirizzo"
+          required
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row-BTN">
+   
+    <button class="salvaModProfilo-BTN" (click)="confermaModProfilo()">conferma modifiche</button>
+    
+  </div>
+</div>    
+    
       }
       <!--button-->
-      <button class="modificaProfilo-BTN" onclick="modificaProfilo()"> modifica profilo</button>
 
-    </div>
+    
     <script>
-   function modificaProfilo(){
-    console.log("fisahjofgijewsf");
-    //document.getElementById("boxModifica").removeAttribute("hidden"); 
-   }
+
     </script>
   </body>
 </html>

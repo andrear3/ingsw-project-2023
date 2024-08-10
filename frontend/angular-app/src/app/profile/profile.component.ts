@@ -34,4 +34,12 @@ export class ProfileComponent {
   regione: string = '';
   indirizzo: string = '';
   showModifica: string='!modifica';
+
+ modificaProfilo(){
+  this.showModifica='modifica';
+ }
+ confermaModProfilo() {
+  this.showModifica = '!modifica';
 }
+}
+
