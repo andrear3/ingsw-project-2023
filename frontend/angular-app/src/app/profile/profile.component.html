@@ -50,6 +50,23 @@
           <button class="eliminaProfilo-BTN"> elimina profilo</button>
           <button class="modificaPasswordProfilo-BTN"> modifica password </button>
     </div>
+    <div class="links">
+      <label for="links">I tuoi link</label>
+      <div class="link1" placeholder="link1"></div>
+      <div class="link2" placeholder="link2"></div>
+      <div class="link3" placeholder="link3"></div>
+
+    </div>
+    <div class="descrizione">
+      <label for="descrizione">La tua descrizione</label>
+      <div class="boxDescrizione"></div>
+    </div>
+    <div class="foto">
+      <div class="boxFoto"></div>
+    </div>
+    <div class="boxFoto-BTN">
+      <button class="modificaFoto-BTN">modifca foto</button>
+    </div>
   </div>    
       }
 
@@ -138,6 +155,24 @@
    
     <button class="salvaModProfilo-BTN" (click)="confermaModProfilo()">conferma modifiche</button>
     
+  </div>
+  <div class="links">
+    <label for="links">I tuoi link</label>
+    <input class="link1"  type="text"
+    placeholder="link1"
+    [(ngModel)]="link"/>
+    <input class="link2"  type="text"
+    placeholder="link2"
+    [(ngModel)]="link"/>
+    <input class="link3"  type="text"
+    placeholder="link3"
+    [(ngModel)]="link"/>
+
+  </div>
+  <div class="descrizione">
+    <label for="descrizione">La tua descrizione</label>
+    <input class="boxDescrizione"
+    type="text"  [(ngModel)]="descrizione">/>
   </div>
 </div>    
     

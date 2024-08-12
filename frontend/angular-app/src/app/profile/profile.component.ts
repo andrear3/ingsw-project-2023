@@ -33,6 +33,8 @@ export class ProfileComponent {
   tipo: string = '';
   regione: string = '';
   indirizzo: string = '';
+  link: string = '';
+  descrizione: string = '';
   showModifica: string='!modifica';
 
  modificaProfilo(){
