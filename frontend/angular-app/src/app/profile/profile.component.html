@@ -26,10 +26,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="box-container">
-        <label for="boxPassword">Password</label>
-        <div class="boxPassword" id="boxPassword"></div>
-      </div>
+     
       <div class="box-container">
         <label for="boxNickname">Nickname</label>
         <div class="boxNickname" id="boxNickname"></div>
@@ -101,16 +98,7 @@
   </div>
   <div class="row">
     <div class="box-container">
-      <label for="boxPasswordMod">Password</label>
-      <div class="boxPasswordMod" id="boxPasswordMod">
-        <input 
-          type="password"
-          placeholder="Password"
-          [(ngModel)]="password"
-          name="password"
-          required
-        />
-      </div>
+      
     </div>
     <div class="box-container">
       <label for="boxNicknameMod">Nickname</label>
@@ -173,6 +161,9 @@
     <label for="descrizione">La tua descrizione</label>
     <input class="boxDescrizione"
     type="text"  [(ngModel)]="descrizione">/>
+  </div>
+  <div class="foto">
+    <div class="boxFoto"></div>
   </div>
   <div class="boxFoto-BTN">
     <button class="modificaFoto-BTN">modifca foto</button>

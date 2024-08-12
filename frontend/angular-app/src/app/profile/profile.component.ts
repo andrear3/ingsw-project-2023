@@ -28,9 +28,7 @@ export class ProfileComponent {
   email: string = '';
   nome: string = '';
   cognome: string = '';
-  password: string = '';
   nickname: string = '';
-  tipo: string = '';
   regione: string = '';
   indirizzo: string = '';
   link: string = '';
