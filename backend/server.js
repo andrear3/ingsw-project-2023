@@ -30,6 +30,8 @@ const app = express();
 //MIDDLEWARE PER PARSING BODY DEL CLIENT.
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+//SESSIONS
 app.use(
   session({
     secret: "your_secret_key",
@@ -45,6 +47,9 @@ app.use(
 app.use(bodyParser.json()); // Parsing JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors()); //CORS SETTINGS
+
+
+
 
 const PORT = 3000;
 
