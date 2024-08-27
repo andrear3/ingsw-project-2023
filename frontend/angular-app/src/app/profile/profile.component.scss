@@ -1,6 +1,6 @@
 .square{
-    width: 95%;
-    height: 90%;
+    width: 1400px;
+    height: 650px;
     border:2px solid ie-hex-str($color: #AAAA);
     border-radius: 20px;
     margin:20px auto;
@@ -13,18 +13,36 @@
     flex-direction: column;
 
 }
-.boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxRegione, .boxIndirizzo {
-     display: flex;
-     flex-direction: row-reverse;
-     flex-wrap: wrap;
-     border-radius: 20px;
+.box-container {
+    color: #727272aa; /* Colore del testo delle etichette */
+    display: flex;
+    flex-direction: column; /* Disporre l'etichetta sopra il box */
+    align-items: first baseline; /* Allinea l'etichetta a sinistra */
+    margin-left: 173px;
+}
 
-     align-items: center; /* Allinea verticalmente gli elementi al centro */
-     margin: 20px auto;
-     width: 80%;
-     max-width: 500px;
-     border-radius: 20px;
+.row {
+    display: flex;
+    justify-content: space-between; /* Disporre le box orizzontalmente con spazio tra di loro */
+    width: 100%; /* Assicurati che occupi tutta la larghezza disponibile */
+    max-width: 450px; /* Limita la larghezza massima per evitare che le box diventino troppo larghe */
+    max-height: 200px;
+    margin-bottom: 10px; /* Spazio tra le righe */
+   
+}
+.boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxRegione, .boxIndirizzo {
+    width: 250px; 
+    height: 25px; /* Dimensioni aumentate per una visualizzazione migliore */
+    border: 2px solid #727272aa; /* Corretto il formato del bordo */
+    border-radius: 20px; /* Per fare un cerchio; usa px per bordi arrotondati se non vuoi cerchi */
+    margin-top: 5px; /* Spazio intorno alla forma */
+    background-color: #ffffff; /* Aggiunto colore di sfondo per renderlo visibile */
+    box-sizing: border-box; 
+    
+    
+    
  }
+ 
 
 .boxNome label,
 .boxCognome label,
@@ -37,52 +55,179 @@
     font-size: 14px;
     color: #727272aa; /* Colore del testo delle etichette */
     position: relative;
-    
-    top: -100%;
-    
+    text-align: left; 
    
 
 }
 
-.boxNomeMod, .boxCognomeMod, .boxDataNascitaMod, .boxPasswordMod, .boxNicknameMod, .boxRegioneMod, .boxIndirizzoMod {
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-    border-radius: 20px;
 
-    align-items: center; /* Allinea verticalmente gli elementi al centro */
-    margin: 20px auto;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 20px;
-}
 
 .boxNomeMod input,
 .boxCognomeMod input,
 .boxDataNascitaMod input,
 .boxPasswordMod input,
 .boxNicknameMod input,
-
 .boxRegioneMod input,
 .boxIndirizzoMod input{
-    width:300px;
-    height: 25px;
-    border-radius: 20px;
-    border: 2px solid #727272aa;
-    color: #AAAA;
-    margin: -2px;
-    align-items: center; 
    
+    width: 250px; 
+    height: 25px; /* Dimensioni aumentate per una visualizzazione migliore */
+    border: 2px solid #727272aa; /* Corretto il formato del bordo */
+    border-radius: 20px; /* Per fare un cerchio; usa px per bordi arrotondati se non vuoi cerchi */
+    margin-top: 5px; /* Spazio intorno alla forma */
+    background-color: #ffffff; /* Aggiunto colore di sfondo per renderlo visibile */
+    box-sizing: border-box; 
+    
+    
 }
 .modificaProfilo-BTN{
     width:150px;
     height: 25px;
     background-color: #22A2EA;
     border-radius: 20px;
-  position: absolute;
+  position: relative;
     text-align: center;
-     margin-bottom:100px;
-    
-    
     color:white;
+   
+   
+}
+.eliminaProfilo-BTN{
+    width:150px;
+    height: 25px;
+    background-color: #22A2EA;
+    border-radius: 20px;
+  position: relative;
+    text-align: center;
+    color:white;
+   
+   
+}
+.modificaPasswordProfilo-BTN{
+    width:150px;
+    height: 25px;
+    background-color: #22A2EA;
+    border-radius: 20px;
+    position: relative;
+    text-align: center;
+    color:white;
+
+    
+}
+.salvaModProfilo-BTN{
+    width:150px;
+    height: 25px;
+    background-color: #22A2EA;
+    border-radius: 20px;
+    position: relative;
+    text-align: center;
+    color:white;
+    left: 65%;
+    
+}
+.row-BTN{
+    display: flex;
+    justify-content: space-between; /* Disporre le box orizzontalmente con spazio tra di loro */
+    width: 100%; /* Assicurati che occupi tutta la larghezza disponibile */
+    max-width: 450px; /* Limita la larghezza massima per evitare che le box diventino troppo larghe */
+    max-height: 200px;
+    margin-top: auto; /* Spinge i bottoni verso il fondo del contenitore */
+    position: absolute;
+    bottom: 20px; /* Distanza dal bordo inferiore */
+    left: 58%; /* Distanza dal bordo sinistro */
+}
+.links{
+    color: #727272aa; /* Colore del testo delle etichette */
+    display: flex;
+    flex-direction: column; /* Disporre l'etichetta sopra il box */
+    align-items: first baseline; /* Allinea l'etichetta a sinistra */
+    margin-left: 130px;
+    margin-top: 110px;
+
+    
+}
+.link1,.link2,.link3 {
+    width: 250px; 
+    height: 25px; /* Dimensioni aumentate per una visualizzazione migliore */
+    border: 2px solid #727272aa; /* Corretto il formato del bordo */
+    border-radius: 20px; /* Per fare un cerchio; usa px per bordi arrotondati se non vuoi cerchi */
+    margin-top: 20px; /* Spazio intorno alla forma */
+    background-color: #ffffff; /* Aggiunto colore di sfondo per renderlo visibile */
+    box-sizing: border-box; 
+    
+}.links label{
+    display: block;
+    font-size: 14px;
+    color: #727272aa; /* Colore del testo delle etichette */
+    position: relative;
+    text-align: left; 
+}
+.link1 input,.link2 input,.link3 input{
+    width: 250px; 
+    height: 25px; /* Dimensioni aumentate per una visualizzazione migliore */
+    border-radius: 20px; 
+    border: 2px solid #727272aa; /* formato del bordo *//* Per fare un cerchio; usa px per bordi arrotondati se non vuoi cerchi */
+    margin-top: 20px; 
+    background-color: #ffffff; 
+    box-sizing: border-box; 
+    
+}
+.descrizione{
+    color: #727272aa; /* Colore del testo delle etichette */
+    display: flex;
+    flex-direction: column; /* Disporre l'etichetta sopra il box */
+    align-items: first baseline; /* Allinea l'etichetta a sinistra */
+    margin-top:-160px;
+    margin-right: 800px;
+}
+.boxDescrizione{
+    width: 550px; 
+    height: 250px; /* Dimensioni aumentate per una visualizzazione migliore */
+    border: 2px solid #727272aa; 
+    border-radius: 20px; 
+    margin-top: 20px; /* Spazio intorno alla forma */
+    background-color: #ffffff; 
+    box-sizing: border-box; 
+}
+.descrizione label{
+    display: block;
+    font-size: 14px;
+    color: #727272aa; /* Colore del testo delle etichette */
+    position: relative;
+    text-align: left; 
+}
+.foto{
+  
+    display: flex;
+    flex-direction: column; /* Disporre l'etichetta sopra il box */
+    
+     margin-right: 1100px;
+    margin-top: -610px;
+}
+.boxFoto{
+    width: 250px; 
+    height: 250px; /* Dimensioni aumentate per una visualizzazione migliore */
+    border: 2px solid #727272aa; 
+    border-radius: 20px; 
+    margin-top: 20px; /* Spazio intorno alla forma */
+    background-color: #ffffff; 
+    box-sizing: border-box; 
+}
+.boxFoto-BTN{
+    display: flex;
+    justify-content: space-between; /* Disporre le box orizzontalmente con spazio tra di loro */
+    width: 100%; /* Assicurati che occupi tutta la larghezza disponibile */
+    position: absolute;
+    margin-left: 600px;
+    margin-top: 100px;
+   
+}
+.modificaFoto-BTN{
+    width:150px;
+    height: 25px;
+    background-color: #22A2EA;
+    border-radius: 20px;
+    position: relative;
+    text-align: center;
+    color:white;
+   
 }

@@ -30,20 +30,20 @@ export const routes: Routes = [
     component: RegistrationpageComponent,
   },
   {
-  path: 'product',
-  title: 'Product',
-  component: ProductpageComponent,
-},
-{
-path: 'profile',
-  title: 'Profile',
-  component: ProfileComponent,
-},
-{
-path: 'asta',
-  title: 'Asta',
-  component: AstaComponent,
-},
+    path: 'product',
+    title: 'Product',
+    component: ProductpageComponent,
+  },
+  {
+    path: 'profile',
+    title: 'Profile',
+    component: ProfileComponent,
+  },
+  {
+    path: 'asta',
+    title: 'Asta',
+    component: AppComponent,
+  },
 
 
 
@@ -58,4 +58,4 @@ path: 'asta',
   ],
   providers: [RestService],
 })
-export class AppModule {}
+export class AppModule { }

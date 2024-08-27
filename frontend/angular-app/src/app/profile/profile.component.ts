@@ -28,10 +28,18 @@ export class ProfileComponent {
   email: string = '';
   nome: string = '';
   cognome: string = '';
-  password: string = '';
   nickname: string = '';
-  tipo: string = '';
   regione: string = '';
   indirizzo: string = '';
-  showModifica: string='venditore';
+  link: string = '';
+  descrizione: string = '';
+  showModifica: string='!modifica';
+
+ modificaProfilo(){
+  this.showModifica='modifica';
+ }
+ confermaModProfilo() {
+  this.showModifica = '!modifica';
 }
+}
+
