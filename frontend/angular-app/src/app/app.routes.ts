@@ -44,7 +44,16 @@ export const routes: Routes = [
     title: 'Asta',
     component: AppComponent,
   },
-
+  {
+    path: 'mieAste',
+    title: 'MieAsta',
+    component: AppComponent,
+  },
+  {
+    path: 'visualProfilo',
+    title: 'VisualProfilo',
+    component: AppComponent,
+  },
 
 
 ];

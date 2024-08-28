@@ -9,10 +9,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
+
 @Component({
-  selector: 'app-asta',
+  selector: 'app-visulizza-profilo',
   standalone: true,
-  imports: [NavbarComponent,
+  imports: [ NavbarComponent,
     MatToolbarModule,
    MatIconModule,
    MatAutocompleteModule,
@@ -21,9 +22,9 @@ import { RestService } from '../_services/rest-api.service';
    CommonModule,
    FormsModule,
    RouterLink,],
-  templateUrl: './asta.component.html',
-  styleUrl: './asta.component.scss'
+  templateUrl: './visulizza-profilo.component.html',
+  styleUrl: './visulizza-profilo.component.scss'
 })
-export class AstaComponent {
+export class VisulizzaProfiloComponent {
 
 }
