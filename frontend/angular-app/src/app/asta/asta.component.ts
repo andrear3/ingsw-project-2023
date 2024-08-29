@@ -25,5 +25,15 @@ import { RestService } from '../_services/rest-api.service';
   styleUrl: './asta.component.scss'
 })
 export class AstaComponent {
+tipoAsta: string='classica'
 
+  astaClassica(){
+    this.tipoAsta='classica';
+  }
+  astaAlRibasso(){
+    this.tipoAsta='ribasso'
+  }
+  astaInversa(){
+    this.tipoAsta='inversa'
+  }
 }

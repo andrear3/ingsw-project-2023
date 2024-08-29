@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouteConfigLoadEnd, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
-import { MatDialog,MatDialogRef } from '@angular/material/dialog';
-
+import { MAT_DIALOG_DATA, MatDialog,MatDialogRef } from '@angular/material/dialog';
+import { AstaComponent } from '../asta/asta.component';
+import { Asta } from '../_models/asta-model';
 @Component({
   selector: 'app-scelta-asta',
   standalone: true,
@@ -13,7 +14,8 @@ import { MatDialog,MatDialogRef } from '@angular/material/dialog';
 export class SceltaAstaComponent {
   constructor(public dialog :MatDialog){}
   closeDialog(){
-    this.dialog.closeAll();
+    this.dialog.closeAll(); 
+    
    }
   
 }
