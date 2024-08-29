@@ -6,13 +6,24 @@ import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
 
 export const homepageRouter = express.Router();
 
-
 homepageRouter.get("/homepage", async (req, res) => {
   try {
     let asteAttive = await AstaCTRL.recuperaAsteAttive();
 
     if (!asteAttive || asteAttive.length === 0) {
       return res.status(404).json({ message: "Nessuna asta trovata" });
+    }
+
+    console.log("Session:", req.session);
+
+    if (!req.session.user) {
+      console.log("NO LOGIN");
+      console.log(req.session.user);
+    }
+
+    if (req.session.user) {
+      console.log("LOGIN FATTO");
+      console.log(req.session.user);
     }
 
     let idAste = asteAttive.map((item) => item.dataValues.astaID);
@@ -30,15 +41,14 @@ homepageRouter.get("/homepage", async (req, res) => {
       return map;
     }, {});
 
-    //componi la risposta al client 
+    //componi la risposta al client
     const baseUrl = req.protocol + "://" + req.get("host") + "/images/";
     const datiConOfferteETempo = asteAttive.map((asta) => ({
       ...asta.toJSON(),
       url: baseUrl + asta.url,
       offertaMax: mappaOfferteMassime[asta.dataValues.astaID] || null,
-      timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null
+      timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
     }));
-
     res.json(datiConOfferteETempo);
   } catch (error) {
     console.error("Errore nel recupero dei dati:", error);

@@ -17,15 +17,18 @@ loginRouter.post("/", async (req, res) => {
       console.log("Login failed: Incorrect password");
       return res.status(401).json({ message: "Incorrect email or password." });
     }
-    req.session.user = user; //SESSIONS
+
+    req.session.user = { nome: user.nome, email: user.email };
+
     req.session.save((err) => {
       if (err) {
         console.error("Session save error:", err);
         return res.status(500).json({ error: err.message });
       }
-      console.log("Login successful:", user);
+      console.log("Login successful:", req.session.user);
       res.json(user);
     });
+
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ error: error.message });
