@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Utente } from '../_models/utente-model';
 import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 //import { Login } from '../_models/login-model';
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,7 @@ export class RestService {
   getAsta(): Observable<any> {
     const url = `${this.apiUrl}/homepage`;
     return this.http.get<any>(url, this.httpOptions);
+
   }
 
   register(
@@ -55,5 +57,12 @@ export class RestService {
 
   logout(): Observable<any> {
     return this.http.get(`${this.apiUrl}/logout`);
+  }
+  private tipoAstaSubject = new BehaviorSubject<string>('ribasso'); // default value
+  tipoAsta$ = this.tipoAstaSubject.asObservable(); // Observable to listen for changes
+
+  // Method to update the tipoAsta
+  setTipoAsta(tipo: string) {
+    this.tipoAstaSubject.next(tipo);
   }
 }

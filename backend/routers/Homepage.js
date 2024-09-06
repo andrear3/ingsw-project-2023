@@ -48,6 +48,7 @@ homepageRouter.get("/homepage", async (req, res) => {
       url: baseUrl + asta.url,
       offertaMax: mappaOfferteMassime[asta.dataValues.astaID] || null,
       timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
+      user: req.session.user
     }));
     res.json(datiConOfferteETempo);
   } catch (error) {

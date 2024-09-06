@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,31 +9,50 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
+
+
 @Component({
   selector: 'app-asta',
   standalone: true,
-  imports: [NavbarComponent,
+  imports: [
+    NavbarComponent,
     MatToolbarModule,
-   MatIconModule,
-   MatAutocompleteModule,
-   MatInputModule,
-   RouterOutlet,
-   CommonModule,
-   FormsModule,
-   RouterLink,],
+    MatIconModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    RouterOutlet,
+    CommonModule,
+    FormsModule,
+    RouterLink,
+  ],
   templateUrl: './asta.component.html',
-  styleUrl: './asta.component.scss'
+  styleUrls: ['./asta.component.scss']
 })
-export class AstaComponent {
-tipoAsta: string='classica'
+export class AstaComponent implements OnInit {
+  public tipoAsta: string = 'ribasso';
 
-  astaClassica(){
-    this.tipoAsta='classica';
+  constructor(private RestService: RestService) {} // Inject the AstaService
+
+  ngOnInit() {
+    // Subscribe to the tipoAsta changes
+    this.RestService.tipoAsta$.subscribe(tipo => {
+      this.tipoAsta = tipo;
+      console.log('Asta type set:', this.tipoAsta);
+    });
   }
-  astaAlRibasso(){
-    this.tipoAsta='ribasso'
+
+  astaClassica() {
+    this.tipoAsta = 'classica';
+    console.log('Asta classica set:', this.tipoAsta);
   }
-  astaInversa(){
-    this.tipoAsta='inversa'
+
+  astaAlRibasso() {
+    console.log('Switching to auction at ribasso'); // Debug output
+    this.tipoAsta = 'ribasso';
+  }
+
+  astaInversa() {
+    console.log('Switching to reverse auction'); // Debug output
+    this.tipoAsta = 'inversa';
   }
 }

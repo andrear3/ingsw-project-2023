@@ -3,29 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="asta.component.html" />
-    <link
-    href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap"
-    rel="stylesheet"
-  />
-    <title>Homepage</title>
+  
+    <title>Asta</title>
   </head>
   <body>
-    <nav>
-      <app-navbar></app-navbar>
-    </nav>
-    @if(tipoAsta==="calssica"){
-      <p>classica</p>
-    }
-    @if (tipoAsta==="inversa") {
-      <p>inversa</p>
-    }
-    @if(tipoAsta==="ribasso"){
-      <p>ribasso</p>
-    }
-
-
+   
+  
     <main>
+   <!-- asta.component.html -->
+<div *ngIf="tipoAsta === 'classica'">
+  <!-- Contenuto per l'asta classica -->
+  <p>Questo è il contenuto per l'asta classica.</p>
+</div>
+
+<div *ngIf="tipoAsta === 'ribasso'">
+  <!-- Contenuto per l'asta al ribasso -->
+  <p>Questo è il contenuto per l'asta al ribasso.</p>
+</div>
+
+<div *ngIf="tipoAsta === 'inversa'">
+  <!-- Contenuto per l'asta inversa -->
+  <p>Questo è il contenuto per l'asta inversa.</p>
+</div>
+
+    
      
     </main>
   </body>
