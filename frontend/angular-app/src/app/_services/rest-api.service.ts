@@ -58,7 +58,7 @@ export class RestService {
   logout(): Observable<any> {
     return this.http.get(`${this.apiUrl}/logout`);
   }
-  private tipoAstaSubject = new BehaviorSubject<string>('ribasso'); // default value
+  private tipoAstaSubject = new BehaviorSubject<string>('classica'); // default value
   tipoAsta$ = this.tipoAstaSubject.asObservable(); // Observable to listen for changes
 
   // Method to update the tipoAsta
