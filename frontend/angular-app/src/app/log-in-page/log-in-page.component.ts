@@ -21,7 +21,7 @@ export class LogInPageComponent {
   login() {
     this.restApiService.login(this.email, this.password).subscribe(
       (response) => {
-        console.log('Login successful:', response);
+        console.log('Login successful:', response?.accessToken);
       },
       (error) => {
         console.error('Login failed:', error);

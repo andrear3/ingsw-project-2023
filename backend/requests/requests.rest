@@ -1,0 +1,14 @@
+GET http://localhost:3000/homepage
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpa2tvd29tYW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE3MjYyMzUzNzZ9.ZhZG8fzk1hcmjR8KHa691m0mXz5qACqyXGIKJC9QpJQ
+
+
+
+###
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email" : "kikkowoman@mail.com",
+    "password" : "1234"
+}

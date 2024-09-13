@@ -1,12 +1,14 @@
 import express from "express";
 import path from "path";
+import jwt from "jsonwebtoken";
 
+import { authToken } from "../middleware/Auth.js";
 import { AstaCTRL } from "../controllers/AstaCTRL.js";
 import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
 
 export const homepageRouter = express.Router();
 
-homepageRouter.get("/homepage", async (req, res) => {
+homepageRouter.get("/homepage", authToken, async (req, res) => {
   try {
     let asteAttive = await AstaCTRL.recuperaAsteAttive();
 
@@ -14,17 +16,7 @@ homepageRouter.get("/homepage", async (req, res) => {
       return res.status(404).json({ message: "Nessuna asta trovata" });
     }
 
-    console.log("Session:", req.session);
-
-    if (!req.session.user) {
-      console.log("NO LOGIN");
-      console.log(req.session.user);
-    }
-
-    if (req.session.user) {
-      console.log("LOGIN FATTO");
-      console.log(req.session.user);
-    }
+  
 
     let idAste = asteAttive.map((item) => item.dataValues.astaID);
 
@@ -48,7 +40,6 @@ homepageRouter.get("/homepage", async (req, res) => {
       url: baseUrl + asta.url,
       offertaMax: mappaOfferteMassime[asta.dataValues.astaID] || null,
       timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
-      user: req.session.user
     }));
     res.json(datiConOfferteETempo);
   } catch (error) {
