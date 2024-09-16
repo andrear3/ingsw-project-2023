@@ -1,18 +1,29 @@
-
-import { ChangeDetectorRef,AfterViewInit, Component,ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  AfterViewInit,
+  Component,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormField } from '@angular/material/input';
-import {MatDialogModule} from '@angular/material/dialog'; 
-import { MatDialog,MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SceltaAstaComponent } from '../scelta-asta/scelta-asta.component';
-import { Router, RouteConfigLoadEnd, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouteConfigLoadEnd,
+  RouterLink,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 import { AstaComponent } from '../asta/asta.component';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -21,14 +32,17 @@ import { AuthService } from '../_services/auth.service';
     MatIcon,
     MatAutocompleteModule,
     MatInputModule,
-    RouterOutlet,CommonModule,RouterLink,RouterModule
+    RouterOutlet,
+    CommonModule,
+    RouterLink,
+    RouterModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements AfterViewInit{
+export class NavbarComponent implements AfterViewInit {
   @ViewChild(AstaComponent) tipoAsta?: AstaComponent;
-  
+
   options: string[] = [
     'Informatica',
     'Videogames',
@@ -36,38 +50,41 @@ export class NavbarComponent implements AfterViewInit{
     'Sport',
     'Collezionismo',
   ];
-  
-  constructor(public dialog :MatDialog,
+  showUtente: string = 'venditore';
+  private statusSubscription: Subscription = new Subscription();
+  constructor(
+    public dialog: MatDialog,
     private router: Router,
-    private cdRef: ChangeDetectorRef, 
+    private cdRef: ChangeDetectorRef,
     private RestService: RestService,
     private AuthService: AuthService
-  ){}
+  ) {}
 
-  utenteAuth=this.AuthService.getUtente();
   ngOnInit() {
-    console.log("fefefeffeaf");
-    console.log(this.AuthService.getUtente()?.tipo);
-   
+    this.statusSubscription = this.AuthService.getStatus().subscribe(
+      (status: boolean) => {
+        if (status) {
+          console.log(this.AuthService.getUtente());
+        }
+      }
+    );
   }
-
-  showUtente :string ='venditore';
-  openDialog(){
-   this.dialog.open(SceltaAstaComponent,{position:{top:'5%',right:'17%'}});
-   console.log("fweofwef");
-   console.log(this.utenteAuth?.tipo);
-
+  openDialog() {
+    this.dialog.open(SceltaAstaComponent, {
+      position: { top: '5%', right: '17%' },
+    });
   }
-   closeDialog(){
+  closeDialog() {
     this.dialog.closeAll();
-   }
-   ngAfterViewInit() {
+  }
+  ngAfterViewInit() {
     if (!this.tipoAsta) {
       console.error('AstaComponent not found via @ViewChild');
     } else {
       console.log('AstaComponent found:', this.tipoAsta);
     }
   }
+
   navigateToAsta() {
     this.router.navigate(['/asta']); 
   }
@@ -75,7 +92,4 @@ export class NavbarComponent implements AfterViewInit{
     this.RestService.setTipoAsta('ribasso');
     this.navigateToAsta();
   }
-
-
-
 }

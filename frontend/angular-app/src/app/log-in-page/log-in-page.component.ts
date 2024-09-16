@@ -28,7 +28,7 @@ export class LogInPageComponent {
         console.log('Login successful:', response?.accessToken);
         this.authService.setToken(response?.accessToken);
 
-
+        
         this.router.navigate(['/homepage']);
       },
       (error) => {
