@@ -11,7 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../_services/auth.service';
 import { NavbarComponent } from '../navbar/navbar.component';
-
+import { Router , RouterLink,
+  RouterModule,
+  RouterOutlet,} from '@angular/router';
 @Component({
   selector: 'app-homepage',
   standalone: true,
@@ -23,6 +25,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
     MatIconModule,
     CommonModule,
     FormsModule,
+   
   ],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
@@ -32,10 +35,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
   utente: Utente | null = null;
   private intervalId: any;
   private subscriptions: Subscription = new Subscription();
+ 
 
   constructor(
     private restService: RestService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -96,5 +101,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
     const sDisplay = s > 0 ? `${s}s` : '';
 
     return dDisplay + hDisplay + mDisplay + sDisplay.trim();
+  }
+  navigateToviewAsta(asta:Asta) {
+    console.log(asta);
+    this.router.navigate(['/auctionView',asta]); 
   }
 }

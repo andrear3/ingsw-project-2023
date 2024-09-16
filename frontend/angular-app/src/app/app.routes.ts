@@ -15,6 +15,7 @@ import { AstaComponent } from './asta/asta.component';
 import { VisulizzaProfiloComponent } from './visulizza-profilo/visulizza-profilo.component';
 
 import { LeMieAsteComponent } from './le-mie-aste/le-mie-aste.component';
+import { AuctionViewComponent } from './auction-view/auction-view.component';
 
 export const routes: Routes = [
   {
@@ -57,6 +58,11 @@ export const routes: Routes = [
     title: 'VisualProfilo',
     component: VisulizzaProfiloComponent,
   },
+  {
+  path: 'auctionView',
+  title: 'AuctionView',
+  component: AuctionViewComponent,
+},
 
 
 ];

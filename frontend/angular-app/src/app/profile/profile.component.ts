@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { Utente } from '../_models/utente-model';
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -39,7 +42,7 @@ export class ProfileComponent {
     private RestService: RestService,
     private AuthService: AuthService
   ){}
-
+  private statusSubscription: Subscription = new Subscription();
 
  modificaProfilo(){
   this.showModifica='modifica';
@@ -47,12 +50,21 @@ export class ProfileComponent {
  confermaModProfilo() {
   this.showModifica = '!modifica';
 }
+utente : Utente | null = null ;
 ngOnInit() {
-  console.log("fefefeffeaf");
-  console.log(this.AuthService.getUtente()?.tipo);
- 
+  this.statusSubscription = this.AuthService.getStatus().subscribe(
+    (status: boolean) => {
+      if (status) {
+    
+        console.log(this.AuthService.getUtente());
+        this.utente=this.AuthService.getUtente();
+        
+       
+        }
+    }
+  );
+}
 }
 
 
-}
 

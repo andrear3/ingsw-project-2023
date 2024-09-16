@@ -10,8 +10,10 @@
       <app-navbar></app-navbar>
     </nav>
     <main>
+     
       <div class="card-container">
         @for (asta of aste; track asta) {
+          <mat-card (click)="navigateToviewAsta(asta)" class="card" >
         <div class="card-item">
           <div class="card-image">
             <img
@@ -39,8 +41,10 @@
             </div>
           </div>
         </div>
+      </mat-card >
         }
       </div>
+    
     </main>
   </body>
 </html>
