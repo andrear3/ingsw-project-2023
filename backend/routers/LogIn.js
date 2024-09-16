@@ -1,4 +1,5 @@
 import express from "express";
+import jwt from "jsonwebtoken";
 import { Utente } from "../models/Database.js";
 import { createHash } from "crypto";
 
@@ -18,30 +19,19 @@ loginRouter.post("/", async (req, res) => {
       return res.status(401).json({ message: "Incorrect email or password." });
     }
 
-    req.session.user = { nome: user.nome, email: user.email };
+    const loginUser = {
+      email: email,
+      password: password,
+    };
 
-    req.session.save((err) => {
-      if (err) {
-        console.error("Session save error:", err);
-        return res.status(500).json({ error: err.message });
-      }
-      console.log("Login successful:", req.session.user);
-      res.json(user);
-    });
+    console.log(loginUser.email);
+    console.log(loginUser.password);
 
+    const accessToken = jwt.sign(loginUser, process.env.ACCESS_TOKEN_SECRET);
+    res.json({ accessToken: accessToken });
+    console.log(accessToken);
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ error: error.message });
   }
 });
-
-/*
-loginRouter.get("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    res.status(200).send("Logged out successfully");
-  });
-});
-*/

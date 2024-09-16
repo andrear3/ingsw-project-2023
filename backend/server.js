@@ -1,13 +1,16 @@
 //GENERAL IMPORTS
+
+import "dotenv/config";
 import express from "express";
-import session from "express-session";
 import bodyParser from "body-parser";
+import jwt from "jsonwebtoken";
 import cors from "cors";
 
 //CONTROLLERS
 import { UtenteCTRL } from "./controllers/UtenteCTRL.js";
 import { OffertaCTRL } from "./controllers/OffertaCTRL.js";
 import { AstaCTRL } from "./controllers/AstaCTRL.js";
+import { authToken } from "./middleware/Auth.js";
 
 //ROUTERS
 import { homepageRouter } from "./routers/Homepage.js";
@@ -25,22 +28,9 @@ const __dirname = dirname(__filename);
 
 const app = express();
 
-//SESSIONS
-app.use(
-  session({
-    secret: "your_secret_key",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
-    },
-  })
-);
-
 //MIDDLEWARE PER PARSING BODY DEL CLIENT.
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 
 //GENERAL STATEMENTS !!!!!!!!
 app.use(bodyParser.json()); // Parsing JSON bodies
@@ -54,12 +44,25 @@ app.use(
 const PORT = 3000;
 
 //TESTING
+
+const posts = [
+  {
+    email: "kikkowoman@mail.com",
+    password: "1234",
+  },
+  {
+    email: "kikkoman@mail.com",
+    password: "4321",
+  },
+];
+
 AstaCTRL.stampaTutteAste();
 
 //STAMPA DELLE ASTE ATTIVE
 //setInterval(AstaCTRL.recuperaAsteAttive, 10000);
 
 //APP ROUTES
+
 
 app.get("/test", (req, res) => {
   //res.sendFile(__dirname + '/gameboy.jpg');
@@ -75,4 +78,3 @@ app.use(loginRouter);
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-

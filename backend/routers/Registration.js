@@ -1,4 +1,5 @@
 import express from "express";
+import jwt from "jsonwebtoken";
 import { Utente } from "../models/Database.js"; // Adjust this import based on your actual model path
 
 export const registrationRouter = express.Router();

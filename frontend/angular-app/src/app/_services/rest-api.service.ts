@@ -1,16 +1,21 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Utente } from '../_models/utente-model';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-//import { Login } from '../_models/login-model';
+import { AuthService } from './auth.service';
+
 @Injectable({
   providedIn: 'root',
 })
 export class RestService {
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
+
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -25,8 +30,17 @@ export class RestService {
 
   getAsta(): Observable<any> {
     const url = `${this.apiUrl}/homepage`;
-    return this.http.get<any>(url, this.httpOptions);
 
+    const token = this.authService.getToken();
+    console.log(token);
+
+    const httpOptionsWithToken = {
+      headers: this.httpOptions.headers.set('Authorization', `Bearer ${token}`),
+    };
+
+    console.log('Token:', token); // Log token for debugging
+
+    return this.http.get<any>(url, { headers: httpOptionsWithToken.headers });
   }
 
   register(
