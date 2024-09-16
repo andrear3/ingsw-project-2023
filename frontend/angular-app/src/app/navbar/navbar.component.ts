@@ -12,6 +12,7 @@ import { SceltaAstaComponent } from '../scelta-asta/scelta-asta.component';
 import { Router, RouteConfigLoadEnd, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { AstaComponent } from '../asta/asta.component';
 import { RestService } from '../_services/rest-api.service';
+import { AuthService } from '../_services/auth.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -35,15 +36,27 @@ export class NavbarComponent implements AfterViewInit{
     'Sport',
     'Collezionismo',
   ];
-  showUtente :string ='compratore';
+  
   constructor(public dialog :MatDialog,
     private router: Router,
-    private cdRef: ChangeDetectorRef, // Inject ChangeDetectorRef to force change detection
-    private RestService: RestService // Inject the AstaService
+    private cdRef: ChangeDetectorRef, 
+    private RestService: RestService,
+    private AuthService: AuthService
   ){}
+
+  utenteAuth=this.AuthService.getUtente();
+  ngOnInit() {
+    console.log("fefefeffeaf");
+    console.log(this.AuthService.getUtente()?.tipo);
+   
+  }
+
+  showUtente :string ='venditore';
   openDialog(){
    this.dialog.open(SceltaAstaComponent,{position:{top:'5%',right:'17%'}});
-  
+   console.log("fweofwef");
+   console.log(this.utenteAuth?.tipo);
+
   }
    closeDialog(){
     this.dialog.closeAll();
@@ -56,7 +69,7 @@ export class NavbarComponent implements AfterViewInit{
     }
   }
   navigateToAsta() {
-    this.router.navigate(['/asta']); // Manually navigate to the '/asta' route
+    this.router.navigate(['/asta']); 
   }
   onRibassoButtonClick() {
     this.RestService.setTipoAsta('ribasso');

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit} from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
+import { AuthService } from '../_services/auth.service';
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -34,6 +35,11 @@ export class ProfileComponent {
   link: string = '';
   descrizione: string = '';
   showModifica: string='!modifica';
+  constructor(
+    private RestService: RestService,
+    private AuthService: AuthService
+  ){}
+
 
  modificaProfilo(){
   this.showModifica='modifica';
@@ -41,5 +47,12 @@ export class ProfileComponent {
  confermaModProfilo() {
   this.showModifica = '!modifica';
 }
+ngOnInit() {
+  console.log("fefefeffeaf");
+  console.log(this.AuthService.getUtente()?.tipo);
+ 
+}
+
+
 }
 

@@ -36,7 +36,6 @@ export class AstaComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.AuthService.getUtente()?.tipo);
-    // Subscribe to the tipoAsta changes
     this.RestService.tipoAsta$.subscribe(tipo => {
       this.tipoAsta = tipo;
       console.log('Asta type set:', this.tipoAsta);
