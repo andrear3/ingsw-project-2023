@@ -14,18 +14,9 @@ homepageRouter.get("/homepage", async (req, res) => {
       return res.status(404).json({ message: "Nessuna asta trovata" });
     }
 
-    console.log("Session:", req.session);
 
-    if (!req.session.user) {
-      console.log("NO LOGIN");
-      console.log(req.session.user);
-    }
-
-    if (req.session.user) {
-      console.log("LOGIN FATTO");
-      console.log(req.session.user);
-    }
-
+    
+  
     let idAste = asteAttive.map((item) => item.dataValues.astaID);
 
     const offerteMassime = await OffertaCTRL.trovaOffertaMassima(idAste);
@@ -48,7 +39,7 @@ homepageRouter.get("/homepage", async (req, res) => {
       url: baseUrl + asta.url,
       offertaMax: mappaOfferteMassime[asta.dataValues.astaID] || null,
       timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
-      user: req.session.user
+      
     }));
     res.json(datiConOfferteETempo);
   } catch (error) {
