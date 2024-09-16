@@ -50,7 +50,10 @@ export class HomepageComponent implements OnInit, OnDestroy {
           console.log(this.aste[0]?.statusAsta);
           console.log(this.utente?.tipo);
 
+          //popolo i campi di utente
           this.authService.setUtente(this.utente);
+          //notifico che utente è stato popolato
+          this.authService.setStatus(true);
         },
         error: (err: any) => {
           console.error('Error fetching data:', err);

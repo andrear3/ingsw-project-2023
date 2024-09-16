@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   public jwtoken: string = '';
   public jwtutente: Utente | null = null;
+  private status = new BehaviorSubject<boolean>(false);
 
   setToken(par: string) {
     this.jwtoken = par;
@@ -25,5 +26,13 @@ export class AuthService {
 
   getUtente(): Utente | null {
     return this.jwtutente;
+  }
+
+  getStatus(): Observable<boolean> {
+    return this.status.asObservable();
+  }
+
+  setStatus(status: boolean): void {
+    this.status.next(status);
   }
 }
