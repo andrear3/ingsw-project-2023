@@ -4,10 +4,6 @@ export function authToken(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
-  console.log(req);
-  console.log(token);
-  console.log("agsrga");
-
   if (token == null) {
     return res.sendStatus(401);
   }
@@ -16,7 +12,10 @@ export function authToken(req, res, next) {
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     if (err) return res.sendStatus(403);
+
+    //req.user attacca l'utente preso da jwt alla richiesta, disponibile ai routers!
     req.user = user;
+    
     next();
   });
 }

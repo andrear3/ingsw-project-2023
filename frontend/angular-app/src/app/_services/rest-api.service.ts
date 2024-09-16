@@ -5,17 +5,15 @@ import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth.service';
 
+import { Asta } from '../_models/asta-model';
+
 @Injectable({
   providedIn: 'root',
 })
 export class RestService {
   private apiUrl = 'http://localhost:3000';
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService
-  ) {}
-
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -28,19 +26,17 @@ export class RestService {
     return this.http.get<Utente[]>(url, this.httpOptions);
   }
 
-  getAsta(): Observable<any> {
+  getAsta(): Observable<{ aste: Asta[]; userInfo: Utente }> {
     const url = `${this.apiUrl}/homepage`;
-
     const token = this.authService.getToken();
-    console.log(token);
 
-    const httpOptionsWithToken = {
-      headers: this.httpOptions.headers.set('Authorization', `Bearer ${token}`),
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
     };
 
-    console.log('Token:', token); // Log token for debugging
-
-    return this.http.get<any>(url, { headers: httpOptionsWithToken.headers });
+    return this.http.get<{ aste: Asta[]; userInfo: Utente }>(url, httpOptions);
   }
 
   register(

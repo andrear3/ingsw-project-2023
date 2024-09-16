@@ -24,8 +24,6 @@ loginRouter.post("/", async (req, res) => {
       password: password,
     };
 
-    console.log(loginUser.email);
-    console.log(loginUser.password);
 
     const accessToken = jwt.sign(loginUser, process.env.ACCESS_TOKEN_SECRET);
     res.json({ accessToken: accessToken });

@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
+import { AuthService } from '../_services/auth.service';
 
 
 @Component({
@@ -31,9 +32,10 @@ import { RestService } from '../_services/rest-api.service';
 export class AstaComponent implements OnInit {
   public tipoAsta: string = 'ribasso';
 
-  constructor(private RestService: RestService) {} // Inject the AstaService
+  constructor(private RestService: RestService, private AuthService: AuthService) {} 
 
   ngOnInit() {
+    console.log(this.AuthService.getUtente()?.tipo);
     // Subscribe to the tipoAsta changes
     this.RestService.tipoAsta$.subscribe(tipo => {
       this.tipoAsta = tipo;

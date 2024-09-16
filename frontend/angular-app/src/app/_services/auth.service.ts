@@ -9,15 +9,21 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   public jwtoken: string = '';
+  public jwtutente: Utente | null = null;
 
-  setToken(par: string){
+  setToken(par: string) {
     this.jwtoken = par;
-    console.log('set:');
-    console.log(this.jwtoken);
-    console.log('set:');
   }
-  //undefined?
-  getToken(){
+
+  getToken() {
     return this.jwtoken;
+  }
+
+  setUtente(utente: Utente) {
+    this.jwtutente = utente;
+  }
+
+  getUtente(): Utente | null {
+    return this.jwtutente;
   }
 }

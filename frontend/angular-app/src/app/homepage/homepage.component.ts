@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RestService } from '../_services/rest-api.service';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Asta } from '../_models/asta-model';
+import { Utente } from '../_models/utente-model';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -9,11 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-
-import { statusAstaEnum } from '../_models/asta-model';
-import { tipoBeneVenditaEnum } from '../_models/asta-model';
-import { categoriaEnum } from '../_models/asta-model';
 import { AuthService } from '../_services/auth.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-homepage',
@@ -32,14 +29,9 @@ import { AuthService } from '../_services/auth.service';
 })
 export class HomepageComponent implements OnInit, OnDestroy {
   aste: Asta[] = [];
+  utente: Utente | null = null;
   private intervalId: any;
   private subscriptions: Subscription = new Subscription();
-
-  public statusEnum = statusAstaEnum;
-  public tipoBeneVendita = tipoBeneVenditaEnum;
-  public categoria = categoriaEnum;
-
-  public temp: string = '1234';
 
   constructor(
     private restService: RestService,
@@ -50,12 +42,15 @@ export class HomepageComponent implements OnInit, OnDestroy {
     console.log(this.authService.getToken());
     this.subscriptions.add(
       this.restService.getAsta().subscribe({
-        next: (data: Asta[]) => {
-          this.aste = data;
+        next: (response: { aste: Asta[]; userInfo: Utente }) => {
+          this.aste = response.aste;
+          this.utente = response.userInfo;
+
           this.startDecrementTimer();
-          console.log(this.aste[0].statusAsta);
-          //assegno qui la variabile da server!!!!!!!!!
-          this.temp = 'test';
+          console.log(this.aste[0]?.statusAsta);
+          console.log(this.utente?.tipo);
+
+          this.authService.setUtente(this.utente);
         },
         error: (err: any) => {
           console.error('Error fetching data:', err);

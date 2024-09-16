@@ -5,18 +5,20 @@ import jwt from "jsonwebtoken";
 import { authToken } from "../middleware/Auth.js";
 import { AstaCTRL } from "../controllers/AstaCTRL.js";
 import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
+import { Utente } from "../models/Database.js";
+import { UtenteCTRL } from "../controllers/UtenteCTRL.js";
 
 export const homepageRouter = express.Router();
 
 homepageRouter.get("/homepage", authToken, async (req, res) => {
   try {
+    // Queries
     let asteAttive = await AstaCTRL.recuperaAsteAttive();
+    let user = await UtenteCTRL.recuperaUtenteByEmail(req.user.email);
 
     if (!asteAttive || asteAttive.length === 0) {
       return res.status(404).json({ message: "Nessuna asta trovata" });
     }
-
-  
 
     let idAste = asteAttive.map((item) => item.dataValues.astaID);
 
@@ -33,7 +35,7 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
       return map;
     }, {});
 
-    //componi la risposta al client
+    // Compose response to client
     const baseUrl = req.protocol + "://" + req.get("host") + "/images/";
     const datiConOfferteETempo = asteAttive.map((asta) => ({
       ...asta.toJSON(),
@@ -41,7 +43,8 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
       offertaMax: mappaOfferteMassime[asta.dataValues.astaID] || null,
       timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
     }));
-    res.json(datiConOfferteETempo);
+
+    res.json({ aste: datiConOfferteETempo, userInfo: user });  // Send user info separately
   } catch (error) {
     console.error("Errore nel recupero dei dati:", error);
     res.status(500).json({ message: "Errore del server" });
