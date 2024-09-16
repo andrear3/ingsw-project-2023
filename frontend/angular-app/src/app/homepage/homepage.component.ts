@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { statusAstaEnum } from '../_models/asta-model';
 import { tipoBeneVenditaEnum } from '../_models/asta-model';
 import { categoriaEnum } from '../_models/asta-model';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -30,7 +31,6 @@ import { categoriaEnum } from '../_models/asta-model';
   styleUrls: ['./homepage.component.scss'],
 })
 export class HomepageComponent implements OnInit, OnDestroy {
-  restService = inject(RestService);
   aste: Asta[] = [];
   private intervalId: any;
   private subscriptions: Subscription = new Subscription();
@@ -39,9 +39,15 @@ export class HomepageComponent implements OnInit, OnDestroy {
   public tipoBeneVendita = tipoBeneVenditaEnum;
   public categoria = categoriaEnum;
 
-  public temp: string = "1234";
-    
+  public temp: string = '1234';
+
+  constructor(
+    private restService: RestService,
+    private authService: AuthService
+  ) {}
+
   ngOnInit() {
+    console.log(this.authService.getToken());
     this.subscriptions.add(
       this.restService.getAsta().subscribe({
         next: (data: Asta[]) => {
@@ -49,7 +55,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
           this.startDecrementTimer();
           console.log(this.aste[0].statusAsta);
           //assegno qui la variabile da server!!!!!!!!!
-          this.temp = "test";
+          this.temp = 'test';
         },
         error: (err: any) => {
           console.error('Error fetching data:', err);
@@ -57,8 +63,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
       })
     );
   }
-
-  
 
   ngOnDestroy() {
     if (this.intervalId) {

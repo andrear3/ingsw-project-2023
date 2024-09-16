@@ -1,30 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>login</title> 
-        <link rel="stylesheet"  href="log-in-page.component.scss">
-        <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap">
-    </head>
-    <body>
-        <div class="square">
-            <span class="D">D</span>
-            <span class="ieti">ieti</span>
-            <span class="D2">D</span>
-            <span class="eals24">eals24</span>
-            <input type="text" class="box1" placeholder="email/nickname" [(ngModel)]="email" name="email" required>
-            <input type="password" class="box2" placeholder="password" [(ngModel)]="password" name="password" required>
-            <button class="boxAccedi" (click)="login()" [routerLink]="['/homepage']">Accedi</button>
-            <span class="O">o</span>
-            <span class="accediCon">Accedi con</span>
-        </div>
-     
-        <div class="square2">
-            <span class="noAcc">Non hai un account?</span>
-            <!--non va il collegamento da rivedere-->
-            <a class="iscriviti"><a class="link" [routerLink]="['/registration']">iscriviti</a></a> 
-            <span class="O2">o</span>
-            <span class="iscrivitiCon">Iscriviti con</span>
-        </div>
-        <div class="backAzz"></div>
-    </body>
+  <head>
+    <title>login</title>
+    <link rel="stylesheet" href="log-in-page.component.scss" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap"
+    />
+  </head>
+  <body>
+    <div class="square">
+      <span class="D">D</span>
+      <span class="ieti">ieti</span>
+      <span class="D2">D</span>
+      <span class="eals24">eals24</span>
+      <input
+        type="text"
+        class="box1"
+        placeholder="email/nickname"
+        [(ngModel)]="email"
+        name="email"
+        required
+      />
+      <input
+        type="password"
+        class="box2"
+        placeholder="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
+      <button class="boxAccedi" (click)="login()">Accedi</button>
+      <span class="O">o</span>
+      <span class="accediCon">Accedi con</span>
+    </div>
+
+    <div class="square2">
+      <span class="noAcc">Non hai un account?</span>
+      <!--non va il collegamento da rivedere-->
+      <a class="iscriviti"
+        ><a class="link">iscriviti</a></a
+      >
+      <span class="O2">o</span>
+      <span class="iscrivitiCon">Iscriviti con</span>
+    </div>
+    <div class="backAzz"></div>
+  </body>
 </html>
