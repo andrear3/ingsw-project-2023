@@ -50,7 +50,6 @@ export class NavbarComponent implements AfterViewInit {
     'Sport',
     'Collezionismo',
   ];
-  showUtente: string = 'venditore';
   private statusSubscription: Subscription = new Subscription();
   constructor(
     public dialog: MatDialog,
@@ -60,12 +59,16 @@ export class NavbarComponent implements AfterViewInit {
     private AuthService: AuthService
   ) {}
 
+  showUtente: string = 'venditore';
+
   ngOnInit() {
     this.statusSubscription = this.AuthService.getStatus().subscribe(
       (status: boolean) => {
         if (status) {
-          console.log(this.AuthService.getUtente());
-        }
+          this.showUtente= String(this.AuthService.getUtente()?.tipo);
+          console.log(' fgerijfgwierjgowjg');
+          console.log(this.showUtente);
+          }
       }
     );
   }
@@ -77,6 +80,7 @@ export class NavbarComponent implements AfterViewInit {
   closeDialog() {
     this.dialog.closeAll();
   }
+
   ngAfterViewInit() {
     if (!this.tipoAsta) {
       console.error('AstaComponent not found via @ViewChild');
@@ -90,6 +94,10 @@ export class NavbarComponent implements AfterViewInit {
   }
   onRibassoButtonClick() {
     this.RestService.setTipoAsta('ribasso');
+    this.navigateToAsta();
+  }
+  onInversaButtonClick() {
+    this.RestService.setTipoAsta('inversa');
     this.navigateToAsta();
   }
 }

@@ -35,7 +35,7 @@ export class SceltaAstaComponent implements AfterViewInit {
     this.closeDialog();
     this.navigateToAsta();
   }
-  onInversaButtonClick() {
+  onRibassoButtonClick() {
     this.closeDialog2();
     this.navigateToAsta();
   }
@@ -45,7 +45,7 @@ export class SceltaAstaComponent implements AfterViewInit {
     this.dialog.closeAll();
   }
   closeDialog2() {
-    this.RestService.setTipoAsta('inversa'); // Update the tipoAsta using the service
+    this.RestService.setTipoAsta('ribasso'); // Update the tipoAsta using the service
     this.dialog.closeAll();
   }
 

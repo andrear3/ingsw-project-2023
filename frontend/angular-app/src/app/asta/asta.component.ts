@@ -30,7 +30,7 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./asta.component.scss']
 })
 export class AstaComponent implements OnInit {
-  public tipoAsta: string = 'ribasso';
+  public tipoAsta: string = 'inversa';
 
   constructor(private RestService: RestService, private AuthService: AuthService) {} 
 
