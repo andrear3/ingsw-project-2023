@@ -17,18 +17,3 @@ registrationRouter.post("/registration", async (req, res) => {
       .json({ message: "Error during registration", error: error.message });
   }
 });
-
-/* REGISTRATION ALTERNATIVA (NON USATA)
-registrationRouter.post('/register', async (req, res) => {
-    const { email, nome, cognome, password, nickname, tipo, regione, indirizzo } = req.body;
-    try {
-      const hashedPassword = createHash('sha256').update(password).digest('hex');
-      console.log(req.body);
-      const user = await Utente.create({ nickname, nome, cognome, email, tipo, regione, indirizzo, password: hashedPassword });
-      res.status(201).json(user);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
-  
-  */
