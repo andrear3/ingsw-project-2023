@@ -49,6 +49,7 @@ export class ProfileComponent {
  }
  confermaModProfilo() {
   this.showModifica = '!modifica';
+  
 }
 utente : Utente | null = null ;
 ngOnInit() {

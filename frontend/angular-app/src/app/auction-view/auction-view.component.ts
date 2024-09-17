@@ -31,9 +31,7 @@ import { Router , RouterLink,
   templateUrl: './auction-view.component.html',
   styleUrl: './auction-view.component.scss'
 })
-export class AuctionViewComponent implements OnInit{
-
-  
+export class AuctionViewComponent {
 
 
 

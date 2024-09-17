@@ -1,0 +1,15 @@
+.square{
+    width: 95%;
+    height: 85%;
+    border:2px solid ie-hex-str($color: #AAAA);
+    border-radius: 20px;
+    margin:20px auto;
+    text-align: center;
+    align-items: center;
+    position: relative;
+    padding: 20px; /* Aggiungi padding per evitare che il contenuto tocchi i bordi */
+    box-sizing: border-box; /* Includi padding e bordo nel calcolo delle dimensioni */
+    display: flex;
+    flex-direction: column;
+
+}
