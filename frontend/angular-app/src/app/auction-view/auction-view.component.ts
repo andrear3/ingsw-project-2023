@@ -1,19 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RestService } from '../_services/rest-api.service';
-import { Asta } from '../_models/asta-model';
-import { Utente } from '../_models/utente-model';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'; 
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { AuthService } from '../_services/auth.service';
-import { NavbarComponent } from '../navbar/navbar.component';
-import { Router , RouterLink,
-  RouterModule,
-  RouterOutlet,} from '@angular/router';
+import { MatButtonModule } from '@angular/material/button'; 
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatIconModule } from '@angular/material/icon'; 
+import { CommonModule } from '@angular/common'; 
+import { FormsModule } from '@angular/forms'; 
+import { NavbarComponent } from '../navbar/navbar.component'; 
+import { Asta } from '../_models/asta-model';
 
 @Component({
   selector: 'app-auction-view',
@@ -26,14 +20,59 @@ import { Router , RouterLink,
     MatIconModule,
     CommonModule,
     FormsModule,
-   
   ],
   templateUrl: './auction-view.component.html',
-  styleUrl: './auction-view.component.scss'
+  styleUrls: ['./auction-view.component.scss'], 
 })
-export class AuctionViewComponent {
+export class AuctionViewComponent implements OnInit {
+  
+  asta: any = {};
 
+  newOffer: number | null = null; 
 
+  constructor(private route: ActivatedRoute) {}
 
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.asta.astaId = +params['astaID'];
+      this.asta.nomeBeneInVendita = params['nomeBeneInVendita'];
+      this.asta.titolo = params['titolo'];
+      this.asta.categoria = params['categoria'];
+      this.asta.tipoBeneInVendita = params['tipoBeneInVendita'];
+      this.asta.descrizioneAsta = params['descrizioneAsta'];
+      this.asta.dataFineAsta = new Date(params['dataFineAsta']);
+      this.asta.statusAsta = params['statusAsta'];
+      this.asta.url = decodeURIComponent(params['url']);
+      this.asta.UtenteNickname = params['UtenteNickname'];
+      this.asta.offertaMax = +params['offertaMax'];
+      this.asta.timeLeft = +params['timeLeft'];
 
+      console.log('Asta data from URL:', this.asta);
+    });
+  }
+
+  //
+  makeOffer() {
+    if (this.newOffer !== null && this.newOffer > 0) {
+   
+      console.log('New offer submitted:', this.newOffer);
+    } else {
+      console.log('Invalid offer');
+    }
+  }
+
+  // Method to format time left
+  getFormattedTime(seconds: number): string {
+    const d = Math.floor(seconds / (3600 * 24));
+    const h = Math.floor((seconds % (3600 * 24)) / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+
+    const dDisplay = d > 0 ? `${d}d ` : '';
+    const hDisplay = h > 0 ? `${h}h ` : '';
+    const mDisplay = m > 0 ? `${m}m ` : '';
+    const sDisplay = s > 0 ? `${s}s` : '';
+
+    return dDisplay + hDisplay + mDisplay + sDisplay.trim();
+  }
 }
