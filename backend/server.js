@@ -21,6 +21,7 @@ import { loginRouter } from "./routers/LogIn.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import path from "path";
+import { productRouter } from "./routers/Product.js";
 
 //USATO PER MANDARE IMMAGINI
 const __filename = fileURLToPath(import.meta.url);
@@ -74,6 +75,7 @@ app.use("/images", express.static(path.join(__dirname, "resources", "images")));
 app.use(homepageRouter);
 app.use(registrationRouter);
 app.use(loginRouter);
+app.use(productRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
