@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { NavbarComponent } from '../navbar/navbar.component'; 
 import { Asta } from '../_models/asta-model';
+import { RestService } from '../_services/rest-api.service';
 
 @Component({
   selector: 'app-auction-view',
@@ -28,9 +29,9 @@ export class AuctionViewComponent implements OnInit {
   
   asta: any = {};
 
-  newOffer: number | null = null; 
+  newOfferta: number | null = null; 
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private restService : RestService) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -53,11 +54,25 @@ export class AuctionViewComponent implements OnInit {
 
   //
   makeOffer() {
-    if (this.newOffer !== null && this.newOffer > 0) {
-   
-      console.log('New offer submitted:', this.newOffer);
+    if (this.newOfferta !== null && this.newOfferta > 0) {
+ 
+      const offerData = {
+        valore: this.newOfferta,
+        UtenteNickname: this.asta.UtenteNickname,
+        AstumAstaID: this.asta.astaId
+      };
+
+      this.restService.postOffer(offerData.valore, offerData.UtenteNickname, offerData.AstumAstaID).subscribe({
+        next: (response) => {
+          console.log('Offerta:', response);
+        },
+        error: (err) => {
+          console.error('Errore:', err);
+
+        }
+      });
     } else {
-      console.log('Invalid offer');
+      console.log('Offerta non valida');
     }
   }
 

@@ -7,15 +7,18 @@ export enum categoriaEnum {
   musica,
   sport,
   collezionismo,
+  default,
 }
 export enum tipoBeneVenditaEnum {
   articolo,
   servizio,
+  default,
 }
 export enum statusAstaEnum {
   venduto,
   inVendita,
   nonVenduto,
+  default,
 }
 //interfaccia
 

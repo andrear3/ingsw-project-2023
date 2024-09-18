@@ -75,4 +75,20 @@ export class RestService {
   setTipoAsta(tipo: string) {
     this.tipoAstaSubject.next(tipo);
   }
+
+  postOffer(valore: number, UtenteNickname: string, AstumAstaID: number): Observable<any> {
+    const url = `${this.apiUrl}/auctionView`;
+    //prendo token per auth
+    const token = this.authService.getToken();
+    //options..
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.post(url, { valore, UtenteNickname, AstumAstaID }, httpOptions);
+  }
+
 }
