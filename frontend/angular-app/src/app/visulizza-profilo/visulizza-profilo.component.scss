@@ -1,0 +1,95 @@
+.square {
+    width: 70%;
+    max-width: 1000px;
+    min-height: 600px; /* Limita la larghezza massima */
+    height: auto; /* Adatta l'altezza automaticamente */
+    border: 2px solid #AAAAAA;
+    border-radius: 20px;
+    margin: 20px auto;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Consenti agli elementi di andare a capo se lo spazio è ridotto */
+}
+
+.row1, .row2 {
+    flex: 1; /* Ogni riga occupa lo stesso spazio disponibile */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.photoProfileContainer {
+    width: 100%;
+    max-width: 350px; /* Limita la dimensione massima */
+    min-height: 300px;
+    min-width: 200px;
+    height: auto; /* Lascia che l'altezza si adatti automaticamente */
+    border: 2px solid #AAAAAA;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.row2 {
+    padding: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.descrizione {
+    width: 100%; /* Occupa l'intera larghezza del contenitore */
+    padding: 10%;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: justify;
+    color: #AAAAAA;
+    margin-bottom: 10%;
+}
+
+.row3 {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.asteAttive-BTN {
+    background-color: #22A2EA;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    width: auto; /* Lascia che la larghezza si adatti automaticamente al contenuto */
+    height: auto;
+    max-width: 100%;
+    text-align: center;
+}
+
+/* Media query per schermi più piccoli */
+@media (max-width: 768px) {
+    .square {
+        flex-direction: column; /* Disporre gli elementi in colonna su schermi piccoli */
+    }
+
+    .row1, .row2, .row3 {
+        width: 100%; /* Le righe occuperanno tutta la larghezza */
+        align-items: center; /* Allinea gli elementi al centro */
+    }
+
+    .descrizione {
+        padding: 5%; /* Riduci il padding su schermi piccoli */
+    }
+
+    .asteAttive-BTN {
+        width: 100%; /* Il bottone occuperà tutta la larghezza su schermi piccoli */
+    }
+}
