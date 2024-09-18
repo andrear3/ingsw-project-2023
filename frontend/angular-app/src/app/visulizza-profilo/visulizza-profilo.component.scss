@@ -47,11 +47,13 @@
 .descrizione {
     width: 100%; /* Occupa l'intera larghezza del contenitore */
     padding: 10%;
-    background-color: #fff;
     border-radius: 5px;
-    text-align: justify;
+    text-align: justify ;
     color: #AAAAAA;
-    margin-bottom: 10%;
+    margin-bottom: 40%;
+    margin-right: 20%;
+    margin-left: 10%;
+
 }
 
 .row3 {
@@ -92,4 +94,13 @@
     .asteAttive-BTN {
         width: 100%; /* Il bottone occuperà tutta la larghezza su schermi piccoli */
     }
+}
+.row1 label {
+    font-size: 16px;
+    color: #AAAAAA;
+    margin-top: 10px; /* Spazio tra il contenitore e le etichette */
+    text-align:left;
+    width: 100%; 
+    margin-left: 20%;
+
 }
