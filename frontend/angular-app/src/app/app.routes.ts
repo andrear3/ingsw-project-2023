@@ -12,6 +12,10 @@ import { RestService } from './_services/rest-api.service';
 import { ProductpageComponent } from './productpage/productpage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AstaComponent } from './asta/asta.component';
+import { VisulizzaProfiloComponent } from './visulizza-profilo/visulizza-profilo.component';
+
+import { LeMieAsteComponent } from './le-mie-aste/le-mie-aste.component';
+import { AuctionViewComponent } from './auction-view/auction-view.component';
 
 export const routes: Routes = [
   {
@@ -42,9 +46,23 @@ export const routes: Routes = [
   {
     path: 'asta',
     title: 'Asta',
-    component: AppComponent,
+    component: AstaComponent,
   },
-
+  {
+    path: 'mieAste',
+    title: 'MieAsta',
+    component: LeMieAsteComponent,
+  },
+  {
+    path: 'visualProfilo',
+    title: 'VisualProfilo',
+    component: VisulizzaProfiloComponent,
+  },
+  {
+  path: 'auctionView',
+  title: 'AuctionView',
+  component: AuctionViewComponent,
+},
 
 
 ];

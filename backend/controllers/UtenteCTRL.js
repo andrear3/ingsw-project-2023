@@ -27,8 +27,21 @@ export class UtenteCTRL {
     await utente.save();
   }
 
-  
-  
+  static async recuperaUtenteByEmail(email) {
+    try {
+      const user = await Utente.findOne({ where: { email } });
+
+      if (!user) {
+        throw new Error(`User with email ${email} not found`);
+      }
+
+      return user;
+    } catch (error) {
+      console.error(`Error retrieving user with Email ${email}:`, error);
+      throw error;
+    }
+  }
+
   static async stampaTuttiUtenti() {
     try {
       const utenti = await Utente.findAll();

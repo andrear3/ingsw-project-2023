@@ -10,8 +10,10 @@
       <app-navbar></app-navbar>
     </nav>
     <main>
+     
       <div class="card-container">
         @for (asta of aste; track asta) {
+          <mat-card (click)="navigateToviewAsta(asta)" class="card" >
         <div class="card-item">
           <div class="card-image">
             <img
@@ -24,9 +26,7 @@
             <h3 class="card-subtitle">{{ asta.nomeBeneInVendita }}</h3>
             <div class="card-info">
               <p><strong>Categoria:</strong> {{ asta.categoria }}</p>
-              <p><strong>Descrizione:</strong> {{ asta.descrizioneAsta }}</p>
               <p><strong>Tipo:</strong> {{ asta.tipoBeneInVendita }}</p>
-              <p><strong>Status:</strong> {{ asta.statusAsta }}</p>
               <p>
                 <strong>Data di Fine Asta:</strong>
                 {{ asta.dataFineAsta | date }}
@@ -41,11 +41,10 @@
             </div>
           </div>
         </div>
+      </mat-card >
         }
       </div>
-      @if (temp == "test"){
-        <h1>funziona</h1>
-      }
+    
     </main>
   </body>
 </html>

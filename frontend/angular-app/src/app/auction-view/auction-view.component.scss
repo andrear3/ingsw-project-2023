@@ -1,0 +1,134 @@
+.square {
+    width: 95%;
+    height: 85%;
+    border: 2px solid ie-hex-str($color: #AAAA);
+    border-radius: 20px;
+    margin: 20px auto;
+    text-align: center;
+    align-items: center;
+    position: relative;
+    padding: 20px; /* Padding per evitare che il contenuto tocchi i bordi */
+    box-sizing: border-box; /* Includi padding e bordo nel calcolo delle dimensioni */
+    display: flex;
+    flex-direction: row; /* Disporre le righe orizzontalmente */
+    justify-content: space-between; /* Spazio uniforme tra le righe */
+}
+
+.row1, .row2, .row3 {
+    display: flex;
+    flex-direction: column; /* Disporre il contenuto verticalmente all'interno di ciascuna riga */
+    justify-content: flex-start; /* Allinea il contenuto all'inizio del contenitore */
+    box-sizing: border-box; /* Includi padding e bordo nel calcolo delle dimensioni */
+    width: 30%; /* Ogni riga occupa un terzo della larghezza del contenitore */
+}
+
+.row1 {
+
+    padding: 10% 5%; /* Padding uniforme su tutti i lati */
+    max-height: 150%; 
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    bottom: 18%;
+}
+
+.row2 {
+    padding: 10% 5%; /* Padding uniforme su tutti i lati */
+    height: 400%; /* Altezza maggiore per riempire lo spazio */
+    display: flex;
+    justify-content: center; /* Allinea orizzontalmente il contenuto */
+    align-items: center; /* Allinea verticalmente il contenuto */
+}
+
+.row3 {
+   
+    padding: 2% 1%; /* Padding uniforme su tutti i lati */
+    display: flex;
+    flex-direction: column; /* Disporre il contenuto verticalmente */
+    justify-content: flex-start; /* Allinea il contenuto all'inizio del contenitore */
+    align-items: flex-start; /* Allinea il contenuto a sinistra */
+    width: 30%; /* Ogni riga occupa un terzo della larghezza del contenitore */
+    box-sizing: border-box;
+    margin-bottom: 14%;
+}
+
+.productName, .timeLeft, .currentOffer {
+    display: flex;
+    flex-direction: column; /* Disporre il contenuto verticalmente all'interno di ciascuna casella */
+    justify-content: left; /* Allinea il contenuto verticalmente */
+    align-items: flex-start; /* Allinea il contenuto a sinistra */
+    width: 50%; /* Occupa tutta la larghezza del contenitore */
+    height: 5%; /* Altezza in percentuale rispetto a .row3 */
+    min-height: 30px; /* Altezza minima per evitare che le caselle diventino troppo piccole */
+    border: 2px solid #727272aa;
+    border-radius: 20px;
+    margin-bottom: 5%; /* Spazio tra le caselle */
+    
+    background-color: #ffffff;
+    box-sizing: border-box;
+    position: relative;
+    
+
+}
+
+.productName label, .timeLeft label, .currentOffer label {
+    display: flex;
+    font-size: 14px;
+    color: #727272aa;
+    text-align: left;
+    margin-bottom: 5px; /* Spazio tra l'etichetta e il contenuto */
+    
+}
+.photoAuctionContainer{
+   position: relative;
+   width: 190%;
+   height: 20%;
+   border:2px solid ie-hex-str($color: #AAAA);
+   border-radius: 5px;
+   margin-bottom: 2%;
+   
+}
+.boxOffer{
+    color: #727272aa;
+    display: flex;
+    flex-direction: column; /* Disporre l'etichetta sopra il box */
+    align-items: center; /* Allinea l'etichetta e il contenuto al centro */
+    border: 2px solid #AAAA;
+    border-radius: 20px;
+    width: 100%;
+    height: 40%;
+    margin-bottom: 10%; /* Centra l'elemento orizzontalmente */
+   
+}
+.boxOffer label{
+    display: block;
+    font-size: 14px;
+    color: #727272aa; /* Colore del testo delle etichette */
+    position: relative;
+    text-align: left;
+    margin-top: 5%; 
+}
+.offerButton{
+    width:100%;
+    height: 50%;
+    background-color: #22A2EA;
+    border-radius: 20px;
+    position: relative;
+    text-align: center;
+    color:white;
+    margin-top: 2%;
+
+}
+.photoProfileContainer{
+    position: relative;
+    width: 40%; /* Utilizza tutta la larghezza disponibile */
+    height: 100%; /* Altezza automatica per adattarsi al contenuto */
+    min-height: 100px; /* Altezza minima per assicurare visibilità */
+    max-height: 200px; /* Imposta un'altezza massima per evitare che diventi troppo grande */
+    border: 2px solid ie-hex-str($color: #AAAA);
+    border-radius: 5px;
+    margin-bottom: 2%;
+    box-sizing: border-box;
+    left: 80%; 
+    margin-bottom: 65%;
+}

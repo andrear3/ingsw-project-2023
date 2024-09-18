@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RestService } from '../_services/rest-api.service';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Asta } from '../_models/asta-model';
+import { Utente } from '../_models/utente-model';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -9,11 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-
-import { statusAstaEnum } from '../_models/asta-model';
-import { tipoBeneVenditaEnum } from '../_models/asta-model';
-import { categoriaEnum } from '../_models/asta-model';
-
+import { AuthService } from '../_services/auth.service';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { Router , RouterLink,
+  RouterModule,
+  RouterOutlet,} from '@angular/router';
 @Component({
   selector: 'app-homepage',
   standalone: true,
@@ -25,31 +25,40 @@ import { categoriaEnum } from '../_models/asta-model';
     MatIconModule,
     CommonModule,
     FormsModule,
+   
   ],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
 })
 export class HomepageComponent implements OnInit, OnDestroy {
-  restService = inject(RestService);
   aste: Asta[] = [];
+  utente: Utente | null = null;
   private intervalId: any;
   private subscriptions: Subscription = new Subscription();
+ 
 
-  public statusEnum = statusAstaEnum;
-  public tipoBeneVendita = tipoBeneVenditaEnum;
-  public categoria = categoriaEnum;
+  constructor(
+    private restService: RestService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  public temp: string = "1234";
-    
   ngOnInit() {
+    console.log(this.authService.getToken());
     this.subscriptions.add(
       this.restService.getAsta().subscribe({
-        next: (data: Asta[]) => {
-          this.aste = data;
+        next: (response: { aste: Asta[]; userInfo: Utente }) => {
+          this.aste = response.aste;
+          this.utente = response.userInfo;
+
           this.startDecrementTimer();
-          console.log(this.aste[0].statusAsta);
-          //assegno qui la variabile da server!!!!!!!!!
-          this.temp = "test";
+          console.log(this.aste[0]?.statusAsta);
+          console.log(this.utente?.tipo);
+
+          //popolo i campi di utente
+          this.authService.setUtente(this.utente);
+          //notifico che utente è stato popolato
+          this.authService.setStatus(true);
         },
         error: (err: any) => {
           console.error('Error fetching data:', err);
@@ -57,8 +66,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
       })
     );
   }
-
-  
 
   ngOnDestroy() {
     if (this.intervalId) {
@@ -94,5 +101,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
     const sDisplay = s > 0 ? `${s}s` : '';
 
     return dDisplay + hDisplay + mDisplay + sDisplay.trim();
+  }
+  navigateToviewAsta(asta:Asta) {
+    console.log(asta);
+    this.router.navigate(['/auctionView',asta]); 
   }
 }

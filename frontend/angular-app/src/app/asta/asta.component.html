@@ -1,2 +1,33 @@
-<p>asta worvdvdvdvks!</p>
-<label for="vrsvsvsvsv"></label>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <title>Asta</title>
+  </head>
+  <body>
+   
+  
+    <main>
+   <!-- asta.component.html -->
+<div *ngIf="tipoAsta === 'classica'">
+  <!-- Contenuto per l'asta classica -->
+  <p>Questo è il contenuto per l'asta classica.</p>
+</div>
+
+<div *ngIf="tipoAsta === 'ribasso'">
+  <!-- Contenuto per l'asta al ribasso -->
+  <p>Questo è il contenuto per l'asta al ribasso.</p>
+</div>
+
+<div *ngIf="tipoAsta === 'inversa'">
+  <!-- Contenuto per l'asta inversa -->
+  <p>Questo è il contenuto per l'asta inversa.</p>
+</div>
+
+    
+     
+    </main>
+  </body>
+</html>

@@ -13,178 +13,152 @@
       <app-navbar></app-navbar>
     </nav>
     
-      @if (showModifica==="!modifica"){
-  <div class="square">
-    <div class="row">
-      <div class="box-container">
-        <label for="boxNome">Nome</label>
-        <div class="boxNome" id="boxNome"></div>
-      </div>
-      <div class="box-container">
-        <label for="boxCognome">Cognome</label>
-        <div class="boxCognome" id="boxCognome"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="box-container">
-        <label for="boxPassword">Password</label>
-        <div class="boxPassword" id="boxPassword"></div>
-      </div>
-      <div class="box-container">
-        <label for="boxNickname">Nickname</label>
-        <div class="boxNickname" id="boxNickname"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="box-container">
-        <label for="boxRegione">Regione</label>
-        <div class="boxRegione" id="boxRegione"></div>
-      </div>
-      <div class="box-container">
-        <label for="boxIndirizzo">Indirizzo</label>
-        <div class="boxIndirizzo" id="boxIndirizzo"></div>
-      </div>
-    </div>
-    <div class="row-BTN">
-          <button class="modificaProfilo-BTN" (click)="modificaProfilo()"> modifica profilo</button>
-          <button class="eliminaProfilo-BTN"> elimina profilo</button>
-          <button class="modificaPasswordProfilo-BTN"> modifica password </button>
-    </div>
-    <div class="links">
-      <label for="links">I tuoi link</label>
-      <div class="link1" placeholder="link1"></div>
-      <div class="link2" placeholder="link2"></div>
-      <div class="link3" placeholder="link3"></div>
-
-    </div>
-    <div class="descrizione">
-      <label for="descrizione">La tua descrizione</label>
-      <div class="boxDescrizione"></div>
-    </div>
-    <div class="foto">
-      <div class="boxFoto"></div>
-    </div>
-    <div class="boxFoto-BTN">
-      <button class="modificaFoto-BTN">modifca foto</button>
-    </div>
-  </div>    
-      }
-
-        <!-- box modifica  -->
-        @else if (showModifica==="modifica"){
+    <!-- Checking if showModifica is not "modifica" -->
+    @if (showModifica === "!modifica") {
       <div class="square">
-  <div class="row">
-    <div class="box-container">
-      <label for="boxNomeMod">Nome</label>
-      <div class="boxNomeMod" id="boxNomeMod">
-        <input 
-          type="text"
-          placeholder="Nome"
-          [(ngModel)]="nome"
-          name="nome"
-          required
-        />
+        <div class="row">
+          <div class="box-container">
+            <label for="boxNome">Nome</label>
+            <div class="boxNome" id="boxNome">{{ utente?.nome }}</div>
+          </div>
+          <div class="box-container">
+            <label for="boxCognome">Cognome</label>
+            <div class="boxCognome" id="boxCognome">{{ utente?.cognome }}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="box-container">
+            <label for="boxNickname">Nickname</label>
+            <div class="boxNickname" id="boxNickname">{{ utente?.nickname }}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="box-container">
+            <label for="boxRegione">Regione</label>
+            <div class="boxRegione" id="boxRegione">{{ utente?.regione }}</div>
+          </div>
+          <div class="box-container">
+            <label for="boxIndirizzo">Indirizzo</label>
+            <div class="boxIndirizzo" id="boxIndirizzo">{{ utente?.indirizzo }}</div>
+          </div>
+        </div>
+        <div class="row-BTN">
+          <button class="modificaProfilo-BTN" (click)="modificaProfilo()">modifica profilo</button>
+          <button class="eliminaProfilo-BTN">elimina profilo</button>
+          <button class="modificaPasswordProfilo-BTN">modifica password</button>
+        </div>
+        <div class="links">
+          <label for="links">I tuoi link</label>
+          <div class="link1" placeholder="link1">{{ utente?.linkEsterni }}</div>
+          <div class="link2" placeholder="link2"></div>
+          <div class="link3" placeholder="link3"></div>
+        </div>
+        <div class="descrizione">
+          <label for="descrizione">La tua descrizione</label>
+          <div class="boxDescrizione"></div>
+        </div>
+        <div class="foto">
+          <div class="boxFoto"></div>
+        </div>
+        <div class="boxFoto-BTN">
+          <button class="modificaFoto-BTN">modifica foto</button>
+        </div>
       </div>
-    </div>
-    <div class="box-container">
-      <label for="boxCognomeMod">Cognome</label>
-      <div class="boxCognomeMod" id="boxCognomeMod">
-        <input 
-          type="text"
-          placeholder="Cognome"
-          [(ngModel)]="cognome"
-          name="cognome"
-          required
-        />
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="box-container">
-      <label for="boxPasswordMod">Password</label>
-      <div class="boxPasswordMod" id="boxPasswordMod">
-        <input 
-          type="password"
-          placeholder="Password"
-          [(ngModel)]="password"
-          name="password"
-          required
-        />
-      </div>
-    </div>
-    <div class="box-container">
-      <label for="boxNicknameMod">Nickname</label>
-      <div class="boxNicknameMod" id="boxNicknameMod">
-        <input 
-          type="text"
-          placeholder="Nickname"
-          [(ngModel)]="nickname"
-          name="nickname"
-          required
-        />
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="box-container">
-      <label for="boxRegioneMod">Regione</label>
-      <div class="boxRegioneMod" id="boxRegioneMod">
-        <input 
-          type="text"
-          placeholder="Regione"
-          [(ngModel)]="regione"
-          name="regione"
-          required
-        />
-      </div>
-    </div>
-    <div class="box-container">
-      <label for="boxIndirizzoMod">Indirizzo</label>
-      <div class="boxIndirizzoMod" id="boxIndirizzoMod">
-        <input 
-          type="text"
-          placeholder="Indirizzo"
-          [(ngModel)]="indirizzo"
-          name="indirizzo"
-          required
-        />
-      </div>
-    </div>
-  </div>
-  <div class="row-BTN">
-   
-    <button class="salvaModProfilo-BTN" (click)="confermaModProfilo()">conferma modifiche</button>
-    
-  </div>
-  <div class="links">
-    <label for="links">I tuoi link</label>
-    <input class="link1"  type="text"
-    placeholder="link1"
-    [(ngModel)]="link"/>
-    <input class="link2"  type="text"
-    placeholder="link2"
-    [(ngModel)]="link"/>
-    <input class="link3"  type="text"
-    placeholder="link3"
-    [(ngModel)]="link"/>
+    }
 
-  </div>
-  <div class="descrizione">
-    <label for="descrizione">La tua descrizione</label>
-    <input class="boxDescrizione"
-    type="text"  [(ngModel)]="descrizione">/>
-  </div>
-  <div class="boxFoto-BTN">
-    <button class="modificaFoto-BTN">modifca foto</button>
-  </div>
-</div>    
-    
-      }
-      <!--button-->
+    <!-- Checking if showModifica is "modifica" -->
+    @else if (showModifica === "modifica") {
+      <div class="square">
+        <div class="row">
+          <div class="box-container">
+            <label for="boxNomeMod">Nome</label>
+            <div class="boxNomeMod" id="boxNomeMod">
+              <input 
+                type="text"
+                placeholder="Nome"
+                [(ngModel)]="nome"
+                name="nome"
+                required
+              />
+            </div>
+          </div>
+          <div class="box-container">
+            <label for="boxCognomeMod">Cognome</label>
+            <div class="boxCognomeMod" id="boxCognomeMod">
+              <input 
+                type="text"
+                placeholder="Cognome"
+                [(ngModel)]="cognome"
+                name="cognome"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="box-container">
+            <label for="boxNicknameMod">Nickname</label>
+            <div class="boxNicknameMod" id="boxNicknameMod">
+              <input 
+                type="text"
+                placeholder="Nickname"
+                [(ngModel)]="nickname"
+                name="nickname"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="box-container">
+            <label for="boxRegioneMod">Regione</label>
+            <div class="boxRegioneMod" id="boxRegioneMod">
+              <input 
+                type="text"
+                placeholder="Regione"
+                [(ngModel)]="regione"
+                name="regione"
+                required
+              />
+            </div>
+          </div>
+          <div class="box-container">
+            <label for="boxIndirizzoMod">Indirizzo</label>
+            <div class="boxIndirizzoMod" id="boxIndirizzoMod">
+              <input 
+                type="text"
+                placeholder="Indirizzo"
+                [(ngModel)]="indirizzo"
+                name="indirizzo"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row-BTN">
+          <button class="salvaModProfilo-BTN" (click)="confermaModProfilo()">conferma modifiche</button>
+        </div>
+        <div class="links">
+          <label for="links">I tuoi link</label>
+          <input class="link1" type="text" placeholder="link1" [(ngModel)]="link"/>
+          <input class="link2" type="text" placeholder="link2" [(ngModel)]="link"/>
+          <input class="link3" type="text" placeholder="link3" [(ngModel)]="link"/>
+        </div>
+        <div class="descrizione">
+          <label for="descrizione">La tua descrizione</label>
+          <input class="boxDescrizione" type="text" [(ngModel)]="descrizione"/>
+        </div>
+        <div class="foto">
+          <div class="boxFoto"></div>
+        </div>
+        <div class="boxFoto-BTN">
+          <button class="modificaFoto-BTN">modifica foto</button>
+        </div>
+      </div>
+    }
 
-    
     <script>
-
+      // Your JavaScript here
     </script>
   </body>
 </html>
