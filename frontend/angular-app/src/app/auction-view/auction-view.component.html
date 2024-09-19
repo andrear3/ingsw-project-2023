@@ -17,22 +17,25 @@
           <div class="photoProfileContainer"></div>
         </div>
         <div class="row2">
-          <div class="photoAuctionContainer"></div>
+          <div class="photoAuctionContainer"> <img [src]="asta?.url" alt="Auction Image" class="auction-image"></div>
           <div class="box-container">
+           
             <label for="boxOffer">Fai la tua offerta</label>
-            <div class="boxOffer" id="boxOffer"></div>
-            <button class="offerButton">Offri</button>
+            <input class="boxOffer" id="boxOffer" type="number">
+            
+            <button class="offerButton" onclick="makeOffer()">Offri</button>
+            
           </div>
         </div>
          <div class="row3">
               <label for="productName">Nome del prodotto:</label>
-              <div class="productName" id="productName"></div>
+              <div class="productName" id="productName">{{asta?.nomeBeneInVendita}}</div>
       
               <label for="timeLeft">Tempo rimasto:</label>
-              <div class="timeLeft" id="timeLeft"></div>
+              <div class="timeLeft" id="timeLeft">{{asta?.timeLeft}}</div>
       
               <label for="currentOffer">Offerta attuale:</label>
-              <div class="currentOffer" id="currentOffer"></div>
+              <div class="currentOffer" id="currentOffer">{{asta?.offertaMax}}</div>
          </div>
     </div> 
         

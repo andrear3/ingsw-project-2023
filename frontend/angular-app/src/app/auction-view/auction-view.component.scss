@@ -24,17 +24,21 @@
 
 .row1 {
 
-    padding: 10% 5%; /* Padding uniforme su tutti i lati */
+    padding: 10% 5% ; /* Padding uniforme su tutti i lati */
     max-height: 150%; 
     position: relative;
     display: flex;
     justify-content: flex-start;
     bottom: 18%;
+    
 }
 
 .row2 {
-    padding: 10% 5%; /* Padding uniforme su tutti i lati */
-    height: 400%; /* Altezza maggiore per riempire lo spazio */
+    //background-color: #22A2EA;
+    padding: 1% 1% 1%; /* Padding uniforme su tutti i lati */
+    height: 85%; 
+    width: 50%;
+    /* Altezza maggiore per riempire lo spazio */
     display: flex;
     justify-content: center; /* Allinea orizzontalmente il contenuto */
     align-items: center; /* Allinea verticalmente il contenuto */
@@ -80,14 +84,17 @@
     
 }
 .photoAuctionContainer{
-   position: relative;
-   width: 190%;
-   height: 20%;
-   border:2px solid ie-hex-str($color: #AAAA);
-   border-radius: 5px;
-   margin-bottom: 2%;
-   
+    position: relative;
+    width: 100%; /* Imposta il contenitore per occupare il 100% della larghezza disponibile */
+    height: 400px; /* Imposta un'altezza fissa per il contenitore, puoi cambiare questo valore */
+    border: 2px solid #AAAA; /* Correggi il colore del bordo */
+    border-radius: 5px;
+    margin-bottom: 2%;
+    overflow: hidden; /* Assicura che l'immagine non esca dai bordi del contenitore */
+    box-sizing: border-box;
 }
+   
+
 .boxOffer{
     color: #727272aa;
     display: flex;
@@ -115,7 +122,7 @@
     border-radius: 20px;
     position: relative;
     text-align: center;
-    color:white;
+    color:rgb(255, 255, 255);
     margin-top: 2%;
 
 }
@@ -131,4 +138,10 @@
     box-sizing: border-box;
     left: 80%; 
     margin-bottom: 65%;
+}
+.auction-image {
+width: 100%; /* L'immagine occupa tutta la larghezza del contenitore */
+    height: 100%; /* L'immagine occupa tutta l'altezza del contenitore */
+    object-fit: cover; /* L'immagine riempie il contenitore mantenendo le proporzioni */
+    display: block; /* Evita spazi vuoti intorno all'immagine */
 }

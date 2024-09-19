@@ -52,8 +52,8 @@ export class AuctionViewComponent implements OnInit {
     });
   }
 
-  //
   makeOffer() {
+ 
     if (this.newOfferta !== null && this.newOfferta > 0) {
  
       const offerData = {
@@ -72,9 +72,11 @@ export class AuctionViewComponent implements OnInit {
         }
       });
     } else {
+    
       console.log('Offerta non valida');
     }
   }
+
 
   // Method to format time left
   getFormattedTime(seconds: number): string {
