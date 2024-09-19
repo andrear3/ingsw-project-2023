@@ -1,0 +1,57 @@
+.square{width: 70%;
+max-width: 1000px;
+min-height: 400px; /* Limita la larghezza massima */
+height: auto; /* Adatta l'altezza automaticamente */
+border: 2px solid #AAAAAA;
+border-radius: 20px;
+margin: 20px auto;
+padding: 20px;
+box-sizing: border-box;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+flex-wrap: wrap; /* Consenti agli elementi di andare a capo se lo spazio è ridotto */
+//margin-top: 15%;
+}
+.row1{
+    background-color:blue ;
+    padding: 2%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.boxProdottiVenduti, .boxTotaleVendite{
+    display: flex;
+    flex-direction: column; /* Disporre il contenuto verticalmente all'interno di ciascuna casella */
+    justify-content: flex-start; /* Allinea il contenuto verticalmente */
+    align-items: flex-start; /* Allinea il contenuto a sinistra */
+    width: 150%; /* Occupa tutta la larghezza del contenitore */
+    height: 7%; /* Altezza in percentuale rispetto a .row3 */
+    min-height: 30px; /* Altezza minima per evitare che le caselle diventino troppo piccole */
+    border: 2px solid #727272aa;
+    border-radius: 20px;
+    margin-bottom: 5%; /* Spazio tra le caselle */
+    background-color: #ffffff;
+    box-sizing: border-box;
+    position: relative;
+    
+}
+.boxTotaleVendite,.boxTotaleVenditeLabel {
+    margin-left: 100%;
+    
+}
+
+.label-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Allinea l'etichetta e il box a sinistra */
+    margin-bottom: 15px; /* Spazio tra il box e la prossima etichetta */
+}
+.label-wrapper label {
+    font-size: 14px;
+    color: #000000aa;
+    margin-bottom: 5px; /* Spazio tra l'etichetta e il box */
+    width: 100%;
+}

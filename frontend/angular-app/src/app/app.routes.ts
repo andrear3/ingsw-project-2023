@@ -13,9 +13,8 @@ import { ProductpageComponent } from './productpage/productpage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AstaComponent } from './asta/asta.component';
 import { VisulizzaProfiloComponent } from './visulizza-profilo/visulizza-profilo.component';
-
-import { LeMieAsteComponent } from './le-mie-aste/le-mie-aste.component';
 import { AuctionViewComponent } from './auction-view/auction-view.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -48,11 +47,7 @@ export const routes: Routes = [
     title: 'Asta',
     component: AstaComponent,
   },
-  {
-    path: 'mieAste',
-    title: 'MieAsta',
-    component: LeMieAsteComponent,
-  },
+  
   {
     path: 'visualProfilo',
     title: 'VisualProfilo',
@@ -62,6 +57,11 @@ export const routes: Routes = [
   path: 'auctionView',
   title: 'AuctionView',
   component: AuctionViewComponent,
+},
+{
+  path: 'dashboard',
+  title: 'Dashboard',
+  component: DashboardComponent,
 },
 
 

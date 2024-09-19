@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component'; 
 import { Asta } from '../_models/asta-model';
 import { RestService } from '../_services/rest-api.service';
-
+import { AuthService } from '../_services/auth.service';
 @Component({
   selector: 'app-auction-view',
   standalone: true,
@@ -31,7 +31,7 @@ export class AuctionViewComponent implements OnInit {
 
   newOfferta: number | null = null; 
 
-  constructor(private route: ActivatedRoute, private restService : RestService) {}
+  constructor(private route: ActivatedRoute, private restService : RestService,private authService : AuthService) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -58,11 +58,11 @@ export class AuctionViewComponent implements OnInit {
  
       const offerData = {
         valore: this.newOfferta,
-        UtenteNickname: this.asta.UtenteNickname,
+        UtenteNickname: this.authService.getUtente()?.nickname,
         AstumAstaID: this.asta.astaId
       };
 
-      this.restService.postOffer(offerData.valore, offerData.UtenteNickname, offerData.AstumAstaID).subscribe({
+      this.restService.postOffer(offerData.valore, String(offerData.UtenteNickname), offerData.AstumAstaID).subscribe({
         next: (response) => {
           console.log('Offerta:', response);
         },

@@ -4,11 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { RestService } from '../_services/rest-api.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
+import {
+ 
+  RouteConfigLoadEnd,
+  RouterLink,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 
 @Component({
   selector: 'app-log-in-page',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink,
+    RouterModule,],
   templateUrl: './log-in-page.component.html',
   styleUrls: ['./log-in-page.component.scss'],
 })
