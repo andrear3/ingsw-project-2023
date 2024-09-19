@@ -22,6 +22,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import path from "path";
 import { productRouter } from "./routers/Product.js";
+import { dashboardRouter } from "./routers/Dashboard.js";
 
 //USATO PER MANDARE IMMAGINI
 const __filename = fileURLToPath(import.meta.url);
@@ -64,7 +65,6 @@ AstaCTRL.stampaTutteAste();
 
 //APP ROUTES
 
-
 app.get("/test", (req, res) => {
   //res.sendFile(__dirname + '/gameboy.jpg');
   res.sendFile(path.join(__dirname, ".", "resources", "images", "gameboy.jpg"));
@@ -76,6 +76,7 @@ app.use(homepageRouter);
 app.use(registrationRouter);
 app.use(loginRouter);
 app.use(productRouter);
+app.use(dashboardRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
