@@ -1,20 +1,22 @@
 .square{width: 70%;
-max-width: 1000px;
+max-width: 1300px;
 min-height: 400px; /* Limita la larghezza massima */
 height: auto; /* Adatta l'altezza automaticamente */
 border: 2px solid #AAAAAA;
 border-radius: 20px;
 margin: 20px auto;
-padding: 20px;
+padding: 10px;
 box-sizing: border-box;
 display: flex;
-flex-direction: row;
-justify-content: space-between;
+flex-direction: column;
+justify-content: flex-start;
 flex-wrap: wrap; /* Consenti agli elementi di andare a capo se lo spazio è ridotto */
 //margin-top: 15%;
+position: relative;
+ 
 }
 .row1{
-    background-color:blue ;
+    //background-color:blue ;
     padding: 2%;
     width: 50%;
     display: flex;
@@ -54,4 +56,49 @@ flex-wrap: wrap; /* Consenti agli elementi di andare a capo se lo spazio è rido
     color: #000000aa;
     margin-bottom: 5px; /* Spazio tra l'etichetta e il box */
     width: 100%;
+}
+
+h2 {
+    margin-bottom: 0px;
+    padding-bottom: 5px;
+    color: #333;
+    font-size: 18px;
+}
+
+table {
+    width: 100%;
+    border-collapse:separate;
+    border-spacing: 0;
+    margin-top: 0;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ffffff;
+}
+
+th {
+    background-color: #ffffff;
+    color: #555;
+}
+
+td {
+    color: #333;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.in-vendita {
+    color: yellow;
+}
+
+.status.venduto {
+    color: green;
+}
+
+.status.non-venduto {
+    color: red;
 }
