@@ -76,7 +76,11 @@ export class RestService {
     this.tipoAstaSubject.next(tipo);
   }
 
-  postOffer(valore: number, UtenteNickname: string, AstumAstaID: number): Observable<any> {
+  postOffer(
+    valore: number,
+    UtenteNickname: string,
+    AstumAstaID: number
+  ): Observable<any> {
     const url = `${this.apiUrl}/auctionView`;
     //prendo token per auth
     const token = this.authService.getToken();
@@ -88,7 +92,24 @@ export class RestService {
       }),
     };
 
-    return this.http.post(url, { valore, UtenteNickname, AstumAstaID }, httpOptions);
+    return this.http.post(
+      url,
+      { valore, UtenteNickname, AstumAstaID },
+      httpOptions
+    );
   }
 
+  postDashboard(nickname: string): Observable<any> {
+    const url = `${this.apiUrl}/dashboard`;
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.post(url, { nickname }, httpOptions);
+  }
 }

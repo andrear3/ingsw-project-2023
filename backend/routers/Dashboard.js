@@ -7,9 +7,8 @@ export const dashboardRouter = express.Router();
 
 dashboardRouter.get("/dashboard", authToken, async (req, res) => {
   try {
-    const dashboardData = await DashboardCTRL.populateDashboard(
-      req.body.nickname
-    );
+    const nickname = req.query.nickname;
+    const dashboardData = await DashboardCTRL.populateDashboard(nickname);
 
     res.status(200).json({
       message: "Success! Dashboard data retrieved.",
