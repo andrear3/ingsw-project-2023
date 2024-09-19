@@ -54,7 +54,7 @@ export class AuctionViewComponent implements OnInit {
 
   makeOffer() {
  
-    if (this.newOfferta !== null && this.newOfferta > 0) {
+    if (this.newOfferta !== null ) {
  
       const offerData = {
         valore: this.newOfferta,
@@ -72,7 +72,8 @@ export class AuctionViewComponent implements OnInit {
         }
       });
     } else {
-    
+       console.log(this.newOfferta);
+      
       console.log('Offerta non valida');
     }
   }

@@ -21,9 +21,9 @@
           <div class="box-container">
            
             <label for="boxOffer">Fai la tua offerta</label>
-            <input class="boxOffer" id="boxOffer" type="number">
+            <input class="boxOffer" id="boxOffer" type="number" [(ngModel)]="newOfferta">
             
-            <button class="offerButton" onclick="makeOffer()">Offri</button>
+            <button class="offerButton" (click)="makeOffer()">Offri</button>
             
           </div>
         </div>
