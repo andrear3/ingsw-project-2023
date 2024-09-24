@@ -9,7 +9,6 @@
 
   
   <body>
-
    
     <main>
    
@@ -29,6 +28,10 @@
             <input type="text" id="titoloAsta" class="input-field" />
           </div>
           <div class="input-group">
+            <label for="nomeProdotto">Nome Prodotto</label>
+            <input type="text" id="nomeProdotto" class="input-field" />
+          </div>
+          <div class="input-group">
             <label for="prezzoIniz">Prezzo Iniziale</label>
             <input type="text" id="prezzoIniz" class="input-field" />
           </div>
@@ -38,9 +41,19 @@
           </div>
           <div class="input-group">
             <label for="categoria">Categoria</label>
-            <select id="categoria" class="input-field">
-              <option value="">Scegli Categoria</option>
-            </select>
+            <input
+               class="input-field"
+               id="categoria"
+               type="text"
+               matInput
+                [matAutocomplete]="auto"
+            />
+
+            <mat-autocomplete #auto="matAutocomplete">
+              @for (option of options; track option) {
+              <mat-option [value]="option">{{ option }}</mat-option>
+              }
+            </mat-autocomplete>
           </div>
         </div>
       </div>

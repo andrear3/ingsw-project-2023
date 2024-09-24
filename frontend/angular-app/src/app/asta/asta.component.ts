@@ -37,6 +37,13 @@ import {
   styleUrls: ['./asta.component.scss']
 })
 export class AstaComponent implements OnInit {
+  options: string[] = [
+    'Informatica',
+    'Videogames',
+    'Musica',
+    'Sport',
+    'Collezionismo',
+  ];
   public tipoAsta: string = 'inversa';
 
   constructor(private RestService: RestService, private AuthService: AuthService) {} 
