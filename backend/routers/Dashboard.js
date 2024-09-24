@@ -5,9 +5,10 @@ import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
 
 export const dashboardRouter = express.Router();
 
-dashboardRouter.get("/dashboard", authToken, async (req, res) => {
+dashboardRouter.post("/dashboard", authToken, async (req, res) => {
   try {
-    const nickname = req.query.nickname;
+    const nickname = req.body.nickname;
+    console.log(nickname);
     const dashboardData = await DashboardCTRL.populateDashboard(nickname);
 
     res.status(200).json({

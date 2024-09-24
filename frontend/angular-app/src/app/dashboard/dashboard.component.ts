@@ -1,5 +1,4 @@
-
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +14,8 @@ import { AuthService } from '../_services/auth.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [  NavbarComponent,
+  imports: [
+    NavbarComponent,
     MatToolbarModule,
     MatIconModule,
     MatAutocompleteModule,
@@ -23,10 +23,38 @@ import { AuthService } from '../_services/auth.service';
     RouterOutlet,
     CommonModule,
     FormsModule,
-    RouterLink,],
+    RouterLink,
+  ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  dashboardData: any[] = [];
 
+  constructor(
+    private restService: RestService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit() {
+    this.callPostDashboard();
+  }
+
+  callPostDashboard() {
+    let user = this.authService.getUtente();
+    if (user) {
+      this.restService.postDashboard(user.nickname).subscribe({
+        next: (response) => {
+          console.log('Dashboard updated:', response);
+          this.dashboardData = response.data; //conserva i dati della risposta
+
+          //esempio di accesso ai dati:
+          console.log(this.dashboardData[0].nomeBeneInVendita);
+        },
+        error: (err) => {
+          console.error('Error posting to dashboard:', err);
+        },
+      });
+    }
+  }
 }
