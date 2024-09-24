@@ -11,12 +11,13 @@ import {
   RouterModule,
   RouterOutlet,
 } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-log-in-page',
   standalone: true,
   imports: [CommonModule, FormsModule,RouterLink,
-    RouterModule,],
+    RouterModule,NavbarComponent],
   templateUrl: './log-in-page.component.html',
   styleUrls: ['./log-in-page.component.scss'],
 })

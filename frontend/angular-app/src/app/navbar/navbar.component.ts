@@ -24,6 +24,7 @@ import { AstaComponent } from '../asta/asta.component';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -36,6 +37,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
     CommonModule,
     RouterLink,
     RouterModule,
+    FormsModule,
+
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
@@ -92,10 +95,7 @@ export class NavbarComponent implements AfterViewInit {
   navigateToAsta() {
     this.router.navigate(['/asta']); 
   }
-  onRibassoButtonClick() {
-    this.RestService.setTipoAsta('ribasso');
-    this.navigateToAsta();
-  }
+
   onInversaButtonClick() {
     this.RestService.setTipoAsta('inversa');
     this.navigateToAsta();

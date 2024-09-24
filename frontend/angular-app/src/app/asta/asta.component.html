@@ -1,33 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+    <link rel="stylesheet" href="asta.component.scss" />
     <title>Asta</title>
   </head>
-  <body>
-   
+
   
+  <body>
+
+   
     <main>
-   <!-- asta.component.html -->
-<div *ngIf="tipoAsta === 'classica'">
-  <!-- Contenuto per l'asta classica -->
-  <p>Questo è il contenuto per l'asta classica.</p>
-</div>
-
-<div *ngIf="tipoAsta === 'ribasso'">
-  <!-- Contenuto per l'asta al ribasso -->
-  <p>Questo è il contenuto per l'asta al ribasso.</p>
-</div>
-
-<div *ngIf="tipoAsta === 'inversa'">
-  <!-- Contenuto per l'asta inversa -->
-  <p>Questo è il contenuto per l'asta inversa.</p>
-</div>
-
+   
+    @if(tipoAsta === "classica"){
     
-     
+      <div class="auction-form">
+        <div class="left-column">
+          <div class="photo-container">
+            <div class="photo-placeholder"></div>
+            <button class="photo-btn">Inserisci Foto</button>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <div class="input-group">
+            <label for="titoloAsta">Titolo Asta</label>
+            <input type="text" id="titoloAsta" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="prezzoIniz">Prezzo Iniziale</label>
+            <input type="text" id="prezzoIniz" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="oreAsta">Ore Asta</label>
+            <input type="text" id="oreAsta" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="categoria">Categoria</label>
+            <select id="categoria" class="input-field">
+              <option value="">Scegli Categoria</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <label for="descrizione">Descrizione</label>
+        <textarea id="descrizione" class="description-input" rows="5"></textarea>
+      </div>
+
+      <div class="action-buttons">
+        <button class="create-auction-btn">Crea Asta</button>
+      </div>
+    }
+
+    @else if(tipoAsta === "ribasso"){
+      <!-- Contenuto per l'asta al ribasso -->
+      <p>Questo è il contenuto per l'asta al ribasso.</p>
+    }
+
+    @else if(tipoAsta === "inversa"){
+      <!-- Contenuto per l'asta inversa -->
+      <p>Questo è il contenuto per l'asta inversa.</p>
+    }
     </main>
+    
+      
+    
   </body>
 </html>

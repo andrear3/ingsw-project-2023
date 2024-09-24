@@ -10,6 +10,13 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
+import {
+  Router,
+  RouteConfigLoadEnd,
+
+  RouterModule,
+  
+} from '@angular/router';
 
 
 @Component({
