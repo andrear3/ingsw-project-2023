@@ -12,17 +12,19 @@ import { RestService } from '../_services/rest-api.service';
 @Component({
   selector: 'app-productpage',
   standalone: true,
-  imports: [ NavbarComponent,
-     MatToolbarModule,
+  imports: [
+    NavbarComponent,
+    MatToolbarModule,
     MatIconModule,
     MatAutocompleteModule,
     MatInputModule,
     RouterOutlet,
     CommonModule,
     FormsModule,
-    RouterLink,],
+    RouterLink,
+  ],
   templateUrl: './productpage.component.html',
-  styleUrl: './productpage.component.scss'
+  styleUrl: './productpage.component.scss',
 })
 export class ProductpageComponent {
 

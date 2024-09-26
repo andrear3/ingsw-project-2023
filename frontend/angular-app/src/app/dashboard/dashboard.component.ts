@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
+import { Asta } from '../_models/asta-model';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,8 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  dashboardData: any[] = [];
+  dashboardData: Asta[] = [];
+  private intervalId: any;
 
   constructor(
     private restService: RestService,
@@ -48,7 +50,6 @@ export class DashboardComponent implements OnInit {
           console.log('Dashboard updated:', response);
           this.dashboardData = response.data; //conserva i dati della risposta
 
-          //esempio di accesso ai dati:
           console.log(this.dashboardData[0].nomeBeneInVendita);
         },
         error: (err) => {
