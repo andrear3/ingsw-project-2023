@@ -13,33 +13,39 @@
       <app-navbar></app-navbar>
     </nav>
     <div class="square">
-        <div class="row1">
-          <div class="photoProfileContainer"></div>
+      <div class="row1">
+        <div class="photoProfileContainer"></div>
+      </div>
+      <div class="row2">
+        <div class="photoAuctionContainer">
+          <img [src]="asta?.url" alt="Auction Image" class="auction-image" />
         </div>
-        <div class="row2">
-          <div class="photoAuctionContainer"> <img [src]="asta?.url" alt="Auction Image" class="auction-image"></div>
-          <div class="box-container">
-           
-            <label for="boxOffer">Fai la tua offerta</label>
-            <input class="boxOffer" id="boxOffer" type="number" [(ngModel)]="newOfferta">
-            
-            <button class="offerButton" (click)="makeOffer()">Offri</button>
-            
-          </div>
+        <div class="box-container">
+          <label for="boxOffer">Fai la tua offerta</label>
+          <input
+            class="boxOffer"
+            id="boxOffer"
+            type="number"
+            [(ngModel)]="newOfferta"
+          />
+
+          <button class="offerButton" (click)="makeOffer()">Offri</button>
         </div>
-         <div class="row3">
-              <label for="productName">Nome del prodotto:</label>
-              <div class="productName" id="productName">{{asta?.nomeBeneInVendita}}</div>
-      
-              <label for="timeLeft">Tempo rimasto:</label>
-              <div class="timeLeft" id="timeLeft">{{asta?.timeLeft}}</div>
-      
-              <label for="currentOffer">Offerta attuale:</label>
-              <div class="currentOffer" id="currentOffer">{{asta?.offertaMax}}</div>
-         </div>
-    </div> 
-        
-    <script>
-    </script>
+      </div>
+      <div class="row3">
+        <label for="productName">Nome del prodotto:</label>
+        <div class="productName" id="productName">
+          {{ asta?.nomeBeneInVendita }}
+        </div>
+
+        <label for="timeLeft">Tempo rimasto:</label>
+        <div class="timeLeft" id="timeLeft">{{ getFormattedTime() }}</div>
+
+        <label for="currentOffer">Offerta attuale:</label>
+        <div class="currentOffer" id="currentOffer">{{ asta?.offertaMax }}</div>
+      </div>
+    </div>
+
+    <script></script>
   </body>
 </html>
