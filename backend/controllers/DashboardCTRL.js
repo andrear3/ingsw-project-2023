@@ -9,7 +9,6 @@ export class DashboardCTRL {
       const aste = await Asta.findAll({
         where: {
           UtenteNickname: nickname,
-          statusAsta: "venduto",
         },
       });
 

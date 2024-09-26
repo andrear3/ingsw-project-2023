@@ -17,7 +17,7 @@ export class OffertaCTRL {
     try {
       const offerte = await Offerta.findAll({
         attributes: [
-          'AstumAstaID', // Use AstumAstaID for grouping
+          'AstumAstaID', 
           [fn('MAX', col('valore')), 'offertaMax'], 
         ],
         where: {

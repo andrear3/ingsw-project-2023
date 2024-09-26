@@ -44,7 +44,7 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
       timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
     }));
 
-    res.json({ aste: datiConOfferteETempo, userInfo: user });  // Send user info separately
+    res.json({ aste: datiConOfferteETempo, userInfo: user });  // Manda info utente separatamente
   } catch (error) {
     console.error("Errore nel recupero dei dati:", error);
     res.status(500).json({ message: "Errore del server" });
