@@ -87,18 +87,19 @@ td {
     color: #333;
 }
 
-.status {
-    font-weight: bold;
-}
 
 .status.in-vendita {
-    color: yellow;
+    color: #ffcc00; /* Giallo per lo stato in vendita */
 }
 
 .status.venduto {
-    color: green;
+    color: #28a745; /* Verde per lo stato venduto */
 }
 
 .status.non-venduto {
-    color: red;
+    color: #dc3545; /* Rosso per lo stato non venduto */
+}
+
+.status {
+    font-weight: bold;
 }

@@ -13,7 +13,7 @@
     <main>
    
     @if(tipoAsta === "classica"){
-    
+    <p>classica</p>
       <div class="auction-form">
         <div class="left-column">
           <div class="photo-container">
@@ -69,13 +69,125 @@
     }
 
     @else if(tipoAsta === "ribasso"){
-      <!-- Contenuto per l'asta al ribasso -->
-      <p>Questo è il contenuto per l'asta al ribasso.</p>
+      <p>ribasso</p>
+      <div  id="ribasso" class="auction-form">
+        <div class="left-column">
+          <div class="photo-container">
+            <div class="photo-placeholder"></div>
+            <button class="photo-btn">Inserisci Foto</button>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <div class="input-group">
+            <label for="titoloAsta">Titolo Asta</label>
+            <input type="text" id="titoloAsta" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="nomeProdotto">Nome Prodotto</label>
+            <input type="text" id="nomeProdotto" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="prezzoIniz">Prezzo Iniziale</label>
+            <input type="text" id="prezzoIniz" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="oreAsta">Ore Asta</label>
+            <input type="text" id="oreAsta" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="percentualeDecremento">Percentuale Decremento</label>
+            <input type="text" id="percentualeDecremento" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="prezzoMinSegreto">Prezzo Minimo Segreto</label>
+            <input type="text" id="prezzoMinSegreto" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="categoria">Categoria</label>
+            <input
+               class="input-field"
+               id="categoria"
+               type="text"
+               matInput
+                [matAutocomplete]="auto"
+            />
+
+            <mat-autocomplete #auto="matAutocomplete">
+              @for (option of options; track option) {
+              <mat-option [value]="option">{{ option }}</mat-option>
+              }
+            </mat-autocomplete>
+          </div>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <label for="descrizione">Descrizione</label>
+        <textarea id="descrizione" class="description-input" rows="5"></textarea>
+      </div>
+
+      <div class="action-buttons">
+        <button class="create-auction-btn">Crea Asta</button>
+      </div>
+    
     }
 
     @else if(tipoAsta === "inversa"){
-      <!-- Contenuto per l'asta inversa -->
-      <p>Questo è il contenuto per l'asta inversa.</p>
+      <p>inversa</p>
+      <div id="inversa" class="auction-form">
+        <div class="left-column">
+          <div class="photo-container">
+            <div class="photo-placeholder"></div>
+            <button class="photo-btn">Inserisci Foto</button>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <div class="input-group">
+            <label for="titoloAsta">Titolo Asta</label>
+            <input type="text" id="titoloAsta" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="nomeProdotto">Nome Prodotto</label>
+            <input type="text" id="nomeProdotto" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="prezzoIniz">Prezzo Iniziale</label>
+            <input type="text" id="prezzoIniz" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="oreAsta">Ore Asta</label>
+            <input type="text" id="oreAsta" class="input-field" />
+          </div>
+          <div class="input-group">
+            <label for="categoria">Categoria</label>
+            <input
+               class="input-field"
+               id="categoria"
+               type="text"
+               matInput
+                [matAutocomplete]="auto"
+            />
+
+            <mat-autocomplete #auto="matAutocomplete">
+              @for (option of options; track option) {
+              <mat-option [value]="option">{{ option }}</mat-option>
+              }
+            </mat-autocomplete>
+          </div>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <label for="descrizione">Descrizione</label>
+        <textarea id="descrizione" class="description-input" rows="5"></textarea>
+      </div>
+
+      <div class="action-buttons">
+        <button class="create-auction-btn">Crea Asta</button>
+      </div>
+
     }
     </main>
     

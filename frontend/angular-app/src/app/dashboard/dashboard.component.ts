@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
+import { Asta } from '../_models/asta-model';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,7 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  dashboardData: any[] = [];
+  dashboardData: Asta[] = [];
 
   constructor(
     private restService: RestService,

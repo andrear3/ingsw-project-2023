@@ -9,6 +9,7 @@ body {
     background-color: #ffffff;
 }
 
+
 .auction-form {
     display: flex;
     margin-top: 20px;
@@ -16,6 +17,7 @@ body {
     border-radius: 10px;
     padding: 20px;
     margin-left: 10px;
+    
 }
 
 .left-column {
@@ -36,6 +38,7 @@ body {
     height: 400px;
     border: 2px solid #00a2e8;
     margin-bottom: 10px;
+    border-radius: 20px;
 }
 
 .photo-btn {
@@ -106,6 +109,22 @@ label {
     margin-bottom: 5px;
     display: block;
     margin-left: 20px;
+}
+
+#ribasso .auction-form, #inversa .auction-form {
+    /* Stessi stili della classica */
+    display: flex;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-left: 10px;
+}
+
+/* Corregge le dimensioni dei campi */
+#ribasso .input-group, #inversa .input-group {
+    width: 40%; /* Imposta la larghezza coerente con l'asta classica */
+    margin-bottom: 20px; /* Spazio coerente con la classica */
 }
 
 @media (max-width: 768px) {
