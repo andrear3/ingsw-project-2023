@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
-import { Asta } from '../_models/asta-model';
+import { Asta, statusAstaEnum } from '../_models/asta-model';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,6 +32,8 @@ import { Asta } from '../_models/asta-model';
 export class DashboardComponent implements OnInit {
   dashboardData: Asta[] = [];
   private intervalId: any;
+  salesValue: number = 0;
+  numberSold: number = 0;
 
   constructor(
     private restService: RestService,
@@ -50,8 +52,8 @@ export class DashboardComponent implements OnInit {
           console.log('Dashboard updated:', response);
           this.dashboardData = response.data; //conserva i dati della risposta
 
-
           this.startDecrementTimer();
+          this.stats();
           console.log(this.dashboardData[0].nomeBeneInVendita);
         },
         error: (err) => {
@@ -88,5 +90,15 @@ export class DashboardComponent implements OnInit {
     const sDisplay = s > 0 ? `${s}s` : '';
 
     return dDisplay + hDisplay + mDisplay + sDisplay.trim();
+  }
+
+  stats() {
+    for (const data of this.dashboardData) {
+      console.log(data.statusAsta);
+      if (String(data.statusAsta) === 'venduto') {
+        this.salesValue += data.offertaMax;
+        this.numberSold += 1;
+      }
+    }
   }
 }

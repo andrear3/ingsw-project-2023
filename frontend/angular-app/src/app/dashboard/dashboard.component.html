@@ -12,53 +12,48 @@
     <nav>
       <app-navbar></app-navbar>
     </nav>
-        <div class="row1">
-          <div class="label-wrapper">
-            <label class="boxProdottiVendutiLabel">Prodotti Venduti</label>
-            <div class="boxProdottiVenduti">
-                <!-- Contenuto del box -->
-            </div>
+    <div class="row1">
+      <div class="label-wrapper">
+        <label class="boxProdottiVendutiLabel">Prodotti Venduti</label>
+        <div class="boxProdottiVenduti">
+          {{ numberSold }}
         </div>
-        <div class="label-wrapper">
-          <label class="boxTotaleVenditeLabel">Totale Vendite</label>
-          <div class="boxTotaleVendite">
-              <!-- Contenuto del box -->
-          </div>
       </div>
-        </div>
-        <div class="row2">
-          <div class="square">
-          
-            <h2>Aste Recenti</h2>
+      <div class="label-wrapper">
+        <label class="boxTotaleVenditeLabel">Totale Vendite</label>
+        <div class="boxTotaleVendite">{{ salesValue }}$</div>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="square">
+        <h2>Aste Recenti</h2>
         <table>
-            <thead>
-                <tr>
-                    <th>Nome Prodotto</th>
-                    <th>Status</th>
-                    <th>Ultima Offerta</th>
-                    <th>Tempo Rimanente</th>
-                </tr>
-            </thead>
-            <tbody id="auctionTableBody">
-              @for (dash of dashboardData; track dashboardData) {
-                <tr> 
-                  <td class="nomeProdotto">{{dash?.nomeBeneInVendita}}</td>
-                  <td class="status {{dash?.statusAsta}}">{{dash?.statusAsta}}</td> 
-                  <td class="ultimaOfferta">{{dash?.offertaMax}}</td>
-                  <td class="tempoRimanente">{{ getFormattedTime(dash)  }}</td>
-                </tr> 
-              }
-            </tbody>
+          <thead>
+            <tr>
+              <th>Nome Prodotto</th>
+              <th>Status</th>
+              <th>Ultima Offerta</th>
+              <th>Tempo Rimanente</th>
+            </tr>
+          </thead>
+          <tbody id="auctionTableBody">
+            @for (dash of dashboardData; track dashboardData) {
+            <tr>
+              <td class="nomeProdotto">{{ dash?.nomeBeneInVendita }}</td>
+              <td class="status {{ dash?.statusAsta }}">
+                {{ dash?.statusAsta }}
+              </td>
+              <td class="ultimaOfferta">{{ dash?.offertaMax }}</td>
+              <td class="tempoRimanente">{{ getFormattedTime(dash) }}</td>
+            </tr>
+            }
+          </tbody>
         </table>
-          </div>
-        </div>
-        
-         <div class="row3">
-           
-         </div>
-    
+      </div>
+    </div>
 
-    <script>
-    </script>
+    <div class="row3"></div>
+
+    <script></script>
   </body>
 </html>

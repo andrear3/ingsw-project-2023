@@ -26,7 +26,6 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./auction-view.component.scss'],
 })
 export class AuctionViewComponent implements OnInit {
-  // Use `any` type for `asta` to avoid TypeScript type-checking issues
   asta: any = {};
   private intervalId: any;
   newOfferta: number | null = null;
