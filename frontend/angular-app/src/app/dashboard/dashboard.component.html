@@ -45,7 +45,7 @@
                   <td class="nomeProdotto">{{dash?.nomeBeneInVendita}}</td>
                   <td class="status {{dash?.statusAsta}}">{{dash?.statusAsta}}</td> 
                   <td class="ultimaOfferta">{{dash?.offertaMax}}</td>
-                  <td class="tempoRimanente">{{dash?.timeLeft}}</td>
+                  <td class="tempoRimanente">{{ getFormattedTime(dash)  }}</td>
                 </tr> 
               }
             </tbody>
