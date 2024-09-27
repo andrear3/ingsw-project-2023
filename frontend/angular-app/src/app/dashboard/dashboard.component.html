@@ -40,11 +40,13 @@
                 </tr>
             </thead>
             <tbody id="auctionTableBody">
-              @for (dash of dashboardData; track dashboardData){
-                <td class="nomeProdotto">{{dash?.nomeBeneInVendita}}</td>
-                <td class="status">{{dash?.statusAsta}}</td>
-                <td calss="ultimaOfferta">{{dash?.offertaMax}}</td>
-                <td class="tempoRimanente">{{dash?.timeLeft}}</td>
+              @for (dash of dashboardData; track dashboardData) {
+                <tr> 
+                  <td class="nomeProdotto">{{dash?.nomeBeneInVendita}}</td>
+                  <td class="status {{dash?.statusAsta}}">{{dash?.statusAsta}}</td> 
+                  <td class="ultimaOfferta">{{dash?.offertaMax}}</td>
+                  <td class="tempoRimanente">{{dash?.timeLeft}}</td>
+                </tr> 
               }
             </tbody>
         </table>
