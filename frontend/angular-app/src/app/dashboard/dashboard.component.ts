@@ -31,7 +31,6 @@ import { Asta } from '../_models/asta-model';
 })
 export class DashboardComponent implements OnInit {
   dashboardData: Asta[] = [];
-  dashboardData: Asta[] = [];
   private intervalId: any;
 
   constructor(
