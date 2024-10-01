@@ -11,9 +11,12 @@ import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../_services/auth.service';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { Router , RouterLink,
+import {
+  Router,
+  RouterLink,
   RouterModule,
-  RouterOutlet,} from '@angular/router';
+  RouterOutlet,
+} from '@angular/router';
 @Component({
   selector: 'app-homepage',
   standalone: true,
@@ -25,7 +28,6 @@ import { Router , RouterLink,
     MatIconModule,
     CommonModule,
     FormsModule,
-   
   ],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
@@ -35,7 +37,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
   utente: Utente | null = null;
   private intervalId: any;
   private subscriptions: Subscription = new Subscription();
- 
+
+  asteFiltrate: Asta[] = [];
 
   constructor(
     private restService: RestService,
@@ -49,6 +52,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
       this.restService.getAsta().subscribe({
         next: (response: { aste: Asta[]; userInfo: Utente }) => {
           this.aste = response.aste;
+          this.asteFiltrate = this.aste;
           this.utente = response.userInfo;
 
           this.startDecrementTimer();
@@ -102,8 +106,22 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
     return dDisplay + hDisplay + mDisplay + sDisplay.trim();
   }
-  navigateToviewAsta(asta:Asta) {
+  navigateToviewAsta(asta: Asta) {
     console.log(asta);
-    this.router.navigate(['/auctionView',asta]); 
+    this.router.navigate(['/auctionView', asta]);
+  }
+
+  filterResults(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const searchText = inputElement?.value || '';
+  
+    if (!searchText) {
+      this.asteFiltrate = this.aste;
+      return;
+    }
+  
+    this.asteFiltrate = this.aste.filter((asta) =>
+      asta?.nomeBeneInVendita?.toLowerCase().includes(searchText.toLowerCase())
+    );
   }
 }
