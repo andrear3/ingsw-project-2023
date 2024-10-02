@@ -1,7 +1,7 @@
 import { AfterViewInit, Component,Input } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { RestService } from '../_services/rest-api.service';
@@ -48,7 +48,8 @@ export class NavbarComponent implements OnInit {
     public dialog: MatDialog,
     private RestService: RestService,
     private AuthService: AuthService,
-   private navbarService: NavbarService
+   private navbarService: NavbarService,
+   private router:Router,
   ) { console.log('Navbar initialized');}
 
   @Input() isVisible: boolean = true;
@@ -84,10 +85,43 @@ export class NavbarComponent implements OnInit {
   }
 
   navigateToAsta() {
+    this.router.navigate(['/asta']);
   }
 
   onInversaButtonClick() {
     this.RestService.setTipoAsta('inversa');
     this.navigateToAsta();
   }
+ 
+
+  changeType(){
+    this.showUtente = String(this.AuthService.getUtente()?.tipo);
+    if(this.showUtente=="compratore"){
+      this.RestService.setTipoUtente('venditore').subscribe({
+        next: (response) => {},
+        error: (err) => {
+          console.error('Error', err);
+        },
+      });
+      this.showUtente="venditore";
+      console.log("chiamala fuznione");
+    
+
+
+      
+    }else if(this.showUtente=="venditore") {
+      this.RestService.setTipoUtente('compratore').subscribe({
+        next: (response) => {},
+        error: (err) => {
+          console.error('Error', err);
+        },
+      });
+      this.showUtente="compratore"; 
+      console.log("chiama asgggegeg") ;
+      
+    }
+    
+  }
+ 
+
 }

@@ -76,12 +76,13 @@ export const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes), // Usa `routes` qui
+    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),// Usa `routes` qui
     MatInputModule,
     MatAutocompleteModule,
     NavbarComponent,
     MatButtonModule, 
   ],
+  exports: [NavbarComponent],
   providers: [RestService],
 })
 export class AppModule { }
