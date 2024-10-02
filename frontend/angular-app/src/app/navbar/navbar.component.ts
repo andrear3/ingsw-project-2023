@@ -1,50 +1,39 @@
-import {
-  ChangeDetectorRef,
-  AfterViewInit,
-  Component,
-  ViewChild,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component,Input } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormField } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { SceltaAstaComponent } from '../scelta-asta/scelta-asta.component';
-import {
-  Router,
-  RouteConfigLoadEnd,
-  RouterLink,
-  RouterModule,
-  RouterOutlet,
-} from '@angular/router';
-import { AstaComponent } from '../asta/asta.component';
+import { RouterOutlet, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { SceltaAstaComponent } from '../scelta-asta/scelta-asta.component'; // Ensure the path is correct
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field'; // Optional if you are using <mat-form-field>
+import { MatInputModule } from '@angular/material/input'; // Required for <input> within the autocomplete
+import { MatIconModule } from '@angular/material/icon';
+import {  OnInit, ViewChild } from '@angular/core';
+import { NavbarService } from '../_services/nav-bar.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
     MatToolbarModule,
     MatIcon,
-    MatAutocompleteModule,
-    MatInputModule,
     RouterOutlet,
     CommonModule,
     RouterLink,
-    RouterModule,
-    FormsModule,
+    MatSelectModule,  
+    MatOptionModule, 
+    RouterLink,
+    MatAutocompleteModule,
   ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+  styleUrls: ['./navbar.component.scss'], // Ensure this is 'styleUrls'
 })
-export class NavbarComponent implements AfterViewInit {
-  @ViewChild(AstaComponent) tipoAsta?: AstaComponent;
-
+export class NavbarComponent implements OnInit {
   options: string[] = [
     'Informatica',
     'Videogames',
@@ -53,46 +42,48 @@ export class NavbarComponent implements AfterViewInit {
     'Collezionismo',
   ];
   private statusSubscription: Subscription = new Subscription();
+  showUtente: string = 'venditore';
+
   constructor(
     public dialog: MatDialog,
-    private router: Router,
-    private cdRef: ChangeDetectorRef,
     private RestService: RestService,
-    private AuthService: AuthService
-  ) {}
+    private AuthService: AuthService,
+   private navbarService: NavbarService
+  ) { console.log('Navbar initialized');}
 
-  showUtente: string = 'venditore';
+  @Input() isVisible: boolean = true;
+  isNavbarVisible: boolean = true;
 
   ngOnInit() {
     this.statusSubscription = this.AuthService.getStatus().subscribe(
       (status: boolean) => {
         if (status) {
           this.showUtente = String(this.AuthService.getUtente()?.tipo);
-          console.log(' fgerijfgwierjgowjg');
           console.log(this.showUtente);
         }
       }
     );
+    this.navbarService.showNavbar$.subscribe(isVisible => {
+      this.isNavbarVisible = isVisible;
+      console.log('Navbar visibile:', this.isNavbarVisible);
+    });
+
   }
+
   openDialog() {
     this.dialog.open(SceltaAstaComponent, {
       position: { top: '5%', right: '17%' },
     });
   }
+
   closeDialog() {
     this.dialog.closeAll();
   }
 
   ngAfterViewInit() {
-    if (!this.tipoAsta) {
-      console.error('AstaComponent not found via @ViewChild');
-    } else {
-      console.log('AstaComponent found:', this.tipoAsta);
-    }
   }
 
   navigateToAsta() {
-    this.router.navigate(['/asta']);
   }
 
   onInversaButtonClick() {

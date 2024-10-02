@@ -39,15 +39,31 @@ body {
     border: 2px solid #00a2e8;
     margin-bottom: 10px;
     border-radius: 20px;
+    overflow: hidden;
+    background-size: cover; /* Riempi il contenitore mantenendo le proporzioni */
+    background-position: center; /* Centra l'immagine all'interno del contenitore */
+    background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+}
+.photo-placeholder img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+
+input[type="file"]{
+    display: none;
 }
 
-.photo-btn {
+
+.labelBTN{
     background-color: #00a2e8;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 20px;
     cursor: pointer;
+    
 }
 
 .right-column {

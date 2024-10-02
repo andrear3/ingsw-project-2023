@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,ElementRef,OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
+import { HttpClient } from "@angular/common/http";
+import { throwError } from 'rxjs';
 import {
   Router,
   RouteConfigLoadEnd,
@@ -44,6 +46,7 @@ export class AstaComponent implements OnInit {
     'Sport',
     'Collezionismo',
   ];
+  
   public tipoAsta: string = 'inversa';
 
   constructor(private RestService: RestService, private AuthService: AuthService) {} 
@@ -70,4 +73,37 @@ export class AstaComponent implements OnInit {
     console.log('Switching to reverse auction'); // Debug output
     this.tipoAsta = 'inversa';
   }
+ 
+
+  @ViewChild('uploadBtn') uploadBtn!: ElementRef;
+  @ViewChild('photoPreview') photoPreview!: ElementRef;
+
+  ngAfterViewInit() {
+    const uploadElement = this.uploadBtn.nativeElement as HTMLInputElement;
+    const previewElement = this.photoPreview.nativeElement as HTMLElement;
+
+    uploadElement.addEventListener('change', (event: any) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          previewElement.style.backgroundImage = `url(${e.target.result})`;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        previewElement.style.backgroundImage = '';
+      }
+    });
+  }
+
+
+
+
+
+
+
+
+  
+
+  
 }
