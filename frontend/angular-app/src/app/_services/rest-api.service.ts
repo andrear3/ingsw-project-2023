@@ -68,10 +68,23 @@ export class RestService {
   logout(): Observable<any> {
     return this.http.get(`${this.apiUrl}/logout`);
   }
-  private tipoAstaSubject = new BehaviorSubject<string>('classica'); // default value
-  tipoAsta$ = this.tipoAstaSubject.asObservable(); // Observable to listen for changes
 
-  // Method to update the tipoAsta
+  setTipoUtente(tipo: string): Observable<any> {
+    const token = this.authService.getToken();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    console.log(tipo);
+
+    return this.http.post(`${this.apiUrl}/setUser`, { tipo }, httpOptions);
+  }
+
+  private tipoAstaSubject = new BehaviorSubject<string>('classica');
+  tipoAsta$ = this.tipoAstaSubject.asObservable();
+
   setTipoAsta(tipo: string) {
     this.tipoAstaSubject.next(tipo);
   }

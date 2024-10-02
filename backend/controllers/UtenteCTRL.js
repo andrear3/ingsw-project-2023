@@ -53,5 +53,22 @@ export class UtenteCTRL {
     }
   }
 
-  
+  static async setTipoUtente(tipo, email) {
+    try {
+      const result = await Utente.update(
+        { tipo },
+        {
+          where: { email: email },
+        }
+      );
+
+      if (result[0] === 0) {
+        throw new Error("Errore nel cambiare tipo");
+      }
+
+      console.log("Successo! Tipo cambiato");
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  }
 }

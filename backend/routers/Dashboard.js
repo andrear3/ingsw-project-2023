@@ -9,10 +9,10 @@ export const dashboardRouter = express.Router();
 dashboardRouter.post("/dashboard", authToken, async (req, res) => {
   try {
     const nickname = req.body.nickname;
-    console.log("Nickname:", nickname);
+    //console.log("Nickname:", nickname);
     
     const dashboardData = await DashboardCTRL.populateDashboard(nickname);
-    console.log("Dashboard Data:", dashboardData);
+    //console.log("Dashboard Data:", dashboardData);
 
     if (!Array.isArray(dashboardData) || dashboardData.length === 0) {
       return res.status(404).json({ message: "Nessuna asta trovata" });

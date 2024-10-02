@@ -16,6 +16,7 @@ import { authToken } from "./middleware/Auth.js";
 import { homepageRouter } from "./routers/Homepage.js";
 import { registrationRouter } from "./routers/Registration.js";
 import { loginRouter } from "./routers/LogIn.js";
+import { setUser } from "./routers/Tipo.js";
 
 //IMPORTS PER IMMAGINI
 import { fileURLToPath } from "url";
@@ -45,20 +46,9 @@ app.use(
 
 const PORT = 3000;
 
-//TESTING
 
-const posts = [
-  {
-    email: "kikkowoman@mail.com",
-    password: "1234",
-  },
-  {
-    email: "kikkoman@mail.com",
-    password: "4321",
-  },
-];
 
-AstaCTRL.stampaTutteAste();
+//AstaCTRL.stampaTutteAste();
 
 //STAMPA DELLE ASTE ATTIVE
 //setInterval(AstaCTRL.recuperaAsteAttive, 10000);
@@ -77,6 +67,7 @@ app.use(registrationRouter);
 app.use(loginRouter);
 app.use(productRouter);
 app.use(dashboardRouter);
+app.use(setUser);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

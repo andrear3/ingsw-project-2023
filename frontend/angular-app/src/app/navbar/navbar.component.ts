@@ -38,7 +38,6 @@ import { FormsModule } from '@angular/forms';
     RouterLink,
     RouterModule,
     FormsModule,
-
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
@@ -68,10 +67,10 @@ export class NavbarComponent implements AfterViewInit {
     this.statusSubscription = this.AuthService.getStatus().subscribe(
       (status: boolean) => {
         if (status) {
-          this.showUtente= String(this.AuthService.getUtente()?.tipo);
+          this.showUtente = String(this.AuthService.getUtente()?.tipo);
           console.log(' fgerijfgwierjgowjg');
           console.log(this.showUtente);
-          }
+        }
       }
     );
   }
@@ -93,7 +92,7 @@ export class NavbarComponent implements AfterViewInit {
   }
 
   navigateToAsta() {
-    this.router.navigate(['/asta']); 
+    this.router.navigate(['/asta']);
   }
 
   onInversaButtonClick() {
