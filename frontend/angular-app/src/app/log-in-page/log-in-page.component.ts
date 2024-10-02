@@ -12,6 +12,8 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { AppComponent } from '../app.component';
+import { NavbarService } from '../_services/nav-bar.service';
 
 @Component({
   selector: 'app-log-in-page',
@@ -28,8 +30,19 @@ export class LogInPageComponent {
   constructor(
     private restApiService: RestService,
     private authService: AuthService,
-    private router: Router 
+    private router: Router,
+    private appComponent:AppComponent, 
+    private navbarService: NavbarService,
+  
   ) {}
+  
+ 
+ ngAfterViewInit() {
+    // Nascondi la navbar quando viene caricata la pagina di login
+    console.log("chiamato NGOnINITn ")
+    this.appComponent.nascondiNavBar();
+  }
+
 
   login() {
     this.restApiService.login(this.email, this.password).subscribe(

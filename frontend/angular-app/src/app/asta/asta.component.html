@@ -10,15 +10,17 @@
   
   <body>
    
-    <main>
-   
+    
+    
     @if(tipoAsta === "classica"){
+    
     <p>classica</p>
       <div class="auction-form">
         <div class="left-column">
           <div class="photo-container">
-            <div class="photo-placeholder"></div>
-            <button class="photo-btn">Inserisci Foto</button>
+            <div class="photo-placeholder" #photoPreview></div>
+              <input type="file"  id="upload-BTN" #uploadBtn>
+              <label class="labelBTN"for="upload-BTN">inserisci foto</label>  
           </div>
         </div>
 
@@ -55,6 +57,7 @@
               }
             </mat-autocomplete>
           </div>
+          
         </div>
       </div>
 
@@ -73,8 +76,9 @@
       <div  id="ribasso" class="auction-form">
         <div class="left-column">
           <div class="photo-container">
-            <div class="photo-placeholder"></div>
-            <button class="photo-btn">Inserisci Foto</button>
+            <div class="photo-placeholder" #photoPreview></div>
+              <input type="file"  id="upload-BTN" #uploadBtn>
+              <label class="labelBTN"for="upload-BTN">inserisci foto</label>  
           </div>
         </div>
 
@@ -138,8 +142,9 @@
       <div id="inversa" class="auction-form">
         <div class="left-column">
           <div class="photo-container">
-            <div class="photo-placeholder"></div>
-            <button class="photo-btn">Inserisci Foto</button>
+            <div class="photo-placeholder" #photoPreview></div>
+              <input type="file"  id="upload-BTN" #uploadBtn>
+              <label class="labelBTN"for="upload-BTN">inserisci foto</label>  
           </div>
         </div>
 
@@ -189,9 +194,10 @@
       </div>
 
     }
-    </main>
+  
     
-      
+   
+
     
   </body>
 </html>

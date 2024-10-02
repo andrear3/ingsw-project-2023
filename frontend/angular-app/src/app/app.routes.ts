@@ -15,6 +15,10 @@ import { AstaComponent } from './asta/asta.component';
 import { VisulizzaProfiloComponent } from './visulizza-profilo/visulizza-profilo.component';
 import { AuctionViewComponent } from './auction-view/auction-view.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MatButtonModule } from '@angular/material/button';
 
 export const routes: Routes = [
   {
@@ -63,7 +67,7 @@ export const routes: Routes = [
   title: 'Dashboard',
   component: DashboardComponent,
 },
-
+{ path: '**', redirectTo: '' } // Wildcard route for a 404 page
 
 ];
 //login
@@ -73,6 +77,10 @@ export const routes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes), // Usa `routes` qui
+    MatInputModule,
+    MatAutocompleteModule,
+    NavbarComponent,
+    MatButtonModule, 
   ],
   providers: [RestService],
 })

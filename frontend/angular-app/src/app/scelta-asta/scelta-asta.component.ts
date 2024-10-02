@@ -5,16 +5,18 @@ import { MAT_DIALOG_DATA, MatDialog,MatDialogRef } from '@angular/material/dialo
 import { AstaComponent } from '../asta/asta.component';
 import { Asta } from '../_models/asta-model';
 import { RestService } from '../_services/rest-api.service';
-
+import { MatButtonModule } from '@angular/material/button'; // If using Material buttons
+import { MatOptionModule } from '@angular/material/core'; // If using mat-option
+import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-scelta-asta',
   standalone: true,
-  imports: [ RouterOutlet,CommonModule,RouterLink,RouterModule],
+  imports: [ RouterOutlet,CommonModule,RouterLink,RouterModule, AstaComponent, MatButtonModule, MatOptionModule, NavbarComponent],
   templateUrl: './scelta-asta.component.html',
   styleUrl: './scelta-asta.component.scss'
 })
 export class SceltaAstaComponent implements AfterViewInit {
-  @ViewChild(AstaComponent) tipoAsta?: AstaComponent; // Indicates that this property will be set after view initialization
+  @ViewChild(AstaComponent) tipoAsta?: AstaComponent; 
 
   constructor(
     public dialog: MatDialog, 
@@ -24,6 +26,7 @@ export class SceltaAstaComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
+    console.log('View initialized');
     if (!this.tipoAsta) {
       console.error('AstaComponent not found via @ViewChild');
     } else {
