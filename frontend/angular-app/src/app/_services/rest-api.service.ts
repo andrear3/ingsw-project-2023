@@ -61,7 +61,7 @@ export class RestService {
     });
   }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string ): Observable<any> {
     return this.http.post(`${this.apiUrl}/`, { email, password });
   }
 
@@ -77,7 +77,7 @@ export class RestService {
       }),
     };
 
-    console.log(tipo);
+    console.log('setipo',tipo);
 
     return this.http.post(`${this.apiUrl}/setUser`, { tipo }, httpOptions);
   }
