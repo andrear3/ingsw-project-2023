@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input'; // Required for <input
 import { MatIconModule } from '@angular/material/icon';
 import {  OnInit, ViewChild } from '@angular/core';
 import { NavbarService } from '../_services/nav-bar.service';
+import { Utente } from '../_models/utente-model';
+import { TipoUtente } from '../_models/tipo-utente-enum';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -42,7 +44,8 @@ export class NavbarComponent implements OnInit {
     'Collezionismo',
   ];
   private statusSubscription: Subscription = new Subscription();
-  showUtente: string = 'venditore';
+  showUtente: string = '';
+  utente: Utente | null = null;
 
   constructor(
     public dialog: MatDialog,
@@ -60,7 +63,7 @@ export class NavbarComponent implements OnInit {
       (status: boolean) => {
         if (status) {
           this.showUtente = String(this.AuthService.getUtente()?.tipo);
-          console.log(this.showUtente);
+          console.log("navbar ",this.showUtente);
         }
       }
     );
@@ -68,7 +71,7 @@ export class NavbarComponent implements OnInit {
       this.isNavbarVisible = isVisible;
       console.log('Navbar visibile:', this.isNavbarVisible);
     });
-
+  
   }
 
   openDialog() {
@@ -92,36 +95,13 @@ export class NavbarComponent implements OnInit {
     this.RestService.setTipoAsta('inversa');
     this.navigateToAsta();
   }
-
-
-  changeType(){
-    this.showUtente = String(this.AuthService.getUtente()?.tipo);
-    if(this.showUtente=="compratore"){
-      this.RestService.setTipoUtente('venditore').subscribe({
-        next: (response) => {},
-        error: (err) => {
-          console.error('Error', err);
-        },
-      });
-      this.showUtente="venditore";
-      console.log("chiamala fuznione");
-    
-
-
-      
-    }else if(this.showUtente=="venditore") {
-      this.RestService.setTipoUtente('compratore').subscribe({
-        next: (response) => {},
-        error: (err) => {
-          console.error('Error', err);
-        },
-      });
-      this.showUtente="compratore"; 
-      console.log("chiama asgggegeg") ;
-      
-    }
-    
+  logout(){
+    this.AuthService.setToken('');
+    this.AuthService.setUtente(this.utente);
+    this.RestService.setTipoUtente(' ');
+    this.AuthService.setStatus(false);
+    this.router.navigate(['/']);
   }
- 
+
 
 }

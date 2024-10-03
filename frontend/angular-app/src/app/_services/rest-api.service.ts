@@ -61,6 +61,7 @@ export class RestService {
     });
   }
 
+<<<<<<< HEAD
   creaAsta(
     titoloAsta: string,
     nomeProdotto: string,
@@ -89,6 +90,9 @@ export class RestService {
   }
 
   login(email: string, password: string): Observable<any> {
+=======
+  login(email: string, password: string ): Observable<any> {
+>>>>>>> e21cef4573e6b0a30729ff927eb4bbf20fcc7b2d
     return this.http.post(`${this.apiUrl}/`, { email, password });
   }
 
@@ -104,7 +108,7 @@ export class RestService {
       }),
     };
 
-    console.log(tipo);
+    console.log('setipo',tipo);
 
     return this.http.post(`${this.apiUrl}/setUser`, { tipo }, httpOptions);
   }

@@ -20,7 +20,7 @@ export class AuthService {
     return this.jwtoken;
   }
 
-  setUtente(utente: Utente) {
+  setUtente(utente: Utente|null) {
     this.jwtutente = utente;
   }
 

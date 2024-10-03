@@ -30,10 +30,28 @@
         name="password"
         required
       />
-      <button class="boxAccedi" (click)="login()">Accedi</button>
-      <span class="O">o</span>
-      <span class="accediCon">Accedi con</span>
-    </div>
+      <div class="boxTipoAccount">
+        <input
+          id="tipoAccount"
+          matInput
+          type="text"
+          [matAutocomplete]="auto"
+          [(ngModel)]="tipo"
+          placeholder="Tipologia Account"
+          required
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of options" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+     
+      <button class="boxAccedi" (click)="login2()">Accedi</button>
+      
+    
+</div>      
+  
 
     <div class="square2">
       <span class="noAcc">Non hai un account?</span>
