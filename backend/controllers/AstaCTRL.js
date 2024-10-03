@@ -41,11 +41,42 @@ export class AstaCTRL {
   }
 
   static async creaAsta(req) {
-    let asta = Asta.build(req.body);
-    await asta.save();
+    try {
+        const {
+            titoloAsta,
+            nomeProdotto,
+            prezzoIniz,
+            oreAsta,
+            categoria,
+            descrizione,
+        } = req.body;
 
-    console.log("Asta Saved to database.");
-  }
+        const fileUrl = req.file ? req.file.filename : null; 
+        const utenteNickname = req.user.UtenteNickname; // Make sure this is being accessed correctly
+
+        const astaData = {
+            nomeBeneInVendita: nomeProdotto,
+            titolo: titoloAsta,
+            categoria: categoria,
+            tipoBeneInVendita: "articolo", 
+            descrizioneAsta: descrizione,
+            prezzofinale: parseFloat(prezzoIniz), 
+            dataFineAsta: new Date(Date.now() + oreAsta * 3600000), 
+            statusAsta: "inVendita", 
+            url: fileUrl,
+            UtenteNickname: utenteNickname, // Add the nickname here
+        };
+
+        // Create a new auction record
+        const asta = await Asta.create(astaData);
+        console.log("Asta saved to database:", asta);
+        return asta; // Optionally return the created record
+    } catch (error) {
+        console.error("Error saving auction to database:", error);
+        throw new Error("Could not save auction");
+    }
+}
+
 
   static async cercaAsta(id) {
     try {

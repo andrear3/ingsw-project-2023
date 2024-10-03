@@ -10,9 +10,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
-import { HttpClient } from '@angular/common/http';
-import { throwError } from 'rxjs';
-import { Router, RouteConfigLoadEnd, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-asta',
@@ -45,7 +42,7 @@ export class AstaComponent implements OnInit {
   oreAsta: string = '';
   categoria: string = '';
   descrizione: string = '';
-  url: string = ''; // This will now hold the actual file URL or Base64 content.
+  url: string = '';
   imageFile: File | null = null; // Store the image file
 
   public tipoAsta: string = 'inversa';
@@ -63,25 +60,29 @@ export class AstaComponent implements OnInit {
     });
   }
 
+  // Update the creaAsta method to send FormData directly
   creaAsta() {
     const formData = new FormData();
-
-    // Append other auction details
-    formData.append('titoloAsta', this.titoloAsta);
-    formData.append('nomeProdotto', this.nomeProdotto);
-    formData.append('prezzoIniz', this.prezzoIniz);
-    formData.append('oreAsta', this.oreAsta);
-    formData.append('categoria', this.categoria);
-    formData.append('descrizione', this.descrizione);
-
-    // Append the image file if it exists
+  
+    formData.append('titoloAsta', this.titoloAsta || ''); // Ensure values are not empty
+    formData.append('nomeProdotto', this.nomeProdotto || '');
+    formData.append('prezzoIniz', this.prezzoIniz || '');
+    formData.append('oreAsta', this.oreAsta || '');
+    formData.append('categoria', this.categoria || '');
+    formData.append('descrizione', this.descrizione || '');
+  
     if (this.imageFile) {
       formData.append('image', this.imageFile, this.imageFile.name);
+    } else if (this.url) {
+      formData.append('url', this.url); // If no file, add the image URL or base64
     }
-
-    // Send FormData to the backend
-    //this.RestService.creaAsta(formData);
+  
+    this.RestService.creaAsta(formData).subscribe(
+      response => console.log('Auction created successfully!', response),
+      error => console.error('Error creating auction:', error)
+    );
   }
+  
 
   astaClassica() {
     this.tipoAsta = 'classica';

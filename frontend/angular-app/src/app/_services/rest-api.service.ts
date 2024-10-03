@@ -61,7 +61,19 @@ export class RestService {
     });
   }
 
-  login(email: string, password: string ): Observable<any> {
+  creaAsta(formData: FormData): Observable<any> {
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+    console.log(formData);
+    return this.http.post(`${this.apiUrl}/creaAsta`, formData, httpOptions);
+  }
+
+  login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/`, { email, password });
   }
 
@@ -77,7 +89,7 @@ export class RestService {
       }),
     };
 
-    console.log('setipo',tipo);
+    console.log('setipo', tipo);
 
     return this.http.post(`${this.apiUrl}/setUser`, { tipo }, httpOptions);
   }

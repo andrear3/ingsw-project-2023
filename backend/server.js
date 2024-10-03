@@ -16,7 +16,6 @@ import { authToken } from "./middleware/Auth.js";
 import { homepageRouter } from "./routers/Homepage.js";
 import { registrationRouter } from "./routers/Registration.js";
 import { loginRouter } from "./routers/LogIn.js";
-import { setUser } from "./routers/Tipo.js";
 
 //IMPORTS PER IMMAGINI
 import { fileURLToPath } from "url";
@@ -24,6 +23,7 @@ import { dirname } from "path";
 import path from "path";
 import { productRouter } from "./routers/Product.js";
 import { dashboardRouter } from "./routers/Dashboard.js";
+import { general } from "./routers/General.js";
 
 //USATO PER MANDARE IMMAGINI
 const __filename = fileURLToPath(import.meta.url);
@@ -46,8 +46,6 @@ app.use(
 
 const PORT = 3000;
 
-
-
 //AstaCTRL.stampaTutteAste();
 
 //STAMPA DELLE ASTE ATTIVE
@@ -67,7 +65,7 @@ app.use(registrationRouter);
 app.use(loginRouter);
 app.use(productRouter);
 app.use(dashboardRouter);
-app.use(setUser);
+app.use(general);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
