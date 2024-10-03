@@ -92,7 +92,7 @@ export class NavbarComponent implements OnInit {
     this.RestService.setTipoAsta('inversa');
     this.navigateToAsta();
   }
- 
+
 
   changeType(){
     this.showUtente = String(this.AuthService.getUtente()?.tipo);
