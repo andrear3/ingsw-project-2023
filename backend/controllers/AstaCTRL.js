@@ -18,6 +18,17 @@ export class AstaCTRL {
     }
   }
 
+  //titolo, nome prodotto, prezzo iniziale, categoria, url, ore, descrizione
+  static async creaAstaClassica(asta) {
+    try {
+      let temp = new Asta();
+      await asta.save();
+    } catch (error) {
+      console.error("Errore durante la creazione dell'asta", error);
+      throw error;
+    }
+  }
+
   static async stampaTutteAste() {
     try {
       const aste = await Asta.findAll();
