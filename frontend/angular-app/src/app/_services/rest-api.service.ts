@@ -61,38 +61,7 @@ export class RestService {
     });
   }
 
-<<<<<<< HEAD
-  creaAsta(
-    titoloAsta: string,
-    nomeProdotto: string,
-    prezzoIniz: string,
-    oreAsta: string,
-    categoria: string,
-    descrizione: string,
-    url: string,
-    file: File | null
-  ) {
-    const formData = new FormData();
-
-    formData.append('titoloAsta', titoloAsta);
-    formData.append('nomeProdotto', nomeProdotto);
-    formData.append('prezzoIniz', prezzoIniz);
-    formData.append('oreAsta', oreAsta);
-    formData.append('categoria', categoria);
-    formData.append('descrizione', descrizione);
-    formData.append('url', url);
-
-    if (file) {
-      formData.append('image', file, file.name);
-    }
-
-    return this.http.post(`${this.apiUrl}/creaAsta`, formData);
-  }
-
-  login(email: string, password: string): Observable<any> {
-=======
   login(email: string, password: string ): Observable<any> {
->>>>>>> e21cef4573e6b0a30729ff927eb4bbf20fcc7b2d
     return this.http.post(`${this.apiUrl}/`, { email, password });
   }
 

@@ -65,8 +65,7 @@ export class AstaComponent implements OnInit {
 
   creaAsta() {
     const formData = new FormData();
-    
-    // Append other auction details
+
     formData.append('titoloAsta', this.titoloAsta);
     formData.append('nomeProdotto', this.nomeProdotto);
     formData.append('prezzoIniz', this.prezzoIniz);
@@ -74,13 +73,10 @@ export class AstaComponent implements OnInit {
     formData.append('categoria', this.categoria);
     formData.append('descrizione', this.descrizione);
 
-    // Append the image file if it exists
     if (this.imageFile) {
       formData.append('image', this.imageFile, this.imageFile.name);
-    }
 
-    // Send FormData to the backend
-    this.RestService.creaAsta(formData);
+    //this.RestService.creaAsta(formData);
   }
 
   astaClassica() {
