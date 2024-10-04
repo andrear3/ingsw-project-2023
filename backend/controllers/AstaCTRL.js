@@ -1,4 +1,5 @@
 import { Asta } from "../models/Database.js";
+import { Utente } from "../models/Database.js";
 import { Offerta } from "../models/Database.js";
 import { Sequelize, Op } from "sequelize";
 
@@ -41,10 +42,44 @@ export class AstaCTRL {
   }
 
   static async creaAsta(req) {
-    let asta = Asta.build(req.body);
-    await asta.save();
+    try {
+      const {
+        titoloAsta,
+        nomeProdotto,
+        prezzoIniz,
+        oreAsta,
+        categoria,
+        descrizione,
+      } = req.body;
 
-    console.log("Asta Saved to database.");
+      const user = await Utente.findOne({ where: { email: req.user.email } });
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      const fileUrl = req.file ? req.file.filename : null;
+      const utenteNickname = user.nickname;
+
+      const astaData = {
+        nomeBeneInVendita: nomeProdotto,
+        titolo: titoloAsta,
+        categoria: categoria,
+        tipoBeneInVendita: "articolo",
+        descrizioneAsta: descrizione,
+        prezzofinale: parseFloat(prezzoIniz),
+        dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
+        statusAsta: "inVendita",
+        url: fileUrl,
+        UtenteNickname: utenteNickname,
+      };
+
+      const asta = await Asta.create(astaData);
+      console.log("Asta saved to database:", asta);
+    } catch (error) {
+      console.error("Error saving auction to database:", error);
+      throw new Error("Could not save auction");
+    }
   }
 
   static async cercaAsta(id) {
