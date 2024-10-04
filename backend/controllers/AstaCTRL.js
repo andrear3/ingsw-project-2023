@@ -67,7 +67,7 @@ export class AstaCTRL {
         categoria: categoria,
         tipoBeneInVendita: "articolo",
         descrizioneAsta: descrizione,
-        prezzofinale: parseFloat(prezzoIniz),
+        prezzoiniziale: parseFloat(prezzoIniz),
         dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
         statusAsta: "inVendita",
         url: fileUrl,

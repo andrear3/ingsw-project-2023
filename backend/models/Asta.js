@@ -32,6 +32,9 @@ export function createModel(database) {
     },
     prezzofinale: {
       type: DataTypes.DOUBLE,
+    },
+    prezzoiniziale: {
+      type: DataTypes.DOUBLE,
       allowNull: false,
     },
     dataFineAsta: {

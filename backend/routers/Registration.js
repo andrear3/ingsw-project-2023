@@ -1,13 +1,22 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import { Utente } from "../models/Database.js"; // Adjust this import based on your actual model path
+import { Utente } from "../models/Database.js";
 
 export const registrationRouter = express.Router();
 
 registrationRouter.post("/registration", async (req, res) => {
-  console.log("Received data:", req.body); // Log received data for debugging
+  console.log("Received data:", req.body);
+
   try {
-    let utente = Utente.build(req.body);
+    const saldo = generateSaldo();
+
+    //aggiungo ai dati l'attributo saldo:
+    let utenteData = {
+      ...req.body,
+      saldo: saldo,
+    };
+
+    let utente = Utente.build(utenteData);
     await utente.save();
     res.status(201).json(utente);
   } catch (error) {
@@ -17,3 +26,9 @@ registrationRouter.post("/registration", async (req, res) => {
       .json({ message: "Error during registration", error: error.message });
   }
 });
+
+function generateSaldo() {
+  return Math.floor(Math.random() * (2500 - 500 + 1)) + 500;
+}
+
+console.log(generateSaldo());

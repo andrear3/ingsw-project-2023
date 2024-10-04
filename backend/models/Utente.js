@@ -37,6 +37,14 @@ export function createModel(database) {
       type: DataTypes.STRING(200), //stringa concatenata
       allowNull: false,
     },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    saldo: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
