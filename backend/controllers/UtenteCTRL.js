@@ -2,6 +2,7 @@ import { Utente } from "../models/Database.js";
 import { Sequelize } from "sequelize";
 
 export class UtenteCTRL {
+  //non usata??????????????????
   static async salvaUtente(
     nickname,
     nome,
@@ -13,6 +14,8 @@ export class UtenteCTRL {
     indirizzo,
     password
   ) {
+    let saldo = generateSaldo();
+
     let utente = new Utente({
       nickname: nickname,
       nome: nome,
@@ -23,6 +26,7 @@ export class UtenteCTRL {
       linkEsterni: linkEsterni,
       indirizzo: indirizzo,
       password: password,
+      saldo: saldo,
     });
     await utente.save();
   }
@@ -72,3 +76,9 @@ export class UtenteCTRL {
     }
   }
 }
+
+function generateSaldo() {
+  return Math.floor(Math.random() * (2500 - 500 + 1)) + 500;
+}
+
+console.log(generateSaldo());

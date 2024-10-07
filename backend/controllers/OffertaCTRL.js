@@ -1,35 +1,68 @@
-import { Offerta } from "../models/Database.js";
+import { Offerta, Asta, Utente } from "../models/Database.js";
 import { Op, fn, col } from "sequelize";
 
 export class OffertaCTRL {
   static async creaOfferta(valore, UtenteNickname, AstumAstaID) {
-    let nuovaOfferta = new Offerta({
-      valore: valore,
-      UtenteNickname: UtenteNickname,
-      AstumAstaID: AstumAstaID,
-    });
+    try {
+      let asta = await Asta.findOne({ where: { astaID: AstumAstaID } });
 
-    await nuovaOfferta.save();
-    console.log("Offerta Saved to database.");
+      if (!asta) {
+        console.log("Asta non trovata.");
+        return;
+      }
+
+      let utente = await Utente.findOne({
+        where: { nickname: UtenteNickname },
+      });
+
+      if (!utente) {
+        console.log("Utente non trovato.");
+        return;
+      }
+
+      if (utente.saldo < valore) {
+        console.log("Saldo insufficiente per l'offerta.");
+        console.log(`Saldo disponibile: ${utente.saldo}, Offerta: ${valore}`);
+        return;
+      }
+
+      if (valore >= asta.prezzoiniziale) {
+        let nuovaOfferta = new Offerta({
+          valore: valore,
+          UtenteNickname: UtenteNickname,
+          AstumAstaID: AstumAstaID,
+        });
+
+        await nuovaOfferta.save();
+        console.log("Offerta salvata nel database.");
+        console.log(
+          `Prezzo iniziale: ${asta.prezzoiniziale}, Offerta: ${valore}`
+        );
+      } else {
+        console.log("Offerta troppo bassa.");
+        console.log(
+          `Prezzo iniziale: ${asta.prezzoiniziale}, Offerta: ${valore}`
+        );
+      }
+    } catch (error) {
+      console.error("Errore nel creare offerta", error);
+    }
   }
 
   static async trovaOffertaMassima(ids) {
     try {
       const offerte = await Offerta.findAll({
-        attributes: [
-          'AstumAstaID', 
-          [fn('MAX', col('valore')), 'offertaMax'], 
-        ],
+        attributes: ["AstumAstaID", [fn("MAX", col("valore")), "offertaMax"]],
         where: {
           AstumAstaID: {
             [Op.in]: ids,
           },
         },
-        group: ['AstumAstaID'], 
+        group: ["AstumAstaID"],
       });
 
-      return offerte.map(offerta => ({
-        AstumAstaID: offerta.dataValues.AstumAstaID, 
+      return offerte.map((offerta) => ({
+        AstumAstaID: offerta.dataValues.AstumAstaID,
         offertaMax: offerta.dataValues.offertaMax,
       }));
     } catch (error) {
@@ -37,6 +70,4 @@ export class OffertaCTRL {
       throw error;
     }
   }
-
-
 }
