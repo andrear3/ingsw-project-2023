@@ -30,7 +30,16 @@
           />
 
           <button class="offerButton" (click)="makeOffer()">Offri</button>
+          
+       
         </div>
+        <div class="description-section">
+          <label for="descrizione">Descrizione</label>
+          <div class="description" id="description">
+            {{ asta?.descrizioneAsta }}
+          </div>
+        </div>
+        
       </div>
       <div class="row3">
         <label for="productName">Nome del prodotto:</label>
@@ -44,6 +53,7 @@
         <label for="currentOffer">Offerta attuale:</label>
         <div class="currentOffer" id="currentOffer">{{ asta?.offertaMax }}</div>
       </div>
+      
     </div>
 
     <script></script>

@@ -17,6 +17,8 @@ import {
   RouterModule,
   RouterOutlet,
 } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @Component({
   selector: 'app-homepage',
   standalone: true,
@@ -28,6 +30,7 @@ import {
     MatIconModule,
     CommonModule,
     FormsModule,
+    MatAutocompleteModule,
   ],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
@@ -37,7 +40,13 @@ export class HomepageComponent implements OnInit, OnDestroy {
   utente: Utente | null = null;
   private intervalId: any;
   private subscriptions: Subscription = new Subscription();
-
+  options: string[] = [
+    'Informatica',
+    'Videogames',
+    'Musica',
+    'Sport',
+    'Collezionismo',
+  ];
   asteFiltrate: Asta[] = [];
 
   constructor(

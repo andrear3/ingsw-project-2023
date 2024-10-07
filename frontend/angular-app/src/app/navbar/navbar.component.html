@@ -30,29 +30,8 @@
           <span class="D2">D</span>
           <span class="eals">eals</span>
         </span>
-        <form action="">
-          <label for="search"></label>
-          <input
-          class="boxSearch"
-            type="text"
-            id="search"
-            name="searchQuery"
-            placeholder="Cerca Asta..."
-          />
-        </form>
-        <input
-        class="boxCategoria"
-           type="text"
-          placeholder="Categoria"
-          aria-label="Number"
-          matInput
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete #auto="matAutocomplete">
-          @for (option of options; track option) {
-          <mat-option [value]="option">{{ option }}</mat-option>
-          }
-        </mat-autocomplete>
+       
+      
         <div class="icone">
             <button type="submit"  class="auctionIcon" (click)="openDialog()">
               <svg  xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
@@ -101,29 +80,8 @@
             <span class="eals">eals</span>
   
           </span>
-          <form action="">
-            <label for="search"></label>
-            <input
-            class="boxSearch"
-              type="text"
-              id="search"
-              name="searchQuery"
-              placeholder="Cerca Asta..."
-            />
-          </form>
-          <input
-          class="boxCategoria"
-             type="text"
-            placeholder="Categoria"
-            aria-label="Number"
-            matInput
-            [matAutocomplete]="auto"
-          />
-          <mat-autocomplete #auto="matAutocomplete">
-            @for (option of options; track option) {
-            <mat-option [value]="option">{{ option }}</mat-option>
-            }
-          </mat-autocomplete>
+          
+       
           <div class="icone">
               <button type="submit"  class="auctionIcon" (click)="onInversaButtonClick()">
                 <svg  xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">

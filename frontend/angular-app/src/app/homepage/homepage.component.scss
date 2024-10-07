@@ -87,6 +87,35 @@ body {
   .card-actions button:hover {
     background-color: #0056b3; /* Darker shade on hover */
   }
+  
+    .search-container {
+      display: flex;
+      justify-content: center;  /* Centro i campi di ricerca orizzontalmente */
+      align-items: center;
+      margin-top: 1rem;         /* Spazio tra la navbar e la search-container */
+      gap: 1rem;                /* Spazio tra i due campi */
+      z-index: 10;
+  }
+  
+
+/* Stili degli input */
+.boxSearch, .boxCategoria {
+    height: 25px;
+    border-radius: 20px;
+    padding: 5px 10px; /* Spaziatura interna per rendere il testo più leggibile */
+    text-align: left;
+    outline: none;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.boxSearch {
+    width: 200px; /* Larghezza specifica per il campo di ricerca */
+}
+
+.boxCategoria {
+    width: 150px; /* Larghezza specifica per il campo categoria */
+}
 
   @media (max-width: 600px) {
     .card-item {

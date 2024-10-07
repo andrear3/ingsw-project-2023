@@ -58,104 +58,17 @@
           <div class="boxDescrizione"></div>
         </div>
         <div class="foto">
-          <div class="boxFoto"></div>
+          <div class="boxFoto" #photoPreview ></div>
         </div>
         <div class="boxFoto-BTN">
-          <button class="modificaFoto-BTN">modifica foto</button>
+         
+          <input type="file" accept="image/*" id="upload-BTN" #uploadBtn />
         </div>
+      
       </div>
     }
 
-    <!-- Checking if showModifica is "modifica" -->
-    @else if (showModifica === "modifica") {
-      <div class="square">
-        <div class="row">
-          <div class="box-container">
-            <label for="boxNomeMod">Nome</label>
-            <div class="boxNomeMod" id="boxNomeMod">
-              <input 
-                type="text"
-                placeholder="Nome"
-                [(ngModel)]="nome"
-                name="nome"
-                required
-              />
-            </div>
-          </div>
-          <div class="box-container">
-            <label for="boxCognomeMod">Cognome</label>
-            <div class="boxCognomeMod" id="boxCognomeMod">
-              <input 
-                type="text"
-                placeholder="Cognome"
-                [(ngModel)]="cognome"
-                name="cognome"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="box-container">
-            <label for="boxNicknameMod">Nickname</label>
-            <div class="boxNicknameMod" id="boxNicknameMod">
-              <input 
-                type="text"
-                placeholder="Nickname"
-                [(ngModel)]="nickname"
-                name="nickname"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="box-container">
-            <label for="boxRegioneMod">Regione</label>
-            <div class="boxRegioneMod" id="boxRegioneMod">
-              <input 
-                type="text"
-                placeholder="Regione"
-                [(ngModel)]="regione"
-                name="regione"
-                required
-              />
-            </div>
-          </div>
-          <div class="box-container">
-            <label for="boxIndirizzoMod">Indirizzo</label>
-            <div class="boxIndirizzoMod" id="boxIndirizzoMod">
-              <input 
-                type="text"
-                placeholder="Indirizzo"
-                [(ngModel)]="indirizzo"
-                name="indirizzo"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        <div class="row-BTN">
-          <button class="salvaModProfilo-BTN" (click)="confermaModProfilo()">conferma modifiche</button>
-        </div>
-        <div class="links">
-          <label for="links">I tuoi link</label>
-          <input class="link1" type="text" placeholder="link1" [(ngModel)]="link"/>
-          <input class="link2" type="text" placeholder="link2" [(ngModel)]="link"/>
-          <input class="link3" type="text" placeholder="link3" [(ngModel)]="link"/>
-        </div>
-        <div class="descrizione">
-          <label for="descrizione">La tua descrizione</label>
-          <input class="boxDescrizione" type="text" [(ngModel)]="descrizione"/>
-        </div>
-        <div class="foto">
-          <div class="boxFoto"></div>
-        </div>
-        <div class="boxFoto-BTN">
-          <button class="modificaFoto-BTN">modifica foto</button>
-        </div>
-      </div>
-    }
+   
 
     <script>
       // Your JavaScript here

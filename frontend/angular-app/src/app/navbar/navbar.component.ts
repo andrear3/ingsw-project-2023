@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
     'Collezionismo',
   ];
   private statusSubscription: Subscription = new Subscription();
-  showUtente: string = '';
+  showUtente: string ='';
   utente: Utente | null = null;
 
   constructor(

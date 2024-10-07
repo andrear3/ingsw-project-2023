@@ -4,7 +4,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
-import { Router,RouteConfigLoadEnd, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,11 +12,13 @@ import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Utente } from '../_models/utente-model';
+import { Router,RouteConfigLoadEnd, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-modifica-profilo',
   standalone: true,
-  imports: [ NavbarComponent,
+  imports: [NavbarComponent,
     MatToolbarModule,
    MatIconModule,
    MatAutocompleteModule,
@@ -26,10 +27,10 @@ import { Utente } from '../_models/utente-model';
    CommonModule,
    FormsModule,
    RouterLink,],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  templateUrl: './modifica-profilo.component.html',
+  styleUrl: './modifica-profilo.component.scss'
 })
-export class ProfileComponent {
+export class ModificaProfiloComponent {
   email: string = '';
   nome: string = '';
   cognome: string = '';
@@ -48,9 +49,9 @@ export class ProfileComponent {
   ){}
   private statusSubscription: Subscription = new Subscription();
 
- modificaProfilo(){
-  this.router.navigate(['/modificaProfilo']);
- }
+ 
+ confermaModProfilo() {
+  this.router.navigate(['/profile']);}
 
 utente : Utente | null = null ;
 ngOnInit() {
@@ -67,7 +68,30 @@ ngOnInit() {
   );
 }
 
+@ViewChild('uploadBtn') uploadBtn!: ElementRef;
+@ViewChild('photoPreview') photoPreview!: ElementRef;
 
+ngAfterViewInit() {
+  const uploadElement = this.uploadBtn.nativeElement as HTMLInputElement;
+  const previewElement = this.photoPreview.nativeElement as HTMLElement;
 
+  uploadElement.addEventListener('change', (event: any) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        previewElement.style.backgroundImage = `url(${e.target.result})`;
+        this.url = e.target.result; // Save base64 string of the image
+      };
+
+      this.imageFile = file; // Store the file for uploading
+      reader.readAsDataURL(file);
+    } else {
+      previewElement.style.backgroundImage = '';
+      this.imageFile = null;
+    }
+  });
+}
 
 }
