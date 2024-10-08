@@ -38,9 +38,9 @@ export class ProfileComponent {
   indirizzo: string = '';
   link: string = '';
   descrizione: string = '';
-  showModifica: string='!modifica';
   url:string='';
   imageFile: any;
+  saldo: number | undefined;
   constructor(
     private RestService: RestService,
     private AuthService: AuthService,

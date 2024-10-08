@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink ,Router} from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 
@@ -49,7 +49,8 @@ export class AstaComponent implements OnInit {
 
   constructor(
     private RestService: RestService,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -81,6 +82,7 @@ export class AstaComponent implements OnInit {
       response => console.log('Auction created successfully!', response),
       error => console.error('Error creating auction:', error)
     );
+    this.router.navigate(['/homepage']);
   }
   
 

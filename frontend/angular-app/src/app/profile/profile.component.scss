@@ -31,7 +31,7 @@
     margin-bottom: 10px; /* Spazio tra le righe */
    
 }
-.boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxRegione, .boxIndirizzo {
+.boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxRegione, .boxIndirizzo,.boxSaldo {
     width: 250px; 
     height: 25px; /* Dimensioni aumentate per una visualizzazione migliore */
     border: 2px solid #727272aa; /* Corretto il formato del bordo */
@@ -51,7 +51,8 @@
 .boxPassword label,
 .boxNickname label,
 .boxRegione label,
-.boxIndirizzo label {
+.boxIndirizzo label,
+.boxSaldo label {
     display: block;
     font-size: 14px;
     color: #727272aa; /* Colore del testo delle etichette */
