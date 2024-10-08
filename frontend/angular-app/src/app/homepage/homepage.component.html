@@ -37,8 +37,8 @@
       
 
       <div class="card-container">
-        <!-- Using @for directive for asteFiltrate and handling null values -->
-        @for (asta of asteFiltrate; track asta) {
+
+        @for (asta of asteFiltrate; track asteFiltrate) {
           <mat-card 
             (click)="navigateToviewAsta(asta)" 
             class="card"
@@ -65,7 +65,7 @@
                     <strong>Offerta corrente: {{ asta?.offertaMax || 0 }}€</strong>
                   </p>
                   <p class="danger">
-                    <strong>Tempo restante: {{ getFormattedTime(asta) || 'N/A' }}</strong>
+                    <strong>Tempo restante: {{ getFormattedTime(asta) }}</strong>
                   </p>
                 </div>
               </div>
