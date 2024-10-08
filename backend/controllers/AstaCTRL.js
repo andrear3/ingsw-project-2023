@@ -1,4 +1,5 @@
 import { OffertaCTRL } from "./OffertaCTRL.js";
+import { UtenteCTRL } from "./UtenteCTRL.js";
 import { Asta } from "../models/Database.js";
 import { Utente } from "../models/Database.js";
 import { Offerta } from "../models/Database.js";
@@ -181,19 +182,29 @@ export class AstaCTRL {
             asta.astaID
           );
 
-          asta.statusAsta = "venduto";
-          await asta.save();
+          if (offertaMassima) {
+            // Destructure
+            const { offertaMax, UtenteNickname } = offertaMassima;
 
-          console.log(
-            `L'asta ID ${asta.astaID} è scaduta e il suo stato è aggiornato a "venduto".`
-          );
-
-          if (offertaMassima !== null) {
-            console.log(
-              `L'offerta massima per l'asta ID ${asta.astaID} è: ${offertaMassima}€`
-            );
+            if (offertaMax > 0) {
+              asta.statusAsta = "venduto";
+              asta.prezzofinale = offertaMax;
+              await UtenteCTRL.diminuisciSaldo(UtenteNickname, offertaMax);
+              await asta.save();
+              console.log(
+                `Asta venduta da ${UtenteNickname} con un prezzo finale di ${offertaMax}`
+              );
+            } else if (offertaMax === 0) {
+              asta.statusAsta = "nonVenduto";
+              asta.prezzofinale = 0;
+              await asta.save();
+              console.log(`Asta non venduta. Nessuna offerta valida.`);
+            }
           } else {
-            console.log(`Non ci sono offerte per l'asta ID ${asta.astaID}.`);
+            asta.statusAsta = "nonVenduto";
+            asta.prezzoFinale = 0;
+            await asta.save();
+            console.log(`Asta non venduta. Nessuna offerta disponibile.`);
           }
         }
       }
@@ -203,8 +214,15 @@ export class AstaCTRL {
   }
 
   static avviaControlloScadenzaAste() {
-    setInterval(() => {
-      this.controllaScadenzaAste();
-    }, 1000);
+    setInterval(async () => {
+      try {
+        await this.controllaScadenzaAste();
+      } catch (error) {
+        console.error(
+          "Errore durante il controllo delle scadenze delle aste:",
+          error
+        );
+      }
+    }, 1000); // Check every second
   }
 }
