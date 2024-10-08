@@ -50,7 +50,7 @@ const PORT = 3000;
 
 //STAMPA DELLE ASTE ATTIVE
 //setInterval(AstaCTRL.recuperaAsteAttive, 10000);
-
+AstaCTRL.avviaControlloScadenzaAste();
 //APP ROUTES
 
 app.get("/test", (req, res) => {
