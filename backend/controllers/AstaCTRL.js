@@ -1,3 +1,4 @@
+import { OffertaCTRL } from "./OffertaCTRL.js";
 import { Asta } from "../models/Database.js";
 import { Utente } from "../models/Database.js";
 import { Offerta } from "../models/Database.js";
@@ -176,12 +177,24 @@ export class AstaCTRL {
         let dataFineAsta = new Date(asta.dataFineAsta);
 
         if (tempoCorrente >= dataFineAsta && asta.statusAsta !== "venduto") {
+          const offertaMassima = await OffertaCTRL.trovaOffertaMassimaPerAsta(
+            asta.astaID
+          );
+
           asta.statusAsta = "venduto";
           await asta.save();
 
           console.log(
             `L'asta ID ${asta.astaID} è scaduta e il suo stato è aggiornato a "venduto".`
           );
+
+          if (offertaMassima !== null) {
+            console.log(
+              `L'offerta massima per l'asta ID ${asta.astaID} è: ${offertaMassima}€`
+            );
+          } else {
+            console.log(`Non ci sono offerte per l'asta ID ${asta.astaID}.`);
+          }
         }
       }
     } catch (error) {

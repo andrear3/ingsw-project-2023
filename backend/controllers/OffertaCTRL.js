@@ -70,4 +70,18 @@ export class OffertaCTRL {
       throw error;
     }
   }
+
+  static async trovaOffertaMassimaPerAsta(AstumAstaID) {
+    try {
+      const offerte = await Offerta.findOne({
+        attributes: [[fn("MAX", col("valore")), "offertaMax"]],
+        where: { AstumAstaID: AstumAstaID },
+      });
+
+      return offerte ? offerte.dataValues.offertaMax : null;
+    } catch (error) {
+      console.error("Error finding maximum offer for auction:", error);
+      throw error;
+    }
+  }
 }
