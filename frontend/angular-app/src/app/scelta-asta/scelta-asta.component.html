@@ -1,25 +1,21 @@
 <!DOCTYPE html>
-<html>
-    <head>
-            
-        <title>sceltaAsta</title> 
-        <link rel="stylesheet"  href="scelta-asta.component.scss">
-        <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap">
-    </head>
-   
-    <body>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scelta Asta</title>
+    <link rel="stylesheet" href="scelta-asta.component.scss">
+    <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap" rel="stylesheet">
+</head>
+<body>
 
-
-     <div class="background">
-        
+    <div class="background">
         <label>Tipo Asta</label>
-
-        <div class="buttonConteiner">
-           
-        <button class="classica-BTN" (click)="onClassicaButtonClick()">classica</button>
-        <button class="inversa-BTN"(click)="onRibassoButtonClick()">al ribasso</button>
-     </div>
+        <div class="buttonContainer">
+            <button class="classica-BTN" onclick="onClassicaButtonClick()">Classica</button>
+            <button class="inversa-BTN" onclick="onRibassoButtonClick()">Al Ribasso</button>
+        </div>
     </div>
 
-    </body>
+</body>
 </html>

@@ -1,36 +1,46 @@
-.background{
-    
-    height:100px;
-    width: 200px;
-    display: flex; /* Usa Flexbox per il layout */
-    flex-direction: column; /* Allinea gli elementi in colonna */
-    align-items: center; /* Centra orizzontalmente gli elementi */
-    justify-content: space-between; /* Distribuisce lo spazio tra gli elementi */
-    text-align: center; /* Centra il testo nella label */
-    margin: 0 auto; /* Centra il div .background orizzontalmente nel suo container */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
+body {
+    background-color: #ffffff;
+}
 
+.background {
+    position: fixed; /* Posiziona il popup in modo fisso */
+    top: 80px; /* Posiziona il componente 20px dall'alto della pagina */
+    left: 50%; /* Allinea orizzontalmente al 50% */
+    transform: translateX(-50%); /* Centra orizzontalmente il popup */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Distribuisce lo spazio tra gli elementi */
+    text-align: center;
+    background-color: white; /* Sfondo bianco per l'effetto popup */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Aggiungi ombra */
+    border-radius: 10px; /* Bordi arrotondati */
+    padding: 20px; /* Aggiungi padding per spazio interno */
+}
 
-.background label{
+.background label {
     color: #727272aa;
     margin-bottom: 20px;
 }
+
 .buttonContainer {
     display: flex;
-    justify-content: center; /* Centra i bottoni orizzontalmente */
-  
+    justify-content: center;
+    gap: 10px; /* Spazio tra i bottoni */
 }
 
-.classica-BTN,.inversa-BTN{
-border-radius:20px ;
-background-color:#22A2EA ;
-color: white;
-color: white;
-padding: 5px 20px; /* Aggiunto padding per migliorare l'aspetto dei bottoni */
-border: none; /* Rimuove i bordi di default dei bottoni */
-cursor: pointer; /* Cambia il cursore per indicare che è cliccabile */
-margin-bottom: 30px;
-margin-left: 10px;
-
+.classica-BTN, .inversa-BTN {
+    border-radius: 20px;
+    background-color: #22A2EA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
 }
