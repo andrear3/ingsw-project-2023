@@ -10,14 +10,31 @@
       <app-navbar></app-navbar>
     </nav>
     <main>
-      <!-- Search input for filtering -->
-      <div class="search-bar">
+     
+     
+      <div class="search-container">
         <input
-          type="text"
-          placeholder="Search auctions..."
-          (input)="filterResults($event)"
+            class="boxSearch"
+            type="text"
+            placeholder="Search auctions..."
+            (input)="filterResults($event)"
+            aria-label="Number"
+            matInput
         />
-      </div>
+        <input
+            class="boxCategoria"
+            type="text"
+            placeholder="Categoria"
+            aria-label="Number"
+            matInput
+            [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+        </mat-autocomplete>
+    </div>
+     
+      
 
       <div class="card-container">
         <!-- Using @for directive for asteFiltrate and handling null values -->

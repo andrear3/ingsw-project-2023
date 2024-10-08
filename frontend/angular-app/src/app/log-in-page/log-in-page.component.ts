@@ -67,8 +67,10 @@ export class LogInPageComponent {
               // Controllo del tipo di utente e impostazione
               if (this.tipo === 'venditore') {
                 await this.setTipoUtente('venditore');
+                
               } else if (this.tipo === 'compratore') {
                 await this.setTipoUtente('compratore');
+                
               }
               resolve(); // Risolvi la Promise dopo che tutto è completato
             } catch (err) {

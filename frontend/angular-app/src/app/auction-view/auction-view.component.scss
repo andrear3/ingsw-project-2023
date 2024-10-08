@@ -1,6 +1,6 @@
 .square {
     width: 95%;
-    height: 85%;
+    height: 95%;
     border: 2px solid ie-hex-str($color: #AAAA);
     border-radius: 20px;
     margin: 20px auto;
@@ -36,7 +36,7 @@
 .row2 {
     //background-color: #22A2EA;
     padding: 1% 1% 1%; /* Padding uniforme su tutti i lati */
-    height: 85%; 
+    height: 100%; 
     width: 50%;
     /* Altezza maggiore per riempire lo spazio */
     display: flex;
@@ -66,7 +66,7 @@
     min-height: 30px; /* Altezza minima per evitare che le caselle diventino troppo piccole */
     border: 2px solid #727272aa;
     border-radius: 20px;
-    margin-bottom: 5%; /* Spazio tra le caselle */
+    margin-bottom: 15%; /* Spazio tra le caselle */
     
     background-color: #ffffff;
     box-sizing: border-box;
@@ -86,7 +86,7 @@
 .photoAuctionContainer{
     position: relative;
     width: 100%; /* Imposta il contenitore per occupare il 100% della larghezza disponibile */
-    height: 450px; /* Imposta un'altezza fissa per il contenitore, puoi cambiare questo valore */
+    height: 600px; /* Imposta un'altezza fissa per il contenitore, puoi cambiare questo valore */
     border: 2px solid #AAAA; /* Correggi il colore del bordo */
     border-radius: 5px;
     margin-bottom: 2%;
@@ -130,18 +130,53 @@
     position: relative;
     width: 40%; /* Utilizza tutta la larghezza disponibile */
     height: 100%; /* Altezza automatica per adattarsi al contenuto */
-    min-height: 100px; /* Altezza minima per assicurare visibilità */
-    max-height: 200px; /* Imposta un'altezza massima per evitare che diventi troppo grande */
+    min-height: 80px; /* Altezza minima per assicurare visibilità */
+    max-height: 120px; /* Imposta un'altezza massima per evitare che diventi troppo grande */
     border: 2px solid ie-hex-str($color: #AAAA);
     border-radius: 5px;
-    margin-bottom: 2%;
     box-sizing: border-box;
     left: 80%; 
-    margin-bottom: 65%;
+    margin-bottom: 140%;
+    min-width: 70px;
 }
 .auction-image {
 width: 100%; /* L'immagine occupa tutta la larghezza del contenitore */
     height: 100%; /* L'immagine occupa tutta l'altezza del contenitore */
     object-fit: cover; /* L'immagine riempie il contenitore mantenendo le proporzioni */
     display: block; /* Evita spazi vuoti intorno all'immagine */
+}
+.description-section {
+    width: 90vw; /* Occupare l'intera larghezza della finestra */
+    height: 20%;
+    margin-left: 0; /* Assicurati che parta dal bordo sinistro */
+    margin-top: 3rem; /* Sposta la descrizione leggermente più in basso */
+    padding-left: 3rem; /* Spazio interno dal lato sinistro */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding-bottom: 3rem; /* Aggiungi uno spazio inferiore per evitare sovrapposizione */
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%; /* Occupa la larghezza del contenitore */
+    min-height: 30px;
+    border-radius: 20px;
+    background-color: transparent; /* Oppure aggiungi un colore se necessario */
+    box-sizing: border-box;
+    padding: 10px; /* Per evitare il contatto con i bordi */
+    text-align: left;
+    margin-top: 1%;
+    margin-bottom: 2rem; 
+}
+
+.description label {
+    font-size: 14px;
+    color: #000000aa;
+    margin-bottom: 5px;
+    text-align: left;
 }

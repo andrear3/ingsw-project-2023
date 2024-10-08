@@ -44,12 +44,12 @@ export class DashboardComponent implements OnInit {
     this.callPostDashboard();
 
     //SET TIPO UTENTE
-    this.restService.setTipoUtente('compratore').subscribe({
+    /*this.restService.setTipoUtente('').subscribe({
       next: (response) => {},
       error: (err) => {
         console.error('Error', err);
       },
-    });
+    });*/
   }
 
   callPostDashboard() {
