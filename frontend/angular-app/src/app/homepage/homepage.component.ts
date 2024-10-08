@@ -11,14 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../_services/auth.service';
 import { NavbarComponent } from '../navbar/navbar.component';
-import {
-  Router,
-  RouterLink,
-  RouterModule,
-  RouterOutlet,
-} from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 @Component({
   selector: 'app-homepage',
   standalone: true,
@@ -40,13 +35,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   utente: Utente | null = null;
   private intervalId: any;
   private subscriptions: Subscription = new Subscription();
-  options: string[] = [
-    'Informatica',
-    'Videogames',
-    'Musica',
-    'Sport',
-    'Collezionismo',
-  ];
+  options: string[] = ['Informatica', 'Videogames', 'Musica', 'Sport', 'Collezionismo'];
   asteFiltrate: Asta[] = [];
 
   constructor(
@@ -61,17 +50,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
       this.restService.getAsta().subscribe({
         next: (response: { aste: Asta[]; userInfo: Utente }) => {
           this.aste = response.aste;
-          this.asteFiltrate = this.aste;
+          this.asteFiltrate = [...this.aste];
           this.utente = response.userInfo;
-
-          this.startDecrementTimer();
-          console.log(this.aste[0]?.statusAsta);
-          console.log(this.utente?.tipo);
-
-          //popolo i campi di utente
           this.authService.setUtente(this.utente);
-          //notifico che utente è stato popolato
           this.authService.setStatus(true);
+          this.startDecrementTimer();
         },
         error: (err: any) => {
           console.error('Error fetching data:', err);
@@ -92,14 +75,23 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   decrement() {
-    this.aste = this.aste.map((asta) => ({
-      ...asta,
-      timeLeft: Math.max(asta.timeLeft - 1, 0),
-    }));
+    let activeAuctions = false;
+
+    this.asteFiltrate = this.asteFiltrate.map((data) => {
+      if (data.timeLeft > 0) {
+        activeAuctions = true;
+        return { ...data, timeLeft: Math.max(data.timeLeft - 1, 0) };
+      }
+      return data;
+    });
+
+    if (!activeAuctions && this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
-  getFormattedTime(asta: Asta): string {
-    return this.secondsToDhms(asta.timeLeft);
+  getFormattedTime(data: Asta): string {
+    return this.secondsToDhms(data.timeLeft);
   }
 
   secondsToDhms(seconds: number): string {
@@ -115,6 +107,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
     return dDisplay + hDisplay + mDisplay + sDisplay.trim();
   }
+
   navigateToviewAsta(asta: Asta) {
     console.log(asta);
     this.router.navigate(['/auctionView', asta]);
@@ -122,15 +115,15 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   filterResults(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    const searchText = inputElement?.value || '';
-  
+    const searchText = inputElement?.value?.toLowerCase() || '';
+
     if (!searchText) {
-      this.asteFiltrate = this.aste;
+      this.asteFiltrate = [...this.aste];
       return;
     }
-  
+
     this.asteFiltrate = this.aste.filter((asta) =>
-      asta?.nomeBeneInVendita?.toLowerCase().includes(searchText.toLowerCase())
+      asta?.nomeBeneInVendita?.toLowerCase().includes(searchText)
     );
   }
 }
