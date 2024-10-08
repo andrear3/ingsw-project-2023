@@ -166,4 +166,32 @@ export class AstaCTRL {
       throw error;
     }
   }
+
+  static async controllaScadenzaAste() {
+    try {
+      const tutteLeAste = await Asta.findAll();
+      const tempoCorrente = new Date();
+
+      for (let asta of tutteLeAste) {
+        let dataFineAsta = new Date(asta.dataFineAsta);
+
+        if (tempoCorrente >= dataFineAsta && asta.statusAsta !== "venduto") {
+          asta.statusAsta = "venduto";
+          await asta.save();
+
+          console.log(
+            `L'asta ID ${asta.astaID} è scaduta e il suo stato è aggiornato a "venduto".`
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Errore nel controllare la scadenza delle aste:", error);
+    }
+  }
+
+  static avviaControlloScadenzaAste() {
+    setInterval(() => {
+      this.controllaScadenzaAste();
+    }, 1000);
+  }
 }
