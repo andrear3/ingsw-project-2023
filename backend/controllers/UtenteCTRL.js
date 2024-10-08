@@ -75,6 +75,32 @@ export class UtenteCTRL {
       console.error("Error:", error.message);
     }
   }
+
+  static async diminuisciSaldo(nickname, amount) {
+    try {
+      const user = await Utente.findOne({
+        where: { nickname },
+      });
+
+      if (!user) {
+        throw new Error("Utente non trovato");
+      }
+
+      if (user.saldo < amount) {
+        throw new Error("Saldo insufficiente");
+      }
+
+      user.saldo -= amount;
+
+      await user.save();
+
+      console.log(`Il saldo di ${nickname} è stato aggiornato a ${user.saldo}`); // "The balance of [nickname] has been updated to [new balance]"
+      return user.saldo;
+    } catch (error) {
+      console.error("Errore durante la detrazione del saldo:", error.message); // "Error during balance deduction:"
+      throw error;
+    }
+  }
 }
 
 function generateSaldo() {

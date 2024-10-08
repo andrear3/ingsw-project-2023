@@ -70,15 +70,24 @@ export class OffertaCTRL {
       throw error;
     }
   }
-
+  
   static async trovaOffertaMassimaPerAsta(AstumAstaID) {
     try {
       const offerte = await Offerta.findOne({
-        attributes: [[fn("MAX", col("valore")), "offertaMax"]],
+        attributes: [
+          [fn("MAX", col("valore")), "offertaMax"],
+          "UtenteNickname", // Directly select UtenteNickname from Offerta
+        ],
         where: { AstumAstaID: AstumAstaID },
+        group: ["UtenteNickname"], // Group by UtenteNickname to avoid aggregation issues
       });
 
-      return offerte ? offerte.dataValues.offertaMax : null;
+      return offerte
+        ? {
+            offertaMax: offerte.dataValues.offertaMax,
+            UtenteNickname: offerte.dataValues.UtenteNickname,
+          }
+        : null;
     } catch (error) {
       console.error("Error finding maximum offer for auction:", error);
       throw error;
