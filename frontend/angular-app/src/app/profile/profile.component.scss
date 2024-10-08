@@ -14,7 +14,7 @@
 
 }
 .box-container {
-    
+
     color: #727272aa; /* Colore del testo delle etichette */
     display: flex;
     flex-direction: column; /* Disporre l'etichetta sopra il box */
@@ -127,20 +127,20 @@
 }
 .row-BTN{
     display: flex;
-    justify-content: space-between; /* Disporre le box orizzontalmente con spazio tra di loro */
-    width: 100%; /* Assicurati che occupi tutta la larghezza disponibile */
-    max-width: 450px; /* Limita la larghezza massima per evitare che le box diventino troppo larghe */
+    justify-content: space-between; 
+    width: 100%; 
+    max-width: 450px; 
     max-height: 200px;
-    margin-top: auto; /* Spinge i bottoni verso il fondo del contenitore */
+    margin-top: auto; 
     position: absolute;
-    bottom: 20px; /* Distanza dal bordo inferiore */
-    left: 58%; /* Distanza dal bordo sinistro */
-}
+    bottom: 20px; 
+    left: 58%; 
+} 
 .links{
-    color: #727272aa; /* Colore del testo delle etichette */
+    color: #727272aa; 
     display: flex;
-    flex-direction: column; /* Disporre l'etichetta sopra il box */
-    align-items: first baseline; /* Allinea l'etichetta a sinistra */
+    flex-direction: column; 
+    align-items: first baseline;
     margin-left: 130px;
     margin-top: 110px;
 
@@ -148,59 +148,58 @@
 }
 .link1,.link2,.link3 {
     width: 250px; 
-    height: 25px; /* Dimensioni aumentate per una visualizzazione migliore */
-    border: 2px solid #727272aa; /* Corretto il formato del bordo */
-    border-radius: 20px; /* Per fare un cerchio; usa px per bordi arrotondati se non vuoi cerchi */
-    margin-top: 20px; /* Spazio intorno alla forma */
-    background-color: #ffffff; /* Aggiunto colore di sfondo per renderlo visibile */
+    height: 25px; 
+    border: 2px solid #727272aa;
+    border-radius: 20px; 
+    margin-top: 20px; 
+    background-color: #ffffff;
     box-sizing: border-box; 
     
 }.links label{
     display: block;
     font-size: 14px;
-    color: #727272aa; /* Colore del testo delle etichette */
+    color: #727272aa; 
     position: relative;
     text-align: left; 
 }
 .link1 input,.link2 input,.link3 input{
     width: 250px; 
-    height: 25px; /* Dimensioni aumentate per una visualizzazione migliore */
+    height: 25px; 
     border-radius: 20px; 
-    border: 2px solid #727272aa; /* formato del bordo *//* Per fare un cerchio; usa px per bordi arrotondati se non vuoi cerchi */
+    border: 2px solid #727272aa; 
     margin-top: 20px; 
     background-color: #ffffff; 
     box-sizing: border-box; 
     
 }
 .descrizione{
-    color: #727272aa; /* Colore del testo delle etichette */
+    color: #727272aa; 
     display: flex;
-    flex-direction: column; /* Disporre l'etichetta sopra il box */
-    align-items: first baseline; /* Allinea l'etichetta a sinistra */
+    flex-direction: column; 
+    align-items: first baseline; 
     margin-top:-160px;
     margin-right: 800px;
 }
 .boxDescrizione{
     width: 550px; 
-    height: 250px; /* Dimensioni aumentate per una visualizzazione migliore */
+    height: 250px; 
     border: 2px solid #727272aa; 
     border-radius: 20px; 
-    margin-top: 20px; /* Spazio intorno alla forma */
+    margin-top: 20px;
     background-color: #ffffff; 
     box-sizing: border-box; 
 }
 .descrizione label{
     display: block;
     font-size: 14px;
-    color: #727272aa; /* Colore del testo delle etichette */
+    color: #727272aa; 
     position: relative;
     text-align: left; 
 }
 .foto{
   
     display: flex;
-    flex-direction: column; /* Disporre l'etichetta sopra il box */
-    display: flex;
+    flex-direction: column; 
     flex-direction: column;
     align-items: center;
      margin-right: 1100px;
@@ -219,8 +218,8 @@
 }
 .boxFoto-BTN{
     display: flex;
-    justify-content: space-between; /* Disporre le box orizzontalmente con spazio tra di loro */
-    width: 100%; /* Assicurati che occupi tutta la larghezza disponibile */
+    justify-content: space-between; 
+    width: 100%; 
     position: absolute;
     margin-left: 600px;
     margin-top: 100px;
