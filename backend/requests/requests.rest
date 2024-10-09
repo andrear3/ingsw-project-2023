@@ -20,3 +20,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpa2tvd
 
 
 ###
+//TESTING ASTA AL RIBASSO
+
+POST http://localhost:3000/creaAstaRibasso
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpa2tvd29tYW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE3MjYyMzUzNzZ9.ZhZG8fzk1hcmjR8KHa691m0mXz5qACqyXGIKJC9QpJQ
+Content-Type: application/json
+
+{
+    "titoloAsta": "Asta di Test",
+    "nomeProdotto": "Laptop Gaming",
+    "prezzoIniz": "1000",
+    "oreAsta": "48",
+    "categoria": "Elettronica",
+    "descrizione": "Laptop da gaming con GPU potente",
+    "prezzoMinSegreto": "800",
+    "decrementoTimer": "5",
+    "valoreDecremento": "50"
+}
+
+###

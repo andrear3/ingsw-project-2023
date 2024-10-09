@@ -1,6 +1,7 @@
 import { OffertaCTRL } from "./OffertaCTRL.js";
 import { UtenteCTRL } from "./UtenteCTRL.js";
 import { Asta } from "../models/Database.js";
+import { AstaAlRibasso } from "../models/Database.js";
 import { Utente } from "../models/Database.js";
 import { Offerta } from "../models/Database.js";
 import { Sequelize, Op } from "sequelize";
@@ -237,5 +238,74 @@ export class AstaCTRL {
         );
       }
     }, 1000); // Check every second
+  }
+
+  //ASTA AL RIBASSO
+  static async creaAstaRibasso(req) {
+    const transaction = await Asta.sequelize.transaction();
+
+    try {
+      const {
+        titoloAsta,
+        nomeProdotto,
+        prezzoIniz,
+        oreAsta,
+        categoria,
+        descrizione,
+        prezzoMinSegreto,
+        decrementoTimer,
+        valoreDecremento,
+      } = req.body;
+
+      const user = await Utente.findOne({ where: { email: req.user.email } });
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      const fileUrl = req.file ? req.file.filename : null;
+      const utenteNickname = user.nickname;
+
+      const astaData = {
+        nomeBeneInVendita: nomeProdotto,
+        titolo: titoloAsta,
+        categoria: categoria,
+        tipoBeneInVendita: "articolo",
+        descrizioneAsta: descrizione,
+        prezzoiniziale: parseFloat(prezzoIniz),
+        dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
+        statusAsta: "inVendita",
+        url: fileUrl,
+        UtenteNickname: utenteNickname,
+      };
+
+      // Create auction and log the result
+      const asta = await Asta.create(astaData, { transaction });
+      console.log("Asta created:", asta); // Log the created auction
+
+      const astaAlRibassoData = {
+        prezzoMinSegreto: parseFloat(prezzoMinSegreto),
+        decrementoTimer: parseInt(decrementoTimer, 10),
+        valoreDecremento: parseFloat(valoreDecremento),
+        AstumAstaID: asta.astaID, // Ensure this is set correctly
+      };
+
+      // Log the data to be used for AstaAlRibasso
+      console.log("AstaAlRibasso data:", astaAlRibassoData);
+
+      await AstaAlRibasso.create(astaAlRibassoData, { transaction });
+
+      await transaction.commit();
+
+      console.log("Asta con ribasso creata con successo:", asta);
+      return asta;
+    } catch (error) {
+      await transaction.rollback();
+      console.error(
+        "Errore durante la creazione dell'asta con ribasso:",
+        error
+      );
+      throw error;
+    }
   }
 }
