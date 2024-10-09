@@ -29,7 +29,6 @@ Asta.Utente = Asta.belongsTo(Utente);
 Utente.Offerta = Utente.hasMany(Offerta);
 Offerta.Utente = Offerta.belongsTo(Utente);
 
-
 Asta.Offerta = Asta.hasMany(Offerta);
 Offerta.Asta = Offerta.belongsTo(Asta);
 
