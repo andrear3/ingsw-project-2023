@@ -108,7 +108,7 @@ export class AstaComponent implements OnInit {
       formData.append('url', this.url); // If no file, add the image URL or base64
     }
   
-    this.RestService.creaAsta(formData).subscribe(
+    this.RestService.creaAstaRibasso(formData).subscribe(
       response => console.log('Auction created successfully!', response),
       error => console.error('Error creating auction:', error)
     );
