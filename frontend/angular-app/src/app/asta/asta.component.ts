@@ -44,6 +44,10 @@ export class AstaComponent implements OnInit {
   descrizione: string = '';
   url: string = '';
   imageFile: File | null = null; // Store the image file
+  //astaRibasso
+  prezzoMinSegreto:string='';
+  decrementoTimer:string='';
+  valoreDecremento:string='';
 
   public tipoAsta: string = 'inversa';
 
@@ -62,7 +66,7 @@ export class AstaComponent implements OnInit {
   }
 
   // Update the creaAsta method to send FormData directly
-  creaAsta() {
+  creaAstaClassica() {
     const formData = new FormData();
   
     formData.append('titoloAsta', this.titoloAsta || ''); // Ensure values are not empty
@@ -85,6 +89,54 @@ export class AstaComponent implements OnInit {
     this.router.navigate(['/homepage']);
   }
   
+  creaAstaAlRibasso() {
+    const formData = new FormData();
+  
+    formData.append('titoloAsta', this.titoloAsta || ''); // Ensure values are not empty
+    formData.append('nomeProdotto', this.nomeProdotto || '');
+    formData.append('prezzoIniz', this.prezzoIniz || '');
+    formData.append('oreAsta', this.oreAsta || '');
+    formData.append('prezzoMinSegreto', this.prezzoMinSegreto || '');
+    formData.append('decrementoTimer', this.decrementoTimer || '');
+    formData.append('valoreDecremento', this.valoreDecremento || '');
+    formData.append('categoria', this.categoria || '');
+    formData.append('descrizione', this.descrizione || '');
+  
+    if (this.imageFile) {
+      formData.append('image', this.imageFile, this.imageFile.name);
+    } else if (this.url) {
+      formData.append('url', this.url); // If no file, add the image URL or base64
+    }
+  
+    this.RestService.creaAsta(formData).subscribe(
+      response => console.log('Auction created successfully!', response),
+      error => console.error('Error creating auction:', error)
+    );
+    this.router.navigate(['/homepage']);
+  }
+
+  creaAstaInversa() {
+    const formData = new FormData();
+  
+    formData.append('titoloAsta', this.titoloAsta || ''); // Ensure values are not empty
+    formData.append('nomeProdotto', this.nomeProdotto || '');
+    formData.append('prezzoIniz', this.prezzoIniz || '');
+    formData.append('oreAsta', this.oreAsta || '');
+    formData.append('categoria', this.categoria || '');
+    formData.append('descrizione', this.descrizione || '');
+  
+    if (this.imageFile) {
+      formData.append('image', this.imageFile, this.imageFile.name);
+    } else if (this.url) {
+      formData.append('url', this.url); // If no file, add the image URL or base64
+    }
+  
+    this.RestService.creaAsta(formData).subscribe(
+      response => console.log('Auction created successfully!', response),
+      error => console.error('Error creating auction:', error)
+    );
+    this.router.navigate(['/homepage']);
+  }
 
   astaClassica() {
     this.tipoAsta = 'classica';

@@ -137,4 +137,37 @@ export class RestService {
 
     return this.http.post(url, { nickname }, httpOptions);
   }
+
+
+  editProfile(
+    nome: string,
+    cognome: string,
+   
+    nickname: string,
+    regione: string,
+    indirizzo: string,
+    url:string,
+    descrizione:string,
+    link1:string,
+    link2:string,
+    link3:string,
+  ) {
+    return this.http.post(`${this.apiUrl}/editprofile`, {
+      nome,
+      cognome,
+      nickname,
+      regione,
+      indirizzo,
+      url,
+      descrizione,
+      link1,
+      link2,
+      link3,
+    });
+  }
+
+
+
+
+  
 }

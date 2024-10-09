@@ -37,18 +37,21 @@ export class ModificaProfiloComponent {
   nickname: string = '';
   regione: string = '';
   indirizzo: string = '';
-  link: string = '';
+  link1: string = '';
+  link2: string = '';
+  link3: string = '';
   descrizione: string = '';
-  showModifica: string='!modifica';
+  
   url:string='';
   imageFile: any;
   constructor(
     private RestService: RestService,
     private AuthService: AuthService,
-    private router: Router
+    private router: Router,
+    private restApiService: RestService
   ){}
   private statusSubscription: Subscription = new Subscription();
-
+  
  
  confermaModProfilo() {
   this.router.navigate(['/profile']);}
@@ -66,6 +69,31 @@ ngOnInit() {
         }
     }
   );
+}
+
+
+editProfile(){
+  this.restApiService.editProfile(
+    this.nome,
+    this.cognome,
+    this.nickname,
+    this.regione,
+    this.indirizzo,
+    this.url,
+    this.descrizione,
+    this.link1,
+    this.link2,
+    this.link3,
+  ).subscribe(
+    (response) => {
+      console.log('modifica effettuata:', response);
+    },
+    (error) => {
+      console.error('modifica fallita:', error);
+    }
+  );
+this.confermaModProfilo();
+
 }
 
 @ViewChild('uploadBtn') uploadBtn!: ElementRef;

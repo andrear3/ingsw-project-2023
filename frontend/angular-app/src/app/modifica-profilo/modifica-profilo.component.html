@@ -24,7 +24,7 @@
             <div class="boxNomeMod" id="boxNomeMod">
               <input 
                 type="text"
-                placeholder="Nome"
+                placeholder="{{ utente?.nome }}"
                 [(ngModel)]="nome"
                 name="nome"
                 required
@@ -36,7 +36,7 @@
             <div class="boxCognomeMod" id="boxCognomeMod">
               <input 
                 type="text"
-                placeholder="Cognome"
+                placeholder="{{ utente?.cognome }}"
                 [(ngModel)]="cognome"
                 name="cognome"
                 required
@@ -50,7 +50,7 @@
             <div class="boxNicknameMod" id="boxNicknameMod">
               <input 
                 type="text"
-                placeholder="Nickname"
+                placeholder="{{ utente?.nickname }}"
                 [(ngModel)]="nickname"
                 name="nickname"
                 required
@@ -64,7 +64,7 @@
             <div class="boxRegioneMod" id="boxRegioneMod">
               <input 
                 type="text"
-                placeholder="Regione"
+                placeholder="{{ utente?.regione }}"
                 [(ngModel)]="regione"
                 name="regione"
                 required
@@ -76,7 +76,7 @@
             <div class="boxIndirizzoMod" id="boxIndirizzoMod">
               <input 
                 type="text"
-                placeholder="Indirizzo"
+                placeholder="{{ utente?.indirizzo }}"
                 [(ngModel)]="indirizzo"
                 name="indirizzo"
                 required
@@ -85,13 +85,13 @@
           </div>
         </div>
         <div class="row-BTN">
-          <button class="salvaModProfilo-BTN" (click)="confermaModProfilo()">conferma modifiche</button>
+          <button class="salvaModProfilo-BTN" (click)="editProfile()">conferma modifiche</button>
         </div>
         <div class="links">
           <label for="links">I tuoi link</label>
-          <input class="link1" type="text" placeholder="link1" [(ngModel)]="link"/>
-          <input class="link2" type="text" placeholder="link2" [(ngModel)]="link"/>
-          <input class="link3" type="text" placeholder="link3" [(ngModel)]="link"/>
+          <input class="link1" type="text" placeholder="{{ utente?.linkEsterni }}" [(ngModel)]="link1"/>
+          <input class="link2" type="text" placeholder="link2" [(ngModel)]="link2"/>
+          <input class="link3" type="text" placeholder="link3" [(ngModel)]="link3"/>
         </div>
         <div class="descrizione">
           <label for="descrizione">La tua descrizione</label>
