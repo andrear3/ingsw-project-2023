@@ -168,7 +168,6 @@ export class AstaCTRL {
       throw error;
     }
   }
-
   static async controllaScadenzaAste() {
     try {
       const tutteLeAste = await Asta.findAll();
@@ -177,35 +176,49 @@ export class AstaCTRL {
       for (let asta of tutteLeAste) {
         let dataFineAsta = new Date(asta.dataFineAsta);
 
-        if (tempoCorrente >= dataFineAsta && asta.statusAsta !== "venduto") {
+        // Check if auction time has ended and status is still "inVendita"
+        if (tempoCorrente >= dataFineAsta && asta.statusAsta === "inVendita") {
           const offertaMassima = await OffertaCTRL.trovaOffertaMassimaPerAsta(
             asta.astaID
           );
 
           if (offertaMassima) {
-            // Destructure
             const { offertaMax, UtenteNickname } = offertaMassima;
 
             if (offertaMax > 0) {
+              // Deduct user's balance and mark auction as "venduto"
+              const utente = await Utente.findOne({
+                where: { nickname: UtenteNickname },
+              });
+
+              if (!utente || utente.saldo < offertaMax) {
+                console.error(
+                  `Saldo insufficiente per ${UtenteNickname} o utente non trovato.`
+                );
+                continue; // Skip to next auction if there's an issue with balance
+              }
+
+              await UtenteCTRL.diminuisciSaldo(UtenteNickname, offertaMax);
               asta.statusAsta = "venduto";
               asta.prezzofinale = offertaMax;
-              await UtenteCTRL.diminuisciSaldo(UtenteNickname, offertaMax);
-              await asta.save();
+
               console.log(
-                `Asta venduta da ${UtenteNickname} con un prezzo finale di ${offertaMax}`
+                `Asta venduta a ${UtenteNickname} con un prezzo finale di ${offertaMax}`
               );
-            } else if (offertaMax === 0) {
+            } else {
               asta.statusAsta = "nonVenduto";
               asta.prezzofinale = 0;
-              await asta.save();
               console.log(`Asta non venduta. Nessuna offerta valida.`);
             }
           } else {
+            // No offers were made
             asta.statusAsta = "nonVenduto";
-            asta.prezzoFinale = 0;
-            await asta.save();
+            asta.prezzofinale = 0;
             console.log(`Asta non venduta. Nessuna offerta disponibile.`);
           }
+
+          // Save the auction status regardless of whether it was sold or not
+          await asta.save();
         }
       }
     } catch (error) {
