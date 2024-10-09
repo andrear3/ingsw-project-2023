@@ -66,7 +66,7 @@ export class AstaComponent implements OnInit {
   }
 
   // Update the creaAsta method to send FormData directly
-  creaAstaClassica() {
+  creaAsta() {
     const formData = new FormData();
   
     formData.append('titoloAsta', this.titoloAsta || ''); // Ensure values are not empty
