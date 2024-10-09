@@ -45,6 +45,22 @@ export function createModel(database) {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    descrizione: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    link1: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+     link2: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    }, 
+    link3: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,

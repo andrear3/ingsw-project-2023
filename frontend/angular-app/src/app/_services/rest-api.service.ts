@@ -72,6 +72,17 @@ export class RestService {
     console.log(formData);
     return this.http.post(`${this.apiUrl}/creaAsta`, formData, httpOptions);
   }
+  creaAstaRibasso(formData: FormData): Observable<any> {
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+    console.log(formData);
+    return this.http.post(`${this.apiUrl}/creaAstaRibasso`, formData, httpOptions);
+  }
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/`, { email, password });
@@ -137,4 +148,36 @@ export class RestService {
 
     return this.http.post(url, { nickname }, httpOptions);
   }
+
+
+  editProfile(
+    nome: string,
+    cognome: string,
+    nickname: string,
+    regione: string,
+    indirizzo: string,
+    url:string,
+    descrizione:string,
+    link1:string,
+    link2:string,
+    link3:string,
+  ) {
+    return this.http.post(`${this.apiUrl}/editprofile`, {
+      nome,
+      cognome,
+      nickname,
+      regione,
+      indirizzo,
+      url,
+      descrizione,
+      link1,
+      link2,
+      link3,
+    });
+  }
+
+
+
+
+  
 }
