@@ -24,7 +24,7 @@
             <div class="boxNomeMod" id="boxNomeMod">
               <input 
                 type="text"
-                placeholder="{{ utente?.nome }}"
+               
                 [(ngModel)]="nome"
                 name="nome"
                 required
@@ -36,7 +36,7 @@
             <div class="boxCognomeMod" id="boxCognomeMod">
               <input 
                 type="text"
-                placeholder="{{ utente?.cognome }}"
+               
                 [(ngModel)]="cognome"
                 name="cognome"
                 required
@@ -50,7 +50,7 @@
             <div class="boxNicknameMod" id="boxNicknameMod">
               <input 
                 type="text"
-                placeholder="{{ utente?.nickname }}"
+                
                 [(ngModel)]="nickname"
                 name="nickname"
                 required
@@ -64,7 +64,7 @@
             <div class="boxRegioneMod" id="boxRegioneMod">
               <input 
                 type="text"
-                placeholder="{{ utente?.regione }}"
+              
                 [(ngModel)]="regione"
                 name="regione"
                 required
@@ -76,7 +76,7 @@
             <div class="boxIndirizzoMod" id="boxIndirizzoMod">
               <input 
                 type="text"
-                placeholder="{{ utente?.indirizzo }}"
+                
                 [(ngModel)]="indirizzo"
                 name="indirizzo"
                 required
@@ -89,9 +89,9 @@
         </div>
         <div class="links">
           <label for="links">I tuoi link</label>
-          <input class="link1" type="text" placeholder="{{ utente?.linkEsterni }}" [(ngModel)]="link1"/>
-          <input class="link2" type="text" placeholder="link2" [(ngModel)]="link2"/>
-          <input class="link3" type="text" placeholder="link3" [(ngModel)]="link3"/>
+          <input class="link1" type="text"  [(ngModel)]="link1"/>
+          <input class="link2" type="text"  [(ngModel)]="link2"/>
+          <input class="link3" type="text"  [(ngModel)]="link3"/>
         </div>
         <div class="descrizione">
           <label for="descrizione">La tua descrizione</label>

@@ -1,6 +1,7 @@
 import { TipoUtente } from './tipo-utente-enum';
 
 export interface Utente {
+  descrizione:string;
   email: string;
   nickname: string;
   password: string;
@@ -8,7 +9,9 @@ export interface Utente {
   cognome: string;
   tipo: TipoUtente;
   regione: string;
-  linkEsterni: string;
+  link1: string;
+  link2: string;
+  link3: string;
   indirizzo: string;
   saldo: number;
   createdAt?: Date;

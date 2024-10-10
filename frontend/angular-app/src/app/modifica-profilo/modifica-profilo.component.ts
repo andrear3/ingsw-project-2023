@@ -55,12 +55,35 @@ export class ModificaProfiloComponent implements OnInit {
     private router: Router
   ) {}
 
+<<<<<<< HEAD
   ngOnInit() {
     this.statusSubscription = this.AuthService.getStatus().subscribe(
       (status: boolean) => {
         if (status) {
           this.utente = this.AuthService.getUtente();
           console.log(this.utente);
+=======
+utente : Utente | null = null ;
+ngOnInit() {
+  this.statusSubscription = this.AuthService.getStatus().subscribe(
+    (status: boolean) => {
+      if (status) {
+    
+        console.log(this.AuthService.getUtente());
+        this.utente=this.AuthService.getUtente();
+         
+        if (this.utente) {
+          this.nome = this.utente.nome;
+          this.cognome = this.utente.cognome;
+          this.nickname = this.utente.nickname;
+          this.regione = this.utente.regione;
+          this.indirizzo = this.utente.indirizzo;
+          this.link1 = this.utente.link1 ;
+          this.link2 = this.utente.link2;
+          this.link3 = this.utente.link3;
+          this.descrizione = this.utente.descrizione;
+       
+>>>>>>> f88ceafa3eb70b2c2490be39ddc920c8746c1841
         }
       }
     );
@@ -105,6 +128,7 @@ export class ModificaProfiloComponent implements OnInit {
     } else if (this.url) {
       formData.append('url', this.url);
     }
+<<<<<<< HEAD
 
     this.RestService.editProfile(formData).subscribe(
       (response) => {
@@ -120,4 +144,61 @@ export class ModificaProfiloComponent implements OnInit {
   confermaModProfilo() {
     this.router.navigate(['/profile']);
   }
+=======
+  }
+  );
+}
+
+
+editProfile(){
+  this.restApiService.editProfile(
+    this.nome,
+    this.cognome,
+    this.nickname,
+    this.regione,
+    this.indirizzo,
+    this.url,
+    this.descrizione,
+    this.link1,
+    this.link2,
+    this.link3,
+  ).subscribe(
+    (response) => {
+      console.log('modifica effettuata:', response);
+    },
+    (error) => {
+      console.error('modifica fallita:', error);
+    }
+  );
+this.confermaModProfilo();
+
+}
+
+@ViewChild('uploadBtn') uploadBtn!: ElementRef;
+@ViewChild('photoPreview') photoPreview!: ElementRef;
+
+ngAfterViewInit() {
+  const uploadElement = this.uploadBtn.nativeElement as HTMLInputElement;
+  const previewElement = this.photoPreview.nativeElement as HTMLElement;
+
+  uploadElement.addEventListener('change', (event: any) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        previewElement.style.backgroundImage = `url(${e.target.result})`;
+        this.url = e.target.result; // Save base64 string of the image
+      };
+
+      this.imageFile = file; // Store the file for uploading
+      reader.readAsDataURL(file);
+    } else {
+      previewElement.style.backgroundImage = '';
+      this.imageFile = null;
+    }
+  });
+}
+
+>>>>>>> f88ceafa3eb70b2c2490be39ddc920c8746c1841
 }
