@@ -81,7 +81,11 @@ export class RestService {
       }),
     };
     console.log(formData);
-    return this.http.post(`${this.apiUrl}/creaAstaRibasso`, formData, httpOptions);
+    return this.http.post(
+      `${this.apiUrl}/creaAstaRibasso`,
+      formData,
+      httpOptions
+    );
   }
   creaAstaInversa(formData: FormData): Observable<any> {
     const token = this.authService.getToken();
@@ -92,7 +96,11 @@ export class RestService {
       }),
     };
     console.log(formData);
-    return this.http.post(`${this.apiUrl}/creaAstaInversa`, formData, httpOptions);
+    return this.http.post(
+      `${this.apiUrl}/creaAstaInversa`,
+      formData,
+      httpOptions
+    );
   }
 
   login(email: string, password: string): Observable<any> {
@@ -160,35 +168,16 @@ export class RestService {
     return this.http.post(url, { nickname }, httpOptions);
   }
 
+  editProfile(formData: FormData): Observable<any> {
+    const token = this.authService.getToken();
 
-  editProfile(
-    nome: string,
-    cognome: string,
-    nickname: string,
-    regione: string,
-    indirizzo: string,
-    url:string,
-    descrizione:string,
-    link1:string,
-    link2:string,
-    link3:string,
-  ) {
-    return this.http.post(`${this.apiUrl}/editprofile`, {
-      nome,
-      cognome,
-      nickname,
-      regione,
-      indirizzo,
-      url,
-      descrizione,
-      link1,
-      link2,
-      link3,
-    });
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    console.log(formData);
+    return this.http.post(`${this.apiUrl}/editprofile`, formData, httpOptions);
   }
-
-
-
-
-  
 }

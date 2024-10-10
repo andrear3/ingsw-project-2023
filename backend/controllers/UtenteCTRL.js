@@ -101,7 +101,40 @@ export class UtenteCTRL {
       throw error;
     }
   }
-}
+
+  static async modificaUtente(data) {
+    try {
+      const { email, nome, cognome, tipo, regione, indirizzo, linkEsterni, url, descrizione, link1, link2, link3 } = data;
+  
+      const user = await Utente.findOne({ where: { email } });
+  
+      if (!user) {
+        throw new Error(`User with email ${email} not found`);
+      }
+  
+      // Update user fields if new values are provided
+      user.nome = nome || user.nome;
+      user.cognome = cognome || user.cognome;
+      user.tipo = tipo || user.tipo;
+      user.regione = regione || user.regione;
+      user.indirizzo = indirizzo || user.indirizzo;
+      user.linkEsterni = linkEsterni || user.linkEsterni;
+      user.url = url || user.url;
+      user.descrizione = descrizione || user.descrizione;
+      user.link1 = link1 || user.link1;
+      user.link2 = link2 || user.link2;
+      user.link3 = link3 || user.link3;
+  
+      await user.save();
+  
+      console.log(`User ${email} updated successfully`);
+      return user;
+    } catch (error) {
+      console.error("Error updating user:", error.message);
+      throw error;
+    }
+  }
+}  
 
 function generateSaldo() {
   return Math.floor(Math.random() * (2500 - 500 + 1)) + 500;

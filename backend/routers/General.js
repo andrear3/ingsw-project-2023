@@ -32,7 +32,10 @@ const upload = multer({ storage });
 general.post("/setUser", authToken, async (req, res) => {
   try {
     console.log("Request to set user type received");
-    const result = await UtenteCTRL.setTipoUtente(req.body.tipo, req.user.email);
+    const result = await UtenteCTRL.setTipoUtente(
+      req.body.tipo,
+      req.user.email
+    );
     res.status(200).json({ message: "User type successfully set", result });
   } catch (error) {
     console.error("Error setting user type:", error);
@@ -41,31 +44,95 @@ general.post("/setUser", authToken, async (req, res) => {
 });
 
 // Route to create a classical auction
-general.post("/creaAsta", authToken, upload.single("image"), async (req, res) => {
-  try {
-    console.log("Auction creation request received:", req.body);
-    if (req.file) {
-      console.log("File received:", req.file.originalname);
-    } else {
-      console.log("No file received.");
-    }
+general.post(
+  "/creaAsta",
+  authToken,
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      console.log("Auction creation request received:", req.body);
+      if (req.file) {
+        console.log("File received:", req.file.originalname);
+      } else {
+        console.log("No file received.");
+      }
 
-    await AstaCTRL.creaAsta(req);
-    res.status(200).json({ message: "Auction created successfully" });
-  } catch (error) {
-    console.error("Error creating auction:", error);
-    res.status(500).json({ message: "Error processing auction", error });
+      await AstaCTRL.creaAsta(req);
+      res.status(200).json({ message: "Auction created successfully" });
+    } catch (error) {
+      console.error("Error creating auction:", error);
+      res.status(500).json({ message: "Error processing auction", error });
+    }
   }
-});
+);
 
 // Route to create a reverse auction
-general.post("/creaAstaRibasso", authToken, upload.single("image"), async (req, res) => {
-  try {
-    console.log("Reverse auction creation request received:", req.body);
-    await AstaCTRL.creaAstaRibasso(req);
-    res.status(200).json({ message: "Reverse auction created successfully" });
-  } catch (error) {
-    console.error("Error creating reverse auction:", error);
-    res.status(500).json({ message: "Error processing reverse auction", error });
+general.post(
+  "/creaAstaRibasso",
+  authToken,
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      console.log("Reverse auction creation request received:", req.body);
+      await AstaCTRL.creaAstaRibasso(req);
+      res.status(200).json({ message: "Reverse auction created successfully" });
+    } catch (error) {
+      console.error("Error creating reverse auction:", error);
+      res
+        .status(500)
+        .json({ message: "Error processing reverse auction", error });
+    }
   }
-});
+);
+
+general.post(
+  "/editprofile",
+  authToken,
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      console.log("Profile update request received:", req.body);
+      if (req.file) {
+        console.log("File received:", req.file);
+      } else {
+        console.log("No file received.");
+      }
+
+      const {
+        nome,
+        cognome,
+        tipo,
+        regione,
+        indirizzo,
+        linkEsterni,
+        descrizione,
+        link1,
+        link2,
+        link3,
+      } = req.body;
+
+      const identifier = req.user.email;
+      const imageUrl = req.file ? req.file.filename : null;
+
+      await UtenteCTRL.modificaUtente({
+        email: identifier,
+        nome,
+        cognome,
+        tipo,
+        regione,
+        indirizzo,
+        linkEsterni,
+        url: imageUrl,
+        descrizione,
+        link1,
+        link2,
+        link3,
+      });
+
+      res.status(200);
+    } catch (error) {
+      console.error("Error processing profile update:", error);
+      res.status(500);
+    }
+  }
+);
