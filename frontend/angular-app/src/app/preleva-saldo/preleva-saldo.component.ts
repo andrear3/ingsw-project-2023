@@ -14,10 +14,11 @@ import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Utente } from '../_models/utente-model';
+
 @Component({
-  selector: 'app-saldo',
+  selector: 'app-preleva-saldo',
   standalone: true,
-  imports: [ MatToolbarModule,
+  imports: [MatToolbarModule,
     MatIconModule,
     MatAutocompleteModule,
     MatInputModule,
@@ -25,10 +26,10 @@ import { Utente } from '../_models/utente-model';
     CommonModule,
     FormsModule,
     RouterLink,],
-  templateUrl: './saldo.component.html',
-  styleUrl: './saldo.component.scss'
+  templateUrl: './preleva-saldo.component.html',
+  styleUrl: './preleva-saldo.component.scss'
 })
-export class SaldoComponent {
+export class PrelevaSaldoComponent {
   saldo: number | undefined;
   constructor(
     private RestService: RestService,
@@ -51,7 +52,5 @@ export class SaldoComponent {
     );
   }
 
-
-
-
+  
 }

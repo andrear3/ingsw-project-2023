@@ -13,6 +13,9 @@ import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Utente } from '../_models/utente-model';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogRef } from '@angular/cdk/dialog';
+import { SaldoComponent } from '../saldo/saldo.component';
 
 @Component({
   selector: 'app-profile',
@@ -44,9 +47,11 @@ export class ProfileComponent {
   constructor(
     private RestService: RestService,
     private AuthService: AuthService,
-    private router: Router
+    private router: Router,
+    private dialogRef : MatDialog,
   ){}
   private statusSubscription: Subscription = new Subscription();
+
 
  modificaProfilo(){
   this.router.navigate(['/modificaProfilo']);
@@ -62,12 +67,14 @@ ngOnInit() {
         this.utente=this.AuthService.getUtente();
         
        
-        
+
         }
     }
   );
 }
-
+openDialogSaldo(){
+  this.dialogRef.open(SaldoComponent)
+}
 
 
 
