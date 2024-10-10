@@ -27,11 +27,29 @@
             placeholder="Categoria"
             aria-label="Number"
             matInput
-            [matAutocomplete]="auto"
+            [matAutocomplete]="autoCat"
+
         />
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
-        </mat-autocomplete>
+        <mat-autocomplete #autoCat="matAutocomplete" (optionSelected)="filterResultsCategoria($event)" >
+          <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+      </mat-autocomplete>
+
+      <mat-autocomplete #autoAsta="matAutocomplete" (optionSelected)="filterResultsTipoAsta($event)" >
+        <mat-option *ngFor="let option of optionAsta" [value]="option">{{ option }}</mat-option>
+    </mat-autocomplete>
+
+        <input
+        class="boxTipoAsta"
+        type="text"
+      
+        placeholder="Tipo Asta"
+        aria-label="Number"
+        matInput
+        [matAutocomplete]="autoAsta"
+    />
+       
+
+        
     </div>
      
       

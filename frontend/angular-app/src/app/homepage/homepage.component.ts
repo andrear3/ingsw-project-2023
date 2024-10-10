@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../_services/auth.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-homepage',
@@ -35,7 +35,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
   utente: Utente | null = null;
   private intervalId: any;
   private subscriptions: Subscription = new Subscription();
-  options: string[] = ['Informatica', 'Videogames', 'Musica', 'Sport', 'Collezionismo'];
+  options: string[] = ['informatica', 'videogames', 'musica', 'sport', 'collezionismo'];
+  optionAsta:string[]=['Classica', 'Inversa', 'Al Ribasso'];
   asteFiltrate: Asta[] = [];
 
   constructor(
@@ -126,4 +127,21 @@ export class HomepageComponent implements OnInit, OnDestroy {
       asta?.nomeBeneInVendita?.toLowerCase().includes(searchText)
     );
   }
+
+  
+
+   
+  filterResultsTipoAsta(event: MatAutocompleteSelectedEvent) {
+    const selectedValue = event.option.value; // Get the value of the selected option
+    console.log('Selected option:', selectedValue); // Log the selected value
+} 
+filterResultsCategoria(event: MatAutocompleteSelectedEvent) {
+  const selectedValue = event.option.value; // Get the selected category
+  this.asteFiltrate = this.aste.filter((asta) => asta.categoria === selectedValue);
+  console.log('Selected option:', selectedValue); // Log the selected value
+  console.log('Filtered Aste:', this.asteFiltrate); // Log the filtered result
+  
+  
+} 
+
 }
