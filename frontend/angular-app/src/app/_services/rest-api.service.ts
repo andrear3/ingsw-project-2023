@@ -39,6 +39,19 @@ export class RestService {
     return this.http.get<{ aste: Asta[]; userInfo: Utente }>(url, httpOptions);
   }
 
+  getAstaRibasso(): Observable<{ aste: Asta[]; userInfo: Utente }> {
+    const url = `${this.apiUrl}/homepage/ribasso`;
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.get<{ aste: Asta[]; userInfo: Utente }>(url, httpOptions);
+  }
+
   register(
     email: string,
     nome: string,

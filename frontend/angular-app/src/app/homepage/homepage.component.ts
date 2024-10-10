@@ -12,7 +12,10 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../_services/auth.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
-import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import {
+  MatAutocompleteModule,
+  MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-homepage',
@@ -35,9 +38,16 @@ export class HomepageComponent implements OnInit, OnDestroy {
   utente: Utente | null = null;
   private intervalId: any;
   private subscriptions: Subscription = new Subscription();
-  options: string[] = ['informatica', 'videogames', 'musica', 'sport', 'collezionismo'];
-  optionAsta:string[]=['Classica', 'Inversa', 'Al Ribasso'];
+  options: string[] = [
+    'informatica',
+    'videogames',
+    'musica',
+    'sport',
+    'collezionismo',
+  ];
+  optionAsta: string[] = ['Classica', 'Inversa', 'Al Ribasso'];
   asteFiltrate: Asta[] = [];
+  tipoAsta: string = 'classica';
 
   constructor(
     private restService: RestService,
@@ -128,20 +138,50 @@ export class HomepageComponent implements OnInit, OnDestroy {
     );
   }
 
-  
-
-   
   filterResultsTipoAsta(event: MatAutocompleteSelectedEvent) {
-    const selectedValue = event.option.value; // Get the value of the selected option
-    console.log('Selected option:', selectedValue); // Log the selected value
-} 
-filterResultsCategoria(event: MatAutocompleteSelectedEvent) {
-  const selectedValue = event.option.value; // Get the selected category
-  this.asteFiltrate = this.aste.filter((asta) => asta.categoria === selectedValue);
-  console.log('Selected option:', selectedValue); // Log the selected value
-  console.log('Filtered Aste:', this.asteFiltrate); // Log the filtered result
-  
-  
-} 
+    const selectedValue = event.option.value;
+    console.log('Selected option:', selectedValue);
 
+    if (selectedValue == 'Al Ribasso') {
+      this.tipoAsta == 'Al Ribasso';
+      this.subscriptions.add(
+        this.restService.getAstaRibasso().subscribe({
+          next: (response: { aste: Asta[]; userInfo: Utente }) => {
+            this.aste = response.aste;
+            this.asteFiltrate = [...this.aste];
+            this.utente = response.userInfo;
+            this.startDecrementTimer();
+          },
+          error: (err: any) => {
+            console.error('Error fetching data:', err);
+          },
+        })
+      );
+    }
+
+    if (selectedValue == 'Classica') {
+      this.tipoAsta == 'Classica';
+      this.subscriptions.add(
+        this.restService.getAsta().subscribe({
+          next: (response: { aste: Asta[]; userInfo: Utente }) => {
+            this.aste = response.aste;
+            this.asteFiltrate = [...this.aste];
+            this.utente = response.userInfo;
+            this.startDecrementTimer();
+          },
+          error: (err: any) => {
+            console.error('Error fetching data:', err);
+          },
+        })
+      );
+    }
+  }
+  filterResultsCategoria(event: MatAutocompleteSelectedEvent) {
+    const selectedValue = event.option.value; // Get the selected category
+    this.asteFiltrate = this.aste.filter(
+      (asta) => asta.categoria === selectedValue
+    );
+    console.log('Selected option:', selectedValue); // Log the selected value
+    console.log('Filtered Aste:', this.asteFiltrate); // Log the filtered result
+  }
 }

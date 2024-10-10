@@ -1,7 +1,7 @@
 import { OffertaCTRL } from "./OffertaCTRL.js";
 import { UtenteCTRL } from "./UtenteCTRL.js";
 import { Asta } from "../models/Database.js";
-import { AstaAlRibasso,AstaInversa } from "../models/Database.js";
+import { AstaAlRibasso, AstaInversa } from "../models/Database.js";
 import { Utente } from "../models/Database.js";
 import { Offerta } from "../models/Database.js";
 import { Sequelize, Op } from "sequelize";
@@ -115,42 +115,93 @@ export class AstaCTRL {
     }
   }
 
-  
   static async recuperaAsteAttive() {
     try {
       // First, get the IDs of Asta that should be excluded
       const excludedAstaIDs = await AstaAlRibasso.findAll({
-        attributes: ['AstumAstaID']
-      }).then(result => result.map(r => r.AstumAstaID));
-  
+        attributes: ["AstumAstaID"],
+      }).then((result) => result.map((r) => r.AstumAstaID));
+
       const excludedAstaInversaIDs = await AstaInversa.findAll({
-        attributes: ['AstumAstaID']
-      }).then(result => result.map(r => r.AstumAstaID));
-  
+        attributes: ["AstumAstaID"],
+      }).then((result) => result.map((r) => r.AstumAstaID));
+
       // Combine both excluded IDs
-      const allExcludedIDs = [...new Set([...excludedAstaIDs, ...excludedAstaInversaIDs])];
-  
+      const allExcludedIDs = [
+        ...new Set([...excludedAstaIDs, ...excludedAstaInversaIDs]),
+      ];
+
       const asteAttive = await Asta.findAll({
         where: {
           dataFineAsta: {
             [Op.gt]: new Date(), // Greater than the current date
           },
           statusAsta: "inVendita",
-          astaID: { // Assuming 'id' is the primary key of Asta
-            [Op.notIn]: allExcludedIDs // Exclude IDs present in AstaAlRibasso and AstaInversa
-          }
+          astaID: {
+            // Assuming 'id' is the primary key of Asta
+            [Op.notIn]: allExcludedIDs, // Exclude IDs present in AstaAlRibasso and AstaInversa
+          },
         },
       });
-  
+
       if (asteAttive.length > 0) {
         console.log("Aste attive:", asteAttive);
       } else {
         console.log("Nessuna asta è attiva");
       }
-      
+
       return asteAttive;
     } catch (error) {
       console.error("Errore nel recupero aste:", error);
+    }
+  }
+
+  //nuova
+  static async recuperaAsteAlRibassoAttive() {
+    try {
+      const activeAstaAlRibasso = await AstaAlRibasso.findAll({
+        attributes: ["AstumAstaID"], 
+      });
+  
+      const activeAstaIDs = activeAstaAlRibasso.map((item) => item.AstumAstaID);
+  
+      if (activeAstaIDs.length === 0) {
+        console.log("Nessuna asta al ribasso attiva");
+        return [];
+      }
+  
+      const astasAlRibasso = await Asta.findAll({
+        where: {
+          astaID: {
+            [Op.in]: activeAstaIDs,
+          },
+          statusAsta: "inVendita",
+          dataFineAsta: {
+            [Op.gt]: new Date(),
+          },
+        },
+        include: [
+          {
+            model: AstaAlRibasso,
+            attributes: [
+              "prezzoMinSegreto",
+              "decrementoTimer",
+              "valoreDecremento",
+            ], 
+          },
+        ],
+      });
+  
+      if (astasAlRibasso.length > 0) {
+        console.log("Aste al ribasso attive:", astasAlRibasso);
+      } else {
+        console.log("Nessuna asta al ribasso è attiva");
+      }
+  
+      return astasAlRibasso;
+    } catch (error) {
+      console.error("Errore nel recupero aste al ribasso:", error);
+      throw error;
     }
   }
   
