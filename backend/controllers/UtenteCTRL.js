@@ -102,16 +102,51 @@ export class UtenteCTRL {
     }
   }
 
+  static async aumentaSaldo(nickname, amount) {
+    try {
+      const user = await Utente.findOne({
+        where: { nickname },
+      });
+
+      if (!user) {
+        throw new Error("Utente non trovato");
+      }
+
+      user.saldo += amount;
+
+      await user.save();
+
+      console.log(`Il saldo di ${nickname} è stato aggiornato a ${user.saldo}`);
+      return user.saldo;
+    } catch (error) {
+      console.error("Errore durante l'aumento del saldo:", error.message);
+      throw error;
+    }
+  }
+
   static async modificaUtente(data) {
     try {
-      const { email, nome, cognome, tipo, regione, indirizzo, linkEsterni, url, descrizione, link1, link2, link3 } = data;
-  
+      const {
+        email,
+        nome,
+        cognome,
+        tipo,
+        regione,
+        indirizzo,
+        linkEsterni,
+        url,
+        descrizione,
+        link1,
+        link2,
+        link3,
+      } = data;
+
       const user = await Utente.findOne({ where: { email } });
-  
+
       if (!user) {
         throw new Error(`User with email ${email} not found`);
       }
-  
+
       // Update user fields if new values are provided
       user.nome = nome || user.nome;
       user.cognome = cognome || user.cognome;
@@ -124,9 +159,9 @@ export class UtenteCTRL {
       user.link1 = link1 || user.link1;
       user.link2 = link2 || user.link2;
       user.link3 = link3 || user.link3;
-  
+
       await user.save();
-  
+
       console.log(`User ${email} updated successfully`);
       return user;
     } catch (error) {
@@ -134,7 +169,7 @@ export class UtenteCTRL {
       throw error;
     }
   }
-}  
+}
 
 function generateSaldo() {
   return Math.floor(Math.random() * (2500 - 500 + 1)) + 500;
