@@ -30,7 +30,7 @@ import { Router,RouteConfigLoadEnd, RouterLink, RouterModule, RouterOutlet } fro
   templateUrl: './modifica-profilo.component.html',
   styleUrl: './modifica-profilo.component.scss'
 })
-export class ModificaProfiloComponent {
+export class ModificaProfiloComponent implements OnInit {
   email: string = '';
   nome: string = '';
   cognome: string = '';
@@ -64,10 +64,21 @@ ngOnInit() {
     
         console.log(this.AuthService.getUtente());
         this.utente=this.AuthService.getUtente();
-        
+         
+        if (this.utente) {
+          this.nome = this.utente.nome;
+          this.cognome = this.utente.cognome;
+          this.nickname = this.utente.nickname;
+          this.regione = this.utente.regione;
+          this.indirizzo = this.utente.indirizzo;
+          this.link1 = this.utente.link1 ;
+          this.link2 = this.utente.link2;
+          this.link3 = this.utente.link3;
+          this.descrizione = this.utente.descrizione;
        
         }
     }
+  }
   );
 }
 
