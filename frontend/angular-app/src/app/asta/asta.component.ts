@@ -30,11 +30,11 @@ import { AuthService } from '../_services/auth.service';
 })
 export class AstaComponent implements OnInit {
   options: string[] = [
-    'Informatica',
-    'Videogames',
-    'Musica',
-    'Sport',
-    'Collezionismo',
+    'informatica',
+    'videogames',
+    'musica',
+    'sport',
+    'collezionismo',
   ];
   titoloAsta: string = '';
   nomeProdotto: string = '';

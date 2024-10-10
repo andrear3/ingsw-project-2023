@@ -14,6 +14,8 @@ import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Utente } from '../_models/utente-model';
+import { PrelevaSaldoComponent } from '../preleva-saldo/preleva-saldo.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-saldo',
   standalone: true,
@@ -33,7 +35,8 @@ export class SaldoComponent {
   constructor(
     private RestService: RestService,
     private AuthService: AuthService,
-    private router: Router
+    private router: Router,
+    private dialogRef : MatDialog,
   ){}
   utente : Utente | null = null ;
   private statusSubscription: Subscription = new Subscription();
@@ -50,6 +53,10 @@ export class SaldoComponent {
       }
     );
   }
+  openDialogSaldoPreleva(){
+    this.dialogRef.open(PrelevaSaldoComponent)
+  }
+  
 
 
 
