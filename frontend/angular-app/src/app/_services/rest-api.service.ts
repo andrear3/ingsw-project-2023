@@ -83,6 +83,17 @@ export class RestService {
     console.log(formData);
     return this.http.post(`${this.apiUrl}/creaAstaRibasso`, formData, httpOptions);
   }
+  creaAstaInversa(formData: FormData): Observable<any> {
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+    console.log(formData);
+    return this.http.post(`${this.apiUrl}/creaAstaInversa`, formData, httpOptions);
+  }
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/`, { email, password });

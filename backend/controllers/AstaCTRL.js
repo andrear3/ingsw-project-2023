@@ -1,11 +1,15 @@
 import { OffertaCTRL } from "./OffertaCTRL.js";
 import { UtenteCTRL } from "./UtenteCTRL.js";
 import { Asta } from "../models/Database.js";
+<<<<<<< HEAD
+import { AstaAlRibasso,AstaInversa } from "../models/Database.js";
+=======
 import { AstaAlRibasso, AstaInversa } from "../models/Database.js";
+>>>>>>> 42532e6170264241b344ffbe743122770a9a3878
 import { Utente } from "../models/Database.js";
 import { Offerta } from "../models/Database.js";
 import { Sequelize, Op } from "sequelize";
-
+import { database } from "../models/Database.js";
 export class AstaCTRL {
   static async recuperaAstaById(astaID) {
     try {
@@ -115,6 +119,7 @@ export class AstaCTRL {
     }
   }
 
+  
   static async recuperaAsteAttive() {
     try {
       // First, get the IDs of Asta that should be excluded
