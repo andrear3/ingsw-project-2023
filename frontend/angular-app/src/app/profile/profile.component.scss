@@ -239,16 +239,21 @@
 
 .boxFoto img {
     width: 100%;
-    height: 100%; /* Ensure the image fills the box */
-    object-fit: cover; /* Maintain aspect ratio and cover the entire box */
-    display: block; /* Ensures no spacing is added around the image */
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
   }
 
 
 
   .auction-image {
-    width: 100%; /* L'immagine occupa tutta la larghezza del contenitore */
-        height: 100%; /* L'immagine occupa tutta l'altezza del contenitore */
-        object-fit: cover; /* L'immagine riempie il contenitore mantenendo le proporzioni */
-        display: block; /* Evita spazi vuoti intorno all'immagine */
+    width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+        display: block; 
+    }
+    @media (max-width: 768px) {
+        .input-group {
+            width: 100%;
+        }
     }
