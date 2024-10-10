@@ -16,4 +16,5 @@ export interface Utente {
   saldo: number;
   createdAt?: Date;
   updatedAt?: Date;
+  url:string;
 }
