@@ -20,6 +20,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ModificaProfiloComponent } from './modifica-profilo/modifica-profilo.component';
+import { SaldoComponent } from './saldo/saldo.component';
 
 export const routes: Routes = [
   {
@@ -73,6 +74,12 @@ export const routes: Routes = [
   title: 'ModificaProfilo',
   component: ModificaProfiloComponent,
 },
+{
+  path: 'saldo',
+  title: 'Saldo',
+  component: SaldoComponent,
+},
+
 { path: '**', redirectTo: '' } // Wildcard route for a 404 page
 
 ];
