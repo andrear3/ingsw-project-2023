@@ -92,7 +92,14 @@
           <input class="boxDescrizione" type="text" [(ngModel)]="descrizione"/>
         </div>
         <div class="foto">
-          <div class="boxFoto" #photoPreview></div>
+          <div class="boxFoto" #photoPreview>
+            <img
+            [src]="utente?.url || 'assets/placeholder.jpg'"
+            alt="Foto profilo"
+            class="auction-image"
+        
+          />
+          </div>
           
         </div>
         <div class="boxFoto-BTN">
