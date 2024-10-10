@@ -42,6 +42,13 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
 
     // Compose response to client
     const baseUrl = req.protocol + "://" + req.get("host") + "/images/";
+
+    // Transforming user's URL
+    const userWithTransformedUrl = {
+      ...user.toJSON(),
+      url: user.url ? baseUrl + user.url : null, // Transform user.url
+    };
+
     const datiConOfferteETempo = asteAttive.map((asta) => ({
       ...asta.toJSON(),
       url: baseUrl + asta.url,
@@ -49,7 +56,7 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
       timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
     }));
 
-    res.json({ aste: datiConOfferteETempo, userInfo: user }); // Manda info utente separatamente
+    res.json({ aste: datiConOfferteETempo, userInfo: userWithTransformedUrl }); // Send transformed user info
   } catch (error) {
     console.error("Errore nel recupero dei dati:", error);
     res.status(500).json({ message: "Errore del server" });

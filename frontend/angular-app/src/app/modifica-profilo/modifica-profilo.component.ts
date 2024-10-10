@@ -62,6 +62,21 @@ export class ModificaProfiloComponent implements OnInit {
         if (status) {
           this.utente = this.AuthService.getUtente();
           console.log(this.utente);
+
+          if (this.utente) {
+            this.nome = this.utente.nome;
+            this.cognome = this.utente.cognome;
+            this.nickname = this.utente.nickname;
+            this.regione = this.utente.regione;
+            this.indirizzo = this.utente.indirizzo;
+            this.link1 = this.utente.link1 ;
+            this.link2 = this.utente.link2;
+            this.link3 = this.utente.link3;
+            this.descrizione = this.utente.descrizione;
+         
+          }
+
+
         }
       }
     );

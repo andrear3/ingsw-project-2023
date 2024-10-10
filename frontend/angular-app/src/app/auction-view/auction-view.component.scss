@@ -128,10 +128,10 @@
 }
 .photoProfileContainer{
     position: relative;
-    width: 40%; /* Utilizza tutta la larghezza disponibile */
-    height: 100%; /* Altezza automatica per adattarsi al contenuto */
-    min-height: 80px; /* Altezza minima per assicurare visibilità */
-    max-height: 120px; /* Imposta un'altezza massima per evitare che diventi troppo grande */
+    width: 40%; 
+    height: 100%; 
+    min-height: 80px; 
+    max-height: 120px; 
     border: 2px solid ie-hex-str($color: #AAAA);
     border-radius: 5px;
     box-sizing: border-box;
@@ -140,22 +140,22 @@
     min-width: 70px;
 }
 .auction-image {
-width: 100%; /* L'immagine occupa tutta la larghezza del contenitore */
-    height: 100%; /* L'immagine occupa tutta l'altezza del contenitore */
-    object-fit: cover; /* L'immagine riempie il contenitore mantenendo le proporzioni */
-    display: block; /* Evita spazi vuoti intorno all'immagine */
+width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
 }
 .description-section {
-    width: 90vw; /* Occupare l'intera larghezza della finestra */
+    width: 90vw;
     height: 20%;
-    margin-left: 0; /* Assicurati che parta dal bordo sinistro */
-    margin-top: 3rem; /* Sposta la descrizione leggermente più in basso */
-    padding-left: 3rem; /* Spazio interno dal lato sinistro */
+    margin-left: 0; 
+    margin-top: 3rem; 
+    padding-left: 3rem; 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     box-sizing: border-box;
-    padding-bottom: 3rem; /* Aggiungi uno spazio inferiore per evitare sovrapposizione */
+    padding-bottom: 3rem; 
 }
 
 .description {
@@ -163,12 +163,12 @@ width: 100%; /* L'immagine occupa tutta la larghezza del contenitore */
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 100%; /* Occupa la larghezza del contenitore */
+    width: 100%; 
     min-height: 30px;
     border-radius: 20px;
-    background-color: transparent; /* Oppure aggiungi un colore se necessario */
+    background-color: transparent; 
     box-sizing: border-box;
-    padding: 10px; /* Per evitare il contatto con i bordi */
+    padding: 10px; 
     text-align: left;
     margin-top: 1%;
     margin-bottom: 2rem; 

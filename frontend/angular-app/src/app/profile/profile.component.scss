@@ -238,7 +238,17 @@
 }
 
 .boxFoto img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%; /* Ensure the image fills the box */
+    object-fit: cover; /* Maintain aspect ratio and cover the entire box */
+    display: block; /* Ensures no spacing is added around the image */
   }
+
+
+
+  .auction-image {
+    width: 100%; /* L'immagine occupa tutta la larghezza del contenitore */
+        height: 100%; /* L'immagine occupa tutta l'altezza del contenitore */
+        object-fit: cover; /* L'immagine riempie il contenitore mantenendo le proporzioni */
+        display: block; /* Evita spazi vuoti intorno all'immagine */
+    }

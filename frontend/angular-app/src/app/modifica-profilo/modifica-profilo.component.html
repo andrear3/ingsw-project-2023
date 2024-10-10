@@ -46,15 +46,9 @@
         </div>
         <div class="row">
           <div class="box-container">
-            <label for="boxNicknameMod">Nickname</label>
-            <div class="boxNicknameMod" id="boxNicknameMod">
-              <input 
-                type="text"
-                
-                [(ngModel)]="nickname"
-                name="nickname"
-                required
-              />
+            <label for="boxNickname">Nickname</label>
+            <div class="boxNickname" id="boxNickname">
+              {{utente?.nickname}}
             </div>
           </div>
         </div>
