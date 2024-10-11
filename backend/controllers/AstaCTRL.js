@@ -472,12 +472,11 @@ export class AstaCTRL {
       }
     } catch (error) {
       console.error("Errore nella gestione delle aste al ribasso:", error);
-      throw error; // Rethrow the error to propagate it up
+      throw error;
     }
   }
 
   static avviaControlloAsteAlRibasso() {
-    // Set an interval to manage downward auctions every 60 seconds
     const intervalId = setInterval(async () => {
       try {
         await AstaCTRL.gestisciAstaAlRibasso();
@@ -486,9 +485,188 @@ export class AstaCTRL {
           "Errore durante il controllo delle aste al ribasso:",
           error
         );
-        // Optionally, clear the interval if there's an error
+
         clearInterval(intervalId);
       }
     }, 10000);
+  }
+
+  //ASTA INVERSA ASTA INVERSA ASTA INVERSA //ASTA INVERSA
+
+  static async creaAstaInversa(req) {
+    const transaction = await Asta.sequelize.transaction();
+
+    try {
+      const {
+        titoloAsta,
+        nomeProdotto,
+        prezzoIniz,
+        oreAsta,
+        categoria,
+        descrizione,
+      } = req.body;
+
+      const user = await Utente.findOne({ where: { email: req.user.email } });
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      const utenteNickname = user.nickname;
+
+      const astaData = {
+        nomeBeneInVendita: nomeProdotto,
+        titolo: titoloAsta,
+        categoria: categoria,
+        tipoBeneInVendita: "servizio", 
+        descrizioneAsta: descrizione,
+        prezzoiniziale: parseFloat(prezzoIniz),
+        dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
+        statusAsta: "inVendita",
+        UtenteNickname: utenteNickname,
+      };
+
+      // Crea l'asta nel database
+      const asta = await Asta.create(astaData, { transaction });
+
+      const astaInversaData = {
+        AstumAstaID: asta.astaID, // Associa questa asta al modello di AstaInversa
+      };
+
+      await AstaInversa.create(astaInversaData, { transaction });
+
+      await transaction.commit();
+
+      console.log("Asta Inversa creata con successo:", asta);
+      return asta;
+    } catch (error) {
+      await transaction.rollback();
+      console.error("Errore durante la creazione dell'asta inversa:", error);
+      throw error;
+    }
+  }
+
+  static async gestisciAstaInversa(astaID, nuovaOfferta, venditoreNickname) {
+    try {
+      const asta = await Asta.findOne({
+        where: { astaID, statusAsta: "inVendita" },
+        //classico join tra tabelle
+        include: [
+          {
+            model: AstaInversa,
+            attributes: ["AstumAstaID"],
+          },
+        ],
+      });
+
+      if (!asta) {
+        throw new Error(`Asta Inversa con ID ${astaID} non trovata.`);
+      }
+
+      // Controlla se l'offerta è inferiore all'ultima offerta
+      const offertaAttuale = await Offerta.findOne({
+        where: { AstaAstaID: astaID },
+        order: [["valore", "ASC"]],
+      });
+
+      if (offertaAttuale && nuovaOfferta >= offertaAttuale.valore) {
+        throw new Error(
+          "L'offerta deve essere inferiore all'offerta più bassa attuale."
+        );
+      }
+
+      // Registra la nuova offerta nel database
+      await Offerta.create({
+        AstumAstaID: astaID,
+        UtenteNickname: venditoreNickname,
+        valore: nuovaOfferta,
+      });
+
+      console.log(
+        `Nuova offerta accettata: ${nuovaOfferta} da ${venditoreNickname}`
+      );
+      return true;
+    } catch (error) {
+      console.error("Errore durante la gestione dell'asta inversa:", error);
+      throw error;
+    }
+  }
+
+  static async controllaScadenzaAstaInversa() {
+    try {
+      const asteInverse = await AstaInversa.findAll({
+        include: [
+          {
+            model: Asta,
+            where: {
+              dataFineAsta: {
+                [Op.lt]: new Date(), // Aste già scadute
+              },
+              statusAsta: "inVendita",
+            },
+          },
+        ],
+      });
+
+      for (let astaInversa of asteInverse) {
+        const asta = astaInversa.Asta;
+
+        // Trova l'offerta più bassa per questa asta
+        const offertaPiuBassa = await Offerta.findOne({
+          where: { AstaAstaID: asta.astaID },
+          order: [["valore", "ASC"]],
+        });
+
+        if (offertaPiuBassa) {
+          asta.statusAsta = "venduto";
+          asta.prezzofinale = offertaPiuBassa.valore;
+          await asta.save();
+
+          console.log(
+            `Asta inversa conclusa. Venditore ${offertaPiuBassa.UtenteNickname} ha vinto con un'offerta di ${offertaPiuBassa.valore}.`
+          );
+        } else {
+          asta.statusAsta = "nonVenduto";
+          asta.prezzofinale = 0;
+          await asta.save();
+          console.log(`Asta inversa conclusa senza vincitore.`);
+        }
+      }
+    } catch (error) {
+      console.error(
+        "Errore durante la gestione della scadenza dell'asta inversa:",
+        error
+      );
+      throw error;
+    }
+  }
+
+  static async recuperaAsteInverseAttive() {
+    try {
+      const asteInverseAttive = await AstaInversa.findAll({
+        include: [
+          {
+            model: Asta,
+            where: {
+              statusAsta: "inVendita",
+              dataFineAsta: {
+                [Op.gt]: new Date(), // Aste non scadute
+              },
+            },
+          },
+        ],
+      });
+
+      if (asteInverseAttive.length > 0) {
+        console.log("Aste inverse attive:", asteInverseAttive);
+      } else {
+        console.log("Nessuna asta inversa attiva.");
+      }
+
+      return asteInverseAttive;
+    } catch (error) {
+      console.error("Errore nel recupero delle aste inverse attive:", error);
+      throw error;
+    }
   }
 }
