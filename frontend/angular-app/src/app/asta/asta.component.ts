@@ -43,7 +43,7 @@ export class AstaComponent implements OnInit {
   categoria: string = '';
   descrizione: string = '';
   url: string = '';
-  imageFile: File | null = null; // Store the image file
+  imageFile: File | null = null; 
   //astaRibasso
   prezzoMinSegreto:string='';
   decrementoTimer:string='';
@@ -65,11 +65,11 @@ export class AstaComponent implements OnInit {
     });
   }
 
-  // Update the creaAsta method to send FormData directly
+  
   creaAsta() {
     const formData = new FormData();
   
-    formData.append('titoloAsta', this.titoloAsta || ''); // Ensure values are not empty
+    formData.append('titoloAsta', this.titoloAsta || ''); 
     formData.append('nomeProdotto', this.nomeProdotto || '');
     formData.append('prezzoIniz', this.prezzoIniz || '');
     formData.append('oreAsta', this.oreAsta || '');
@@ -79,7 +79,7 @@ export class AstaComponent implements OnInit {
     if (this.imageFile) {
       formData.append('image', this.imageFile, this.imageFile.name);
     } else if (this.url) {
-      formData.append('url', this.url); // If no file, add the image URL or base64
+      formData.append('url', this.url); 
     }
   
     this.RestService.creaAsta(formData).subscribe(
@@ -92,7 +92,7 @@ export class AstaComponent implements OnInit {
   creaAstaAlRibasso() {
     const formData = new FormData();
   
-    formData.append('titoloAsta', this.titoloAsta || ''); // Ensure values are not empty
+    formData.append('titoloAsta', this.titoloAsta || ''); 
     formData.append('nomeProdotto', this.nomeProdotto || '');
     formData.append('prezzoIniz', this.prezzoIniz || '');
     formData.append('oreAsta', this.oreAsta || '');
@@ -105,7 +105,7 @@ export class AstaComponent implements OnInit {
     if (this.imageFile) {
       formData.append('image', this.imageFile, this.imageFile.name);
     } else if (this.url) {
-      formData.append('url', this.url); // If no file, add the image URL or base64
+      formData.append('url', this.url); 
     }
   
     this.RestService.creaAstaRibasso(formData).subscribe(
@@ -118,7 +118,7 @@ export class AstaComponent implements OnInit {
   creaAstaInversa() {
     const formData = new FormData();
   
-    formData.append('titoloAsta', this.titoloAsta || ''); // Ensure values are not empty
+    formData.append('titoloAsta', this.titoloAsta || ''); 
     formData.append('nomeProdotto', this.nomeProdotto || '');
     formData.append('prezzoIniz', this.prezzoIniz || '');
     formData.append('oreAsta', this.oreAsta || '');
@@ -128,7 +128,7 @@ export class AstaComponent implements OnInit {
     if (this.imageFile) {
       formData.append('image', this.imageFile, this.imageFile.name);
     } else if (this.url) {
-      formData.append('url', this.url); // If no file, add the image URL or base64
+      formData.append('url', this.url); 
     }
   
     this.RestService.creaAsta(formData).subscribe(
@@ -144,12 +144,12 @@ export class AstaComponent implements OnInit {
   }
 
   astaAlRibasso() {
-    console.log('Switching to auction at ribasso'); // Debug output
+    console.log('Switching to auction at ribasso');
     this.tipoAsta = 'ribasso';
   }
 
   astaInversa() {
-    console.log('Switching to reverse auction'); // Debug output
+    console.log('Switching to reverse auction');
     this.tipoAsta = 'inversa';
   }
 
@@ -167,10 +167,10 @@ export class AstaComponent implements OnInit {
 
         reader.onload = (e: any) => {
           previewElement.style.backgroundImage = `url(${e.target.result})`;
-          this.url = e.target.result; // Save base64 string of the image
+          this.url = e.target.result; 
         };
 
-        this.imageFile = file; // Store the file for uploading
+        this.imageFile = file; 
         reader.readAsDataURL(file);
       } else {
         previewElement.style.backgroundImage = '';

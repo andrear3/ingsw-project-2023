@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
-
+import { Utente } from '../_models/utente-model';
 @Component({
   selector: 'app-auction-view',
   standalone: true,
@@ -35,7 +35,8 @@ export class AuctionViewComponent implements OnInit {
     private restService: RestService,
     private authService: AuthService
   ) {}
-
+  public tipoAsta: string = '';
+  utenteAsta : Utente | null =null;
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.asta.astaId = +params['astaID'];
@@ -50,12 +51,15 @@ export class AuctionViewComponent implements OnInit {
       this.asta.UtenteNickname = params['UtenteNickname'];
       this.asta.offertaMax = +params['offertaMax'];
       this.asta.timeLeft = +params['timeLeft'];
-
+      this.asta.prezzoiniziale=params['prezzoiniziale'];
+      this.tipoAsta = params['tipoAsta'];
+      this.utenteAsta=this.authService.getUtente();
+      console.log('Tipo Asta:', this.tipoAsta);
       console.log('Asta data from URL:', this.asta);
+     console.log("creatore asta",this.utenteAsta);
       this.startDecrementTimer();
     });
   }
-
   makeOffer() {
     if (this.newOfferta !== null) {
       const offerData = {

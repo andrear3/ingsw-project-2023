@@ -56,7 +56,7 @@
     margin-bottom: 14%;
 }
 
-.productName, .timeLeft, .currentOffer {
+.productName, .timeLeft, .currentOffer,.prezzoC,.decremento {
     display: flex;
     flex-direction: column; /* Disporre il contenuto verticalmente all'interno di ciascuna casella */
     justify-content: left; /* Allinea il contenuto verticalmente */
@@ -75,7 +75,7 @@
 
 }
 
-.productName label, .timeLeft label, .currentOffer label {
+.productName label, .timeLeft label, .currentOffer label , .prezzoC label ,.decremento label {
     display: flex;
     font-size: 14px;
     color: #727272aa;
@@ -85,12 +85,12 @@
 }
 .photoAuctionContainer{
     position: relative;
-    width: 100%; /* Imposta il contenitore per occupare il 100% della larghezza disponibile */
-    height: 600px; /* Imposta un'altezza fissa per il contenitore, puoi cambiare questo valore */
-    border: 2px solid #AAAA; /* Correggi il colore del bordo */
+    width: 100%; 
+    height: 600px; 
+    border: 2px solid #AAAA; 
     border-radius: 5px;
     margin-bottom: 2%;
-    overflow: hidden; /* Assicura che l'immagine non esca dai bordi del contenitore */
+    overflow: hidden; 
     box-sizing: border-box;
 }
    
@@ -98,19 +98,19 @@
 .boxOffer{
     color: #727272aa;
     display: flex;
-    flex-direction: column; /* Disporre l'etichetta sopra il box */
-    align-items: center; /* Allinea l'etichetta e il contenuto al centro */
+    flex-direction: column; 
+    align-items: center; 
     border: 2px solid #AAAA;
     border-radius: 20px;
     width: 100%;
     height: 40%;
-    margin-bottom: 10%; /* Centra l'elemento orizzontalmente */
+    margin-bottom: 10%; 
    
 }
 .boxOffer label{
     display: block;
     font-size: 14px;
-    color: #727272aa; /* Colore del testo delle etichette */
+    color: #727272aa; 
     position: relative;
     text-align: left;
     margin-top: 5%; 
@@ -128,16 +128,19 @@
 }
 .photoProfileContainer{
     position: relative;
-    width: 40%; 
-    height: 100%; 
+    width: 100px; 
+    height: 90px; 
     min-height: 80px; 
     max-height: 120px; 
     border: 2px solid ie-hex-str($color: #AAAA);
     border-radius: 5px;
     box-sizing: border-box;
     left: 80%; 
-    margin-bottom: 140%;
+    margin-bottom: 310px;
     min-width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .auction-image {
 width: 100%; 
@@ -156,9 +159,11 @@ width: 100%;
     align-items: flex-start;
     box-sizing: border-box;
     padding-bottom: 3rem; 
+    background-color: transparent;
 }
 
 .description {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -180,3 +185,18 @@ width: 100%;
     margin-bottom: 5px;
     text-align: left;
 }
+
+.photoProfileContainer img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
+    border-radius: 5px; 
+}
+  
+  .auction-image {
+    width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+        display: block; 
+    }

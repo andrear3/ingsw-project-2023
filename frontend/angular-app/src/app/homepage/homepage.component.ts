@@ -47,7 +47,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   ];
   optionAsta: string[] = ['Classica', 'Inversa', 'Al Ribasso'];
   asteFiltrate: Asta[] = [];
-  tipoAsta: string = 'classica';
+  tipoAsta: string = 'Classica';
 
   constructor(
     private restService: RestService,
@@ -121,7 +121,22 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   navigateToviewAsta(asta: Asta) {
     console.log(asta);
-    this.router.navigate(['/auctionView', asta]);
+    this.router.navigate(['/auctionView', {
+      astaID: asta.astaId,
+      nomeBeneInVendita: asta.nomeBeneInVendita,
+      titolo: asta.titolo,
+      categoria: asta.categoria,
+      tipoBeneInVendita: asta.tipoBeneInVendita,
+      descrizioneAsta: asta.descrizioneAsta,
+      dataFineAsta: asta.dataFineAsta,
+      statusAsta: asta.statusAsta,
+      url: encodeURIComponent(asta.url),
+      UtenteNickname: asta.UtenteNickname,
+      offertaMax: asta.offertaMax,
+      timeLeft: asta.timeLeft,
+      tipoAsta: this.tipoAsta // Passing tipoAsta to the AuctionViewComponent
+    }]);
+    
   }
 
   filterResults(event: Event) {
@@ -143,7 +158,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
     console.log('Selected option:', selectedValue);
 
     if (selectedValue == 'Al Ribasso') {
-      this.tipoAsta == 'Al Ribasso';
+      this.tipoAsta ='Al Ribasso';
       this.subscriptions.add(
         this.restService.getAstaRibasso().subscribe({
           next: (response: { aste: Asta[]; userInfo: Utente }) => {
@@ -160,7 +175,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
     }
 
     if (selectedValue == 'Classica') {
-      this.tipoAsta == 'Classica';
+      this.tipoAsta = 'Classica';
       this.subscriptions.add(
         this.restService.getAsta().subscribe({
           next: (response: { aste: Asta[]; userInfo: Utente }) => {

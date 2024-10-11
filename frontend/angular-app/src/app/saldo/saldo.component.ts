@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { Utente } from '../_models/utente-model';
 import { PrelevaSaldoComponent } from '../preleva-saldo/preleva-saldo.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AggiungiSaldoComponent } from '../aggiungi-saldo/aggiungi-saldo.component';
 @Component({
   selector: 'app-saldo',
   standalone: true,
@@ -55,8 +56,12 @@ export class SaldoComponent {
   }
   openDialogSaldoPreleva(){
     this.dialogRef.open(PrelevaSaldoComponent)
+    this.dialogRef.closeAll;
   }
-  
+  openDialogSaldoAggiungi(){
+    this.dialogRef.open(AggiungiSaldoComponent)
+    this.dialogRef.closeAll;
+  }
 
 
 

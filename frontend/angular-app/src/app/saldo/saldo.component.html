@@ -1,7 +1,7 @@
 <h2>Saldo</h2>
 <h2>{{utente?.saldo}}</h2>
 <div class="row-BTN">
-    <button class="aggiungi">Aggiungi</button>
-    <button class="preleva">Preleva</button>
+    <button class="aggiungi" (click)="openDialogSaldoAggiungi()">Aggiungi</button>
+    <button class="preleva"(click)="openDialogSaldoPreleva()">Preleva</button>
     
   </div>
