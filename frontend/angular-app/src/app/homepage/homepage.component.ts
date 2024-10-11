@@ -143,14 +143,13 @@ export class HomepageComponent implements OnInit, OnDestroy {
     console.log('Selected option:', selectedValue);
 
     if (selectedValue == 'Al Ribasso') {
-      this.tipoAsta == 'Al Ribasso';
+      this.tipoAsta = 'Al Ribasso';
       this.subscriptions.add(
         this.restService.getAstaRibasso().subscribe({
           next: (response: { aste: Asta[]; userInfo: Utente }) => {
             this.aste = response.aste;
             this.asteFiltrate = [...this.aste];
-            this.utente = response.userInfo;
-            this.startDecrementTimer();
+
           },
           error: (err: any) => {
             console.error('Error fetching data:', err);
@@ -160,14 +159,13 @@ export class HomepageComponent implements OnInit, OnDestroy {
     }
 
     if (selectedValue == 'Classica') {
-      this.tipoAsta == 'Classica';
+      this.tipoAsta = 'Classica';
       this.subscriptions.add(
         this.restService.getAsta().subscribe({
           next: (response: { aste: Asta[]; userInfo: Utente }) => {
             this.aste = response.aste;
             this.asteFiltrate = [...this.aste];
-            this.utente = response.userInfo;
-            this.startDecrementTimer();
+
           },
           error: (err: any) => {
             console.error('Error fetching data:', err);
@@ -177,11 +175,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
     }
   }
   filterResultsCategoria(event: MatAutocompleteSelectedEvent) {
-    const selectedValue = event.option.value; // Get the selected category
+    const selectedValue = event.option.value; 
     this.asteFiltrate = this.aste.filter(
       (asta) => asta.categoria === selectedValue
     );
-    console.log('Selected option:', selectedValue); // Log the selected value
-    console.log('Filtered Aste:', this.asteFiltrate); // Log the filtered result
+    console.log('Selected option:', selectedValue); 
+    console.log('Filtered Aste:', this.asteFiltrate); 
   }
 }

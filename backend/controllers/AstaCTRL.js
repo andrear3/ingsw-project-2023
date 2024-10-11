@@ -115,6 +115,74 @@ export class AstaCTRL {
     }
   }
 
+  static async creaAstaRibasso(req) {
+    const transaction = await Asta.sequelize.transaction();
+
+    try {
+      const {
+        titoloAsta,
+        nomeProdotto,
+        prezzoIniz,
+        oreAsta,
+        categoria,
+        descrizione,
+        prezzoMinSegreto,
+        decrementoTimer,
+        valoreDecremento,
+      } = req.body;
+
+      const user = await Utente.findOne({ where: { email: req.user.email } });
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      const fileUrl = req.file ? req.file.filename : null;
+      const utenteNickname = user.nickname;
+
+      const astaData = {
+        nomeBeneInVendita: nomeProdotto,
+        titolo: titoloAsta,
+        categoria: categoria,
+        tipoBeneInVendita: "articolo",
+        descrizioneAsta: descrizione,
+        prezzoiniziale: parseFloat(prezzoIniz),
+        dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
+        statusAsta: "inVendita",
+        url: fileUrl,
+        UtenteNickname: utenteNickname,
+      };
+
+      // Create auction and log the result
+      const asta = await Asta.create(astaData, { transaction });
+      console.log("Asta created:", asta); // Log the created auction
+
+      const astaAlRibassoData = {
+        prezzoMinSegreto: parseFloat(prezzoMinSegreto),
+        decrementoTimer: parseInt(decrementoTimer, 10),
+        valoreDecremento: parseFloat(valoreDecremento),
+        AstumAstaID: asta.astaID, // Ensure this is set correctly
+      };
+
+      // Log the data to be used for AstaAlRibasso
+      console.log("AstaAlRibasso data:", astaAlRibassoData);
+
+      await AstaAlRibasso.create(astaAlRibassoData, { transaction });
+
+      await transaction.commit();
+
+      console.log("Asta con ribasso creata con successo:", asta);
+      return asta;
+    } catch (error) {
+      await transaction.rollback();
+      console.error(
+        "Errore durante la creazione dell'asta con ribasso:",
+        error
+      );
+      throw error;
+    }
+  }
+
   static async recuperaAsteAttive() {
     try {
       // First, get the IDs of Asta that should be excluded
@@ -160,16 +228,16 @@ export class AstaCTRL {
   static async recuperaAsteAlRibassoAttive() {
     try {
       const activeAstaAlRibasso = await AstaAlRibasso.findAll({
-        attributes: ["AstumAstaID"], 
+        attributes: ["AstumAstaID"],
       });
-  
+
       const activeAstaIDs = activeAstaAlRibasso.map((item) => item.AstumAstaID);
-  
+
       if (activeAstaIDs.length === 0) {
         console.log("Nessuna asta al ribasso attiva");
         return [];
       }
-  
+
       const astasAlRibasso = await Asta.findAll({
         where: {
           astaID: {
@@ -187,24 +255,44 @@ export class AstaCTRL {
               "prezzoMinSegreto",
               "decrementoTimer",
               "valoreDecremento",
-            ], 
+            ],
           },
         ],
       });
-  
+
       if (astasAlRibasso.length > 0) {
         console.log("Aste al ribasso attive:", astasAlRibasso);
       } else {
         console.log("Nessuna asta al ribasso è attiva");
       }
-  
+
       return astasAlRibasso;
     } catch (error) {
       console.error("Errore nel recupero aste al ribasso:", error);
       throw error;
     }
   }
-  
+
+  static async ottieniPrezzoCorrenteAstaRibasso(astaID) {
+    try {
+      const asta = await Asta.findOne({
+        where: { astaID },
+      });
+
+      if (!asta) {
+        console.log("Asta non trovata.");
+        return null;
+      }
+
+      return asta.prezzoiniziale;
+    } catch (error) {
+      console.error(
+        "Errore nel recuperare il prezzo iniziale dell'asta:",
+        error
+      );
+      throw error;
+    }
+  }
 
   static async getTimeLeftForAsteByIds(ids) {
     try {
@@ -310,71 +398,97 @@ export class AstaCTRL {
   }
 
   //ASTA AL RIBASSO
-  static async creaAstaRibasso(req) {
-    const transaction = await Asta.sequelize.transaction();
-
+  static async gestisciAstaAlRibasso() {
     try {
-      const {
-        titoloAsta,
-        nomeProdotto,
-        prezzoIniz,
-        oreAsta,
-        categoria,
-        descrizione,
-        prezzoMinSegreto,
-        decrementoTimer,
-        valoreDecremento,
-      } = req.body;
+      // Retrieve active downward auctions
+      const asteAlRibassoAttive = await AstaAlRibasso.findAll({
+        where: {
+          // You can add any additional filters here if necessary
+        },
+      });
 
-      const user = await Utente.findOne({ where: { email: req.user.email } });
+      const currentTime = new Date();
 
-      if (!user) {
-        throw new Error("User not found");
+      for (let astaRibasso of asteAlRibassoAttive) {
+        // Retrieve the corresponding Asta based on AstumAstaID
+        const asta = await Asta.findOne({
+          where: {
+            astaID: astaRibasso.AstumAstaID,
+            statusAsta: "inVendita",
+            dataFineAsta: { [Op.gt]: currentTime }, // Only future auctions
+          },
+        });
+
+        // Check if the Asta was found
+        if (!asta) {
+          console.log(
+            `Asta non trovata per l'asta al ribasso ID: ${astaRibasso.id}`
+          );
+          continue; // Skip to the next iteration if Asta is not found
+        }
+
+        const timeSinceLastDecrement = currentTime - astaRibasso.updatedAt; // Use updatedAt from AstaAlRibasso
+
+        // Check if it's time to decrement the price
+        if (timeSinceLastDecrement >= astaRibasso.decrementoTimer * 1000) {
+          const newPrice = asta.prezzoiniziale - astaRibasso.valoreDecremento;
+
+          // Check if the new price is below the secret minimum price
+          if (newPrice <= astaRibasso.prezzoMinSegreto) {
+            // Update auction status to non-sold
+            asta.statusAsta = "nonVenduto";
+            await asta.save();
+
+            console.log(
+              `Asta al ribasso fallita. Il prezzo ha raggiunto il minimo segreto per l'asta con ID: ${asta.astaID}`
+            );
+            continue; // Skip to the next iteration
+          }
+
+          // Update the price and timestamp
+          asta.prezzoiniziale = newPrice;
+          asta.updatedAt = new Date(); // Update the timestamp of the Asta
+          await asta.save();
+
+          console.log(
+            `Prezzo ridotto per l'asta al ribasso con ID: ${asta.astaID}. Nuovo prezzo: ${newPrice}`
+          );
+        }
+
+        // Check for the maximum offer
+        const offertaMassima = await OffertaCTRL.trovaOffertaMassimaPerAsta(
+          asta.astaID
+        );
+
+        if (offertaMassima) {
+          asta.statusAsta = "venduto";
+          asta.prezzofinale = offertaMassima.valore;
+          await asta.save();
+
+          console.log(
+            `Asta al ribasso venduta a ${offertaMassima.UtenteNickname} per il prezzo di ${offertaMassima.valore}`
+          );
+        }
       }
-
-      const fileUrl = req.file ? req.file.filename : null;
-      const utenteNickname = user.nickname;
-
-      const astaData = {
-        nomeBeneInVendita: nomeProdotto,
-        titolo: titoloAsta,
-        categoria: categoria,
-        tipoBeneInVendita: "articolo",
-        descrizioneAsta: descrizione,
-        prezzoiniziale: parseFloat(prezzoIniz),
-        dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
-        statusAsta: "inVendita",
-        url: fileUrl,
-        UtenteNickname: utenteNickname,
-      };
-
-      // Create auction and log the result
-      const asta = await Asta.create(astaData, { transaction });
-      console.log("Asta created:", asta); // Log the created auction
-
-      const astaAlRibassoData = {
-        prezzoMinSegreto: parseFloat(prezzoMinSegreto),
-        decrementoTimer: parseInt(decrementoTimer, 10),
-        valoreDecremento: parseFloat(valoreDecremento),
-        AstumAstaID: asta.astaID, // Ensure this is set correctly
-      };
-
-      // Log the data to be used for AstaAlRibasso
-      console.log("AstaAlRibasso data:", astaAlRibassoData);
-
-      await AstaAlRibasso.create(astaAlRibassoData, { transaction });
-
-      await transaction.commit();
-
-      console.log("Asta con ribasso creata con successo:", asta);
-      return asta;
     } catch (error) {
-      await transaction.rollback();
-      console.error(
-        "Errore durante la creazione dell'asta con ribasso:",
-        error
-      );
-      throw error;
+      console.error("Errore nella gestione delle aste al ribasso:", error);
+      throw error; // Rethrow the error to propagate it up
     }
+  }
+
+  static avviaControlloAsteAlRibasso() {
+    // Set an interval to manage downward auctions every 60 seconds
+    const intervalId = setInterval(async () => {
+      try {
+        await AstaCTRL.gestisciAstaAlRibasso();
+      } catch (error) {
+        console.error(
+          "Errore durante il controllo delle aste al ribasso:",
+          error
+        );
+        // Optionally, clear the interval if there's an error
+        clearInterval(intervalId);
+      }
+    }, 10000);
   }
 }

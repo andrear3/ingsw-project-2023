@@ -70,7 +70,7 @@ export class OffertaCTRL {
       throw error;
     }
   }
-  
+
   static async trovaOffertaMassimaPerAsta(AstumAstaID) {
     try {
       const offerte = await Offerta.findOne({
@@ -93,4 +93,5 @@ export class OffertaCTRL {
       throw error;
     }
   }
+
 }
