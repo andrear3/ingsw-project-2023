@@ -33,17 +33,7 @@ import { SaldoComponent } from '../saldo/saldo.component';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
-  email: string = '';
-  nome: string = '';
-  cognome: string = '';
-  nickname: string = '';
-  regione: string = '';
-  indirizzo: string = '';
-  link: string = '';
-  descrizione: string = '';
-  url:string='';
-  imageFile: any;
-  saldo: number | undefined;
+  
   constructor(
     private RestService: RestService,
     private AuthService: AuthService,

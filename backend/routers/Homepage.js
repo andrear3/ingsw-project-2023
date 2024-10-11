@@ -67,11 +67,6 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
 homepageRouter.get("/homepage/ribasso", authToken, async (req, res) => {
   try {
     let asteAlRibasso = await AstaCTRL.recuperaAsteAlRibassoAttive(); 
-    console.log("fratm");
-    console.log("fratm");
-    console.log(asteAlRibasso);
-    console.log("fratm");
-    console.log("fratm");
     let user = await UtenteCTRL.recuperaUtenteByEmail(req.user.email);
 
     if (!asteAlRibasso || asteAlRibasso.length === 0) {

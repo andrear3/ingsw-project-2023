@@ -37,27 +37,23 @@ export class AuctionViewComponent implements OnInit {
   ) {}
   public tipoAsta: string = '';
   utenteAsta : Utente | null =null;
+  
   ngOnInit() {
+    console.log('ASTA PASSATA DA SERVICE:');
+    console.log(this.authService.getAsta());
+    console.log('#################:');
+    this.tipoAsta=this.authService.getTipo();
+    this.asta=this.authService.getAsta();
+    this.utenteAsta=this.authService.getUtente();
+         this.startDecrementTimer();
+         
     this.route.params.subscribe((params) => {
-      this.asta.astaId = +params['astaID'];
-      this.asta.nomeBeneInVendita = params['nomeBeneInVendita'];
-      this.asta.titolo = params['titolo'];
-      this.asta.categoria = params['categoria'];
-      this.asta.tipoBeneInVendita = params['tipoBeneInVendita'];
-      this.asta.descrizioneAsta = params['descrizioneAsta'];
-      this.asta.dataFineAsta = new Date(params['dataFineAsta']);
-      this.asta.statusAsta = params['statusAsta'];
-      this.asta.url = decodeURIComponent(params['url']);
-      this.asta.UtenteNickname = params['UtenteNickname'];
-      this.asta.offertaMax = +params['offertaMax'];
-      this.asta.timeLeft = +params['timeLeft'];
-      this.asta.prezzoiniziale=params['prezzoiniziale'];
-      this.tipoAsta = params['tipoAsta'];
-      this.utenteAsta=this.authService.getUtente();
+     
+     
+
       console.log('Tipo Asta:', this.tipoAsta);
       console.log('Asta data from URL:', this.asta);
      console.log("creatore asta",this.utenteAsta);
-      this.startDecrementTimer();
     });
   }
   makeOffer() {
