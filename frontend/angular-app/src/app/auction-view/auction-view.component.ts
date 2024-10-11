@@ -37,6 +37,9 @@ export class AuctionViewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('ASTA PASSATA DA SERVICE:');
+    console.log(this.authService.getAsta());
+    console.log('#################:');
     this.route.params.subscribe((params) => {
       this.asta.astaId = +params['astaID'];
       this.asta.nomeBeneInVendita = params['nomeBeneInVendita'];

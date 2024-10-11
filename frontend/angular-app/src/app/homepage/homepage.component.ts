@@ -120,6 +120,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   navigateToviewAsta(asta: Asta) {
+    this.authService.setAsta(asta);
     console.log(asta);
     this.router.navigate(['/auctionView', asta]);
   }
