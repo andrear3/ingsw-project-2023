@@ -22,7 +22,7 @@ export class AuthService {
     return this.jwtoken;
   }
 
-  setUtente(utente: Utente|null) {
+  setUtente(utente: Utente | null) {
     this.jwtutente = utente;
   }
 
@@ -30,7 +30,7 @@ export class AuthService {
     return this.jwtutente;
   }
 
-  setAsta(asta: Asta|null){
+  setAsta(asta: Asta | null) {
     this.currentAsta = asta;
   }
 
@@ -45,5 +45,4 @@ export class AuthService {
   setStatus(status: boolean): void {
     this.status.next(status);
   }
-  
 }
