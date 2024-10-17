@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
 import { SaldoComponent } from '../saldo/saldo.component';
 
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -64,6 +65,7 @@ ngOnInit() {
 }
 openDialogSaldo(){
   this.dialogRef.open(SaldoComponent)
+  
 }
 
 

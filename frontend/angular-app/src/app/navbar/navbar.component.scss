@@ -20,109 +20,53 @@
 
   }
  
-  .boxSearch{
-    width: 350px;
-    height: 25px;
-    position:relative;
-    border-radius: 20px;
-    text-align: left;
-    position: relative;
-    margin-left: 80%;
-  }
-  .boxCategoria{
-    width: 100px;
-    height: 25px;
-    border-radius: 20px;
-    text-align: left;
-    position: relative;
-    margin-left: 320px;
-  }
-  .icone{
-    display: flex;
-    align-items: left;
-    gap: 60px;
-    margin: 0 auto;
-    margin-right: 40%;
- }
-  .auctionIcon{
-    background-color: #22A2EA;
-    color: white;
-    border: none;
-    width: 35px;
-    height: 35px;
-    position: relative;
-    margin-left: 100px;
-    fill:white;
-    cursor: pointer; 
-  }
   
-
-
-  .auctionIcon label{
-    background-color: #22A2EA;
-    color:white;
-    border: none;
-    align-items: center;
+  .icone {
     display: flex;
-    font-size: 10px;
-    flex-direction: column;
-    margin: 2px;
-  }
-  .dashboardIcon,.asteIcon{
+    justify-content: center; /* Centra le icone orizzontalmente */
+    align-items: center;     /* Centra le icone verticalmente */
+    width: 50px;
+    height: 50px;
+    margin: 0;               /* Rimuovi tutti i margini */
+    padding-right: 50%;              /* Rimuovi tutti i padding */
+    gap: 60px;               /* Distanza tra le icone */
+}
+
+
+.auctionIcon, .dashboardIcon, .asteIcon, .userIcon, .changeProfile {
     background-color: #22A2EA;
     color: white;
-    width: 35px;
-    height: 35px;
     border: none;
+    width: 50px;
+    height: 50px;
     position: relative;
-    //margin-left: 170px;
-    fill:white;
+    fill: white;
     cursor: pointer;
-  }
-  .dashboardIcon label,.asteIcon label{
-    color: white;
-    align-items: center;
     display: flex;
-    font-size: 10px;
     flex-direction: column;
-    margin: 2px;
-  }
-  .userIcon{
-    color: white;
-    background-color: #22A2EA;
-    width: 35px;
-    height: 35px;
-    border: none;
-    position: relative;
-    fill:white;
-    cursor: pointer;
-  }
-  .userIcon label{
-    color: white;
-
     align-items: center;
-    display: flex;
-    font-size: 10px;
-    flex-direction: column;
-    margin: 2px;
-  }
-  .changeProfile{
-    color: white;
-    background-color: #22A2EA;
-    width: 35px;
-    height: 35px;
-    border: none;
-    position: relative;
-    fill:white;
-    cursor: pointer;
-  }
-  .changeProfile label{
-    color: white;
+    justify-content: center;
+}
 
+.auctionIcon label, .dashboardIcon label, .asteIcon label, .userIcon label, .changeProfile label {
+    color: white;
+    font-size: 12px;
+    margin-top: 4px; /* Spaziatura tra icona e testo */
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    display: flex;
-    font-size: 10px;
-    flex-direction: column;
-    margin: 2px;
-  }
+}
 
+/* Regola il contenitore per adattarsi a varie risoluzioni */
+@media (max-width: 768px) {
+    .icone {
+        gap: 30px; /* Riduce il gap su schermi più piccoli */
+    }
+}
+
+@media (max-width: 480px) {
+    .icone {
+        flex-direction: column; /* Dispone le icone in colonna su schermi molto piccoli */
+        gap: 20px;              /* Ulteriore riduzione del gap */
+    }
+}
