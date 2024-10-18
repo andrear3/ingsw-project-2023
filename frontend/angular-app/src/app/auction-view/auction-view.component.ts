@@ -40,23 +40,8 @@ export class AuctionViewComponent implements OnInit {
     console.log('ASTA PASSATA DA SERVICE:');
     console.log(this.authService.getAsta());
     console.log('#################:');
-    this.route.params.subscribe((params) => {
-      this.asta.astaId = +params['astaID'];
-      this.asta.nomeBeneInVendita = params['nomeBeneInVendita'];
-      this.asta.titolo = params['titolo'];
-      this.asta.categoria = params['categoria'];
-      this.asta.tipoBeneInVendita = params['tipoBeneInVendita'];
-      this.asta.descrizioneAsta = params['descrizioneAsta'];
-      this.asta.dataFineAsta = new Date(params['dataFineAsta']);
-      this.asta.statusAsta = params['statusAsta'];
-      this.asta.url = decodeURIComponent(params['url']);
-      this.asta.UtenteNickname = params['UtenteNickname'];
-      this.asta.offertaMax = +params['offertaMax'];
-      this.asta.timeLeft = +params['timeLeft'];
 
-      console.log('Asta data from URL:', this.asta);
-      this.startDecrementTimer();
-    });
+
   }
 
   makeOffer() {
