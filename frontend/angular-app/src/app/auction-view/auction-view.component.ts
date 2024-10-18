@@ -36,33 +36,23 @@ export class AuctionViewComponent implements OnInit {
     private authService: AuthService
   ) {}
   public tipoAsta: string = '';
-  utenteAsta : Utente | null =null;
-  
-  ngOnInit() {
-    console.log('ASTA PASSATA DA SERVICE:');
-    console.log(this.authService.getAsta());
-    console.log('#################:');
-    this.tipoAsta=this.authService.getTipo();
-    this.asta=this.authService.getAsta();
-    this.utenteAsta=this.authService.getUtente();
-         this.startDecrementTimer();
-         
-    this.route.params.subscribe((params) => {
-     
-     
+  utenteAsta: Utente | null = null;
 
-      console.log('Tipo Asta:', this.tipoAsta);
-      console.log('Asta data from URL:', this.asta);
-     console.log("creatore asta",this.utenteAsta);
-    });
+  ngOnInit() {
+    this.tipoAsta = this.authService.getTipo();
+    this.asta = this.authService.getAsta();
+    this.utenteAsta = this.authService.getUtente();
+    this.startDecrementTimer();
   }
   makeOffer() {
     if (this.newOfferta !== null) {
       const offerData = {
         valore: this.newOfferta,
         UtenteNickname: this.authService.getUtente()?.nickname,
-        AstumAstaID: this.asta.astaId,
+        AstumAstaID: this.asta.astaID,
       };
+
+      console.log(offerData);
 
       this.restService
         .postOffer(

@@ -148,7 +148,7 @@ export class RestService {
   postOffer(
     valore: number,
     UtenteNickname: string,
-    AstumAstaID: number
+    AstumAstaID: number | undefined
   ): Observable<any> {
     const url = `${this.apiUrl}/auctionView`;
     //prendo token per auth
