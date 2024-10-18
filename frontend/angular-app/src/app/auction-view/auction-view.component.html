@@ -12,9 +12,17 @@
     <nav>
       <app-navbar></app-navbar>
     </nav>
+    @if(tipoAsta==="Classica"){
     <div class="square">
       <div class="row1">
-        <div class="photoProfileContainer"></div>
+        <div class="photoProfileContainer">
+          <img
+            [src]="utenteAsta?.url || 'assets/placeholder.jpg'"
+            alt="Foto profilo"
+            class="auction-image"
+        
+          />
+        </div>
       </div>
       <div class="row2">
         <div class="photoAuctionContainer">
@@ -47,15 +55,69 @@
           {{ asta?.nomeBeneInVendita }}
         </div>
 
+ <label for="prezzoIniz">Offerta attuale:</label>
+        <div class="prezzoIniz" id="prezzo">{{ asta?.offertaMax }}</div>
         <label for="timeLeft">Tempo rimasto:</label>
         <div class="timeLeft" id="timeLeft">{{ getFormattedTime() }}</div>
 
         <label for="currentOffer">Offerta attuale:</label>
         <div class="currentOffer" id="currentOffer">{{ asta?.offertaMax }}</div>
       </div>
-      
+    
     </div>
-
+    }
+    @if(tipoAsta=="Al Ribasso"){
+        <div class="square">
+          <div class="row1">
+            <div class="photoProfileContainer">
+              <img
+              [src]="utenteAsta?.url || 'assets/placeholder.jpg'"
+              alt="Foto profilo"
+              class="auction-image"
+          
+            />
+            </div>
+          </div>
+          <div class="row2">
+            <div class="photoAuctionContainer">
+              <img [src]="asta?.url" alt="Auction Image" class="auction-image" />
+            </div>
+            <div class="box-container">
+             
+    
+              <button class="offerButton">Compra ora</button>
+              
+           
+            </div>
+            <div class="description-section">
+              <label for="descrizione">Descrizione</label>
+              <div class="description" id="description">
+                {{ asta?.descrizioneAsta }}
+              </div>
+            </div>
+            
+          </div>
+          <div class="row3">
+            <label for="productName">Nome del prodotto</label>
+            <div class="productName" id="productName">
+              {{ asta?.nomeBeneInVendita }}
+            </div>
+    
+            <label for="timeLeft">Tempo rimasto</label>
+            <div class="timeLeft" id="timeLeft">{{ getFormattedTime() }}</div>
+    
+            <label for="prezzoC">Prezzo corrente</label>
+            <div class="prezzoC" id="Prezzo">{{ asta?.prezzoiniziale }}</div>
+            <label for="decremento">Decremento</label>
+            <div class="decremento" id="Decremento">{{ asta?.offertaMax }}</div>
+          </div>
+          
+        
+        </div>
+    }
+    @if(tipoAsta=="Inversa"){
+      <p>fdsf</p>
+    }
     <script></script>
   </body>
 </html>

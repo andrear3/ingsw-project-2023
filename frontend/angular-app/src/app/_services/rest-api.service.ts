@@ -143,6 +143,7 @@ export class RestService {
   setTipoAsta(tipo: string) {
     this.tipoAstaSubject.next(tipo);
   }
+  
 
   postOffer(
     valore: number,

@@ -30,6 +30,7 @@ export interface Asta {
   tipoBeneInVendita: tipoBeneVenditaEnum;
   descrizioneAsta: string;
   prezzofinale: number;
+  prezzoiniziale:number;
   dataFineAsta: Date;
   statusAsta: statusAstaEnum;
   url: string;
@@ -39,4 +40,5 @@ export interface Asta {
   prezzoMinSegreto: number;
   decrementoTimer: number;
   valoreDecremento: number;
+
 }

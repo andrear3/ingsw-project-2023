@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
-
+import { Utente } from '../_models/utente-model';
 @Component({
   selector: 'app-auction-view',
   standalone: true,
@@ -35,7 +35,9 @@ export class AuctionViewComponent implements OnInit {
     private restService: RestService,
     private authService: AuthService
   ) {}
-
+  public tipoAsta: string = '';
+  utenteAsta : Utente | null =null;
+  
   ngOnInit() {
     console.log('ASTA PASSATA DA SERVICE:');
     console.log(this.authService.getAsta());
@@ -43,7 +45,6 @@ export class AuctionViewComponent implements OnInit {
 
 
   }
-
   makeOffer() {
     if (this.newOfferta !== null) {
       const offerData = {

@@ -9,20 +9,20 @@ body {
 }
 
 .background {
-    position: fixed; /* Posiziona il popup in modo fisso */
-    top: 80px; /* Posiziona il componente 20px dall'alto della pagina */
-    left: 50%; /* Allinea orizzontalmente al 50% */
-    transform: translateX(-50%); /* Centra orizzontalmente il popup */
+    position: fixed; 
+    top: 80px; 
+    left: 50%; 
+    transform: translateX(-50%); 
     
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; /* Distribuisce lo spazio tra gli elementi */
+    justify-content: space-between; 
     text-align: center;
-    background-color: white; /* Sfondo bianco per l'effetto popup */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Aggiungi ombra */
-    border-radius: 10px; /* Bordi arrotondati */
-    padding: 20px; /* Aggiungi padding per spazio interno */
+    background-color: white; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 10px; 
+    padding: 20px; 
 }
 
 .background label {
@@ -33,7 +33,7 @@ body {
 .buttonContainer {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Spazio tra i bottoni */
+    gap: 10px; 
 }
 
 .classica-BTN, .inversa-BTN {

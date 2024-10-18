@@ -13,6 +13,7 @@ export class AuthService {
   public currentAsta: Asta | null = null;
   public jwtutente: Utente | null = null;
   private status = new BehaviorSubject<boolean>(false);
+  public tipo: string= '';
 
   setToken(par: string) {
     this.jwtoken = par;
@@ -44,5 +45,11 @@ export class AuthService {
 
   setStatus(status: boolean): void {
     this.status.next(status);
+  }
+  setTipo(tipo:string){
+    this.tipo=tipo;
+  }
+  getTipo(){
+    return this.tipo;
   }
 }

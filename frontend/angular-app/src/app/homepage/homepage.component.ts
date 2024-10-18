@@ -47,7 +47,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   ];
   optionAsta: string[] = ['Classica', 'Inversa', 'Al Ribasso'];
   asteFiltrate: Asta[] = [];
-  tipoAsta: string = 'classica';
+  tipoAsta: string = 'Classica';
 
   constructor(
     private restService: RestService,
@@ -119,10 +119,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
     return dDisplay + hDisplay + mDisplay + sDisplay.trim();
   }
 
-  navigateToviewAsta(asta: Asta) {
+ 
+  navigateToviewAsta(asta: Asta, tipoAsta:string) {
     this.authService.setAsta(asta);
+    this.authService.setTipo(this.tipoAsta);
     console.log(asta);
-    this.router.navigate(['/auctionView', asta]);
+    this.router.navigate(['/auctionView']);
   }
 
   filterResults(event: Event) {
