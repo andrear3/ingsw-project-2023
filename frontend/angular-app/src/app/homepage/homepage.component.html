@@ -73,15 +73,24 @@
                 <h3 class="card-subtitle">{{ asta?.nomeBeneInVendita || 'Nome non disponibile' }}</h3>
                 <div class="card-info">
                   <p><strong>Categoria:</strong> {{ asta?.categoria || 'N/A' }}</p>
+                  <p><strong>TIpo asta:</strong> {{ tipoAsta || 'N/A' }}</p>
                   <p><strong>Tipo:</strong> {{ asta?.tipoBeneInVendita || 'N/A' }}</p>
                   <p>
                     <strong>Data di Fine Asta:</strong>
                     {{ asta?.dataFineAsta ? (asta.dataFineAsta | date) : 'N/A' }}
                   </p>
                   <p><strong>Creata da:</strong> {{ asta?.UtenteNickname || 'N/A' }}</p>
+                  @if(tipoAsta=='Classica'|| tipoAsta=='Inversa'){
                   <p class="danger">
                     <strong>Offerta corrente: {{ asta?.offertaMax || 0 }}€</strong>
-                  </p>
+                  </p> 
+                }
+                @if(tipoAsta=='AlRibasso'){
+                  <p class="danger">
+                    <strong>Prezzo corrente : {{ asta?.prezzoiniziale|| 0 }}€</strong>
+                  </p> 
+                }
+
                   <p class="danger">
                     <strong>Tempo restante: {{ getFormattedTime(asta) }}</strong>
                   </p>
