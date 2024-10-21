@@ -46,6 +46,22 @@ export class UtenteCTRL {
     }
   }
 
+  static async recuperaUtenteByNickname(nickname) {
+    try {
+      const user = await Utente.findOne({ where: { nickname } });
+  
+      if (!user) {
+        throw new Error(`User with nickname ${nickname} not found`);
+      }
+  
+      return user;
+    } catch (error) {
+      console.error(`Error retrieving user with nickname ${nickname}:`, error);
+      throw error;
+    }
+  }
+
+
   static async stampaTuttiUtenti() {
     try {
       const utenti = await Utente.findAll();

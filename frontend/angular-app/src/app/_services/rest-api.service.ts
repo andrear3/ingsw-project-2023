@@ -223,4 +223,21 @@ export class RestService {
     console.log(formData);
     return this.http.post(`${this.apiUrl}/editprofile`, formData, httpOptions);
   }
-}
+
+
+  //getUtente con nickname per visualizzaPRofilo 
+  getUtenteByNickname(nickname: string): Observable<Utente> {
+    const token = this.authService.getToken(); // Ottieni il token di autorizzazione
+  
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`, // Aggiungi l'autorizzazione se necessaria
+      }),
+    };
+  
+    return this.http.get<Utente>(`${this.apiUrl}/utente/nickname/${nickname}`, httpOptions);
+  }
+  
+  }
+

@@ -68,6 +68,26 @@ app.use(productRouter);
 app.use(dashboardRouter);
 app.use(general);
 
+
+app.get('/Utente/nickname/:nickname', async (req, res) => {
+  const { nickname } = req.params;
+  try {
+    const user = await UtenteCTRL.recuperaUtenteByNickname(nickname);
+    if (!user) {
+      return res.status(404).json({ message: 'Utente non trovato' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error('Errore nel recupero dell\'utente:', error);
+    res.status(500).json({ message: 'Errore interno del server' });
+  }
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+
+
