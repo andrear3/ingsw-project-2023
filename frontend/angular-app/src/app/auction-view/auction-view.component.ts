@@ -74,34 +74,25 @@ export class AuctionViewComponent implements OnInit {
     }
   }
 
-
   //da usare
   makeOfferRibasso() {
-    if (this.newOfferta !== null) {
-      const offerData = {
-        UtenteNickname: this.authService.getUtente()?.nickname,
-        AstumAstaID: this.asta.astaID,
-      };
+    const offerData = {
+      UtenteNickname: this.authService.getUtente()?.nickname,
+      AstumAstaID: this.asta.astaID,
+    };
 
-      console.log(offerData);
+    console.log(offerData);
 
-      this.restService
-        .postOfferRibasso(
-          String(offerData.UtenteNickname),
-          offerData.AstumAstaID
-        )
-        .subscribe({
-          next: (response) => {
-            console.log('Offerta:', response);
-          },
-          error: (err) => {
-            console.error('Errore:', err);
-          },
-        });
-    } else {
-      console.log(this.newOfferta);
-      console.log('Offerta non valida');
-    }
+    this.restService
+      .postOfferRibasso(String(offerData.UtenteNickname), offerData.AstumAstaID)
+      .subscribe({
+        next: (response) => {
+          console.log('Offerta:', response);
+        },
+        error: (err) => {
+          console.error('Errore:', err);
+        },
+      });
   }
 
   startDecrementTimer() {

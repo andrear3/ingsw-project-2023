@@ -171,7 +171,7 @@ export class RestService {
     UtenteNickname: string,
     AstumAstaID: number | undefined
   ): Observable<any> {
-    const url = `${this.apiUrl}/auctionViewRibasso`;
+    const url = `${this.apiUrl}/auctionRibassoView`;
 
     const token = this.authService.getToken();
 
