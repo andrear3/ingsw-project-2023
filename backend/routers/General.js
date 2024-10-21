@@ -8,7 +8,6 @@ import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
-import { UtenteCTRL } from "../controllers/UtenteCTRL.js";
 
 export const general = express.Router();
 

@@ -167,6 +167,24 @@ export class RestService {
     );
   }
 
+  postOfferRibasso(
+    UtenteNickname: string,
+    AstumAstaID: number | undefined
+  ): Observable<any> {
+    const url = `${this.apiUrl}/auctionViewRibasso`;
+
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.post(url, { UtenteNickname, AstumAstaID }, httpOptions);
+  }
+
   updateSaldo(mode: number, valore: number) {
     const url = `${this.apiUrl}/saldo`;
     const token = this.authService.getToken();
