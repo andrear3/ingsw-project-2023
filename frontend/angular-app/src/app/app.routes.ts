@@ -79,6 +79,11 @@ export const routes: Routes = [
   title: 'Saldo',
   component: SaldoComponent,
 },
+{
+  path: 'visualizzaProfilo',
+  title: 'VisualizaProfilo',
+  component: VisulizzaProfiloComponent,
+},
 
 { path: '**', redirectTo: '' } // Wildcard route for a 404 page
 

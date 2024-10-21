@@ -10,6 +10,8 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Utente } from '../_models/utente-model';
+import { Router,RouterLink } from '@angular/router';
+import { state } from '@angular/animations';
 @Component({
   selector: 'app-auction-view',
   standalone: true,
@@ -21,6 +23,7 @@ import { Utente } from '../_models/utente-model';
     MatIconModule,
     CommonModule,
     FormsModule,
+    RouterLink,
   ],
   templateUrl: './auction-view.component.html',
   styleUrls: ['./auction-view.component.scss'],
@@ -33,7 +36,8 @@ export class AuctionViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private restService: RestService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {}
   public tipoAsta: string = '';
   utenteAsta: Utente | null = null;
@@ -99,4 +103,11 @@ export class AuctionViewComponent implements OnInit {
 
     return dDisplay + hDisplay + mDisplay + sDisplay.trim();
   }
+ visualProfile(){
+  
+  this.router.navigate(['/visualizzaProfilo']);
+  console.log('utenten passato ',this.asta.UtenteNickname)
+ }
+
+
 }

@@ -72,7 +72,7 @@ export class LogInPageComponent {
                 await this.setTipoUtente('compratore');
                 
               }
-              resolve(); // Risolvi la Promise dopo che tutto è completato
+              resolve(); //  Promise dopo che tutto è completato
             } catch (err) {
               console.error('Errore durante setTipoUtente:', err);
               reject(err); // Rigetta se c'è un errore in setTipoUtente

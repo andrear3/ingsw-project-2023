@@ -15,7 +15,7 @@
     @if(tipoAsta==="Classica"){
     <div class="square">
       <div class="row1">
-        <div class="photoProfileContainer">
+        <div class="photoProfileContainer"(click)="visualProfile()">
           <img
             [src]="utenteAsta?.url || 'assets/placeholder.jpg'"
             alt="Foto profilo"
