@@ -7,6 +7,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
+import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
 
 export const general = express.Router();
 
@@ -137,4 +138,17 @@ general.post(
   }
 );
 
-
+general.post("/saldo", authToken, async (req, res) => {
+  try {
+    if (req.body.mode == 0) {
+      await UtenteCTRL.diminuisciSaldo(req.user.nickname, req.body.valore);
+      res.status(200).json({ message: "Update: Diminuisci" });
+    } else if (req.body.mode == 1){
+      await UtenteCTRL.aumentaSaldo(req.user.nickname, req.body.valore);
+      res.status(200).json({ message: "Update: Aumenta" });
+    }
+  } catch (error) {
+    console.error("Error creating auction:", error);
+    res.status(500).json({ message: "Error processing auction", error });
+  }
+});

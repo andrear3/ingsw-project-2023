@@ -22,18 +22,18 @@ productRouter.post("/auctionView", authToken, async (req, res) => {
 });
 
 productRouter.post("/auctionRibassoView", authToken, async (req, res) => {
-  const { UtenteNickname, astaID } = req.body;
+  const { UtenteNickname, AstumAstaID } = req.body;
 
-  if (!UtenteNickname || !astaID) {
+  if (!UtenteNickname || !AstumAstaID) {
     return res.status(400).json({ error: "Campi richiesti mancanti." });
   }
 
   try {
     const prezzoCorrente = await AstaCTRL.ottieniPrezzoCorrenteAstaRibasso(
-      astaID
+      AstumAstaID
     );
 
-    await OffertaCTRL.creaOfferta(prezzoCorrente, UtenteNickname, astaID);
+    await OffertaCTRL.creaOfferta(prezzoCorrente, UtenteNickname, AstumAstaID);
     await AstaCTRL.gestisciAstaAlRibasso();
 
     res

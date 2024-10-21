@@ -143,7 +143,6 @@ export class RestService {
   setTipoAsta(tipo: string) {
     this.tipoAstaSubject.next(tipo);
   }
-  
 
   postOffer(
     valore: number,
@@ -166,6 +165,36 @@ export class RestService {
       { valore, UtenteNickname, AstumAstaID },
       httpOptions
     );
+  }
+
+  postOfferRibasso(
+    UtenteNickname: string,
+    AstumAstaID: number | undefined
+  ): Observable<any> {
+    const url = `${this.apiUrl}/auctionRibassoView`;
+
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.post(url, { UtenteNickname, AstumAstaID }, httpOptions);
+  }
+
+  updateSaldo(mode: number, valore: number) {
+    const url = `${this.apiUrl}/saldo`;
+    const token = this.authService.getToken();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+    return this.http.post(url, { mode, valore }, httpOptions);
   }
 
   postDashboard(nickname: string): Observable<any> {
