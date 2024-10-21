@@ -35,6 +35,7 @@ export class AggiungiSaldoComponent {
     private RestService: RestService,
     private AuthService: AuthService,
     private router: Router
+    
   ){}
   utente : Utente | null = null ;
   private statusSubscription: Subscription = new Subscription();
@@ -51,5 +52,7 @@ export class AggiungiSaldoComponent {
       }
     );
   }
-
+aggiungiSaldo(){
+  this.RestService.updateSaldo(1,2);
+}
 }
