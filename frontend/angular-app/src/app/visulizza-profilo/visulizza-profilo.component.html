@@ -14,14 +14,25 @@
     </nav>
     <div class="square">
         <div class="row1">
-            <div class="photoProfileContainer"></div>
-            <label class="nome"></label>
-            <label class="citta">citta</label>
-            <label class="link">link</label>
+            <div class="photoProfileContainer"#photoPreview>
+               
+             
+                <img
+                [src]="'http://localhost:3000/images/' + utente?.url" alt="Foto profilo" 
+                alt="Foto profilo"
+                class="auction-image"
+            
+              />
+            
+    
+           
+            </div>
+            <label class="nome">{{utente?.nome}}</label>
+            <label class="link">{{utente?.link1}}</label>
         </div>
 
         <div class="row2">
-          <p class="descrizione">prova descrione jfi jeors g sgrsg s gsrg  srg srgrsg srg srg rsg rsgrg rsg rsg rsgrsgrsfjeoajfojoajejfoa jsnugj hsjg kgh kjsahgwahogkuhgouhwigouwhui whg hwug hwuig iuwdgh wuidg wuid ghwuidg hwuidgh widugh wui widg hiug foajfoeajfoajefjfoaejfoajfoiajfkjbngughoerwh  cazz cvaazaih  oaifhaof h</p>
+          <p class="descrizione">{{utente?.descrizione}}</p>
         </div>
         
         <div class="row3">

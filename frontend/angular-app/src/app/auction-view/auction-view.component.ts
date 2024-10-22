@@ -28,7 +28,7 @@ import { state } from '@angular/animations';
   templateUrl: './auction-view.component.html',
   styleUrls: ['./auction-view.component.scss'],
 })
-export class AuctionViewComponent implements OnInit {
+export class AuctionViewComponent  {
   asta: any = {};
   private intervalId: any;
   newOfferta: number | null = null;
@@ -41,13 +41,33 @@ export class AuctionViewComponent implements OnInit {
   ) {}
   public tipoAsta: string = '';
   utenteAsta: Utente | null = null;
+  nickname: string | null = null;
+  errorMessage: string | null = null;
+
 
   ngOnInit() {
     this.tipoAsta = this.authService.getTipo();
     this.asta = this.authService.getAsta();
-    this.utenteAsta = this.authService.getUtente();
+    console.log('nick da passare ',this.asta.nickname);
     this.startDecrementTimer();
+// serve a prendere l'immagine del profilo del creatore dellásta
+    this.nickname = this.asta.nickname;
+    console.log('il nickname', this.nickname);
+    if (this.nickname) {
+      this.restService.getUtenteByNickname(this.nickname).subscribe({
+        next: (data) => {
+          this.utenteAsta = data; // Memorizza i dati dell'utente
+          console.log('Utente trovato:', this.utenteAsta);
+        },
+        error: (err) => {
+          console.error('Errore nel recupero dell\'utente:', err);
+          this.errorMessage = 'Errore nel recupero delle informazioni dell\'utente';
+        },
+      });
+    }
   }
+
+
   makeOffer() {
     if (this.newOfferta !== null) {
       const offerData = {
@@ -126,7 +146,7 @@ export class AuctionViewComponent implements OnInit {
   }
  visualProfile(){
   
-  this.router.navigate(['/visualizzaProfilo']);
+  this.router.navigate(['/visualizzaProfilo',this.asta.UtenteNickname]);
   console.log('utenten passato ',this.asta.UtenteNickname)
  }
 

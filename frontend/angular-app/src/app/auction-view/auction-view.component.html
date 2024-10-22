@@ -17,7 +17,7 @@
       <div class="row1">
         <div class="photoProfileContainer"(click)="visualProfile()">
           <img
-            [src]="utenteAsta?.url || 'assets/placeholder.jpg'"
+            [src]="'http://localhost:3000/images/' + utenteAsta?.url" alt="Foto profilo" 
             alt="Foto profilo"
             class="auction-image"
         
@@ -71,7 +71,7 @@
           <div class="row1">
             <div class="photoProfileContainer">
               <img
-              [src]="utenteAsta?.url || 'assets/placeholder.jpg'"
+              [src]="'http://localhost:3000/images/' + utenteAsta?.url" alt="Foto profilo" 
               alt="Foto profilo"
               class="auction-image"
           

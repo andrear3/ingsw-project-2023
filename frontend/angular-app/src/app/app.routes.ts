@@ -80,7 +80,7 @@ export const routes: Routes = [
   component: SaldoComponent,
 },
 {
-  path: 'visualizzaProfilo',
+  path: 'visualizzaProfilo/:nickname',
   title: 'VisualizaProfilo',
   component: VisulizzaProfiloComponent,
 },

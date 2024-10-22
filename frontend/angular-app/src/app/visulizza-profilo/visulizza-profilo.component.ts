@@ -16,6 +16,8 @@ import { Subscription } from 'rxjs';
 import { Utente } from '../_models/utente-model';
 import { Asta } from '../_models/asta-model';
 import { Navigation } from '@angular/router';
+import { Route } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-visulizza-profilo',
   standalone: true,
@@ -39,13 +41,26 @@ export class VisulizzaProfiloComponent {
     private AuthService: AuthService,
     private router: Router,
     private dialogRef : MatDialog,
-   
+    private route: ActivatedRoute,
   ){}
-  private statusSubscription: Subscription = new Subscription();
-  utente: string | null = null;
+ 
+  nickname: string | null = null;
+  utente:Utente|null=null;
+  errorMessage: string | null = null;
   ngOnInit() {
-
-   
-  
+    this.nickname = this.route.snapshot.paramMap.get('nickname');
+    console.log('il nickname', this.nickname);
+    if (this.nickname) {
+      this.RestService.getUtenteByNickname(this.nickname).subscribe({
+        next: (data) => {
+          this.utente = data; // Memorizza i dati dell'utente
+          console.log('Utente trovato:', this.utente);
+        },
+        error: (err) => {
+          console.error('Errore nel recupero dell\'utente:', err);
+          this.errorMessage = 'Errore nel recupero delle informazioni dell\'utente';
+        },
+      });
+    }
   }
 }
