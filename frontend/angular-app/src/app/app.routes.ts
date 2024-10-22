@@ -21,6 +21,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ModificaProfiloComponent } from './modifica-profilo/modifica-profilo.component';
 import { SaldoComponent } from './saldo/saldo.component';
+import { ModPasswordComponent } from './mod-password/mod-password.component';
+import { EliminaProfiloComponent } from './elimina-profilo/elimina-profilo.component';
+import { LeMieAsteComponent } from './le-mie-aste/le-mie-aste.component';
 
 export const routes: Routes = [
   {
@@ -83,6 +86,21 @@ export const routes: Routes = [
   path: 'visualizzaProfilo/:nickname',
   title: 'VisualizaProfilo',
   component: VisulizzaProfiloComponent,
+},
+{
+  path: 'mod-password',
+  title: 'Mod-password',
+  component: ModPasswordComponent,
+},
+{
+  path: 'elimina-profilo',
+  title: 'Elimina-profilo',
+  component: EliminaProfiloComponent,
+},
+{
+  path: 'leMieAste',
+  title: 'LeMieAste',
+  component: LeMieAsteComponent,
 },
 
 { path: '**', redirectTo: '' } // Wildcard route for a 404 page

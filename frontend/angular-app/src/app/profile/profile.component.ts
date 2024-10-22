@@ -16,6 +16,8 @@ import { Utente } from '../_models/utente-model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
 import { SaldoComponent } from '../saldo/saldo.component';
+import { ModPasswordComponent } from '../mod-password/mod-password.component';
+import { EliminaProfiloComponent } from '../elimina-profilo/elimina-profilo.component';
 
 
 @Component({
@@ -67,7 +69,14 @@ openDialogSaldo(){
   this.dialogRef.open(SaldoComponent)
   
 }
-
+openDialogPass(){
+  this.dialogRef.open(ModPasswordComponent)
+  
+}
+openDialogElimina(){
+  this.dialogRef.open(EliminaProfiloComponent)
+  
+}
 
 
 }
