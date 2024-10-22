@@ -1,11 +1,16 @@
-
-import { Component ,ElementRef,OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
-import { Router,RouteConfigLoadEnd, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouteConfigLoadEnd,
+  RouterLink,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,41 +23,40 @@ import { Utente } from '../_models/utente-model';
 @Component({
   selector: 'app-aggiungi-saldo',
   standalone: true,
-  imports: [MatToolbarModule,
+  imports: [
+    MatToolbarModule,
     MatIconModule,
     MatAutocompleteModule,
     MatInputModule,
     RouterOutlet,
     CommonModule,
     FormsModule,
-    RouterLink,],
+    RouterLink,
+  ],
   templateUrl: './aggiungi-saldo.component.html',
-  styleUrl: './aggiungi-saldo.component.scss'
+  styleUrl: './aggiungi-saldo.component.scss',
 })
 export class AggiungiSaldoComponent {
   saldo: number | undefined;
   constructor(
-    private RestService: RestService,
+    private restService: RestService,
     private AuthService: AuthService,
     private router: Router
-    
-  ){}
-  utente : Utente | null = null ;
+  ) {}
+  utente: Utente | null = null;
   private statusSubscription: Subscription = new Subscription();
   ngOnInit() {
     this.statusSubscription = this.AuthService.getStatus().subscribe(
       (status: boolean) => {
         if (status) {
-      
           console.log(this.AuthService.getUtente());
-          this.utente=this.AuthService.getUtente();
-          
-          
-          }
+          this.utente = this.AuthService.getUtente();
+        }
       }
     );
   }
-aggiungiSaldo(){
-  this.RestService.updateSaldo(1,2);
-}
+  aggiungiSaldo() {
+    console.log('test');
+    this.restService.updateSaldo(1, 2);
+  }
 }
