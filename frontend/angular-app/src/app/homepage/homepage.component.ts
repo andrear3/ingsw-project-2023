@@ -161,6 +161,23 @@ export class HomepageComponent implements OnInit, OnDestroy {
       );
     }
 
+    if (selectedValue == 'Inversa') {
+      this.tipoAsta = 'Inversa';
+      this.subscriptions.add(
+        this.restService.getAstaInversa().subscribe({
+          next: (response: { aste: Asta[]; userInfo: Utente }) => {
+            this.aste = response.aste;
+            this.asteFiltrate = [...this.aste];
+
+          },
+          error: (err: any) => {
+            console.error('Error fetching data:', err);
+          },
+        })
+      );
+    }
+
+
     if (selectedValue == 'Classica') {
       this.tipoAsta = 'Classica';
       this.subscriptions.add(

@@ -39,7 +39,7 @@ import { Utente } from '../_models/utente-model';
 export class AggiungiSaldoComponent {
   saldo: number | undefined;
   constructor(
-    private RestService: RestService,
+    private restService: RestService,
     private AuthService: AuthService,
     private router: Router
   ) {}
@@ -56,7 +56,7 @@ export class AggiungiSaldoComponent {
     );
   }
   aggiungiSaldo() {
-    console.log("test");
-    this.RestService.updateSaldo(1, 2);
+    console.log('test');
+    this.restService.updateSaldo(1, 2);
   }
 }

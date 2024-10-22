@@ -39,6 +39,21 @@ export class RestService {
     return this.http.get<{ aste: Asta[]; userInfo: Utente }>(url, httpOptions);
   }
 
+  //DA TESTARE
+  getAstaInversa(): Observable<{ aste: Asta[]; userInfo: Utente }> {
+    const url = `${this.apiUrl}/homepage/inversa`;
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.get<{ aste: Asta[]; userInfo: Utente }>(url, httpOptions);
+  }
+
+
   getAstaRibasso(): Observable<{ aste: Asta[]; userInfo: Utente }> {
     const url = `${this.apiUrl}/homepage/ribasso`;
     const token = this.authService.getToken();
@@ -167,6 +182,53 @@ export class RestService {
     );
   }
 
+  //DA TESTAREEEEEEEEEEE
+  postOfferInversa(
+    valore: number,
+    UtenteNickname: string,
+    AstumAstaID: number | undefined
+  ): Observable<any> {
+    const url = `${this.apiUrl}/auctionInversaView`;
+    //prendo token per auth
+    const token = this.authService.getToken();
+    //options..
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.post(
+      url,
+      { valore, UtenteNickname, AstumAstaID },
+      httpOptions
+    );
+  }
+
+  updateSaldo(
+    mode: number,
+    valore: number
+  ): Observable<any> {
+    const url = `${this.apiUrl}/123`;
+    //prendo token per auth
+    const token = this.authService.getToken();
+    //options..
+    console.log(mode, valore, url);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.post(
+      url,
+      { mode, valore },
+      httpOptions
+    );
+  }
+
   postOfferRibasso(
     UtenteNickname: string,
     AstumAstaID: number | undefined
@@ -185,17 +247,7 @@ export class RestService {
     return this.http.post(url, { UtenteNickname, AstumAstaID }, httpOptions);
   }
 
-  updateSaldo(mode: number, valore: number) {
-    const url = `${this.apiUrl}/test`;
-    const token = this.authService.getToken();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    return this.http.post(url, { mode, valore }, httpOptions);
-  }
+ 
 
   postDashboard(nickname: string): Observable<any> {
     const url = `${this.apiUrl}/dashboard`;

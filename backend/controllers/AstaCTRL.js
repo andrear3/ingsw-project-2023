@@ -643,30 +643,41 @@ export class AstaCTRL {
 
   static async recuperaAsteInverseAttive() {
     try {
+      // Retrieve all active AstaInversa records
       const asteInverseAttive = await AstaInversa.findAll({
-        include: [
-          {
-            model: Asta,
-            where: {
-              statusAsta: "inVendita",
-              dataFineAsta: {
-                [Op.gt]: new Date(), // Aste non scadute
-              },
-            },
-          },
-        ],
+        attributes: ["AstumAstaID"], // Only fetch the reference IDs
       });
-
-      if (asteInverseAttive.length > 0) {
-        console.log("Aste inverse attive:", asteInverseAttive);
-      } else {
-        console.log("Nessuna asta inversa attiva.");
+  
+      const activeAstaIDs = asteInverseAttive.map((item) => item.AstumAstaID);
+  
+      if (activeAstaIDs.length === 0) {
+        console.log("Nessuna asta inversa attiva");
+        return [];
       }
-
-      return asteInverseAttive;
+  
+      // Fetch the corresponding records from Asta
+      const astasInverse = await Asta.findAll({
+        where: {
+          astaID: {
+            [Op.in]: activeAstaIDs,
+          },
+          statusAsta: "inVendita",
+          dataFineAsta: {
+            [Op.gt]: new Date(), // Only fetch active auctions
+          },
+        },
+      });
+  
+      if (astasInverse.length > 0) {
+        console.log("Aste inverse attive:", astasInverse);
+      } else {
+        console.log("Nessuna asta inversa è attiva");
+      }
+  
+      return astasInverse;
     } catch (error) {
       console.error("Errore nel recupero delle aste inverse attive:", error);
       throw error;
     }
   }
-}
+}  
