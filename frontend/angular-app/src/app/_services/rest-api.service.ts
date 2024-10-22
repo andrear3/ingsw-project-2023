@@ -186,7 +186,7 @@ export class RestService {
   }
 
   updateSaldo(mode: number, valore: number) {
-    const url = `${this.apiUrl}/saldo`;
+    const url = `${this.apiUrl}/test`;
     const token = this.authService.getToken();
     const httpOptions = {
       headers: new HttpHeaders({

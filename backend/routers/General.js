@@ -138,15 +138,17 @@ general.post(
   }
 );
 
-general.post("/saldo", authToken, async (req, res) => {
+general.post("/test", authToken, async (req, res) => {
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", req);
   try {
     if (req.body.mode == 0) {
       await UtenteCTRL.diminuisciSaldo(req.user.nickname, req.body.valore);
       res.status(200).json({ message: "Update: Diminuisci" });
-    } else if (req.body.mode == 1){
+    } else if (req.body.mode == 1) {
       await UtenteCTRL.aumentaSaldo(req.user.nickname, req.body.valore);
       res.status(200).json({ message: "Update: Aumenta" });
     }
+    res.status(200).json({ message: "Update"});
   } catch (error) {
     console.error("Error creating auction:", error);
     res.status(500).json({ message: "Error processing auction", error });
