@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth.service';
 
 import { Asta } from '../_models/asta-model';
+import { Offerta } from '../_models/offerta-model';
 
 @Injectable({
   providedIn: 'root',
@@ -291,5 +292,21 @@ export class RestService {
     return this.http.get<Utente>(`${this.apiUrl}/utente/nickname/${nickname}`, httpOptions);
   }
   
+  getOfferteByUtente(nickname: string): Observable<Offerta[]> {
+    const url = `${this.apiUrl}/offerte/utente/${nickname}`;
+    const token = this.authService.getToken();
+  
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+  
+    return this.http.get<Offerta[]>(url, httpOptions);
+  }
+
+
+
   }
 
