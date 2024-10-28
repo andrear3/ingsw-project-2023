@@ -48,10 +48,11 @@ export class AuctionViewComponent  {
   ngOnInit() {
     this.tipoAsta = this.authService.getTipo();
     this.asta = this.authService.getAsta();
-    console.log('nick da passare ',this.asta.nickname);
+    console.log('astaselezioianta',this.asta);
+    console.log('nick da passare ',this.asta.UtenteNickname);
     this.startDecrementTimer();
 // serve a prendere l'immagine del profilo del creatore dellásta
-    this.nickname = this.asta.nickname;
+    this.nickname = this.asta.UtenteNickname;
     console.log('il nickname', this.nickname);
     if (this.nickname) {
       this.restService.getUtenteByNickname(this.nickname).subscribe({

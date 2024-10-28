@@ -90,7 +90,9 @@ export class NavbarComponent implements OnInit {
   navigateToAsta() {
     this.router.navigate(['/asta']);
   }
-
+  navigateToLeMieAste() {
+    this.router.navigate(['/leMieAste']);
+  }
   onInversaButtonClick() {
     this.RestService.setTipoAsta('inversa');
     this.navigateToAsta();

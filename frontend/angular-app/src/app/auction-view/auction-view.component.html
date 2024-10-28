@@ -116,7 +116,58 @@
         </div>
     }
     @if(tipoAsta=="Inversa"){
-      <p>fdsf</p>
+      <div class="square">
+        <div class="row1">
+          <div class="photoProfileContainer"(click)="visualProfile()">
+            <img
+              [src]="'http://localhost:3000/images/' + utenteAsta?.url" alt="Foto profilo" 
+              alt="Foto profilo"
+              class="auction-image"
+          
+            />
+          </div>
+        </div>
+        <div class="row2">
+          <div class="photoAuctionContainer">
+            <img [src]="asta?.url" alt="Auction Image" class="auction-image" />
+          </div>
+          <div class="box-container">
+            <label for="boxOffer">Fai la tua offerta</label>
+            <input
+              class="boxOffer"
+              id="boxOffer"
+              type="number"
+              [(ngModel)]="newOfferta"
+            />
+  
+            <button class="offerButton" (click)="makeOffer()">Offri</button>
+            
+         
+          </div>
+          <div class="description-section">
+            <label for="descrizione">Descrizione</label>
+            <div class="description" id="description">
+              {{ asta?.descrizioneAsta }}
+            </div>
+          </div>
+          
+        </div>
+        <div class="row3">
+          <label for="productName">Nome del prodotto:</label>
+          <div class="productName" id="productName">
+            {{ asta?.nomeBeneInVendita }}
+          </div>
+  
+   <label for="prezzoIniz">Offerta attuale:</label>
+          <div class="prezzoIniz" id="prezzo">{{ asta?.offertaMax }}</div>
+          <label for="timeLeft">Tempo rimasto:</label>
+          <div class="timeLeft" id="timeLeft">{{ getFormattedTime() }}</div>
+  
+          <label for="currentOffer">Offerta attuale:</label>
+          <div class="currentOffer" id="currentOffer">{{ asta?.offertaMax }}</div>
+        </div>
+      
+      </div>
     }
     <script></script>
   </body>

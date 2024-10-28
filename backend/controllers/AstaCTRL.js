@@ -506,7 +506,7 @@ export class AstaCTRL {
         url,
         descrizione,
       } = req.body;
-
+      const fileUrl = req.file ? req.file.filename : null;
       const user = await Utente.findOne({ where: { email: req.user.email } });
 
       if (!user) {
@@ -523,6 +523,7 @@ export class AstaCTRL {
         descrizioneAsta: descrizione,
         prezzoiniziale: parseFloat(prezzoIniz),
         dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
+        url: fileUrl,
         statusAsta: "inVendita",
         url: url,
         UtenteNickname: utenteNickname,

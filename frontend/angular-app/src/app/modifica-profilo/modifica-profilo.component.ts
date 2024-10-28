@@ -125,6 +125,7 @@ export class ModificaProfiloComponent implements OnInit {
     this.RestService.editProfile(formData).subscribe(
       (response) => {
         console.log('Profile updated successfully:', response);
+        this.router.navigate(['/profile']);
         this.confermaModProfilo();
       },
       (error) => {
