@@ -503,6 +503,7 @@ export class AstaCTRL {
         prezzoIniz,
         oreAsta,
         categoria,
+        url,
         descrizione,
       } = req.body;
 
@@ -523,6 +524,7 @@ export class AstaCTRL {
         prezzoiniziale: parseFloat(prezzoIniz),
         dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
         statusAsta: "inVendita",
+        url: url,
         UtenteNickname: utenteNickname,
       };
 

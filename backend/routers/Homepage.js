@@ -67,7 +67,7 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
 homepageRouter.get("/homepage/inversa", authToken, async (req, res) => {
   try {
     // Queries
-    let asteAttive = await AstaCTRL.recuperaAsteInverseAttive();
+    let asteAttive = await AstaCTRL.recuperaAsteInverseAttive(); 
     let user = await UtenteCTRL.recuperaUtenteByEmail(req.user.email);
 
     if (!asteAttive || asteAttive.length === 0) {
@@ -100,12 +100,12 @@ homepageRouter.get("/homepage/inversa", authToken, async (req, res) => {
 
     const datiConOfferteETempo = asteAttive.map((asta) => ({
       ...asta.toJSON(),
-      url: baseUrl + asta.url,
+      url: asta.url ? baseUrl + asta.url : null, // Ensure asta.url is not null
       offertaMax: mappaOfferteMassime[asta.dataValues.astaID] || null,
       timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
     }));
 
-    res.json({ aste: datiConOfferteETempo, userInfo: userWithTransformedUrl }); // Send transformed user info
+    res.json({ aste: datiConOfferteETempo, userInfo: userWithTransformedUrl });
   } catch (error) {
     console.error("Errore nel recupero dei dati:", error);
     res.status(500).json({ message: "Errore del server" });
