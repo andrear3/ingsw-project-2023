@@ -681,4 +681,11 @@ export class AstaCTRL {
       throw error;
     }
   }
+  metodo(vaar){
+    if(vaar==1){
+      console.log( "funziona");
+      return 1;
+    }
+
+  }
 }  
