@@ -67,6 +67,7 @@ export class LeMieAsteComponent {
           this.utente = response.userInfo;
           this.authService.setUtente(this.utente);
           this.authService.setStatus(true);
+          console.log('utentne',this.utente.nickname);
           if (this.utente) {
             this.subscriptions.add(
               this.restService.getOfferteByUtente(this.utente.nickname).subscribe({
