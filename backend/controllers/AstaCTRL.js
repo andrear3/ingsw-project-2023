@@ -683,4 +683,50 @@ export class AstaCTRL {
       throw error;
     }
   }
+
+  static async recuperaAsteConOfferteUtente(nickname) {
+    try {
+
+      const userOffers = await Offerta.findAll({
+        where: {
+          UtenteNickname: nickname,
+        },
+        attributes: ["AstumAstaID"],
+      });
+  
+
+      console.log(userOffers);
+      const astaIDs = [...new Set(userOffers.map((offer) => offer.AstumAstaID))];
+  
+      if (astaIDs.length === 0) {
+        console.log(`Nessuna offerta trovata per l'utente con nickname: ${nickname}`);
+        return [];
+      }
+  
+ 
+      const asteAttive = await Asta.findAll({
+        where: {
+          astaID: {
+            [Op.in]: astaIDs,
+          },
+          statusAsta: "inVendita", 
+          dataFineAsta: {
+            [Op.gt]: new Date(),
+          },
+        },
+      });
+  
+      if (asteAttive.length > 0) {
+        console.log(`Aste attive con offerte dell'utente ${nickname}:`, asteAttive);
+      } else {
+        console.log(`Nessuna asta attiva trovata per l'utente ${nickname}`);
+      }
+  
+      return asteAttive;
+    } catch (error) {
+      console.error("Errore nel recuperare aste con offerte utente:", error);
+      throw error;
+    }
+  }
+  
 }  

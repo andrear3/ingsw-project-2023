@@ -64,3 +64,6 @@ Content-Type: application/json
 
 
 ###
+GET http://localhost:3000/aste/utente/:kikkowoman
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpa2tvd29tYW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE3MjYyMzUzNzZ9.ZhZG8fzk1hcmjR8KHa691m0mXz5qACqyXGIKJC9QpJQ
+Content-Type: application/json

@@ -160,6 +160,24 @@ homepageRouter.get("/homepage/ribasso", authToken, async (req, res) => {
   }
 });
 
+homepageRouter.get("/aste/utente/:nickname", authToken, async (req, res) => {
+  try {
+    const { nickname } = req.params;
+
+    // Retrieve active auctions with offers by the user
+    const asteConOfferte = await AstaCTRL.recuperaAsteConOfferteUtente(nickname);
+
+    if (!asteConOfferte || asteConOfferte.length === 0) {
+      return res.status(404).json({ message: `Nessuna asta attiva trovata per l'utente ${nickname}` });
+    }
+
+    res.json({ aste: asteConOfferte });
+  } catch (error) {
+    console.error("Errore nel recupero delle aste con offerte dell'utente:", error);
+    res.status(500).json({ message: "Errore del server" });
+  }
+});
+
 homepageRouter.get("/images/:filename", (req, res) => {
   const filename = req.params.filename;
   const options = {
