@@ -1,23 +1,18 @@
 import { expect } from 'chai';
 import { AstaCTRL } from "../backend/controllers/AstaCTRL.js";
 import { database } from '../backend/models/Database.js';
-describe("Test", function () {
- 
-
-  
-
+import { Asta } from '../backend/models/Database.js';
+describe("Test", function () { 
   it("test recuperaAstaByID method", async function () {
     try {
-      console.log("Chiamando recuperaAstaById con ID 12");
-  
-      // Verifica che l'eccezione venga lanciata quando non si trova l'asta
-      const result = await AstaCTRL.recuperaAstaById(12);
+      const result = await AstaCTRL.recuperaAstaById(60);
       console.log("Risultato:", result);
-  
-      expect(result).to.have.property('astaID', 12);
+      expect(result).to.not.be.null;
+      expect(result).to.have.property('astaID', 60);
     } catch (error) {
       console.error("Errore:", error);
     }
   });
-  
+
+
 });

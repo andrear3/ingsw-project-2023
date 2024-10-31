@@ -6,8 +6,13 @@ import { createModel as createAstaInversaModel } from "./AstaInversa.js";
 import { createModel as createAstaAlRibassoModel } from "./AstaAlRibasso.js";
 import { createModel as createOffertaModel } from "./Offerta.js";
 
-export const database = new Sequelize("sqlite:database", {
+import dotenv from "dotenv";
+dotenv.config();
+
+export const database = new Sequelize({
   dialect: "sqlite",
+  storage: process.env.DB_STORAGE || "./database.sqlite",
+  logging: console.log, // Attiva il logging delle query per il debug
 });
 
 createUtenteModel(database);
