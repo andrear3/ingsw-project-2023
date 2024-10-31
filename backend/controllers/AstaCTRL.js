@@ -8,6 +8,7 @@ import { Sequelize, Op } from "sequelize";
 import { database } from "../models/Database.js";
 export class AstaCTRL {
   static async recuperaAstaById(astaID) {
+   
     try {
       const asta = await Asta.findByPk(astaID);
 
@@ -20,6 +21,7 @@ export class AstaCTRL {
       console.error(`Error retrieving auction with ID ${astaID}:`, error);
       throw error;
     }
+  
   }
 
   //titolo, nome prodotto, prezzo iniziale, categoria, url, ore, descrizione
