@@ -336,7 +336,7 @@ export class AstaCTRL {
       for (let asta of tutteLeAste) {
         let dataFineAsta = new Date(asta.dataFineAsta);
 
-        // Check if auction time has ended and status is still "inVendita"
+        
         if (tempoCorrente >= dataFineAsta && asta.statusAsta === "inVendita") {
           const offertaMassima = await OffertaCTRL.trovaOffertaMassimaPerAsta(
             asta.astaID
@@ -346,7 +346,7 @@ export class AstaCTRL {
             const { offertaMax, UtenteNickname } = offertaMassima;
 
             if (offertaMax > 0) {
-              // Deduct user's balance and mark auction as "venduto"
+              
               const utente = await Utente.findOne({
                 where: { nickname: UtenteNickname },
               });
@@ -355,7 +355,7 @@ export class AstaCTRL {
                 console.error(
                   `Saldo insufficiente per ${UtenteNickname} o utente non trovato.`
                 );
-                continue; // Skip to next auction if there's an issue with balance
+                continue; 
               }
 
               await UtenteCTRL.diminuisciSaldo(UtenteNickname, offertaMax);
@@ -371,13 +371,13 @@ export class AstaCTRL {
               console.log(`Asta non venduta. Nessuna offerta valida.`);
             }
           } else {
-            // No offers were made
+            
             asta.statusAsta = "nonVenduto";
             asta.prezzofinale = 0;
             console.log(`Asta non venduta. Nessuna offerta disponibile.`);
           }
 
-          // Save the auction status regardless of whether it was sold or not
+          
           await asta.save();
         }
       }
@@ -396,40 +396,40 @@ export class AstaCTRL {
           error
         );
       }
-    }, 1000); // Check every second
+    }, 1000); 
   }
 
-  //ASTA AL RIBASSO
+ 
   static async gestisciAstaAlRibasso() {
     try {
-      // Retrieve active downward auctions
+
       const asteAlRibassoAttive = await AstaAlRibasso.findAll({
         where: {
-          // You can add any additional filters here if necessary
+         
         },
       });
 
       const currentTime = new Date();
 
       for (let astaRibasso of asteAlRibassoAttive) {
-        // Retrieve the corresponding Asta based on AstumAstaID
+       
         const asta = await Asta.findOne({
           where: {
             astaID: astaRibasso.AstumAstaID,
             statusAsta: "inVendita",
-            dataFineAsta: { [Op.gt]: currentTime }, // Only future auctions
+            dataFineAsta: { [Op.gt]: currentTime }, 
           },
         });
 
-        // Check if the Asta was found
+        
         if (!asta) {
           console.log(
             `Asta non trovata per l'asta al ribasso ID: ${astaRibasso.id}`
           );
-          continue; // Skip to the next iteration if Asta is not found
+          continue; 
         }
 
-        const timeSinceLastDecrement = currentTime - astaRibasso.updatedAt; // Use updatedAt from AstaAlRibasso
+        const timeSinceLastDecrement = currentTime - astaRibasso.updatedAt; 
 
         // Check if it's time to decrement the price
         if (timeSinceLastDecrement >= astaRibasso.decrementoTimer * 1000) {
@@ -550,6 +550,15 @@ export class AstaCTRL {
   }
 
   static async gestisciAstaInversa(astaID, nuovaOfferta, venditoreNickname) {
+    if (astaID == null) {
+      throw new Error("Il parametro 'astaID' non può essere null o undefined.");
+    }
+    if (nuovaOfferta == null) {
+      throw new Error("Il parametro 'nuovaOfferta' non può essere null o undefined.");
+    }
+    if (!venditoreNickname) {
+      throw new Error("Il parametro 'venditoreNickname' non può essere null, undefined o una stringa vuota.");
+    }
     try {
       const asta = await Asta.findOne({
         where: { astaID, statusAsta: "inVendita" },
@@ -568,7 +577,7 @@ export class AstaCTRL {
 
       // Controlla se l'offerta è inferiore all'ultima offerta
       const offertaAttuale = await Offerta.findOne({
-        where: { AstaAstaID: astaID },
+        where: { AstumAstaID: astaID },
         order: [["valore", "ASC"]],
       });
 
