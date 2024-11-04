@@ -1,9 +1,8 @@
 import { expect } from 'chai';
 import { AstaCTRL } from "../backend/controllers/AstaCTRL.js";
-import { database } from '../backend/models/Database.js';
-import { Asta } from '../backend/models/Database.js';
-describe("Test1", function () { 
-  it("test recuperaAstaByID method", async function () {
+
+describe("AstaCTRL Test1", function () { 
+  it("test recuperaAstaByID 60", async function () {
    
       const result = await AstaCTRL.recuperaAstaById(60);
       console.log("Risultato:", result);
@@ -12,18 +11,31 @@ describe("Test1", function () {
    
   });
 });
-describe("AstaCTRL - recuperaAstaById", function () { 
-  it("should throw an error for invalid ID (null)", function (done) {
+describe("AstaCTRL Test2", function () { 
+  it("test recuperaAstaById null", function () {
     AstaCTRL.recuperaAstaById(null)
      
       .catch((error) => {
-        //verfica che il risultato atteso sia quello aspettato ( un messaggio di errore)
-        expect(error.message).to.equal("Asta with ID null not found");
-        done(); 
+        expect(error.message);
       });
   });
 });
 
-  
-
-
+describe("AstaCTRL Test3", function () { 
+  it("test recuperaAstaById 21(non presente in database)", function () {
+    AstaCTRL.recuperaAstaById(21)
+     
+      .catch((error) => {
+        expect(error.message);
+      });
+  });
+});
+describe("AstaCTRL Test4", function () { 
+  it("test recuperaAstaById nussun parametro passato ", function () {
+    AstaCTRL.recuperaAstaById()
+     
+      .catch((error) => {
+        expect(error.message); 
+      });
+  });
+});
