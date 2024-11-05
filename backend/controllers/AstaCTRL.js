@@ -523,7 +523,7 @@ export class AstaCTRL {
         descrizioneAsta: descrizione,
         prezzoiniziale: parseFloat(prezzoIniz),
         dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
-        url: fileUrl,
+        //url: fileUrl,
         statusAsta: "inVendita",
         url: url,
         UtenteNickname: utenteNickname,

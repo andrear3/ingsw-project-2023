@@ -7,15 +7,9 @@
   "scripts": {
     "test": "mocha './mocha-testing/**/*.spec.mjs'"
   },
- 
   "devDependencies": {
     "chai": "^5.1.2",
-    "mocha": "^10.7.3"
+    "mocha": "^10.8.2"
   },
-
-  
-
-    "type": "module"
-
-  
+  "type": "module"
 }
