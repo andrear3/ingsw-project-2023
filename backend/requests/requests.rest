@@ -5,7 +5,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpa2tvd
 
 ###
 
+<<<<<<< HEAD
 POST http://localhost:3000
+=======
+POST http://localhost:3000/
+>>>>>>> cc19e889f434fc1db26804a4794eeb51a3c45740
 Content-Type: application/json
 
 {
