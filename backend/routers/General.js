@@ -7,7 +7,6 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
-import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
 
 export const general = express.Router();
 

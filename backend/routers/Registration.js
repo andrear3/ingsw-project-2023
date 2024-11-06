@@ -1,5 +1,4 @@
 import express from "express";
-import jwt from "jsonwebtoken";
 import { Utente } from "../models/Database.js";
 
 export const registrationRouter = express.Router();

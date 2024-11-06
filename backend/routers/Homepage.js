@@ -1,11 +1,9 @@
 import express from "express";
 import path from "path";
-import jwt from "jsonwebtoken";
 
 import { authToken } from "../middleware/Auth.js";
 import { AstaCTRL } from "../controllers/AstaCTRL.js";
 import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
-import { Utente } from "../models/Database.js";
 import { UtenteCTRL } from "../controllers/UtenteCTRL.js";
 import { fileURLToPath } from "url";
 

@@ -1,7 +1,6 @@
+
 import { Asta } from "../models/Database.js";
-import { Offerta } from "../models/Database.js";
-import { Utente } from "../models/Database.js";
-import { Sequelize, Op } from "sequelize";
+
 
 export class DashboardCTRL {
   static async populateDashboard(nickname) {

@@ -3,14 +3,12 @@
 import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
-import jwt from "jsonwebtoken";
 import cors from "cors";
 
 //CONTROLLERS
 import { UtenteCTRL } from "./controllers/UtenteCTRL.js";
-import { OffertaCTRL } from "./controllers/OffertaCTRL.js";
 import { AstaCTRL } from "./controllers/AstaCTRL.js";
-import { authToken } from "./middleware/Auth.js";
+
 
 //ROUTERS
 import { homepageRouter } from "./routers/Homepage.js";
@@ -19,8 +17,10 @@ import { loginRouter } from "./routers/LogIn.js";
 
 //IMPORTS PER IMMAGINI
 import { fileURLToPath } from "url";
-import { dirname } from "path";
+//sonarqu
+//import { dirname } from "path";
 import path from "path";
+import { dirname }from "path";
 import { productRouter } from "./routers/Product.js";
 import { dashboardRouter } from "./routers/Dashboard.js";
 import { general } from "./routers/General.js";
