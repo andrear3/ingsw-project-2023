@@ -11,12 +11,12 @@ loginRouter.post("/", async (req, res) => {
     const user = await Utente.findOne({ where: { email } });
     if (!user) {
       console.log("Login failed: User not found");
-      return res.status(401).json({ message: "Incorrect email or password." });
+      return res.status(401).json({ message: "Incorrect email." });
     }
     const hashedPassword = createHash("sha256").update(password).digest("hex");
     if (hashedPassword !== user.password) {
       console.log("Login failed: Incorrect password");
-      return res.status(401).json({ message: "Incorrect email or password." });
+       return res.status(401).json({ message: "Incorrect password." });
     }
 
     const loginUser = {
@@ -27,7 +27,9 @@ loginRouter.post("/", async (req, res) => {
 
     const accessToken = jwt.sign(loginUser, process.env.ACCESS_TOKEN_SECRET);
     res.json({ accessToken: accessToken });
-    //console.log(accessToken);
+    return res.status(200).json({accessToken})
+
+    
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ error: error.message });
