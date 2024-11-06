@@ -16,8 +16,6 @@ import { loginRouter } from "./routers/LogIn.js";
 
 //IMPORTS PER IMMAGINI
 import { fileURLToPath } from "url";
-//sonarqu
-//import { dirname } from "path";
 import path, { dirname } from "path";
 
 import { productRouter } from "./routers/Product.js";
