@@ -3,14 +3,11 @@
 import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
-import jwt from "jsonwebtoken";
 import cors from "cors";
 
 //CONTROLLERS
 import { UtenteCTRL } from "./controllers/UtenteCTRL.js";
-import { OffertaCTRL } from "./controllers/OffertaCTRL.js";
 import { AstaCTRL } from "./controllers/AstaCTRL.js";
-import { authToken } from "./middleware/Auth.js";
 
 //ROUTERS
 import { homepageRouter } from "./routers/Homepage.js";
@@ -19,8 +16,8 @@ import { loginRouter } from "./routers/LogIn.js";
 
 //IMPORTS PER IMMAGINI
 import { fileURLToPath } from "url";
-import { dirname } from "path";
-import path from "path";
+import path, { dirname } from "path";
+
 import { productRouter } from "./routers/Product.js";
 import { dashboardRouter } from "./routers/Dashboard.js";
 import { general } from "./routers/General.js";
@@ -68,26 +65,21 @@ app.use(productRouter);
 app.use(dashboardRouter);
 app.use(general);
 
-
-app.get('/Utente/nickname/:nickname', async (req, res) => {
+app.get("/Utente/nickname/:nickname", async (req, res) => {
   const { nickname } = req.params;
   try {
     const user = await UtenteCTRL.recuperaUtenteByNickname(nickname);
     if (!user) {
-      return res.status(404).json({ message: 'Utente non trovato' });
+      return res.status(404).json({ message: "Utente non trovato" });
     }
 
     res.json(user);
   } catch (error) {
-    console.error('Errore nel recupero dell\'utente:', error);
-    res.status(500).json({ message: 'Errore interno del server' });
+    console.error("Errore nel recupero dell'utente:", error);
+    res.status(500).json({ message: "Errore interno del server" });
   }
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-
-
-

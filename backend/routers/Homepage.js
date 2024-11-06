@@ -1,11 +1,9 @@
 import express from "express";
 import path from "path";
-import jwt from "jsonwebtoken";
 
 import { authToken } from "../middleware/Auth.js";
 import { AstaCTRL } from "../controllers/AstaCTRL.js";
 import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
-import { Utente } from "../models/Database.js";
 import { UtenteCTRL } from "../controllers/UtenteCTRL.js";
 import { fileURLToPath } from "url";
 
@@ -67,7 +65,7 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
 homepageRouter.get("/homepage/inversa", authToken, async (req, res) => {
   try {
     // Queries
-    let asteAttive = await AstaCTRL.recuperaAsteInverseAttive();
+    let asteAttive = await AstaCTRL.recuperaAsteInverseAttive(); 
     let user = await UtenteCTRL.recuperaUtenteByEmail(req.user.email);
 
     if (!asteAttive || asteAttive.length === 0) {
@@ -100,12 +98,12 @@ homepageRouter.get("/homepage/inversa", authToken, async (req, res) => {
 
     const datiConOfferteETempo = asteAttive.map((asta) => ({
       ...asta.toJSON(),
-      url: baseUrl + asta.url,
+      url: asta.url ? baseUrl + asta.url : null, // Ensure asta.url is not null
       offertaMax: mappaOfferteMassime[asta.dataValues.astaID] || null,
       timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
     }));
 
-    res.json({ aste: datiConOfferteETempo, userInfo: userWithTransformedUrl }); // Send transformed user info
+    res.json({ aste: datiConOfferteETempo, userInfo: userWithTransformedUrl });
   } catch (error) {
     console.error("Errore nel recupero dei dati:", error);
     res.status(500).json({ message: "Errore del server" });
@@ -156,6 +154,24 @@ homepageRouter.get("/homepage/ribasso", authToken, async (req, res) => {
     res.json({ aste: datiConOfferteETempo, userInfo: userWithTransformedUrl });
   } catch (error) {
     console.error("Errore nel recupero dei dati:", error);
+    res.status(500).json({ message: "Errore del server" });
+  }
+});
+
+homepageRouter.get("/aste/utente/:nickname", authToken, async (req, res) => {
+  try {
+    const { nickname } = req.params;
+
+    // Retrieve active auctions with offers by the user
+    const asteConOfferte = await AstaCTRL.recuperaAsteConOfferteUtente(nickname);
+
+    if (!asteConOfferte || asteConOfferte.length === 0) {
+      return res.status(404).json({ message: `Nessuna asta attiva trovata per l'utente ${nickname}` });
+    }
+
+    res.json({ aste: asteConOfferte });
+  } catch (error) {
+    console.error("Errore nel recupero delle aste con offerte dell'utente:", error);
     res.status(500).json({ message: "Errore del server" });
   }
 });

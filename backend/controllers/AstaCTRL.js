@@ -1,11 +1,8 @@
 import { OffertaCTRL } from "./OffertaCTRL.js";
 import { UtenteCTRL } from "./UtenteCTRL.js";
-import { Asta } from "../models/Database.js";
-import { AstaAlRibasso, AstaInversa } from "../models/Database.js";
-import { Utente } from "../models/Database.js";
-import { Offerta } from "../models/Database.js";
-import { Sequelize, Op } from "sequelize";
-import { database } from "../models/Database.js";
+import { Asta, AstaAlRibasso, AstaInversa, Utente, Offerta} from "../models/Database.js";
+import { Op } from "sequelize";
+
 export class AstaCTRL {
   static async recuperaAstaById(astaID) {
    
@@ -27,7 +24,6 @@ export class AstaCTRL {
   //titolo, nome prodotto, prezzo iniziale, categoria, url, ore, descrizione
   static async creaAstaClassica(asta) {
     try {
-      let temp = new Asta();
       await asta.save();
     } catch (error) {
       console.error("Errore durante la creazione dell'asta", error);
@@ -505,9 +501,10 @@ export class AstaCTRL {
         prezzoIniz,
         oreAsta,
         categoria,
+        url,
         descrizione,
       } = req.body;
-      const fileUrl = req.file ? req.file.filename : null;
+      //const fileUrl = req.file ? req.file.filename : null;
       const user = await Utente.findOne({ where: { email: req.user.email } });
 
       if (!user) {
@@ -524,8 +521,9 @@ export class AstaCTRL {
         descrizioneAsta: descrizione,
         prezzoiniziale: parseFloat(prezzoIniz),
         dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
-        url: fileUrl,
+        //url: fileUrl,
         statusAsta: "inVendita",
+        url: url,
         UtenteNickname: utenteNickname,
       };
 
@@ -691,12 +689,5 @@ export class AstaCTRL {
       console.error("Errore nel recupero delle aste inverse attive:", error);
       throw error;
     }
-  }
-  metodo(vaar){
-    if(vaar==1){
-      console.log( "funziona");
-      return 1;
-    }
-
   }
 }  
