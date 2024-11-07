@@ -8,10 +8,13 @@
   },
   "scripts": {
     "test": "mocha './mocha-testing/**/*.spec.mjs'"
+    
   },
   "devDependencies": {
     "chai": "^5.1.2",
     "mocha": "^10.7.3",
+    "mochawesome": "^7.1.3",
+    "mochawesome-report-generator": "^6.2.0",
     "sinon": "^19.0.2",
     "supertest": "^7.0.0"
   },
