@@ -75,6 +75,9 @@ export class UtenteCTRL {
 
   static async setTipoUtente(tipo, email) {
     try {
+      if (tipo !== 'venditore' && tipo !== 'compratore') {
+        throw new Error("Tipo utente non valido. Deve essere 'venditore' o 'compratore'.");
+      }
       const result = await Utente.update(
         { tipo },
         {

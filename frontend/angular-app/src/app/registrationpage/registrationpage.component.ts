@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
+import { Utente } from '../_models/utente-model';
+import { TipoUtente } from '../_models/tipo-utente-enum';
 
 @Component({
   selector: 'app-registrationpage',
@@ -36,6 +38,23 @@ export class RegistrationpageComponent {
   regione: string = '';
   indirizzo: string = '';
 
+  utente: Utente = {
+    email: this.email,
+    descrizione: '',
+    nickname: '',
+    password: '',
+    nome: '',
+    cognome: '',
+    tipo: TipoUtente.compratore,
+    regione: '',
+    link1: '',
+    link2: '',
+    link3: '',
+    indirizzo: '',
+    saldo: 0,
+    url: ''
+  };
+
   constructor(private restApiService: RestService) {}
 
   register() {
@@ -59,4 +78,6 @@ export class RegistrationpageComponent {
         }
       );
   }
+
+
 }
