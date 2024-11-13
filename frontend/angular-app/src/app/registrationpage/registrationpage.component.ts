@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-registrationpage',
   standalone: true,
@@ -36,7 +36,7 @@ export class RegistrationpageComponent {
   regione: string = '';
   indirizzo: string = '';
 
-  constructor(private restApiService: RestService) {}
+  constructor(private restApiService: RestService, private router:Router) {}
 
   register() {
     this.restApiService
@@ -58,5 +58,9 @@ export class RegistrationpageComponent {
           console.error('Registration failed:', error);
         }
       );
+  }
+  navigateToLogInPage(){
+    this.router.navigate(['/']);
+
   }
 }
