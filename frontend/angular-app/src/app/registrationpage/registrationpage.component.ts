@@ -8,13 +8,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
-<<<<<<< HEAD
-import { Router } from '@angular/router';
-=======
 import { Utente } from '../_models/utente-model';
 import { TipoUtente } from '../_models/tipo-utente-enum';
+import { Router } from 'express';
 
->>>>>>> a65df2c6ad5962ae771b85fbf6fdb58b1d562422
 @Component({
   selector: 'app-registrationpage',
   standalone: true,
@@ -51,7 +48,7 @@ export class RegistrationpageComponent {
     url: '',
   };
 
-  constructor(private restApiService: RestService, private router:Router) {}
+  constructor(private restApiService: RestService,private router:Router) {}
 
   register() {
     this.restApiService.register(this.utente).subscribe(
@@ -64,8 +61,6 @@ export class RegistrationpageComponent {
     );
     console.log(this.utente);
   }
-  navigateToLogInPage(){
-    this.router.navigate(['/']);
-
-  }
+  
 }
+
