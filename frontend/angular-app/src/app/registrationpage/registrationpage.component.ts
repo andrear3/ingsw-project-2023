@@ -47,6 +47,8 @@ export class RegistrationpageComponent {
     url: '',
   };
 
+
+
   constructor(private restApiService: RestService) {}
 
   register() {
@@ -59,5 +61,6 @@ export class RegistrationpageComponent {
       }
     );
     console.log(this.utente);
+    console.log("test");
   }
 }
