@@ -1,13 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Utente } from '../_models/utente-model';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth.service';
 
 import { Asta } from '../_models/asta-model';
 import { Offerta } from '../_models/offerta-model';
-
+import { Utente } from '../_models/utente-model';
 @Injectable({
   providedIn: 'root',
 })
@@ -54,7 +53,6 @@ export class RestService {
     return this.http.get<{ aste: Asta[]; userInfo: Utente }>(url, httpOptions);
   }
 
-
   getAstaRibasso(): Observable<{ aste: Asta[]; userInfo: Utente }> {
     const url = `${this.apiUrl}/homepage/ribasso`;
     const token = this.authService.getToken();
@@ -68,25 +66,9 @@ export class RestService {
     return this.http.get<{ aste: Asta[]; userInfo: Utente }>(url, httpOptions);
   }
 
-  register(
-    email: string,
-    nome: string,
-    cognome: string,
-    password: string,
-    nickname: string,
-    tipo: string,
-    regione: string,
-    indirizzo: string
-  ) {
+  register(utente: Utente) {
     return this.http.post(`${this.apiUrl}/registration`, {
-      email,
-      nome,
-      cognome,
-      password,
-      nickname,
-      tipo,
-      regione,
-      indirizzo,
+      utente,
     });
   }
 
@@ -207,10 +189,7 @@ export class RestService {
     );
   }
 
-  updateSaldo(
-    mode: number,
-    valore: number
-  ): Observable<any> {
+  updateSaldo(mode: number, valore: number): Observable<any> {
     const url = `${this.apiUrl}/123`;
     //prendo token per auth
     const token = this.authService.getToken();
@@ -223,11 +202,7 @@ export class RestService {
       }),
     };
 
-    return this.http.post(
-      url,
-      { mode, valore },
-      httpOptions
-    );
+    return this.http.post(url, { mode, valore }, httpOptions);
   }
 
   postOfferRibasso(
@@ -247,8 +222,6 @@ export class RestService {
 
     return this.http.post(url, { UtenteNickname, AstumAstaID }, httpOptions);
   }
-
- 
 
   postDashboard(nickname: string): Observable<any> {
     const url = `${this.apiUrl}/dashboard`;
@@ -277,36 +250,34 @@ export class RestService {
     return this.http.post(`${this.apiUrl}/editprofile`, formData, httpOptions);
   }
 
-
-  //getUtente con nickname per visualizzaPRofilo 
+  //getUtente con nickname per visualizzaPRofilo
   getUtenteByNickname(nickname: string): Observable<Utente> {
     const token = this.authService.getToken(); // Ottieni il token di autorizzazione
-  
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`, // Aggiungi l'autorizzazione se necessaria
       }),
     };
-  
-    return this.http.get<Utente>(`${this.apiUrl}/utente/nickname/${nickname}`, httpOptions);
+
+    return this.http.get<Utente>(
+      `${this.apiUrl}/utente/nickname/${nickname}`,
+      httpOptions
+    );
   }
-  
+
   getOfferteByUtente(nickname: string): Observable<Offerta[]> {
     const url = `${this.apiUrl}/offerte/utente/${nickname}`;
     const token = this.authService.getToken();
-  
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       }),
     };
-  
+
     return this.http.get<Offerta[]>(url, httpOptions);
   }
-
-
-
-  }
-
+}

@@ -11,9 +11,11 @@ registrationRouter.post("/registration", async (req, res) => {
 
     //aggiungo ai dati l'attributo saldo:
     let utenteData = {
-      ...req.body,
+      ...req.body.utente,
       saldo: saldo,
     };
+
+    console.log(utenteData);
 
     let utente = Utente.build(utenteData);
     await utente.save();

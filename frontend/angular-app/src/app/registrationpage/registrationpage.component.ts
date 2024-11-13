@@ -29,17 +29,9 @@ import { TipoUtente } from '../_models/tipo-utente-enum';
 })
 export class RegistrationpageComponent {
   options: string[] = ['venditore', 'compratore'];
-  email: string = '';
-  nome: string = '';
-  cognome: string = '';
-  password: string = '';
-  nickname: string = '';
-  tipo: string = '';
-  regione: string = '';
-  indirizzo: string = '';
 
   utente: Utente = {
-    email: this.email,
+    email: '',
     descrizione: '',
     nickname: '',
     password: '',
@@ -52,32 +44,20 @@ export class RegistrationpageComponent {
     link3: '',
     indirizzo: '',
     saldo: 0,
-    url: ''
+    url: '',
   };
 
   constructor(private restApiService: RestService) {}
 
   register() {
-    this.restApiService
-      .register(
-        this.email,
-        this.nome,
-        this.cognome,
-        this.password,
-        this.nickname,
-        this.tipo,
-        this.regione,
-        this.indirizzo
-      )
-      .subscribe(
-        (response) => {
-          console.log('Registration successful:', response);
-        },
-        (error) => {
-          console.error('Registration failed:', error);
-        }
-      );
+    this.restApiService.register(this.utente).subscribe(
+      (response) => {
+        console.log('Registration successful:', response);
+      },
+      (error) => {
+        console.error('Registration failed:', error);
+      }
+    );
+    console.log(this.utente);
   }
-
-
 }
