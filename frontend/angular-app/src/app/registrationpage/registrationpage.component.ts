@@ -8,7 +8,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
+<<<<<<< HEAD
 import { Router } from '@angular/router';
+=======
+import { Utente } from '../_models/utente-model';
+import { TipoUtente } from '../_models/tipo-utente-enum';
+
+>>>>>>> a65df2c6ad5962ae771b85fbf6fdb58b1d562422
 @Component({
   selector: 'app-registrationpage',
   standalone: true,
@@ -27,37 +33,36 @@ import { Router } from '@angular/router';
 })
 export class RegistrationpageComponent {
   options: string[] = ['venditore', 'compratore'];
-  email: string = '';
-  nome: string = '';
-  cognome: string = '';
-  password: string = '';
-  nickname: string = '';
-  tipo: string = '';
-  regione: string = '';
-  indirizzo: string = '';
+
+  utente: Utente = {
+    email: '',
+    descrizione: '',
+    nickname: '',
+    password: '',
+    nome: '',
+    cognome: '',
+    tipo: TipoUtente.compratore,
+    regione: '',
+    link1: '',
+    link2: '',
+    link3: '',
+    indirizzo: '',
+    saldo: 0,
+    url: '',
+  };
 
   constructor(private restApiService: RestService, private router:Router) {}
 
   register() {
-    this.restApiService
-      .register(
-        this.email,
-        this.nome,
-        this.cognome,
-        this.password,
-        this.nickname,
-        this.tipo,
-        this.regione,
-        this.indirizzo
-      )
-      .subscribe(
-        (response) => {
-          console.log('Registration successful:', response);
-        },
-        (error) => {
-          console.error('Registration failed:', error);
-        }
-      );
+    this.restApiService.register(this.utente).subscribe(
+      (response) => {
+        console.log('Registration successful:', response);
+      },
+      (error) => {
+        console.error('Registration failed:', error);
+      }
+    );
+    console.log(this.utente);
   }
   navigateToLogInPage(){
     this.router.navigate(['/']);

@@ -16,11 +16,16 @@ export class AuthService {
   public tipo: string= '';
 
   setToken(par: string) {
-    this.jwtoken = par;
+    //old token
+    //this.jwtoken = par;
+    localStorage.setItem('token', par);
   }
 
   getToken() {
-    return this.jwtoken;
+    const token = localStorage.getItem('token');
+    return token;
+    //old token
+    //return this.jwtoken;
   }
 
   setUtente(utente: Utente | null) {

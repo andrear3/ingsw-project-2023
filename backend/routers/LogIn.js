@@ -13,10 +13,11 @@ loginRouter.post("/", async (req, res) => {
       console.log("Login failed: User not found");
       return res.status(401).json({ message: "Incorrect email." });
     }
+
     const hashedPassword = createHash("sha256").update(password).digest("hex");
     if (hashedPassword !== user.password) {
       console.log("Login failed: Incorrect password");
-       return res.status(401).json({ message: "Incorrect password." });
+      return res.status(401).json({ message: "Incorrect password." });
     }
 
     const loginUser = {
@@ -24,12 +25,9 @@ loginRouter.post("/", async (req, res) => {
       password: password,
     };
 
-
     const accessToken = jwt.sign(loginUser, process.env.ACCESS_TOKEN_SECRET);
-    res.json({ accessToken: accessToken });
-    return res.status(200).json({accessToken})
-
-    
+    // Send the access token in the response
+    return res.status(200).json({ accessToken });
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ error: error.message });
