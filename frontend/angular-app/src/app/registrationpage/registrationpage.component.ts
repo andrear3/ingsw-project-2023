@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { Utente } from '../_models/utente-model';
 import { TipoUtente } from '../_models/tipo-utente-enum';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrationpage',
@@ -50,7 +50,7 @@ export class RegistrationpageComponent {
 
 
 
-  constructor(private restApiService: RestService) {}
+  constructor(private restApiService: RestService, private router:Router) {}
 
   register() {
     this.restApiService.register(this.utente).subscribe(
@@ -64,6 +64,8 @@ export class RegistrationpageComponent {
     console.log(this.utente);
     console.log("test");
   }
-  
+  navigateToLoginPage(){
+    this.router.navigate(['/']);
+  }
 }
 
