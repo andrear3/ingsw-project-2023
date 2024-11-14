@@ -95,10 +95,10 @@ export class UtenteCTRL {
     }
   }
 
-  static async diminuisciSaldo(email, amount) {
+  static async diminuisciSaldo(nickname, amount) {
     try {
       const user = await Utente.findOne({
-        where: { email },
+        where: { nickname },
       });
 
       if (!user) {
@@ -113,7 +113,7 @@ export class UtenteCTRL {
 
       await user.save();
 
-      console.log(`Il saldo di ${email} è stato aggiornato a ${user.saldo}`); // "The balance of [nickname] has been updated to [new balance]"
+      console.log(`Il saldo di ${nickname} è stato aggiornato a ${user.saldo}`); // "The balance of [nickname] has been updated to [new balance]"
       return user.saldo;
     } catch (error) {
       console.error("Errore durante la detrazione del saldo:", error.message); // "Error during balance deduction:"
@@ -121,10 +121,10 @@ export class UtenteCTRL {
     }
   }
 
-  static async aumentaSaldo(email, amount) {
+  static async aumentaSaldo(nickname, amount) {
     try {
       const user = await Utente.findOne({
-        where: { email },
+        where: { nickname },
       });
 
       if (!user) {
@@ -135,7 +135,7 @@ export class UtenteCTRL {
 
       await user.save();
 
-      console.log(`Il saldo di ${email} è stato aggiornato a ${user.saldo}`);
+      console.log(`Il saldo di ${nickname} è stato aggiornato a ${user.saldo}`);
       return user.saldo;
     } catch (error) {
       console.error("Errore durante l'aumento del saldo:", error.message);
