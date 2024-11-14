@@ -41,7 +41,7 @@ export class LogInPageComponent {
     private authService: AuthService,
     private router: Router,
     private appComponent:AppComponent, 
-    private navbarService: NavbarService,
+  
   
   ) {}
   
@@ -116,6 +116,9 @@ export class LogInPageComponent {
       console.error('Errore durante il login:', error);
     }
   }
-  
+  navigateToRegistration() {
+    
+    this.router.navigate(['/registration']);
+  }
  
 }

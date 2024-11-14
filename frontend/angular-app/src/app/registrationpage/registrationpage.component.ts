@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { Utente } from '../_models/utente-model';
 import { TipoUtente } from '../_models/tipo-utente-enum';
+import { Router } from 'express';
 
 @Component({
   selector: 'app-registrationpage',
@@ -63,4 +64,6 @@ export class RegistrationpageComponent {
     console.log(this.utente);
     console.log("test");
   }
+  
 }
+
