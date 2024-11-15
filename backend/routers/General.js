@@ -92,14 +92,14 @@ general.post(
   upload.single("image"),
   async (req, res) => {
     try {
-      console.log("Reverse auction creation request received:", req.body);
+      console.log("Inversa auction creation request received:", req.body);
       await AstaCTRL.creaAstaInversa(req);
-      res.status(200).json({ message: "Reverse auction created successfully" });
+      res.status(200).json({ message: "Inversa auction created successfully" });
     } catch (error) {
-      console.error("Error creating reverse auction:", error);
+      console.error("Error creating inversa auction:", error);
       res
         .status(500)
-        .json({ message: "Error processing reverse auction", error });
+        .json({ message: "Error processing inversa auction", error });
     }
   }
 );
