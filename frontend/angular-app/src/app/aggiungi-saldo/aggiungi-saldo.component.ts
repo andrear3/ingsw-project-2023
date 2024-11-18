@@ -37,7 +37,7 @@ import { Utente } from '../_models/utente-model';
   styleUrl: './aggiungi-saldo.component.scss',
 })
 export class AggiungiSaldoComponent {
-  saldo: number | undefined;
+  cifra: number = 1;
   constructor(
     private restService: RestService,
     private AuthService: AuthService,
@@ -56,7 +56,11 @@ export class AggiungiSaldoComponent {
     );
   }
   aggiungiSaldo() {
-    console.log('test');
-    this.restService.updateSaldo(1, 2);
+    this.restService.updateSaldo(1, this.cifra).subscribe({
+      next: (response) =>
+        console.log('Saldo aggiornato con successo:', response),
+      error: (err) =>
+        console.error("Errore nell'aggiornamento del saldo:", err),
+    });
   }
 }

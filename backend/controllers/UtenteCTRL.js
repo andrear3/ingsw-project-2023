@@ -1,6 +1,5 @@
 import { Utente } from "../models/Database.js";
 
-
 export class UtenteCTRL {
   //non usata??????????????????
   static async salvaUtente(
@@ -49,18 +48,17 @@ export class UtenteCTRL {
   static async recuperaUtenteByNickname(nickname) {
     try {
       const user = await Utente.findOne({ where: { nickname } });
-  
+
       if (!user) {
         throw new Error(`User with nickname ${nickname} not found`);
       }
-  
+
       return user;
     } catch (error) {
       console.error(`Error retrieving user with nickname ${nickname}:`, error);
       throw error;
     }
   }
-
 
   static async stampaTuttiUtenti() {
     try {
@@ -75,8 +73,10 @@ export class UtenteCTRL {
 
   static async setTipoUtente(tipo, email) {
     try {
-      if (tipo !== 'venditore' && tipo !== 'compratore') {
-        throw new Error("Tipo utente non valido. Deve essere 'venditore' o 'compratore'.");
+      if (tipo !== "venditore" && tipo !== "compratore") {
+        throw new Error(
+          "Tipo utente non valido. Deve essere 'venditore' o 'compratore'."
+        );
       }
       const result = await Utente.update(
         { tipo },
@@ -97,8 +97,12 @@ export class UtenteCTRL {
 
   static async diminuisciSaldo(nickname, amount) {
     try {
+      const whereStatement = nickname.includes("@")
+        ? { email: nickname }
+        : { nickname: nickname };
+
       const user = await Utente.findOne({
-        where: { nickname },
+        where: whereStatement,
       });
 
       if (!user) {
@@ -109,8 +113,7 @@ export class UtenteCTRL {
         throw new Error("Saldo insufficiente");
       }
 
-      user.saldo -= amount;
-
+      user.saldo = user.saldo - parseInt(amount);
       await user.save();
 
       console.log(`Il saldo di ${nickname} è stato aggiornato a ${user.saldo}`); // "The balance of [nickname] has been updated to [new balance]"
@@ -123,15 +126,19 @@ export class UtenteCTRL {
 
   static async aumentaSaldo(nickname, amount) {
     try {
-      const user = await Utente.findOne({
-        where: { nickname },
-      });
+      const whereStatement = nickname.includes("@")
+        ? { email: nickname }
+        : { nickname: nickname };
 
+      const user = await Utente.findOne({
+        where: whereStatement,
+      });
+      
       if (!user) {
         throw new Error("Utente non trovato");
       }
 
-      user.saldo += amount;
+      user.saldo = user.saldo + parseInt(amount);
 
       await user.save();
 

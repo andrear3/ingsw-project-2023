@@ -74,7 +74,7 @@ homepageRouter.get("/homepage/inversa", authToken, async (req, res) => {
 
     let idAste = asteAttive.map((item) => item.dataValues.astaID);
 
-    const offerteMassime = await OffertaCTRL.trovaOffertaMassima(idAste);
+    const offerteMassime = await OffertaCTRL.trovaOffertaMinima(idAste);
     const timeLeftForAste = await AstaCTRL.getTimeLeftForAsteByIds(idAste);
 
     const mappaOfferteMassime = offerteMassime.reduce((map, offerta) => {

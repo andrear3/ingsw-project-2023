@@ -1,22 +1,19 @@
-
-<h2>Saldo </h2>
-<h2>{{utente?.saldo}}</h2>
+<h2>Saldo</h2>
+<h2>{{ utente?.saldo }}</h2>
 <div class="box-container">
-    <label for="boxCifra">Inserisci la cifra da prelevare </label>
-    <input class="boxCifra" id="boxcifra">   
-
-  </div>
-  <div class="box-container">
-    <label for="boxNumeroCarta">Numero Carta </label>
-    <input class="boxNumeroCarta" id="boxNumeroCarta">   
-  </div>
-  <div class="box-container">
-    <label for="boxNomeInt">Nome intestario</label>
-    <input class="boxNomeInt" id="boxNomeInt">   
-    <label for="boxCognomeInt">Cognome intestario </label>
-    <input class="boxCognomeInt" id="boxCognomeInt">   
-  </div>
-  <div class="row-BTN">
-    <button class="preleva-BTN">Preleva</button>
-    
-  </div>
+  <label for="boxCifra">Inserisci la cifra da prelevare </label>
+  <input class="boxCifra" id="boxcifra" [(ngModel)]="cifra" />
+</div>
+<div class="box-container">
+  <label for="boxNumeroCarta">Numero Carta </label>
+  <input class="boxNumeroCarta" id="boxNumeroCarta" />
+</div>
+<div class="box-container">
+  <label for="boxNomeInt">Nome intestario</label>
+  <input class="boxNomeInt" id="boxNomeInt" />
+  <label for="boxCognomeInt">Cognome intestario </label>
+  <input class="boxCognomeInt" id="boxCognomeInt" />
+</div>
+<div class="row-BTN">
+  <button class="preleva-BTN" (click)="prelevaSaldo()">Preleva</button>
+</div>
