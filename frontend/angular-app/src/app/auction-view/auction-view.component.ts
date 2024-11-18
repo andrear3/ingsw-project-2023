@@ -51,13 +51,13 @@ export class AuctionViewComponent  {
     console.log('astaselezioianta',this.asta);
     console.log('nick da passare ',this.asta.UtenteNickname);
     this.startDecrementTimer();
-// serve a prendere l'immagine del profilo del creatore dellásta
+
     this.nickname = this.asta.UtenteNickname;
     console.log('il nickname', this.nickname);
     if (this.nickname) {
       this.restService.getUtenteByNickname(this.nickname).subscribe({
         next: (data) => {
-          this.utenteAsta = data; // Memorizza i dati dell'utente
+          this.utenteAsta = data; 
           console.log('Utente trovato:', this.utenteAsta);
         },
         error: (err) => {

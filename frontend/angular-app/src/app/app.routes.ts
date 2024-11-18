@@ -103,7 +103,7 @@ export const routes: Routes = [
   component: LeMieAsteComponent,
 },
 
-{ path: '**', redirectTo: '' } // Wildcard route for a 404 page
+{ path: '**', redirectTo: '' } 
 
 ];
 //login
@@ -112,7 +112,7 @@ export const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),// Usa `routes` qui
+    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),
     MatInputModule,
     MatAutocompleteModule,
     NavbarComponent,
