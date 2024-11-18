@@ -12,7 +12,7 @@ dotenv.config();
 export const database = new Sequelize({
   dialect: "sqlite",
   storage: process.env.DB_STORAGE || "./database.sqlite",
-  logging: console.log, // Attiva il logging delle query per il debug
+  logging: console.log, 
 });
 
 createUtenteModel(database);

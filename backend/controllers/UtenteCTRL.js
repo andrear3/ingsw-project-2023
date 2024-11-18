@@ -1,7 +1,7 @@
 import { Utente } from "../models/Database.js";
 
 export class UtenteCTRL {
-  //non usata??????????????????
+
   static async salvaUtente(
     nickname,
     nome,
@@ -116,10 +116,10 @@ export class UtenteCTRL {
       user.saldo = user.saldo - parseInt(amount);
       await user.save();
 
-      console.log(`Il saldo di ${nickname} è stato aggiornato a ${user.saldo}`); // "The balance of [nickname] has been updated to [new balance]"
+      console.log(`Il saldo di ${nickname} è stato aggiornato a ${user.saldo}`); 
       return user.saldo;
     } catch (error) {
-      console.error("Errore durante la detrazione del saldo:", error.message); // "Error during balance deduction:"
+      console.error("Errore durante la detrazione del saldo:", error.message); 
       throw error;
     }
   }
@@ -173,7 +173,7 @@ export class UtenteCTRL {
         throw new Error(`User with email ${email} not found`);
       }
 
-      // Update user fields if new values are provided
+
       user.nome = nome || user.nome;
       user.cognome = cognome || user.cognome;
       user.tipo = tipo || user.tipo;

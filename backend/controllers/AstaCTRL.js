@@ -151,18 +151,17 @@ export class AstaCTRL {
         UtenteNickname: utenteNickname,
       };
 
-      // Create auction and log the result
       const asta = await Asta.create(astaData, { transaction });
-      console.log("Asta created:", asta); // Log the created auction
+      console.log("Asta created:", asta); 
 
       const astaAlRibassoData = {
         prezzoMinSegreto: parseFloat(prezzoMinSegreto),
         decrementoTimer: parseInt(decrementoTimer, 10),
         valoreDecremento: parseFloat(valoreDecremento),
-        AstumAstaID: asta.astaID, // Ensure this is set correctly
+        AstumAstaID: asta.astaID, 
       };
 
-      // Log the data to be used for AstaAlRibasso
+ 
       console.log("AstaAlRibasso data:", astaAlRibassoData);
 
       await AstaAlRibasso.create(astaAlRibassoData, { transaction });
@@ -183,7 +182,7 @@ export class AstaCTRL {
 
   static async recuperaAsteAttive() {
     try {
-      // First, get the IDs of Asta that should be excluded
+
       const excludedAstaIDs = await AstaAlRibasso.findAll({
         attributes: ["AstumAstaID"],
       }).then((result) => result.map((r) => r.AstumAstaID));
@@ -192,7 +191,7 @@ export class AstaCTRL {
         attributes: ["AstumAstaID"],
       }).then((result) => result.map((r) => r.AstumAstaID));
 
-      // Combine both excluded IDs
+    
       const allExcludedIDs = [
         ...new Set([...excludedAstaIDs, ...excludedAstaInversaIDs]),
       ];
@@ -200,12 +199,12 @@ export class AstaCTRL {
       const asteAttive = await Asta.findAll({
         where: {
           dataFineAsta: {
-            [Op.gt]: new Date(), // Greater than the current date
+            [Op.gt]: new Date(), 
           },
           statusAsta: "inVendita",
           astaID: {
-            // Assuming 'id' is the primary key of Asta
-            [Op.notIn]: allExcludedIDs, // Exclude IDs present in AstaAlRibasso and AstaInversa
+      
+            [Op.notIn]: allExcludedIDs, 
           },
         },
       });
@@ -222,7 +221,7 @@ export class AstaCTRL {
     }
   }
 
-  //nuova
+
   static async recuperaAsteAlRibassoAttive() {
     try {
       const activeAstaAlRibasso = await AstaAlRibasso.findAll({
@@ -427,25 +426,25 @@ export class AstaCTRL {
 
         const timeSinceLastDecrement = currentTime - astaRibasso.updatedAt; 
 
-        // Check if it's time to decrement the price
+
         if (timeSinceLastDecrement >= astaRibasso.decrementoTimer * 1000) {
           const newPrice = asta.prezzoiniziale - astaRibasso.valoreDecremento;
 
-          // Check if the new price is below the secret minimum price
+      
           if (newPrice <= astaRibasso.prezzoMinSegreto) {
-            // Update auction status to non-sold
+     
             asta.statusAsta = "nonVenduto";
             await asta.save();
 
             console.log(
               `Asta al ribasso fallita. Il prezzo ha raggiunto il minimo segreto per l'asta con ID: ${asta.astaID}`
             );
-            continue; // Skip to the next iteration
+            continue;
           }
 
-          // Update the price and timestamp
+          
           asta.prezzoiniziale = newPrice;
-          asta.updatedAt = new Date(); // Update the timestamp of the Asta
+          asta.updatedAt = new Date(); 
           await asta.save();
 
           console.log(
@@ -453,7 +452,7 @@ export class AstaCTRL {
           );
         }
 
-        // Check for the maximum offer
+        
         const offertaMassima = await OffertaCTRL.trovaOffertaMassimaPerAsta(
           asta.astaID
         );
@@ -489,7 +488,7 @@ export class AstaCTRL {
     }, 10000);
   }
 
-  //ASTA INVERSA ASTA INVERSA ASTA INVERSA //ASTA INVERSA
+
 
   static async creaAstaInversa(req) {
     const transaction = await Asta.sequelize.transaction();
@@ -526,11 +525,11 @@ export class AstaCTRL {
         UtenteNickname: utenteNickname,
       };
 
-      // Crea l'asta nel database
+     
       const asta = await Asta.create(astaData, { transaction });
 
       const astaInversaData = {
-        AstumAstaID: asta.astaID, // Associa questa asta al modello di AstaInversa
+        AstumAstaID: asta.astaID, 
       };
 
       await AstaInversa.create(astaInversaData, { transaction });
@@ -559,7 +558,7 @@ export class AstaCTRL {
     try {
       const asta = await Asta.findOne({
         where: { astaID, statusAsta: "inVendita" },
-        //classico join tra tabelle
+      
         include: [
           {
             model: AstaInversa,
@@ -572,7 +571,7 @@ export class AstaCTRL {
         throw new Error(`Asta Inversa con ID ${astaID} non trovata.`);
       }
 
-      // Controlla se l'offerta è inferiore all'ultima offerta
+
       const offertaAttuale = await Offerta.findOne({
         where: { AstumAstaID: astaID },
         order: [["valore", "ASC"]],
@@ -584,7 +583,7 @@ export class AstaCTRL {
         );
       }
 
-      // Registra la nuova offerta nel database
+
       await Offerta.create({
         AstumAstaID: astaID,
         UtenteNickname: venditoreNickname,
@@ -609,7 +608,7 @@ export class AstaCTRL {
             model: Asta,
             where: {
               dataFineAsta: {
-                [Op.lt]: new Date(), // Aste già scadute
+                [Op.lt]: new Date(), 
               },
               statusAsta: "inVendita",
             },
@@ -620,7 +619,7 @@ export class AstaCTRL {
       for (let astaInversa of asteInverse) {
         const asta = astaInversa.Asta;
 
-        // Trova l'offerta più bassa per questa asta
+       
         const offertaPiuBassa = await Offerta.findOne({
           where: { AstaAstaID: asta.astaID },
           order: [["valore", "ASC"]],
@@ -652,9 +651,9 @@ export class AstaCTRL {
 
   static async recuperaAsteInverseAttive() {
     try {
-      // Retrieve all active AstaInversa records
+     
       const asteInverseAttive = await AstaInversa.findAll({
-        attributes: ["AstumAstaID"], // Only fetch the reference IDs
+        attributes: ["AstumAstaID"], 
       });
   
       const activeAstaIDs = asteInverseAttive.map((item) => item.AstumAstaID);
@@ -664,7 +663,7 @@ export class AstaCTRL {
         return [];
       }
   
-      // Fetch the corresponding records from Asta
+      
       const astasInverse = await Asta.findAll({
         where: {
           astaID: {
@@ -672,7 +671,7 @@ export class AstaCTRL {
           },
           statusAsta: "inVendita",
           dataFineAsta: {
-            [Op.gt]: new Date(), // Only fetch active auctions
+            [Op.gt]: new Date(), 
           },
         },
       });

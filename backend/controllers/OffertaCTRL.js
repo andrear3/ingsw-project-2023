@@ -145,10 +145,10 @@ export class OffertaCTRL {
       const offerte = await Offerta.findOne({
         attributes: [
           [fn("MAX", col("valore")), "offertaMax"],
-          "UtenteNickname", // Directly select UtenteNickname from Offerta
+          "UtenteNickname", 
         ],
         where: { AstumAstaID: AstumAstaID },
-        group: ["UtenteNickname"], // Group by UtenteNickname to avoid aggregation issues
+        group: ["UtenteNickname"], 
       });
 
       return offerte
