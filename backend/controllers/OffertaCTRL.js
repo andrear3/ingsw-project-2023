@@ -49,6 +49,53 @@ export class OffertaCTRL {
     }
   }
 
+  static async creaOffertaInversa(valore, UtenteNickname, AstumAstaID) {
+    try {
+      let asta = await Asta.findOne({ where: { astaID: AstumAstaID } });
+
+      if (!asta) {
+        console.log("Asta non trovata.");
+        return;
+      }
+
+      let utente = await Utente.findOne({
+        where: { nickname: UtenteNickname },
+      });
+
+      if (!utente) {
+        console.log("Utente non trovato.");
+        return;
+      }
+
+      if (utente.saldo < valore) {
+        console.log("Saldo insufficiente per l'offerta.");
+        console.log(`Saldo disponibile: ${utente.saldo}, Offerta: ${valore}`);
+        return;
+      }
+
+      if (valore < asta.prezzoiniziale && valore > 0) {
+        let nuovaOfferta = new Offerta({
+          valore: valore,
+          UtenteNickname: UtenteNickname,
+          AstumAstaID: AstumAstaID,
+        });
+
+        await nuovaOfferta.save();
+        console.log("Offerta salvata nel database.");
+        console.log(
+          `Prezzo iniziale: ${asta.prezzoiniziale}, Offerta: ${valore}`
+        );
+      } else {
+        console.log("Offerta troppo alta.");
+        console.log(
+          `Prezzo iniziale: ${asta.prezzoiniziale}, Offerta: ${valore}`
+        );
+      }
+    } catch (error) {
+      console.error("Errore nel creare offerta", error);
+    }
+  }
+
   static async trovaOffertaMassima(ids) {
     try {
       const offerte = await Offerta.findAll({
@@ -71,15 +118,37 @@ export class OffertaCTRL {
     }
   }
 
+  static async trovaOffertaMinima(ids) {
+    try {
+      const offerte = await Offerta.findAll({
+        attributes: ["AstumAstaID", [fn("MIN", col("valore")), "offertaMin"]],
+        where: {
+          AstumAstaID: {
+            [Op.in]: ids,
+          },
+        },
+        group: ["AstumAstaID"],
+      });
+
+      return offerte.map((offerta) => ({
+        AstumAstaID: offerta.dataValues.AstumAstaID,
+        offertaMin: offerta.dataValues.offertaMin,
+      }));
+    } catch (error) {
+      console.error("Error finding minimum offers:", error);
+      throw error;
+    }
+  }
+
   static async trovaOffertaMassimaPerAsta(AstumAstaID) {
     try {
       const offerte = await Offerta.findOne({
         attributes: [
           [fn("MAX", col("valore")), "offertaMax"],
-          "UtenteNickname", // Directly select UtenteNickname from Offerta
+          "UtenteNickname",
         ],
         where: { AstumAstaID: AstumAstaID },
-        group: ["UtenteNickname"], // Group by UtenteNickname to avoid aggregation issues
+        group: ["UtenteNickname"],
       });
 
       return offerte
@@ -94,4 +163,26 @@ export class OffertaCTRL {
     }
   }
 
+  static async trovaOffertaMinimaPerAsta(AstumAstaID) {
+    try {
+      const offerte = await Offerta.findOne({
+        attributes: [
+          [fn("MIN", col("valore")), "offertaMin"],
+          "UtenteNickname",
+        ],
+        where: { AstumAstaID: AstumAstaID },
+        group: ["UtenteNickname"],
+      });
+
+      return offerte
+        ? {
+            offertaMin: offerte.dataValues.offertaMin,
+            UtenteNickname: offerte.dataValues.UtenteNickname,
+          }
+        : null;
+    } catch (error) {
+      console.error("Error finding minimum offer for auction:", error);
+      throw error;
+    }
+  }
 }

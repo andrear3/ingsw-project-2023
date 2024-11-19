@@ -190,11 +190,12 @@ export class RestService {
   }
 
   updateSaldo(mode: number, valore: number): Observable<any> {
-    const url = `${this.apiUrl}/123`;
+    const url = `${this.apiUrl}/tests`;
     //prendo token per auth
     const token = this.authService.getToken();
     //options..
     console.log(mode, valore, url);
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -250,14 +251,14 @@ export class RestService {
     return this.http.post(`${this.apiUrl}/editprofile`, formData, httpOptions);
   }
 
-  //getUtente con nickname per visualizzaPRofilo
+  
   getUtenteByNickname(nickname: string): Observable<Utente> {
-    const token = this.authService.getToken(); // Ottieni il token di autorizzazione
+    const token = this.authService.getToken(); 
 
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`, // Aggiungi l'autorizzazione se necessaria
+        Authorization: `Bearer ${token}`, 
       }),
     };
 

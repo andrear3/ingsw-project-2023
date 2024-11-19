@@ -7,12 +7,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs';
-import { SceltaAstaComponent } from '../scelta-asta/scelta-asta.component'; // Ensure the path is correct
+import { SceltaAstaComponent } from '../scelta-asta/scelta-asta.component'; 
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field'; // Optional if you are using <mat-form-field>
-import { MatInputModule } from '@angular/material/input'; // Required for <input> within the autocomplete
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { MatInputModule } from '@angular/material/input'; 
 import { MatIconModule } from '@angular/material/icon';
 import {  OnInit, ViewChild } from '@angular/core';
 import { NavbarService } from '../_services/nav-bar.service';
@@ -33,7 +33,7 @@ import { TipoUtente } from '../_models/tipo-utente-enum';
     MatAutocompleteModule,
   ],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'], // Ensure this is 'styleUrls'
+  styleUrls: ['./navbar.component.scss'], 
 })
 export class NavbarComponent implements OnInit {
   options: string[] = [

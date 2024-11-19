@@ -47,7 +47,6 @@ export class LogInPageComponent {
   
  
  ngAfterViewInit() {
-    // Nascondi la navbar quando viene caricata la pagina di login
     console.log("chiamato NGOnINITn ")
     this.appComponent.nascondiNavBar();
   }
@@ -56,7 +55,7 @@ export class LogInPageComponent {
   async login(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.restApiService.login(this.email, this.password).subscribe(
-        async (response) => {  // Usa async qui per usare await all'interno
+        async (response) => {
           console.log('Login successful:', response?.accessToken);
           
           if (response?.accessToken) {
@@ -64,7 +63,6 @@ export class LogInPageComponent {
             console.log('Token impostato correttamente:', this.authService.getToken());
   
             try {
-              // Controllo del tipo di utente e impostazione
               if (this.tipo === 'venditore') {
                 await this.setTipoUtente('venditore');
                 
@@ -72,10 +70,10 @@ export class LogInPageComponent {
                 await this.setTipoUtente('compratore');
                 
               }
-              resolve(); //  Promise dopo che tutto è completato
+              resolve();
             } catch (err) {
               console.error('Errore durante setTipoUtente:', err);
-              reject(err); // Rigetta se c'è un errore in setTipoUtente
+              reject(err);
             }
   
           } else {
@@ -85,23 +83,23 @@ export class LogInPageComponent {
         },
         (error) => {
           console.error('Login failed:', error);
-          reject(error); // In caso di errore, rigetta la Promise
+          reject(error);
         }
       );
     });
   }
   
-  // Funzione per setTipoUtente come Promise
+
   setTipoUtente(tipo: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.restApiService.setTipoUtente(tipo).subscribe(
         (response) => {
           console.log(`Tipo utente impostato a ${tipo}:`, response);
-          resolve(); // Risolvi la Promise quando setTipoUtente ha successo
+          resolve(); 
         },
         (error) => {
           console.error('Errore impostazione tipo utente:', error);
-          reject(error); // Rigetta la Promise in caso di errore
+          reject(error);
         }
       );
     });
@@ -109,9 +107,9 @@ export class LogInPageComponent {
   
   async login2() {
     try {
-      await this.login();  // Aspetta che la funzione login termini
+      await this.login();
       console.log('Navigo a /homepage');
-      this.router.navigate(['/homepage']);  // Naviga solo dopo che il login è completato
+      this.router.navigate(['/homepage']);  
     } catch (error) {
       console.error('Errore durante il login:', error);
     }

@@ -31,7 +31,7 @@ productRouter.post("/auctionInversaView", authToken, async (req, res) => {
   }
 
   try {
-    await OffertaCTRL.creaOfferta(valore, UtenteNickname, AstumAstaID);
+    await OffertaCTRL.creaOffertaInversa(valore, UtenteNickname, AstumAstaID);
     res.status(201).json({ message: "Offer created successfully." });
   } catch (error) {
     console.error("Error creating offer:", error);
@@ -67,14 +67,17 @@ productRouter.post("/auctionRibassoView", authToken, async (req, res) => {
 });
 
 
-productRouter.post("/123", authToken, async (req, res) => {
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+productRouter.post("/tests", authToken, async (req, res) => {
   try {
     if (req.body.mode == 0) {
+
+      console.log(req.user.email, req.body.valore);
       await UtenteCTRL.diminuisciSaldo(req.user.email, req.body.valore);
       res.status(200).json({ message: "Update: Diminuisci" });
+
     } else if (req.body.mode == 1) {
+      
+      console.log(req.user.email, req.body.valore);
       await UtenteCTRL.aumentaSaldo(req.user.email, req.body.valore);
       res.status(200).json({ message: "Update: Aumenta" });
     } else {

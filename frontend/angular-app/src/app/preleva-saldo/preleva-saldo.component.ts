@@ -1,11 +1,16 @@
-
-import { Component ,ElementRef,OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
-import { Router,RouteConfigLoadEnd, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouteConfigLoadEnd,
+  RouterLink,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,41 +23,44 @@ import { Utente } from '../_models/utente-model';
 @Component({
   selector: 'app-preleva-saldo',
   standalone: true,
-  imports: [MatToolbarModule,
+  imports: [
+    MatToolbarModule,
     MatIconModule,
     MatAutocompleteModule,
     MatInputModule,
     RouterOutlet,
     CommonModule,
     FormsModule,
-    RouterLink,],
+    RouterLink,
+  ],
   templateUrl: './preleva-saldo.component.html',
-  styleUrl: './preleva-saldo.component.scss'
+  styleUrl: './preleva-saldo.component.scss',
 })
 export class PrelevaSaldoComponent {
-  saldo: number | undefined;
+  cifra: number = 1;
   constructor(
-    private RestService: RestService,
+    private restService: RestService,
     private AuthService: AuthService,
     private router: Router
-  ){}
-  utente : Utente | null = null ;
+  ) {}
+  utente: Utente | null = null;
   private statusSubscription: Subscription = new Subscription();
   ngOnInit() {
     this.statusSubscription = this.AuthService.getStatus().subscribe(
       (status: boolean) => {
         if (status) {
-      
           console.log(this.AuthService.getUtente());
-          this.utente=this.AuthService.getUtente();
-          
-          
-          }
+          this.utente = this.AuthService.getUtente();
+        }
       }
     );
   }
- prelevaSaldo(){
-   
- }
-  
+  prelevaSaldo() {
+    this.restService.updateSaldo(0, this.cifra).subscribe({
+      next: (response) =>
+        console.log('Saldo aggiornato con successo:', response),
+      error: (err) =>
+        console.error("Errore nell'aggiornamento del saldo:", err),
+    });
+  }
 }

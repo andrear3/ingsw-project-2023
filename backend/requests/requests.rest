@@ -57,13 +57,13 @@ Content-Type: application/json
 ###
 
 ###
-POST http://localhost:3000/123
+POST http://localhost:3000/tests
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpa2tvd29tYW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE3MjYyMzUzNzZ9.ZhZG8fzk1hcmjR8KHa691m0mXz5qACqyXGIKJC9QpJQ
 Content-Type: application/json
 
 {
     "mode": "1",
-    "valore": "6"
+    "valore": "160005"
 }
 
 
