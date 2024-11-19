@@ -121,7 +121,7 @@ export class OffertaCTRL {
   static async trovaOffertaMinima(ids) {
     try {
       const offerte = await Offerta.findAll({
-        attributes: ["AstumAstaID", [fn("MIN", col("valore")), "offertaMax"]],
+        attributes: ["AstumAstaID", [fn("MIN", col("valore")), "offertaMin"]],
         where: {
           AstumAstaID: {
             [Op.in]: ids,
@@ -132,10 +132,10 @@ export class OffertaCTRL {
 
       return offerte.map((offerta) => ({
         AstumAstaID: offerta.dataValues.AstumAstaID,
-        offertaMax: offerta.dataValues.offertaMax,
+        offertaMin: offerta.dataValues.offertaMin,
       }));
     } catch (error) {
-      console.error("Error finding maximum offers:", error);
+      console.error("Error finding minimum offers:", error);
       throw error;
     }
   }
@@ -145,10 +145,10 @@ export class OffertaCTRL {
       const offerte = await Offerta.findOne({
         attributes: [
           [fn("MAX", col("valore")), "offertaMax"],
-          "UtenteNickname", 
+          "UtenteNickname",
         ],
         where: { AstumAstaID: AstumAstaID },
-        group: ["UtenteNickname"], 
+        group: ["UtenteNickname"],
       });
 
       return offerte
@@ -163,4 +163,26 @@ export class OffertaCTRL {
     }
   }
 
+  static async trovaOffertaMinimaPerAsta(AstumAstaID) {
+    try {
+      const offerte = await Offerta.findOne({
+        attributes: [
+          [fn("MIN", col("valore")), "offertaMin"],
+          "UtenteNickname",
+        ],
+        where: { AstumAstaID: AstumAstaID },
+        group: ["UtenteNickname"],
+      });
+
+      return offerte
+        ? {
+            offertaMin: offerte.dataValues.offertaMin,
+            UtenteNickname: offerte.dataValues.UtenteNickname,
+          }
+        : null;
+    } catch (error) {
+      console.error("Error finding minimum offer for auction:", error);
+      throw error;
+    }
+  }
 }

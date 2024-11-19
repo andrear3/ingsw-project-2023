@@ -9,13 +9,13 @@ import { fileURLToPath } from "url";
 
 export const homepageRouter = express.Router();
 
-// Define __filename and __dirname
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 homepageRouter.get("/homepage", authToken, async (req, res) => {
   try {
-    // Queries
+
     let asteAttive = await AstaCTRL.recuperaAsteAttive();
     let user = await UtenteCTRL.recuperaUtenteByEmail(req.user.email);
 
@@ -38,13 +38,13 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
       return map;
     }, {});
 
-    // Compose response to client
+
     const baseUrl = req.protocol + "://" + req.get("host") + "/images/";
 
-    // Transforming user's URL
+
     const userWithTransformedUrl = {
       ...user.toJSON(),
-      url: user.url ? baseUrl + user.url : null, // Transform user.url
+      url: user.url ? baseUrl + user.url : null, 
     };
 
     const datiConOfferteETempo = asteAttive.map((asta) => ({
@@ -54,7 +54,7 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
       timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
     }));
 
-    res.json({ aste: datiConOfferteETempo, userInfo: userWithTransformedUrl }); // Send transformed user info
+    res.json({ aste: datiConOfferteETempo, userInfo: userWithTransformedUrl }); 
   } catch (error) {
     console.error("Errore nel recupero dei dati:", error);
     res.status(500).json({ message: "Errore del server" });
@@ -64,7 +64,7 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
 // DA TESTARE
 homepageRouter.get("/homepage/inversa", authToken, async (req, res) => {
   try {
-    // Queries
+
     let asteAttive = await AstaCTRL.recuperaAsteInverseAttive(); 
     let user = await UtenteCTRL.recuperaUtenteByEmail(req.user.email);
 
@@ -74,11 +74,11 @@ homepageRouter.get("/homepage/inversa", authToken, async (req, res) => {
 
     let idAste = asteAttive.map((item) => item.dataValues.astaID);
 
-    const offerteMassime = await OffertaCTRL.trovaOffertaMinima(idAste);
+    const offerteMinime = await OffertaCTRL.trovaOffertaMinima(idAste);
     const timeLeftForAste = await AstaCTRL.getTimeLeftForAsteByIds(idAste);
 
-    const mappaOfferteMassime = offerteMassime.reduce((map, offerta) => {
-      map[offerta.AstumAstaID] = offerta.offertaMax;
+    const mappaOfferteMinime = offerteMinime.reduce((map, offerta) => {
+      map[offerta.AstumAstaID] = offerta.offertaMin;
       return map;
     }, {});
 
@@ -87,19 +87,19 @@ homepageRouter.get("/homepage/inversa", authToken, async (req, res) => {
       return map;
     }, {});
 
-    // Compose response to client
+    
     const baseUrl = req.protocol + "://" + req.get("host") + "/images/";
 
-    // Transforming user's URL
+   
     const userWithTransformedUrl = {
       ...user.toJSON(),
-      url: user.url ? baseUrl + user.url : null, // Transform user.url
+      url: user.url ? baseUrl + user.url : null, 
     };
 
     const datiConOfferteETempo = asteAttive.map((asta) => ({
       ...asta.toJSON(),
-      url: asta.url ? baseUrl + asta.url : null, // Ensure asta.url is not null
-      offertaMax: mappaOfferteMassime[asta.dataValues.astaID] || null,
+      url: asta.url ? baseUrl + asta.url : null, 
+      offertaMin: mappaOfferteMinime[asta.dataValues.astaID] || null,
       timeLeft: mappaTimeLeft[asta.dataValues.astaID] || null,
     }));
 
@@ -162,7 +162,7 @@ homepageRouter.get("/aste/utente/:nickname", authToken, async (req, res) => {
   try {
     const { nickname } = req.params;
 
-    // Retrieve active auctions with offers by the user
+
     const asteConOfferte = await AstaCTRL.recuperaAsteConOfferteUtente(nickname);
 
     if (!asteConOfferte || asteConOfferte.length === 0) {

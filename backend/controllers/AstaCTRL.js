@@ -1,11 +1,17 @@
 import { OffertaCTRL } from "./OffertaCTRL.js";
 import { UtenteCTRL } from "./UtenteCTRL.js";
-import { Asta, AstaAlRibasso, AstaInversa, Utente, Offerta} from "../models/Database.js";
+import {
+  Asta,
+  AstaAlRibasso,
+  AstaInversa,
+  Utente,
+  Offerta,
+} from "../models/Database.js";
 import { Op } from "sequelize";
+import chalk from "chalk";
 
 export class AstaCTRL {
   static async recuperaAstaById(astaID) {
-   
     try {
       const asta = await Asta.findByPk(astaID);
 
@@ -18,7 +24,6 @@ export class AstaCTRL {
       console.error(`Error retrieving auction with ID ${astaID}:`, error);
       throw error;
     }
-  
   }
 
   //titolo, nome prodotto, prezzo iniziale, categoria, url, ore, descrizione
@@ -152,16 +157,15 @@ export class AstaCTRL {
       };
 
       const asta = await Asta.create(astaData, { transaction });
-      console.log("Asta created:", asta); 
+      console.log("Asta created:", asta);
 
       const astaAlRibassoData = {
         prezzoMinSegreto: parseFloat(prezzoMinSegreto),
         decrementoTimer: parseInt(decrementoTimer, 10),
         valoreDecremento: parseFloat(valoreDecremento),
-        AstumAstaID: asta.astaID, 
+        AstumAstaID: asta.astaID,
       };
 
- 
       console.log("AstaAlRibasso data:", astaAlRibassoData);
 
       await AstaAlRibasso.create(astaAlRibassoData, { transaction });
@@ -182,7 +186,6 @@ export class AstaCTRL {
 
   static async recuperaAsteAttive() {
     try {
-
       const excludedAstaIDs = await AstaAlRibasso.findAll({
         attributes: ["AstumAstaID"],
       }).then((result) => result.map((r) => r.AstumAstaID));
@@ -191,7 +194,6 @@ export class AstaCTRL {
         attributes: ["AstumAstaID"],
       }).then((result) => result.map((r) => r.AstumAstaID));
 
-    
       const allExcludedIDs = [
         ...new Set([...excludedAstaIDs, ...excludedAstaInversaIDs]),
       ];
@@ -199,12 +201,11 @@ export class AstaCTRL {
       const asteAttive = await Asta.findAll({
         where: {
           dataFineAsta: {
-            [Op.gt]: new Date(), 
+            [Op.gt]: new Date(),
           },
           statusAsta: "inVendita",
           astaID: {
-      
-            [Op.notIn]: allExcludedIDs, 
+            [Op.notIn]: allExcludedIDs,
           },
         },
       });
@@ -220,7 +221,6 @@ export class AstaCTRL {
       console.error("Errore nel recupero aste:", error);
     }
   }
-
 
   static async recuperaAsteAlRibassoAttive() {
     try {
@@ -331,7 +331,6 @@ export class AstaCTRL {
       for (let asta of tutteLeAste) {
         let dataFineAsta = new Date(asta.dataFineAsta);
 
-        
         if (tempoCorrente >= dataFineAsta && asta.statusAsta === "inVendita") {
           const offertaMassima = await OffertaCTRL.trovaOffertaMassimaPerAsta(
             asta.astaID
@@ -341,7 +340,6 @@ export class AstaCTRL {
             const { offertaMax, UtenteNickname } = offertaMassima;
 
             if (offertaMax > 0) {
-              
               const utente = await Utente.findOne({
                 where: { nickname: UtenteNickname },
               });
@@ -350,7 +348,7 @@ export class AstaCTRL {
                 console.error(
                   `Saldo insufficiente per ${UtenteNickname} o utente non trovato.`
                 );
-                continue; 
+                continue;
               }
 
               await UtenteCTRL.diminuisciSaldo(UtenteNickname, offertaMax);
@@ -366,13 +364,11 @@ export class AstaCTRL {
               console.log(`Asta non venduta. Nessuna offerta valida.`);
             }
           } else {
-            
             asta.statusAsta = "nonVenduto";
             asta.prezzofinale = 0;
             console.log(`Asta non venduta. Nessuna offerta disponibile.`);
           }
 
-          
           await asta.save();
         }
       }
@@ -391,48 +387,39 @@ export class AstaCTRL {
           error
         );
       }
-    }, 1000); 
+    }, 1000);
   }
 
- 
   static async gestisciAstaAlRibasso() {
     try {
-
       const asteAlRibassoAttive = await AstaAlRibasso.findAll({
-        where: {
-         
-        },
+        where: {},
       });
 
       const currentTime = new Date();
 
       for (let astaRibasso of asteAlRibassoAttive) {
-       
         const asta = await Asta.findOne({
           where: {
             astaID: astaRibasso.AstumAstaID,
             statusAsta: "inVendita",
-            dataFineAsta: { [Op.gt]: currentTime }, 
+            dataFineAsta: { [Op.gt]: currentTime },
           },
         });
 
-        
         if (!asta) {
           console.log(
             `Asta non trovata per l'asta al ribasso ID: ${astaRibasso.id}`
           );
-          continue; 
+          continue;
         }
 
-        const timeSinceLastDecrement = currentTime - astaRibasso.updatedAt; 
-
+        const timeSinceLastDecrement = currentTime - astaRibasso.updatedAt;
 
         if (timeSinceLastDecrement >= astaRibasso.decrementoTimer * 1000) {
           const newPrice = asta.prezzoiniziale - astaRibasso.valoreDecremento;
 
-      
           if (newPrice <= astaRibasso.prezzoMinSegreto) {
-     
             asta.statusAsta = "nonVenduto";
             await asta.save();
 
@@ -442,9 +429,8 @@ export class AstaCTRL {
             continue;
           }
 
-          
           asta.prezzoiniziale = newPrice;
-          asta.updatedAt = new Date(); 
+          asta.updatedAt = new Date();
           await asta.save();
 
           console.log(
@@ -452,7 +438,6 @@ export class AstaCTRL {
           );
         }
 
-        
         const offertaMassima = await OffertaCTRL.trovaOffertaMassimaPerAsta(
           asta.astaID
         );
@@ -488,7 +473,34 @@ export class AstaCTRL {
     }, 10000);
   }
 
+  static avviaControlloAste() {
+    setInterval(async () => {
+      try {
+        console.log(
+          chalk.bgYellowBright("Esecuzione controllo aste in corso...")
+        );
+        console.log();
+        console.log();
 
+        await this.gestisciAstaInversa();
+        //await this.gestisciAstaAlRibasso();
+        //await this.controllaScadenzaAste();
+
+        console.log(
+          chalk.green.bold("Controllo aste completato con successo.")
+        );
+        console.log();
+        console.log();
+      } catch (error) {
+        console.error(
+          chalk.red("Errore durante il controllo delle aste:"),
+          error
+        );
+        console.log();
+        console.log();
+      }
+    }, 10000);
+  }
 
   static async creaAstaInversa(req) {
     const transaction = await Asta.sequelize.transaction();
@@ -516,7 +528,7 @@ export class AstaCTRL {
         nomeBeneInVendita: nomeProdotto,
         titolo: titoloAsta,
         categoria: categoria,
-        tipoBeneInVendita: "servizio", 
+        tipoBeneInVendita: "servizio",
         descrizioneAsta: descrizione,
         prezzoiniziale: parseFloat(prezzoIniz),
         dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
@@ -525,11 +537,10 @@ export class AstaCTRL {
         UtenteNickname: utenteNickname,
       };
 
-     
       const asta = await Asta.create(astaData, { transaction });
 
       const astaInversaData = {
-        AstumAstaID: asta.astaID, 
+        AstumAstaID: asta.astaID,
       };
 
       await AstaInversa.create(astaInversaData, { transaction });
@@ -545,125 +556,90 @@ export class AstaCTRL {
     }
   }
 
-  static async gestisciAstaInversa(astaID, nuovaOfferta, venditoreNickname) {
-    if (astaID == null) {
-      throw new Error("Il parametro 'astaID' non può essere null o undefined.");
-    }
-    if (nuovaOfferta == null) {
-      throw new Error("Il parametro 'nuovaOfferta' non può essere null o undefined.");
-    }
-    if (!venditoreNickname) {
-      throw new Error("Il parametro 'venditoreNickname' non può essere null, undefined o una stringa vuota.");
-    }
+  static async gestisciAstaInversa() {
     try {
-      const asta = await Asta.findOne({
-        where: { astaID, statusAsta: "inVendita" },
-      
-        include: [
-          {
-            model: AstaInversa,
-            attributes: ["AstumAstaID"],
+      const tutteLeAsteInverse = await AstaInversa.findAll();
+      const tempoCorrente = new Date();
+
+      for (let astaInversa of tutteLeAsteInverse) {
+        const asta = await Asta.findOne({
+          where: {
+            astaID: astaInversa.AstumAstaID,
+            statusAsta: "inVendita",
           },
-        ],
-      });
-
-      if (!asta) {
-        throw new Error(`Asta Inversa con ID ${astaID} non trovata.`);
-      }
-
-
-      const offertaAttuale = await Offerta.findOne({
-        where: { AstumAstaID: astaID },
-        order: [["valore", "ASC"]],
-      });
-
-      if (offertaAttuale && nuovaOfferta >= offertaAttuale.valore) {
-        throw new Error(
-          "L'offerta deve essere inferiore all'offerta più bassa attuale."
-        );
-      }
-
-
-      await Offerta.create({
-        AstumAstaID: astaID,
-        UtenteNickname: venditoreNickname,
-        valore: nuovaOfferta,
-      });
-
-      console.log(
-        `Nuova offerta accettata: ${nuovaOfferta} da ${venditoreNickname}`
-      );
-      return true;
-    } catch (error) {
-      console.error("Errore durante la gestione dell'asta inversa:", error);
-      throw error;
-    }
-  }
-
-  static async controllaScadenzaAstaInversa() {
-    try {
-      const asteInverse = await AstaInversa.findAll({
-        include: [
-          {
-            model: Asta,
-            where: {
-              dataFineAsta: {
-                [Op.lt]: new Date(), 
-              },
-              statusAsta: "inVendita",
-            },
-          },
-        ],
-      });
-
-      for (let astaInversa of asteInverse) {
-        const asta = astaInversa.Asta;
-
-       
-        const offertaPiuBassa = await Offerta.findOne({
-          where: { AstaAstaID: asta.astaID },
-          order: [["valore", "ASC"]],
         });
-
-        if (offertaPiuBassa) {
-          asta.statusAsta = "venduto";
-          asta.prezzofinale = offertaPiuBassa.valore;
-          await asta.save();
-
-          console.log(
-            `Asta inversa conclusa. Venditore ${offertaPiuBassa.UtenteNickname} ha vinto con un'offerta di ${offertaPiuBassa.valore}.`
+        if(asta){
+          console.log(chalk.bgCyanBright(asta.astaID, "asta in vendita"));
+        }
+        if (!asta) {
+          console.error(
+            `Asta not found for AstaInversa ID: ${astaInversa.AstumAstaID}`
           );
-        } else {
-          asta.statusAsta = "nonVenduto";
-          asta.prezzofinale = 0;
+          continue;
+        }
+
+        let dataFineAsta = new Date(asta.dataFineAsta);
+
+        if (tempoCorrente >= dataFineAsta && asta.statusAsta === "inVendita") {
+          console.log(chalk.bgCyanBright(asta.astaID, "asta scaduta"));
+          const offertaMinima = await OffertaCTRL.trovaOffertaMinimaPerAsta(
+            asta.astaID
+          );
+
+          if (offertaMinima) {
+            const { offertaMin, UtenteNickname } = offertaMinima;
+
+            if (offertaMin > 0) {
+              const utente = await Utente.findOne({
+                where: { nickname: UtenteNickname },
+              });
+
+              if (!utente || utente.saldo < offertaMin) {
+                console.error(
+                  `Saldo insufficiente per ${UtenteNickname} o utente non trovato.`
+                );
+                continue;
+              }
+
+              await UtenteCTRL.diminuisciSaldo(UtenteNickname, offertaMin);
+              asta.statusAsta = "venduto";
+              asta.prezzofinale = offertaMin;
+
+              console.log(
+                `Asta venduta a ${UtenteNickname} con un prezzo finale di ${offertaMin}`
+              );
+            } else {
+              asta.statusAsta = "nonVenduto";
+              asta.prezzofinale = 0;
+              console.log(`Asta non venduta. Nessuna offerta valida.`);
+            }
+          } else {
+            asta.statusAsta = "nonVenduto";
+            asta.prezzofinale = 0;
+            console.log(`Asta non venduta. Nessuna offerta disponibile.`);
+          }
+
           await asta.save();
-          console.log(`Asta inversa conclusa senza vincitore.`);
         }
       }
     } catch (error) {
-      console.error(
-        "Errore durante la gestione della scadenza dell'asta inversa:",
-        error
-      );
-      throw error;
+      console.error("Errore nel controllare la scadenza delle aste:", error);
     }
   }
 
   static async recuperaAsteInverseAttive() {
     try {
-     
       const asteInverseAttive = await AstaInversa.findAll({
-        attributes: ["AstumAstaID"], 
+        attributes: ["AstumAstaID"],
       });
-  
+
       const activeAstaIDs = asteInverseAttive.map((item) => item.AstumAstaID);
-  
+
       if (activeAstaIDs.length === 0) {
         console.log("Nessuna asta inversa attiva");
         return [];
       }
-  
-      
+
       const astasInverse = await Asta.findAll({
         where: {
           astaID: {
@@ -671,21 +647,21 @@ export class AstaCTRL {
           },
           statusAsta: "inVendita",
           dataFineAsta: {
-            [Op.gt]: new Date(), 
+            [Op.gt]: new Date(),
           },
         },
       });
-  
+
       if (astasInverse.length > 0) {
         console.log("Aste inverse attive:", astasInverse);
       } else {
         console.log("Nessuna asta inversa è attiva");
       }
-  
+
       return astasInverse;
     } catch (error) {
       console.error("Errore nel recupero delle aste inverse attive:", error);
       throw error;
     }
   }
-}  
+}

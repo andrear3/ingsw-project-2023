@@ -10,7 +10,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Utente } from '../_models/utente-model';
-import { Router,RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { state } from '@angular/animations';
 @Component({
   selector: 'app-auction-view',
@@ -28,7 +28,7 @@ import { state } from '@angular/animations';
   templateUrl: './auction-view.component.html',
   styleUrls: ['./auction-view.component.scss'],
 })
-export class AuctionViewComponent  {
+export class AuctionViewComponent {
   asta: any = {};
   private intervalId: any;
   newOfferta: number | null = null;
@@ -37,19 +37,18 @@ export class AuctionViewComponent  {
     private route: ActivatedRoute,
     private restService: RestService,
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {}
   public tipoAsta: string = '';
   utenteAsta: Utente | null = null;
   nickname: string | null = null;
   errorMessage: string | null = null;
 
-
   ngOnInit() {
     this.tipoAsta = this.authService.getTipo();
     this.asta = this.authService.getAsta();
-    console.log('astaselezioianta',this.asta);
-    console.log('nick da passare ',this.asta.UtenteNickname);
+    console.log('astaselezioianta', this.asta);
+    console.log('nick da passare ', this.asta.UtenteNickname);
     this.startDecrementTimer();
 
     this.nickname = this.asta.UtenteNickname;
@@ -57,17 +56,17 @@ export class AuctionViewComponent  {
     if (this.nickname) {
       this.restService.getUtenteByNickname(this.nickname).subscribe({
         next: (data) => {
-          this.utenteAsta = data; 
+          this.utenteAsta = data;
           console.log('Utente trovato:', this.utenteAsta);
         },
         error: (err) => {
-          console.error('Errore nel recupero dell\'utente:', err);
-          this.errorMessage = 'Errore nel recupero delle informazioni dell\'utente';
+          console.error("Errore nel recupero dell'utente:", err);
+          this.errorMessage =
+            "Errore nel recupero delle informazioni dell'utente";
         },
       });
     }
   }
-
 
   makeOffer() {
     if (this.newOfferta !== null) {
@@ -99,6 +98,35 @@ export class AuctionViewComponent  {
     }
   }
 
+  makeOfferInversa() {
+    if (this.newOfferta !== null) {
+      const offerData = {
+        valore: this.newOfferta,
+        UtenteNickname: this.authService.getUtente()?.nickname,
+        AstumAstaID: this.asta.astaID,
+      };
+
+      console.log(offerData);
+
+      this.restService
+        .postOfferInversa(
+          offerData.valore,
+          String(offerData.UtenteNickname),
+          offerData.AstumAstaID
+        )
+        .subscribe({
+          next: (response) => {
+            console.log('Offerta:', response);
+          },
+          error: (err) => {
+            console.error('Errore:', err);
+          },
+        });
+    } else {
+      console.log(this.newOfferta);
+      console.log('Offerta non valida');
+    }
+  }
   //da usare
   makeOfferRibasso() {
     const offerData = {
@@ -145,11 +173,8 @@ export class AuctionViewComponent  {
 
     return dDisplay + hDisplay + mDisplay + sDisplay.trim();
   }
- visualProfile(){
-  
-  this.router.navigate(['/visualizzaProfilo',this.asta.UtenteNickname]);
-  console.log('utenten passato ',this.asta.UtenteNickname)
- }
-
-
+  visualProfile() {
+    this.router.navigate(['/visualizzaProfilo', this.asta.UtenteNickname]);
+    console.log('utenten passato ', this.asta.UtenteNickname);
+  }
 }

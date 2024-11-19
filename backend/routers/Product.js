@@ -68,8 +68,6 @@ productRouter.post("/auctionRibassoView", authToken, async (req, res) => {
 
 
 productRouter.post("/tests", authToken, async (req, res) => {
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
   try {
     if (req.body.mode == 0) {
 
