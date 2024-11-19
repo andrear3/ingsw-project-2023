@@ -169,7 +169,7 @@ export class AstaCTRL {
 
       await transaction.commit();
 
-      console.log("Asta con ribasso creata con successo:", asta);
+      console.log("Asta con ribasso creata con successo CTRL:", asta);
       return asta;
     } catch (error) {
       await transaction.rollback();
@@ -504,7 +504,7 @@ export class AstaCTRL {
         url,
         descrizione,
       } = req.body;
-      //const fileUrl = req.file ? req.file.filename : null;
+      const fileUrl = req.file ? req.file.filename : null;
       const user = await Utente.findOne({ where: { email: req.user.email } });
 
       if (!user) {
@@ -521,7 +521,7 @@ export class AstaCTRL {
         descrizioneAsta: descrizione,
         prezzoiniziale: parseFloat(prezzoIniz),
         dataFineAsta: new Date(Date.now() + oreAsta * 3600000),
-        //url: fileUrl,
+        url: fileUrl,
         statusAsta: "inVendita",
         url: url,
         UtenteNickname: utenteNickname,
