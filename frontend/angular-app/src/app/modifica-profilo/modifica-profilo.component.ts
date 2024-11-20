@@ -12,6 +12,7 @@ import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Utente } from '../_models/utente-model';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-modifica-profilo',
@@ -30,7 +31,6 @@ import { Utente } from '../_models/utente-model';
   templateUrl: './modifica-profilo.component.html',
   styleUrls: ['./modifica-profilo.component.scss'],
 })
-
 export class ModificaProfiloComponent implements OnInit {
   email: string = '';
   nome: string = '';
@@ -53,7 +53,8 @@ export class ModificaProfiloComponent implements OnInit {
   constructor(
     private RestService: RestService,
     private AuthService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -69,14 +70,11 @@ export class ModificaProfiloComponent implements OnInit {
             this.nickname = this.utente.nickname;
             this.regione = this.utente.regione;
             this.indirizzo = this.utente.indirizzo;
-            this.link1 = this.utente.link1 ;
+            this.link1 = this.utente.link1;
             this.link2 = this.utente.link2;
             this.link3 = this.utente.link3;
             this.descrizione = this.utente.descrizione;
-         
           }
-
-
         }
       }
     );
@@ -104,11 +102,17 @@ export class ModificaProfiloComponent implements OnInit {
   }
 
   editProfile() {
-    const formData = new FormData();
+    if (this.isFormInvalid()) {
+      this.snackBar.open('Compila tutti i campi richiesti!', 'Close', {
+        duration: 3000,
+      });
+      return;
+    }
 
+    const formData = new FormData();
     formData.append('nome', this.nome || '');
     formData.append('cognome', this.cognome || '');
-    formData.append('nickname', this.nickname || '');//da rimuovere
+    formData.append('nickname', this.nickname || '');
     formData.append('regione', this.regione || '');
     formData.append('indirizzo', this.indirizzo || '');
     formData.append('descrizione', this.descrizione || '');
@@ -122,19 +126,31 @@ export class ModificaProfiloComponent implements OnInit {
       formData.append('url', this.url);
     }
 
-    this.RestService.editProfile(formData).subscribe(
-      (response) => {
-        console.log('Profile updated successfully:', response);
-        this.router.navigate(['/profile']);
-        this.confermaModProfilo();
-      },
-      (error) => {
-        console.error('Profile update failed:', error);
-      }
-    );
+    this.RestService.editProfile(formData).subscribe({
+      next: () =>
+        this.snackBar.open('Profilo modificato ✅', 'Close', {
+          duration: 3000,
+        }),
+
+      error: () =>
+        this.snackBar.open('Errore durante la creazione asta', 'Close', {
+          duration: 3000,
+        }),
+    });
+    this.router.navigate(['/homepage']);
   }
 
-  confermaModProfilo() {
-    this.router.navigate(['/profile']);
+  isFormInvalid(): boolean {
+    return (
+      !this.nome ||
+      !this.cognome ||
+      !this.nickname ||
+      !this.regione ||
+      !this.indirizzo ||
+      !this.descrizione ||
+      !this.link1 ||
+      !this.link2 ||
+      !this.link3
+    );
   }
 }

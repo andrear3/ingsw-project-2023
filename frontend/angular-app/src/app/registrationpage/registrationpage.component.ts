@@ -10,7 +10,8 @@ import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { Utente } from '../_models/utente-model';
 import { TipoUtente } from '../_models/tipo-utente-enum';
-import { Router } from 'express';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrationpage',
@@ -48,22 +49,25 @@ export class RegistrationpageComponent {
     url: '',
   };
 
-
-
-  constructor(private restApiService: RestService) {}
+  constructor(
+    private restApiService: RestService,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {}
 
   register() {
-    this.restApiService.register(this.utente).subscribe(
-      (response) => {
-        console.log('Registration successful:', response);
+    this.restApiService.register(this.utente).subscribe({
+      next: () => {
+        this.snackBar.open('Sei stato registrato con successo! ✅', 'Close', {
+          duration: 3000,
+        });
+        this.router.navigate(['/']);
       },
-      (error) => {
-        console.error('Registration failed:', error);
-      }
-    );
-    console.log(this.utente);
-    console.log("test");
+      error: () => {
+        this.snackBar.open('Errore nella registrazione', 'Close', {
+          duration: 3000,
+        });
+      },
+    });
   }
-  
 }
-

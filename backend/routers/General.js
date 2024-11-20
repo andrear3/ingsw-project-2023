@@ -167,7 +167,7 @@ general.post(
         link3,
       });
 
-      res.status(200);
+      res.status(200).json({ message: "Success" });
     } catch (error) {
       console.error("Error processing profile update:", error);
       res.status(500);

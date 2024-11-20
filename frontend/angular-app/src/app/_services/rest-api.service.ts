@@ -189,7 +189,7 @@ export class RestService {
   }
 
   updateSaldo(mode: number, valore: number): Observable<any> {
-    const url = `${this.apiUrl}/tests`;
+    const url = `${this.apiUrl}/saldoModifica`;
     //prendo token per auth
     const token = this.authService.getToken();
     //options..

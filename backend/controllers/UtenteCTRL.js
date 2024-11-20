@@ -26,6 +26,7 @@ export class UtenteCTRL {
       indirizzo: indirizzo,
       password: password,
       saldo: saldo,
+      url: "default-profle"
     });
     await utente.save();
   }

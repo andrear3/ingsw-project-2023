@@ -19,6 +19,8 @@ import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Utente } from '../_models/utente-model';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-preleva-saldo',
@@ -32,6 +34,7 @@ import { Utente } from '../_models/utente-model';
     CommonModule,
     FormsModule,
     RouterLink,
+    MatSnackBarModule,
   ],
   templateUrl: './preleva-saldo.component.html',
   styleUrl: './preleva-saldo.component.scss',
@@ -41,7 +44,9 @@ export class PrelevaSaldoComponent {
   constructor(
     private restService: RestService,
     private AuthService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private dialogRef: MatDialogRef<PrelevaSaldoComponent>
   ) {}
   utente: Utente | null = null;
   private statusSubscription: Subscription = new Subscription();
@@ -57,10 +62,22 @@ export class PrelevaSaldoComponent {
   }
   prelevaSaldo() {
     this.restService.updateSaldo(0, this.cifra).subscribe({
-      next: (response) =>
-        console.log('Saldo aggiornato con successo:', response),
-      error: (err) =>
-        console.error("Errore nell'aggiornamento del saldo:", err),
+      next: () => {
+        this.snackBar.open(
+          `${this.cifra}€ prelevati con successo ✅`,
+          'Close',
+          {
+            duration: 3000,
+          }
+        );
+        this.dialogRef.close();
+        this.router.navigate(['/homepage']);
+      },
+      error: () => {
+        this.snackBar.open('Errore', 'Close', {
+          duration: 3000,
+        });
+      },
     });
   }
 }
