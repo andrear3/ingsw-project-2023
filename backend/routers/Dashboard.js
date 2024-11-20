@@ -3,6 +3,7 @@ import { DashboardCTRL } from "../controllers/DashboardCTRL.js";
 import { authToken } from "../middleware/Auth.js";
 import { OffertaCTRL } from "../controllers/OffertaCTRL.js";
 import { AstaCTRL } from "../controllers/AstaCTRL.js";
+import { UtenteCTRL } from "../controllers/UtenteCTRL.js";
 
 export const dashboardRouter = express.Router();
 
@@ -10,7 +11,7 @@ dashboardRouter.post("/dashboard", authToken, async (req, res) => {
   try {
     const nickname = req.body.nickname;
     //console.log("Nickname:", nickname);
-    
+
     const dashboardData = await DashboardCTRL.populateDashboard(nickname);
     //console.log("Dashboard Data:", dashboardData);
 
@@ -43,5 +44,19 @@ dashboardRouter.post("/dashboard", authToken, async (req, res) => {
   } catch (error) {
     console.error("Error Dashboard:", error);
     res.status(500).json({ error: error.message });
+  }
+});
+
+dashboardRouter.post("/offerte/filter", authToken, async (req, res) => {
+  try {
+    const astaIds = await UtenteCTRL.trovaAstePerMail(req.user.email);
+
+    if (astaIds.length === 0) {
+      return res.status(404).json({ message: "Nessun asta trovata per email" });
+    }
+    res.json({ astaIds });
+  } catch (error) {
+    console.error("Errore nel filtraggio", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });

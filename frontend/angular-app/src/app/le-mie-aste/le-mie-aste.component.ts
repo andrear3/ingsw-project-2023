@@ -12,33 +12,39 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../_services/auth.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
-import { Offerta } from '../_models/offerta-model';
 import {
   MatAutocompleteModule,
   MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
 
-
 @Component({
   selector: 'app-le-mie-aste',
   standalone: true,
-  imports: [ NavbarComponent,
+  imports: [
+    NavbarComponent,
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
     CommonModule,
     FormsModule,
-    MatAutocompleteModule,],
+    MatAutocompleteModule,
+  ],
   templateUrl: './le-mie-aste.component.html',
-  styleUrl: './le-mie-aste.component.scss'
+  styleUrls: ['./le-mie-aste.component.scss'],
 })
-export class LeMieAsteComponent {
+export class LeMieAsteComponent implements OnInit, OnDestroy {
   aste: Asta[] = [];
-  offerta: Offerta[] = [];
+  asteFiltrate: Asta[] = [];
+  astePartecipate: Asta[] = [];
   utente: Utente | null = null;
-  private intervalId: any;
+  tipoAsta: string = 'Classica';
+  categoriaFiltro: string | null = null;
+  utenteFiltro: string | null = null;
+  searchQuery: string = '';
   private subscriptions: Subscription = new Subscription();
+  private intervalId: any;
+
   options: string[] = [
     'informatica',
     'videogames',
@@ -47,9 +53,7 @@ export class LeMieAsteComponent {
     'collezionismo',
   ];
   optionAsta: string[] = ['Classica', 'Inversa', 'Al Ribasso'];
-  asteFiltrate: Asta[] = [];
-  tipoAsta: string = 'Classica';
-  optionUtente :string[]=['Create da me', 'Partecipando']
+  optionUtente: string[] = ['Create da me', 'Partecipando'];
 
   constructor(
     private restService: RestService,
@@ -58,7 +62,6 @@ export class LeMieAsteComponent {
   ) {}
 
   ngOnInit() {
-    console.log(this.authService.getToken());
     this.subscriptions.add(
       this.restService.getAsta().subscribe({
         next: (response: { aste: Asta[]; userInfo: Utente }) => {
@@ -67,42 +70,111 @@ export class LeMieAsteComponent {
           this.utente = response.userInfo;
           this.authService.setUtente(this.utente);
           this.authService.setStatus(true);
-          console.log('utentne',this.utente.nickname);
+
           if (this.utente) {
             this.subscriptions.add(
-              this.restService.getOfferteByUtente(this.utente.nickname).subscribe({
-                next: (offerta) => {
-                  this.offerta = offerta;
+              this.restService.offerteByUtente().subscribe({
+                next: (astePartecipate) => {
+                  this.astePartecipate = astePartecipate;
+                  console.log('Aste partecipate:', astePartecipate);
                 },
-                error: (err) => console.error('Errore nel recuperare le offerte:', err),
+                error: (err) =>
+                  console.error('Errore nel recuperare le aste:', err),
               })
             );
           }
+
           this.startDecrementTimer();
         },
-        error: (err: any) => {
-          console.error('Error fetching data:', err);
-        },
+        error: (err) =>
+          console.error('Errore nel caricamento delle aste:', err),
       })
     );
   }
-  filtraUtente(event: MatAutocompleteSelectedEvent) {
-    const selectedValue = event.option.value;
-    if (selectedValue === 'Create da me') {
-      this.asteFiltrate = this.aste.filter(
-        (asta) => asta.UtenteNickname === this.utente?.nickname
-      );
-    } else if (selectedValue === 'Partecipando' && this.offerta.length > 0) {
-      const astePartecipateIds = this.offerta.map(offerta => offerta.AstumAstaID);
-      this.asteFiltrate = this.aste.filter(asta => astePartecipateIds.includes(asta.astaId));
+
+  applyFilters() {
+    if (this.utenteFiltro === 'Partecipando') {
+      this.asteFiltrate = this.astePartecipate.filter((asta) => {
+        if (
+          this.searchQuery &&
+          !asta.nomeBeneInVendita.toLowerCase().includes(this.searchQuery)
+        ) {
+          return false;
+        }
+        if (
+          this.categoriaFiltro &&
+          String(asta.categoria) !== this.categoriaFiltro
+        ) {
+          return false;
+        }
+        return true;
+      });
+    } else {
+      this.asteFiltrate = this.aste.filter((asta) => {
+        if (
+          this.searchQuery &&
+          !asta.nomeBeneInVendita.toLowerCase().includes(this.searchQuery)
+        ) {
+          return false;
+        }
+        if (
+          this.categoriaFiltro &&
+          String(asta.categoria) !== this.categoriaFiltro
+        ) {
+          return false;
+        }
+        if (
+          this.utenteFiltro === 'Create da me' &&
+          asta.UtenteNickname !== this.utente?.nickname
+        ) {
+          return false;
+        }
+        return true;
+      });
     }
   }
 
-  ngOnDestroy() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
+  filtraUtente(event: MatAutocompleteSelectedEvent) {
+    this.utenteFiltro = event.option.value;
+    this.applyFilters();
+  }
+
+  filterResults(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchQuery = inputElement?.value?.toLowerCase() || '';
+    this.applyFilters();
+  }
+
+  filterResultsCategoria(event: MatAutocompleteSelectedEvent) {
+    this.categoriaFiltro = event.option.value;
+    this.applyFilters();
+  }
+
+  filterResultsTipoAsta(event: MatAutocompleteSelectedEvent) {
+    const selectedValue = event.option.value;
+
+    if (selectedValue === 'Al Ribasso') {
+      this.tipoAsta = 'Al Ribasso';
+      this.fetchAste(() => this.restService.getAstaRibasso());
+    } else if (selectedValue === 'Inversa') {
+      this.tipoAsta = 'Inversa';
+      this.fetchAste(() => this.restService.getAstaInversa());
+    } else {
+      this.tipoAsta = 'Classica';
+      this.fetchAste(() => this.restService.getAsta());
     }
-    this.subscriptions.unsubscribe();
+  }
+
+  fetchAste(apiCall: () => any) {
+    this.subscriptions.add(
+      apiCall().subscribe({
+        next: (response: { aste: Asta[]; userInfo: Utente }) => {
+          this.aste = response.aste;
+          this.applyFilters();
+        },
+        error: () => console.error('Errore nel caricamento delle aste:'),
+      })
+    );
   }
 
   startDecrementTimer() {
@@ -135,93 +207,21 @@ export class LeMieAsteComponent {
     const m = Math.floor((seconds % 3600) / 60);
     const s = Math.floor(seconds % 60);
 
-    const dDisplay = d > 0 ? `${d}d ` : '';
-    const hDisplay = h > 0 ? `${h}h ` : '';
-    const mDisplay = m > 0 ? `${m}m ` : '';
-    const sDisplay = s > 0 ? `${s}s` : '';
-
-    return dDisplay + hDisplay + mDisplay + sDisplay.trim();
+    return `${d > 0 ? d + 'd ' : ''}${h > 0 ? h + 'h ' : ''}${
+      m > 0 ? m + 'm ' : ''
+    }${s > 0 ? s + 's' : ''}`;
   }
 
- 
-  navigateToviewAsta(asta: Asta, tipoAsta:string) {
+  navigateToviewAsta(asta: Asta, tipoAsta: string) {
     this.authService.setAsta(asta);
-    this.authService.setTipo(this.tipoAsta);
-    console.log(asta);
+    this.authService.setTipo(tipoAsta);
     this.router.navigate(['/auctionView']);
   }
-  filterResults(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const searchText = inputElement?.value?.toLowerCase() || '';
 
-    if (!searchText) {
-      this.asteFiltrate = [...this.aste];
-      return;
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
-
-    this.asteFiltrate = this.aste.filter((asta) =>
-      asta?.nomeBeneInVendita?.toLowerCase().includes(searchText)
-    );
-  }
-  filterResultsCategoria(event: MatAutocompleteSelectedEvent) {
-    const selectedValue = event.option.value; 
-    this.asteFiltrate = this.aste.filter(
-      (asta) => asta.categoria === selectedValue
-    );
-    console.log('Selected option:', selectedValue); 
-    console.log('Filtered Aste:', this.asteFiltrate); 
-  }
-  filterResultsTipoAsta(event: MatAutocompleteSelectedEvent) {
-    const selectedValue = event.option.value;
-    console.log('Selected option:', selectedValue);
-
-    if (selectedValue == 'Al Ribasso') {
-      this.tipoAsta = 'Al Ribasso';
-      this.subscriptions.add(
-        this.restService.getAstaRibasso().subscribe({
-          next: (response: { aste: Asta[]; userInfo: Utente }) => {
-            this.aste = response.aste;
-            this.asteFiltrate = [...this.aste];
-
-          },
-          error: (err: any) => {
-            console.error('Error fetching data:', err);
-          },
-        })
-      );
-    }
-
-    if (selectedValue == 'Inversa') {
-      this.tipoAsta = 'Inversa';
-      this.subscriptions.add(
-        this.restService.getAstaInversa().subscribe({
-          next: (response: { aste: Asta[]; userInfo: Utente }) => {
-            this.aste = response.aste;
-            this.asteFiltrate = [...this.aste];
-
-          },
-          error: (err: any) => {
-            console.error('Error fetching data:', err);
-          },
-        })
-      );
-    }
-
-
-    if (selectedValue == 'Classica') {
-      this.tipoAsta = 'Classica';
-      this.subscriptions.add(
-        this.restService.getAsta().subscribe({
-          next: (response: { aste: Asta[]; userInfo: Utente }) => {
-            this.aste = response.aste;
-            this.asteFiltrate = [...this.aste];
-
-          },
-          error: (err: any) => {
-            console.error('Error fetching data:', err);
-          },
-        })
-      );
-    }
+    this.subscriptions.unsubscribe();
   }
 }

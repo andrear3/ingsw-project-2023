@@ -1,4 +1,7 @@
 import { Utente } from "../models/Database.js";
+import { Offerta } from "../models/Database.js";
+import { Asta } from "../models/Database.js";
+import { Op } from "sequelize";
 import chalk from "chalk";
 
 export class UtenteCTRL {
@@ -26,7 +29,7 @@ export class UtenteCTRL {
       indirizzo: indirizzo,
       password: password,
       saldo: saldo,
-      url: "default-profle"
+      url: "default-profle",
     });
     await utente.save();
   }
@@ -222,6 +225,54 @@ export class UtenteCTRL {
       console.error(
         chalk.red(`Errore durante l'eliminazione dell'utente:`, error.message)
       );
+      throw error;
+    }
+  }
+
+  static async trovaAstePerMail(email) {
+    try {
+      const utente = await Utente.findOne({
+        where: { email: email },
+        attributes: ["nickname"],
+      });
+
+      if (!utente) {
+        console.log("No user found with the given email.");
+        return [];
+      }
+      const nickname = utente.nickname;
+
+      const offerte = await Offerta.findAll({
+        attributes: ["AstumAstaID"],
+        where: { UtenteNickname: nickname },
+      });
+
+      if (!offerte.length) {
+        console.log("Nessuna Offerta");
+        return [];
+      }
+
+      const uniqueAstaIds = [
+        ...new Set(offerte.map((offerta) => offerta.AstumAstaID)),
+      ];
+
+      const aste = await Asta.findAll({
+        where: {
+          astaID: {
+            [Op.in]: uniqueAstaIds,
+          },
+        },
+      });
+
+      if (!aste.length) {
+        console.log("Nessuna asta per gli ID.");
+        return [];
+      }
+
+      console.log("Aste:", aste);
+      return aste;
+    } catch (error) {
+      console.error("Errore:", error);
       throw error;
     }
   }

@@ -294,8 +294,8 @@ export class RestService {
     );
   }
 
-  getOfferteByUtente(nickname: string): Observable<Offerta[]> {
-    const url = `${this.apiUrl}/offerte/utente/${nickname}`;
+  offerteByUtente(): Observable<Asta[]> {
+    const url = `${this.apiUrl}/offerte/filter`;
     const token = this.authService.getToken();
 
     const httpOptions = {
@@ -305,6 +305,6 @@ export class RestService {
       }),
     };
 
-    return this.http.get<Offerta[]>(url, httpOptions);
+    return this.http.post<Asta[]>(url, {}, httpOptions);
   }
 }

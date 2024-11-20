@@ -36,6 +36,7 @@ export interface Asta {
   url: string;
   UtenteNickname: string;
   offertaMax: any;
+  offertaMin: any;
   timeLeft: number;
   prezzoMinSegreto: number;
   decrementoTimer: number;
