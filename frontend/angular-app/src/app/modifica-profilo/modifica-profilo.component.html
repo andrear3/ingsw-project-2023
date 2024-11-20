@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,104 +12,82 @@
     <nav>
       <app-navbar></app-navbar>
     </nav>
-    
-    
-  
-      <div class="square">
-        <div class="row">
-          <div class="box-container">
-            <label for="boxNomeMod">Nome</label>
-            <div class="boxNomeMod" id="boxNomeMod">
-              <input 
-                type="text"
-               
-                [(ngModel)]="nome"
-                name="nome"
-                required
-              />
-            </div>
-          </div>
-          <div class="box-container">
-            <label for="boxCognomeMod">Cognome</label>
-            <div class="boxCognomeMod" id="boxCognomeMod">
-              <input 
-                type="text"
-               
-                [(ngModel)]="cognome"
-                name="cognome"
-                required
-              />
-            </div>
+
+    <div class="square">
+      <div class="row">
+        <div class="box-container">
+          <label for="boxNomeMod">Nome</label>
+          <div class="boxNomeMod" id="boxNomeMod">
+            <input type="text" [(ngModel)]="nome" name="nome" required />
           </div>
         </div>
-        <div class="row">
-          <div class="box-container">
-            <label for="boxNickname">Nickname</label>
-            <div class="boxNickname" id="boxNickname">
-              {{utente?.nickname}}
-            </div>
+        <div class="box-container">
+          <label for="boxCognomeMod">Cognome</label>
+          <div class="boxCognomeMod" id="boxCognomeMod">
+            <input type="text" [(ngModel)]="cognome" name="cognome" required />
           </div>
         </div>
-        <div class="row">
-          <div class="box-container">
-            <label for="boxRegioneMod">Regione</label>
-            <div class="boxRegioneMod" id="boxRegioneMod">
-              <input 
-                type="text"
-              
-                [(ngModel)]="regione"
-                name="regione"
-                required
-              />
-            </div>
-          </div>
-          <div class="box-container">
-            <label for="boxIndirizzoMod">Indirizzo</label>
-            <div class="boxIndirizzoMod" id="boxIndirizzoMod">
-              <input 
-                type="text"
-                
-                [(ngModel)]="indirizzo"
-                name="indirizzo"
-                required
-              />
-            </div>
+      </div>
+      <div class="row">
+        <div class="box-container">
+          <label for="boxNickname">Nickname</label>
+          <div class="boxNickname" id="boxNickname">
+            {{ utente?.nickname }}
           </div>
         </div>
-        <div class="row-BTN">
-          <button class="salvaModProfilo-BTN" (click)="editProfile()">conferma modifiche</button>
+      </div>
+      <div class="row">
+        <div class="box-container">
+          <label for="boxRegioneMod">Regione</label>
+          <div class="boxRegioneMod" id="boxRegioneMod">
+            <input type="text" [(ngModel)]="regione" name="regione" required />
+          </div>
         </div>
-        <div class="links">
-          <label for="links">I tuoi link</label>
-          <input class="link1" type="text"  [(ngModel)]="link1"/>
-          <input class="link2" type="text"  [(ngModel)]="link2"/>
-          <input class="link3" type="text"  [(ngModel)]="link3"/>
+        <div class="box-container">
+          <label for="boxIndirizzoMod">Indirizzo</label>
+          <div class="boxIndirizzoMod" id="boxIndirizzoMod">
+            <input
+              type="text"
+              [(ngModel)]="indirizzo"
+              name="indirizzo"
+              required
+            />
+          </div>
         </div>
-        <div class="descrizione">
-          <label for="descrizione">La tua descrizione</label>
-          <input class="boxDescrizione" type="text" [(ngModel)]="descrizione"/>
-        </div>
-        <div class="foto">
-          <div class="boxFoto" #photoPreview>
-            <img
+      </div>
+      <div class="row-BTN">
+        <button class="salvaModProfilo-BTN" (click)="editProfile()">
+          conferma modifiche
+        </button>
+      </div>
+      <div class="links">
+        <label for="links">I tuoi link</label>
+        <input class="link1" type="text" [(ngModel)]="link1" />
+        <input class="link2" type="text" [(ngModel)]="link2" />
+        <input class="link3" type="text" [(ngModel)]="link3" />
+      </div>
+      <div class="descrizione">
+        <label for="descrizione">La tua descrizione</label>
+        <textarea
+          class="boxDescrizione"
+          [(ngModel)]="descrizione"
+          rows="4"
+          placeholder="Scrivi una breve descrizione su di te..."
+        ></textarea>
+      </div>
+      <div class="foto">
+        <div class="boxFoto" #photoPreview>
+          <img
             [src]="utente?.url || 'assets/placeholder.jpg'"
             alt="Foto profilo"
             class="auction-image"
-        
           />
-          </div>
-          
-        </div>
-        <div class="boxFoto-BTN">
-         
-          <input type="file" accept="image/*" id="upload-BTN" #uploadBtn />
-          <label class="labelBTN" for="upload-BTN">inserisci foto</label>
         </div>
       </div>
-    
-
-    <script>
-      // Your JavaScript here
-    </script>
+      <div class="boxFoto-BTN">
+        <input type="file" accept="image/*" id="upload-BTN" #uploadBtn />
+        <label class="labelBTN" for="upload-BTN">inserisci foto</label>
+      </div>
+    </div>
   </body>
 </html>

@@ -30,7 +30,7 @@
         <table>
           <thead>
             <tr>
-              <th>Nome Prodotto</th>
+              <th>Prodotto</th>
               <th>Status</th>
               <th>Ultima Offerta</th>
               <th>Tempo Rimanente</th>
@@ -39,7 +39,7 @@
           <tbody id="auctionTableBody">
             @for (dash of dashboardData; track dashboardData) {
             <tr>
-              <td class="nomeProdotto">{{ dash?.nomeBeneInVendita }}</td>
+              <td class="nomeProdotto">{{ dash?.titolo }}</td>
               <td class="status {{ dash?.statusAsta }}">
                 {{ dash?.statusAsta }}
               </td>
