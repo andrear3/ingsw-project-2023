@@ -1,7 +1,7 @@
 import { Utente } from "../models/Database.js";
+import chalk from "chalk";
 
 export class UtenteCTRL {
-
   static async salvaUtente(
     nickname,
     nome,
@@ -116,10 +116,10 @@ export class UtenteCTRL {
       user.saldo = user.saldo - parseInt(amount);
       await user.save();
 
-      console.log(`Il saldo di ${nickname} è stato aggiornato a ${user.saldo}`); 
+      console.log(`Il saldo di ${nickname} è stato aggiornato a ${user.saldo}`);
       return user.saldo;
     } catch (error) {
-      console.error("Errore durante la detrazione del saldo:", error.message); 
+      console.error("Errore durante la detrazione del saldo:", error.message);
       throw error;
     }
   }
@@ -133,7 +133,7 @@ export class UtenteCTRL {
       const user = await Utente.findOne({
         where: whereStatement,
       });
-      
+
       if (!user) {
         throw new Error("Utente non trovato");
       }
@@ -146,6 +146,19 @@ export class UtenteCTRL {
       return user.saldo;
     } catch (error) {
       console.error("Errore durante l'aumento del saldo:", error.message);
+      throw error;
+    }
+  }
+
+  static async modificaPassword(pswd, email) {
+    try {
+      const user = await Utente.findOne({ where: { email } });
+
+      user.password = pswd;
+      await user.save();
+      console.log(`Password updated successfully`);
+    } catch (error) {
+      console.error("Errore nell'aggiornamento password:", error.message);
       throw error;
     }
   }
@@ -173,7 +186,6 @@ export class UtenteCTRL {
         throw new Error(`User with email ${email} not found`);
       }
 
-
       user.nome = nome || user.nome;
       user.cognome = cognome || user.cognome;
       user.tipo = tipo || user.tipo;
@@ -192,6 +204,23 @@ export class UtenteCTRL {
       return user;
     } catch (error) {
       console.error("Error updating user:", error.message);
+      throw error;
+    }
+  }
+
+  static async eliminaUtente(email) {
+    try {
+      await Utente.destroy({
+        where: { email },
+      });
+
+      console.log(
+        chalk.green(`Utente con l'email ${email} eliminato con successo`)
+      );
+    } catch (error) {
+      console.error(
+        chalk.red(`Errore durante l'eliminazione dell'utente:`, error.message)
+      );
       throw error;
     }
   }
