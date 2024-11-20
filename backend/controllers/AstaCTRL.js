@@ -483,8 +483,8 @@ export class AstaCTRL {
         console.log();
 
         await this.gestisciAstaInversa();
-        //await this.gestisciAstaAlRibasso();
-        //await this.controllaScadenzaAste();
+        await this.gestisciAstaAlRibasso();
+        await this.controllaScadenzaAste();
 
         console.log(
           chalk.green.bold("Controllo aste completato con successo.")
