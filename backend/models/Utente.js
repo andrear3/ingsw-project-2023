@@ -29,10 +29,6 @@ export function createModel(database) {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    linkEsterni: {
-      type: DataTypes.STRING(200), //stringa concatenata
-      allowNull: true,
-    },
     indirizzo: {
       type: DataTypes.STRING(200), //stringa concatenata
       allowNull: false,
@@ -53,10 +49,10 @@ export function createModel(database) {
       type: DataTypes.STRING,
       allowNull: true,
     },
-     link2: {
+    link2: {
       type: DataTypes.STRING,
       allowNull: true,
-    }, 
+    },
     link3: {
       type: DataTypes.STRING,
       allowNull: true,

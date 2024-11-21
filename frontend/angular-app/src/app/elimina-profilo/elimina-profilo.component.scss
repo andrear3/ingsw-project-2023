@@ -1,28 +1,42 @@
 .confermaElimina {
-    width: 150px;
-    height: 35px; 
-    background-color: #22A2EA;
-    border-radius: 20px;
-    position: relative;
-    text-align: center;
-    color: white;
-    cursor: pointer; 
-    margin: 5%;
+  width: 160px;
+  height: 50px;
+  background-color: #d9534f;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px auto;
+  border: 2px solid #a94442;
+  text-align: center;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
+.confermaElimina:hover {
+  background-color: #c9302c;
+  transform: scale(1.05);
+}
+
+.confermaElimina:active {
+  background-color: #ac2925;
+}
 
 .box-container {
-    color: #727272aa; /* Colore del testo delle etichette */
-    display: flex;
-    flex-direction: column; /* Disporre l'etichetta sopra il box */
-    align-items: first baseline; /* Allinea l'etichetta a sinistra */
-    margin: 5% ;
-    width: 400px;
-
+  color: #727272;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #d9534f;
+  background-color: #fff5f5;
+  border-radius: 10px;
 }
-.rowBTN{
-    margin: 5%;
+
+.rowBTN {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
-
-
-

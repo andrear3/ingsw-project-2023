@@ -195,11 +195,14 @@ export class HomepageComponent implements OnInit, OnDestroy {
     }
   }
   filterResultsCategoria(event: MatAutocompleteSelectedEvent) {
-    const selectedValue = event.option.value; 
+    const selectedValue = event.option.value;
+    
     this.asteFiltrate = this.aste.filter(
       (asta) => asta.categoria === selectedValue
     );
     console.log('Selected option:', selectedValue); 
     console.log('Filtered Aste:', this.asteFiltrate); 
   }
+
+  
 }

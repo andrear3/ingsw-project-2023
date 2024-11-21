@@ -165,7 +165,6 @@ export class RestService {
     );
   }
 
-  //DA TESTAREEEEEEEEEEE
   postOfferInversa(
     valore: number,
     UtenteNickname: string,
@@ -190,7 +189,7 @@ export class RestService {
   }
 
   updateSaldo(mode: number, valore: number): Observable<any> {
-    const url = `${this.apiUrl}/tests`;
+    const url = `${this.apiUrl}/saldoModifica`;
     //prendo token per auth
     const token = this.authService.getToken();
     //options..
@@ -238,6 +237,34 @@ export class RestService {
     return this.http.post(url, { nickname }, httpOptions);
   }
 
+  modificaPassword(password: string): Observable<any> {
+    const url = `${this.apiUrl}/password`;
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.post(url, { password }, httpOptions);
+  }
+
+  eliminaUtente(): Observable<any> {
+    const url = `${this.apiUrl}/eliminaUtente`;
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.post(url, {}, httpOptions);
+  }
+
   editProfile(formData: FormData): Observable<any> {
     const token = this.authService.getToken();
     console.log("restapiChiamta")
@@ -251,25 +278,7 @@ export class RestService {
     return this.http.post(`${this.apiUrl}/editprofile`, formData, httpOptions);
   }
 
-  
   getUtenteByNickname(nickname: string): Observable<Utente> {
-    const token = this.authService.getToken(); 
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`, 
-      }),
-    };
-
-    return this.http.get<Utente>(
-      `${this.apiUrl}/utente/nickname/${nickname}`,
-      httpOptions
-    );
-  }
-
-  getOfferteByUtente(nickname: string): Observable<Offerta[]> {
-    const url = `${this.apiUrl}/offerte/utente/${nickname}`;
     const token = this.authService.getToken();
 
     const httpOptions = {
@@ -279,6 +288,23 @@ export class RestService {
       }),
     };
 
-    return this.http.get<Offerta[]>(url, httpOptions);
+    return this.http.get<Utente>(
+      `${this.apiUrl}/utente/nickname/${nickname}`,
+      httpOptions
+    );
+  }
+
+  offerteByUtente(): Observable<Asta[]> {
+    const url = `${this.apiUrl}/offerte/filter`;
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.post<Asta[]>(url, {}, httpOptions);
   }
 }

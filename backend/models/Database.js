@@ -12,7 +12,7 @@ dotenv.config();
 export const database = new Sequelize({
   dialect: "sqlite",
   storage: process.env.DB_STORAGE || "./database.sqlite",
-  logging: console.log, 
+  logging: console.log,
 });
 
 createUtenteModel(database);
@@ -44,7 +44,7 @@ Asta.AstaInversa = Asta.hasOne(AstaInversa); //opzionale
 AstaInversa.Asta = AstaInversa.belongsTo(Asta);
 
 database
-  .sync(/*{ force: true, alter: true }*/)
+  .sync(/*{force: true, alter: true}*/)
   .then(() => {
     console.log("Database synced correctly");
   })

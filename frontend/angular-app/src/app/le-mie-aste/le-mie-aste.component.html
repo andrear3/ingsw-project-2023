@@ -10,90 +10,117 @@
       <app-navbar></app-navbar>
     </nav>
     <main>
-     
-     
       <div class="search-container">
-    
         <input
-        class="boxUtente"
-        type="text"
-        placeholder="Partecipando/Create"
-        aria-label="Number"
-        matInput
-        [matAutocomplete]="autoUtente"
+          class="boxUtente"
+          type="text"
+          placeholder="Partecipando/Create"
+          aria-label="Number"
+          matInput
+          [matAutocomplete]="autoUtente"
+        />
+        <mat-autocomplete
+          #autoCat="matAutocomplete"
+          (optionSelected)="filterResultsCategoria($event)"
+        >
+          <mat-option *ngFor="let option of options" [value]="option">{{
+            option
+          }}</mat-option>
+        </mat-autocomplete>
 
-    />
-        <mat-autocomplete #autoCat="matAutocomplete" (optionSelected)="filterResultsCategoria($event)" >
-          <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
-      </mat-autocomplete>
-
-      <mat-autocomplete #autoAsta="matAutocomplete" (optionSelected)="filterResultsTipoAsta($event)" >
-        <mat-option *ngFor="let option of optionAsta" [value]="option">{{ option }}</mat-option>
-    </mat-autocomplete>
-    <mat-autocomplete #autoUtente="matAutocomplete" (optionSelected)="filtraUtente($event)" >
-        <mat-option *ngFor="let option of  optionUtente" [value]="option">{{ option }}</mat-option>
-    </mat-autocomplete>
+        <mat-autocomplete
+          #autoAsta="matAutocomplete"
+          (optionSelected)="filterResultsTipoAsta($event)"
+        >
+          <mat-option *ngFor="let option of optionAsta" [value]="option">{{
+            option
+          }}</mat-option>
+        </mat-autocomplete>
+        <mat-autocomplete
+          #autoUtente="matAutocomplete"
+          (optionSelected)="filtraUtente($event)"
+        >
+          <mat-option *ngFor="let option of optionUtente" [value]="option">{{
+            option
+          }}</mat-option>
+        </mat-autocomplete>
 
         <input
-        class="boxTipoAsta"
-        type="text"
-      
-        placeholder="Tipo Asta"
-        aria-label="Number"
-        matInput
-        [matAutocomplete]="autoAsta"
-    />
-       
-
-        
-    </div>
-     
-      
+          class="boxTipoAsta"
+          type="text"
+          placeholder="Tipo Asta"
+          aria-label="Number"
+          matInput
+          [matAutocomplete]="autoAsta"
+        />
+      </div>
 
       <div class="card-container">
-
         @for (asta of asteFiltrate; track asteFiltrate) {
-          <mat-card 
-            (click)="navigateToviewAsta(asta,tipoAsta)" 
-            class="card"
-            *ngIf="asta">
-            <div class="card-item">
-              <div class="card-image">
-                <img
-                  [src]="asta?.url || 'placeholder.jpg'"
-                  alt="Immagine di {{ asta?.nomeBeneInVendita || 'N/A' }}"
-                />
-              </div>
-              <div class="card-content">
-                <h2 class="card-title">{{ asta?.titolo || 'Titolo non disponibile' }}</h2>
-                <h3 class="card-subtitle">{{ asta?.nomeBeneInVendita || 'Nome non disponibile' }}</h3>
-                <div class="card-info">
-                  <p><strong>Categoria:</strong> {{ asta?.categoria || 'N/A' }}</p>
-                  <p><strong>TIpo asta:</strong> {{ tipoAsta || 'N/A' }}</p>
-                  <p><strong>Tipo:</strong> {{ asta?.tipoBeneInVendita || 'N/A' }}</p>
-                  <p>
-                    <strong>Data di Fine Asta:</strong>
-                    {{ asta?.dataFineAsta ? (asta.dataFineAsta | date) : 'N/A' }}
-                  </p>
-                  <p><strong>Creata da:</strong> {{ asta?.UtenteNickname || 'N/A' }}</p>
-                  @if(tipoAsta=='Classica'|| tipoAsta=='Inversa'){
-                  <p class="danger">
-                    <strong>Offerta corrente: {{ asta?.offertaMax || 0 }}€</strong>
-                  </p> 
-                }
-                @if(tipoAsta=='Al Ribasso'){
-                  <p class="danger">
-                    <strong>Prezzo corrente : {{ asta?.prezzoiniziale|| 0 }}€</strong>
-                  </p> 
+        <mat-card
+          (click)="navigateToviewAsta(asta, tipoAsta)"
+          class="card"
+          *ngIf="asta"
+        >
+          <div class="card-item">
+            <div class="card-image">
+              <img
+                [src]="asta?.url || 'placeholder.jpg'"
+                alt="Immagine di {{ asta?.nomeBeneInVendita || 'N/A' }}"
+              />
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">
+                {{ asta?.titolo || "Titolo non disponibile" }}
+              </h2>
+              <h3 class="card-subtitle">
+                {{ asta?.nomeBeneInVendita || "Nome non disponibile" }}
+              </h3>
+              <div class="card-info">
+                <p>
+                  <strong>Categoria:</strong> {{ asta?.categoria || "N/A" }}
+                </p>
+                <p><strong>TIpo asta:</strong> {{ tipoAsta || "N/A" }}</p>
+                <p>
+                  <strong>Tipo:</strong> {{ asta?.tipoBeneInVendita || "N/A" }}
+                </p>
+                <p>
+                  <strong>Data di Fine Asta:</strong>
+                  {{ asta?.dataFineAsta ? (asta.dataFineAsta | date) : "N/A" }}
+                </p>
+                <p>
+                  <strong>Creata da:</strong>
+                  {{ asta?.UtenteNickname || "N/A" }}
+                </p>
+                @if(tipoAsta=='Inversa'){
+                <p class="danger">
+                  <strong
+                    >Offerta corrente:
+                    {{ asta?.offertaMin || asta?.prezzoiniziale }}€</strong
+                  >
+                </p>
+                } @if(tipoAsta=='Classica'){
+                <p class="danger">
+                  <strong
+                    >Offerta corrente:
+                    {{ asta?.offertaMax || asta?.prezzoiniziale }}€</strong
+                  >
+                </p>
+                } @if(tipoAsta=='Al Ribasso'){
+                <p class="danger">
+                  <strong
+                    >Prezzo corrente : {{ asta?.prezzoiniziale || 0 }}€</strong
+                  >
+                </p>
                 }
 
-                  <p class="danger">
-                    <strong>Tempo restante: {{ getFormattedTime(asta) }}</strong>
-                  </p>
-                </div>
+                <p class="danger">
+                  <strong>Tempo restante: {{ getFormattedTime(asta) }}</strong>
+                </p>
               </div>
             </div>
-          </mat-card>
+          </div>
+        </mat-card>
         }
       </div>
     </main>

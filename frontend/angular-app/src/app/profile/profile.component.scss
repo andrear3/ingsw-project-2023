@@ -1,49 +1,44 @@
-.square{
+.square {
     width: 1400px;
     height: 650px;
-    border:2px solid ie-hex-str($color: #AAAA);
+    border: 2px solid #AAAA;
     border-radius: 20px;
-    margin:20px auto;
-    text-align: center;
+    margin: 20px auto;
+    text-align: left;
     align-items: center;
     position: relative;
-    padding: 20px; /* Aggiungi padding per evitare che il contenuto tocchi i bordi */
-    box-sizing: border-box; /* Includi padding e bordo nel calcolo delle dimensioni */
+    padding: 20px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-
 }
-.box-container {
 
-    color: #727272aa; /* Colore del testo delle etichette */
+.box-container {
+    color: #727272aa;
     display: flex;
-    flex-direction: column; /* Disporre l'etichetta sopra il box */
-    align-items: first baseline; /* Allinea l'etichetta a sinistra */
+    flex-direction: column;
+    align-items: flex-start;
     margin-left: 173px;
 }
 
 .row {
     display: flex;
-    justify-content: space-between; /* Disporre le box orizzontalmente con spazio tra di loro */
-    width: 100%; /* Assicurati che occupi tutta la larghezza disponibile */
-    max-width: 450px; /* Limita la larghezza massima per evitare che le box diventino troppo larghe */
+    justify-content: space-between;
+    width: 100%;
+    max-width: 450px;
     max-height: 200px;
-    margin-bottom: 10px; /* Spazio tra le righe */
-   
+    margin-bottom: 10px;
 }
-.boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxRegione, .boxIndirizzo,.boxSaldo {
-    width: 250px; 
-    height: 25px; /* Dimensioni aumentate per una visualizzazione migliore */
-    border: 2px solid #727272aa; /* Corretto il formato del bordo */
-    border-radius: 20px; /* Per fare un cerchio; usa px per bordi arrotondati se non vuoi cerchi */
-    margin-top: 5px; /* Spazio intorno alla forma */
-    background-color: #ffffff; /* Aggiunto colore di sfondo per renderlo visibile */
-    box-sizing: border-box; 
-    
-    
-    
- }
- 
+
+.boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxRegione, .boxIndirizzo, .boxSaldo {
+    width: 250px;
+    height: 25px;
+    border: 2px solid #727272aa;
+    border-radius: 20px;
+    margin-top: 5px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
 
 .boxNome label,
 .boxCognome label,
@@ -55,14 +50,10 @@
 .boxSaldo label {
     display: block;
     font-size: 14px;
-    color: #727272aa; /* Colore del testo delle etichette */
+    color: #727272aa;
     position: relative;
-    text-align: left; 
-   
-
+    text-align: left;
 }
-
-
 
 .boxNomeMod input,
 .boxCognomeMod input,
@@ -70,190 +61,171 @@
 .boxPasswordMod input,
 .boxNicknameMod input,
 .boxRegioneMod input,
-.boxIndirizzoMod input{
-   
-    width: 250px; 
-    height: 25px; /* Dimensioni aumentate per una visualizzazione migliore */
-    border: 2px solid #727272aa; /* Corretto il formato del bordo */
-    border-radius: 20px; /* Per fare un cerchio; usa px per bordi arrotondati se non vuoi cerchi */
-    margin-top: 5px; /* Spazio intorno alla forma */
-    background-color: #ffffff; /* Aggiunto colore di sfondo per renderlo visibile */
-    box-sizing: border-box; 
-    
-    
-}
-.modificaProfilo-BTN{
-    width:170px;
+.boxIndirizzoMod input {
+    width: 250px;
     height: 25px;
-    background-color: #22A2EA;
+    border: 2px solid #727272aa;
     border-radius: 20px;
-  position: relative;
-    text-align: center;
-    color:white;
-   
-   
+    margin-top: 5px;
+    background-color: #ffffff;
+    box-sizing: border-box;
 }
-.eliminaProfilo-BTN{
-    width:170px;
-    height: 25px;
-    background-color: #22A2EA;
-    border-radius: 20px;
-  position: relative;
-    text-align: center;
-    color:white;
-   
-   
-}
-.modificaPasswordProfilo-BTN{
-    width:190px;
-    height: 25px;
-    background-color: #22A2EA;
-    border-radius: 20px;
-    position: relative;
-    text-align: center;
-    color:white;
 
-    
+.modificaProfilo-BTN,
+.eliminaProfilo-BTN,
+.modificaPasswordProfilo-BTN {
+    width: 170px;
+    height: 25px;
+    background-color: #22A2EA;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
 }
-.salvaModProfilo-BTN{
-    width:190px;
+
+.salvaModProfilo-BTN {
+    width: 190px;
     height: 25px;
     background-color: #22A2EA;
     border-radius: 20px;
     position: relative;
     text-align: center;
-    color:white;
+    color: white;
     left: 65%;
-    
 }
-.row-BTN{
+
+.row-BTN {
     display: flex;
-    justify-content: space-between; 
-    width: 100%; 
-    max-width: 450px; 
+    justify-content: space-between;
+    width: 100%;
+    max-width: 450px;
     max-height: 200px;
-    margin-top: auto; 
+    margin-top: auto;
     position: absolute;
-    bottom: 20px; 
-    left: 58%; 
-} 
-.links{
-    color: #727272aa; 
+    bottom: 20px;
+    left: 58%;
+}
+
+.links {
+    color: #727272aa;
     display: flex;
-    flex-direction: column; 
-    align-items: first baseline;
+    flex-direction: column;
+    align-items: flex-start;
     margin-left: 130px;
     margin-top: 110px;
-
-    
 }
-.link1,.link2,.link3 {
-    width: 250px; 
-    height: 25px; 
+
+.link1, .link2, .link3 {
+    width: 250px;
+    height: 25px;
     border: 2px solid #727272aa;
-    border-radius: 20px; 
-    margin-top: 20px; 
+    border-radius: 20px;
+    margin-top: 20px;
     background-color: #ffffff;
-    box-sizing: border-box; 
-    
-}.links label{
+    box-sizing: border-box;
+}
+
+.links label {
     display: block;
     font-size: 14px;
-    color: #727272aa; 
+    color: #727272aa;
     position: relative;
-    text-align: left; 
+    text-align: left;
 }
-.link1 input,.link2 input,.link3 input{
-    width: 250px; 
-    height: 25px; 
-    border-radius: 20px; 
-    border: 2px solid #727272aa; 
-    margin-top: 20px; 
-    background-color: #ffffff; 
-    box-sizing: border-box; 
-    
+
+.link1 input,
+.link2 input,
+.link3 input {
+    width: 250px;
+    height: 25px;
+    border-radius: 20px;
+    border: 2px solid #727272aa;
+    margin-top: 20px;
+    background-color: #ffffff;
+    box-sizing: border-box;
 }
-.descrizione{
-    color: #727272aa; 
+
+.descrizione {
+    color: #727272aa;
     display: flex;
-    flex-direction: column; 
-    align-items: first baseline; 
-    margin-top:-160px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: -160px;
     margin-right: 800px;
 }
-.boxDescrizione{
-    width: 550px; 
-    height: 250px; 
-    border: 2px solid #727272aa; 
-    border-radius: 20px; 
+
+.boxDescrizione {
+    width: 550px;
+    height: 250px;
+    border: 2px solid #727272aa;
+    border-radius: 20px;
     margin-top: 20px;
-    background-color: #ffffff; 
-    box-sizing: border-box; 
+    background-color: #ffffff;
+    box-sizing: border-box;
 }
-.descrizione label{
+
+.descrizione label {
     display: block;
     font-size: 14px;
-    color: #727272aa; 
+    color: #727272aa;
     position: relative;
-    text-align: left; 
+    text-align: left;
 }
-.foto{
-  
+
+.foto {
     display: flex;
-    flex-direction: column; 
     flex-direction: column;
     align-items: center;
-     margin-right: 1100px;
+    margin-right: 1100px;
     margin-top: -610px;
 }
-.boxFoto{
-    width: 250px; 
-    height: 250px; 
-    border: 2px solid #727272aa; 
-    border-radius: 20px; 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+
+.boxFoto {
+    width: 250px;
+    height: 250px;
+    border: 2px solid #727272aa;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     overflow: hidden;
     margin-top: 20px;
 }
-.boxFoto-BTN{
+
+.boxFoto-BTN {
     display: flex;
-    justify-content: space-between; 
-    width: 100%; 
+    justify-content: space-between;
+    width: 100%;
     position: absolute;
     margin-left: 600px;
     margin-top: 100px;
-   
 }
-.modificaFoto-BTN,.saldo-BTN{
-    width:170px;
+
+.modificaFoto-BTN,
+.saldo-BTN {
+    width: 170px;
     height: 25px;
     background-color: #22A2EA;
     border-radius: 20px;
-    position: relative;
     text-align: center;
-    color:white;
-   
+    color: white;
 }
 
 .boxFoto img {
     width: 100%;
-    height: 100%; 
-    object-fit: cover; 
-    display: block; 
-  }
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
+.auction-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
-
-  .auction-image {
-    width: 100%; 
-        height: 100%; 
-        object-fit: cover; 
-        display: block; 
+@media (max-width: 768px) {
+    .input-group {
+        width: 100%;
     }
-    @media (max-width: 768px) {
-        .input-group {
-            width: 100%;
-        }
-    }
+}

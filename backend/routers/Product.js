@@ -67,7 +67,7 @@ productRouter.post("/auctionRibassoView", authToken, async (req, res) => {
 });
 
 
-productRouter.post("/tests", authToken, async (req, res) => {
+productRouter.post("/saldoModifica", authToken, async (req, res) => {
   try {
     if (req.body.mode == 0) {
 

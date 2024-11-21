@@ -85,7 +85,6 @@ general.post(
   }
 );
 
-//DA TESTAREEEEEEEEEEEEE
 general.post(
   "/creaAstaInversa",
   authToken,
@@ -104,6 +103,25 @@ general.post(
   }
 );
 
+general.post("/password", authToken, async (req, res) => {
+  try {
+    await UtenteCTRL.modificaPassword(req.body.password, req.user.email);
+    res.status(200).json({ message: "Password modificata con successo!" });
+  } catch (error) {
+    console.error("Errore nella modifica:", error);
+    res.status(500).json({ message: "Errore nella modifica", error });
+  }
+});
+
+general.post("/eliminaUtente", authToken, async (req, res) => {
+  try {
+    await UtenteCTRL.eliminaUtente(req.user.email);
+    res.status(200).json({ message: "Eliminazione avvenuta con successo" });
+  } catch (error) {
+    console.error("Errore:", error);
+    res.status(500).json({ message: "Errore", error });
+  }
+});
 
 general.post(
   "/editprofile",
@@ -149,11 +167,10 @@ general.post(
         link3,
       });
 
-      res.status(200);
+      res.status(200).json({ message: "Success" });
     } catch (error) {
       console.error("Error processing profile update:", error);
       res.status(500);
     }
   }
 );
-

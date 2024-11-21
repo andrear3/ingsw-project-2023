@@ -1,11 +1,16 @@
-
-import { Component ,ElementRef,OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
-import { Router,RouteConfigLoadEnd, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouteConfigLoadEnd,
+  RouterLink,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,21 +20,23 @@ import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Utente } from '../_models/utente-model';
 import { PrelevaSaldoComponent } from '../preleva-saldo/preleva-saldo.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AggiungiSaldoComponent } from '../aggiungi-saldo/aggiungi-saldo.component';
 @Component({
   selector: 'app-saldo',
   standalone: true,
-  imports: [ MatToolbarModule,
+  imports: [
+    MatToolbarModule,
     MatIconModule,
     MatAutocompleteModule,
     MatInputModule,
     RouterOutlet,
     CommonModule,
     FormsModule,
-    RouterLink,],
+    RouterLink,
+  ],
   templateUrl: './saldo.component.html',
-  styleUrl: './saldo.component.scss'
+  styleUrl: './saldo.component.scss',
 })
 export class SaldoComponent {
   saldo: number | undefined;
@@ -37,33 +44,27 @@ export class SaldoComponent {
     private RestService: RestService,
     private AuthService: AuthService,
     private router: Router,
-    private dialogRef : MatDialog,
-  ){}
-  utente : Utente | null = null ;
+    private dialogRef: MatDialog,
+    private diaRef: MatDialogRef<SaldoComponent>
+  ) {}
+  utente: Utente | null = null;
   private statusSubscription: Subscription = new Subscription();
   ngOnInit() {
     this.statusSubscription = this.AuthService.getStatus().subscribe(
       (status: boolean) => {
         if (status) {
-      
           console.log(this.AuthService.getUtente());
-          this.utente=this.AuthService.getUtente();
-          
-          
-          }
+          this.utente = this.AuthService.getUtente();
+        }
       }
     );
   }
-  openDialogSaldoPreleva(){
-    this.dialogRef.open(PrelevaSaldoComponent)
-    this.dialogRef.closeAll;
+  openDialogSaldoPreleva() {
+    this.diaRef.close();
+    this.dialogRef.open(PrelevaSaldoComponent);
   }
-  openDialogSaldoAggiungi(){
-    this.dialogRef.open(AggiungiSaldoComponent)
-    this.dialogRef.closeAll;
+  openDialogSaldoAggiungi() {
+    this.diaRef.close();
+    this.dialogRef.open(AggiungiSaldoComponent);
   }
-
-
-
-
 }

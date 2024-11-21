@@ -13,6 +13,11 @@ registrationRouter.post("/registration", async (req, res) => {
     let utenteData = {
       ...req.body.utente,
       saldo: saldo,
+      url: "default-profile.png",
+      descrizione: "Inserisci qui la tua descrizione!",
+      link1: "Inserisci un link!",
+      link2: "Inserisci un link!",
+      link3: "Inserisci un link!",
     };
 
     console.log(utenteData);
