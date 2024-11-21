@@ -126,7 +126,7 @@ export class ModificaProfiloComponent implements OnInit {
       (response) => {
         console.log('Profile updated successfully:', response);
         this.router.navigate(['/profile']);
-        this.confermaModProfilo();
+  
       },
       (error) => {
         console.error('Profile update failed:', error);
@@ -134,7 +134,5 @@ export class ModificaProfiloComponent implements OnInit {
     );
   }
 
-  confermaModProfilo() {
-    this.router.navigate(['/profile']);
-  }
+  
 }
