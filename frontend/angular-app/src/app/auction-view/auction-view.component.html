@@ -8,6 +8,21 @@
       rel="stylesheet"
     />
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-FSGHBNFWGY");
+  </script>
+
   <body>
     <nav>
       <app-navbar></app-navbar>
@@ -15,12 +30,12 @@
     @if(tipoAsta==="Classica"){
     <div class="square">
       <div class="row1">
-        <div class="photoProfileContainer"(click)="visualProfile()">
+        <div class="photoProfileContainer" (click)="visualProfile()">
           <img
-            [src]="'http://localhost:3000/images/' + utenteAsta?.url" alt="Foto profilo" 
+            [src]="'http://localhost:3000/images/' + utenteAsta?.url"
+            alt="Foto profilo"
             alt="Foto profilo"
             class="auction-image"
-        
           />
         </div>
       </div>
@@ -38,8 +53,6 @@
           />
 
           <button class="offerButton" (click)="makeOffer()">Offri</button>
-          
-       
         </div>
         <div class="description-section">
           <label for="descrizione">Descrizione</label>
@@ -47,7 +60,6 @@
             {{ asta?.descrizioneAsta }}
           </div>
         </div>
-        
       </div>
       <div class="row3">
         <label for="productName">Nome del prodotto:</label>
@@ -55,7 +67,7 @@
           {{ asta?.nomeBeneInVendita }}
         </div>
 
- <label for="prezzoIniz">Offerta attuale:</label>
+        <label for="prezzoIniz">Offerta attuale:</label>
         <div class="prezzoIniz" id="prezzo">{{ asta?.offertaMax }}</div>
         <label for="timeLeft">Tempo rimasto:</label>
         <div class="timeLeft" id="timeLeft">{{ getFormattedTime() }}</div>
@@ -63,111 +75,101 @@
         <label for="currentOffer">Offerta attuale:</label>
         <div class="currentOffer" id="currentOffer">{{ asta?.offertaMax }}</div>
       </div>
-    
     </div>
-    }
-    @if(tipoAsta=="Al Ribasso"){
-        <div class="square">
-          <div class="row1">
-            <div class="photoProfileContainer">
-              <img
-              [src]="'http://localhost:3000/images/' + utenteAsta?.url" alt="Foto profilo" 
-              alt="Foto profilo"
-              class="auction-image"
-          
-            />
-            </div>
-          </div>
-          <div class="row2">
-            <div class="photoAuctionContainer">
-              <img [src]="asta?.url" alt="Auction Image" class="auction-image" />
-            </div>
-            <div class="box-container">
-             
-    
-              <button class="offerButton" (click)="makeOfferRibasso()">Compra ora</button>
-              
-           
-            </div>
-            <div class="description-section">
-              <label for="descrizione">Descrizione</label>
-              <div class="description" id="description">
-                {{ asta?.descrizioneAsta }}
-              </div>
-            </div>
-            
-          </div>
-          <div class="row3">
-            <label for="productName">Nome del prodotto</label>
-            <div class="productName" id="productName">
-              {{ asta?.nomeBeneInVendita }}
-            </div>
-    
-            <label for="timeLeft">Tempo rimasto</label>
-            <div class="timeLeft" id="timeLeft">{{ getFormattedTime() }}</div>
-    
-            <label for="prezzoC">Prezzo corrente</label>
-            <div class="prezzoC" id="Prezzo">{{ asta?.prezzoiniziale }}</div>
-            <label for="decremento">Decremento</label>
-            <div class="decremento" id="Decremento">{{ asta?.offertaMax }}</div>
-          </div>
-          
-        
+    } @if(tipoAsta=="Al Ribasso"){
+    <div class="square">
+      <div class="row1">
+        <div class="photoProfileContainer">
+          <img
+            [src]="'http://localhost:3000/images/' + utenteAsta?.url"
+            alt="Foto profilo"
+            alt="Foto profilo"
+            class="auction-image"
+          />
         </div>
-    }
-    @if(tipoAsta=="Inversa"){
-      <div class="square">
-        <div class="row1">
-          <div class="photoProfileContainer"(click)="visualProfile()">
-            <img
-              [src]="'http://localhost:3000/images/' + utenteAsta?.url" alt="Foto profilo" 
-              alt="Foto profilo"
-              class="auction-image"
-          
-            />
-          </div>
-        </div>
-        <div class="row2">
-          <div class="photoAuctionContainer">
-            <img [src]="asta?.url" alt="Auction Image" class="auction-image" />
-          </div>
-          <div class="box-container">
-            <label for="boxOffer">Fai la tua offerta</label>
-            <input
-              class="boxOffer"
-              id="boxOffer"
-              type="number"
-              [(ngModel)]="newOfferta"
-            />
-  
-            <button class="offerButton" (click)="makeOfferInversa()">Offri</button>
-            
-         
-          </div>
-          <div class="description-section">
-            <label for="descrizione">Descrizione</label>
-            <div class="description" id="description">
-              {{ asta?.descrizioneAsta }}
-            </div>
-          </div>
-          
-        </div>
-        <div class="row3">
-          <label for="productName">Nome del prodotto:</label>
-          <div class="productName" id="productName">
-            {{ asta?.nomeBeneInVendita }}
-          </div>
-  
-   <label for="prezzoIniz">Offerta attuale:</label>
-          <div class="prezzoIniz" id="prezzo">{{ asta?.offertaMax }}</div>
-          <label for="timeLeft">Tempo rimasto:</label>
-          <div class="timeLeft" id="timeLeft">{{ getFormattedTime() }}</div>
-  
-          <label for="currentOffer">Offerta attuale:</label>
-          <div class="currentOffer" id="currentOffer">{{ asta?.offertaMax }}</div>
-        </div>
-      
       </div>
+      <div class="row2">
+        <div class="photoAuctionContainer">
+          <img [src]="asta?.url" alt="Auction Image" class="auction-image" />
+        </div>
+        <div class="box-container">
+          <button class="offerButton" (click)="makeOfferRibasso()">
+            Compra ora
+          </button>
+        </div>
+        <div class="description-section">
+          <label for="descrizione">Descrizione</label>
+          <div class="description" id="description">
+            {{ asta?.descrizioneAsta }}
+          </div>
+        </div>
+      </div>
+      <div class="row3">
+        <label for="productName">Nome del prodotto</label>
+        <div class="productName" id="productName">
+          {{ asta?.nomeBeneInVendita }}
+        </div>
+
+        <label for="timeLeft">Tempo rimasto</label>
+        <div class="timeLeft" id="timeLeft">{{ getFormattedTime() }}</div>
+
+        <label for="prezzoC">Prezzo corrente</label>
+        <div class="prezzoC" id="Prezzo">{{ asta?.prezzoiniziale }}</div>
+        <label for="decremento">Decremento</label>
+        <div class="decremento" id="Decremento">{{ asta?.offertaMax }}</div>
+      </div>
+    </div>
+    } @if(tipoAsta=="Inversa"){
+    <div class="square">
+      <div class="row1">
+        <div class="photoProfileContainer" (click)="visualProfile()">
+          <img
+            [src]="'http://localhost:3000/images/' + utenteAsta?.url"
+            alt="Foto profilo"
+            alt="Foto profilo"
+            class="auction-image"
+          />
+        </div>
+      </div>
+      <div class="row2">
+        <div class="photoAuctionContainer">
+          <img [src]="asta?.url" alt="Auction Image" class="auction-image" />
+        </div>
+        <div class="box-container">
+          <label for="boxOffer">Fai la tua offerta</label>
+          <input
+            class="boxOffer"
+            id="boxOffer"
+            type="number"
+            [(ngModel)]="newOfferta"
+          />
+
+          <button class="offerButton" (click)="makeOfferInversa()">
+            Offri
+          </button>
+        </div>
+        <div class="description-section">
+          <label for="descrizione">Descrizione</label>
+          <div class="description" id="description">
+            {{ asta?.descrizioneAsta }}
+          </div>
+        </div>
+      </div>
+      <div class="row3">
+        <label for="productName">Nome del prodotto:</label>
+        <div class="productName" id="productName">
+          {{ asta?.nomeBeneInVendita }}
+        </div>
+
+        <label for="prezzoIniz">Offerta attuale:</label>
+        <div class="prezzoIniz" id="prezzo">{{ asta?.offertaMax }}</div>
+        <label for="timeLeft">Tempo rimasto:</label>
+        <div class="timeLeft" id="timeLeft">{{ getFormattedTime() }}</div>
+
+        <label for="currentOffer">Offerta attuale:</label>
+        <div class="currentOffer" id="currentOffer">{{ asta?.offertaMax }}</div>
+      </div>
+    </div>
     }
     <script></script>
   </body>

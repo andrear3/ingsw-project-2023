@@ -7,8 +7,19 @@
       href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap"
     />
   </head>
+  <!-- Google tag (gtag.js) -->
+ 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-FSGHBNFWGY');
+  </script>
+
   <body>
-    
     <div class="square">
       <span class="D">D</span>
       <span class="ieti">ieti</span>
@@ -46,12 +57,9 @@
           </mat-option>
         </mat-autocomplete>
       </div>
-     
+
       <button class="boxAccedi" (click)="login2()">Accedi</button>
-      
-    
-</div>      
-  
+    </div>
 
     <div class="square2">
       <span class="noAcc">Non hai un account?</span>
@@ -59,7 +67,6 @@
       <a class="iscriviti"
         ><a class="link" (click)="navigateToRegistration()">Iscriviti!</a></a
       >
-      
     </div>
     <div class="backAzz"></div>
   </body>

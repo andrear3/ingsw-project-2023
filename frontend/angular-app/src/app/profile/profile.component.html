@@ -8,76 +8,85 @@
       rel="stylesheet"
     />
   </head>
+
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-FSGHBNFWGY');
+  </script>
+
+
   <body>
     <nav>
       <app-navbar></app-navbar>
     </nav>
-    
 
-
-      <div class="square">
-        <div class="row">
-          <div class="box-container">
-            <label for="boxNome">Nome</label>
-            <div class="boxNome" id="boxNome">{{ utente?.nome }}</div>
+    <div class="square">
+      <div class="row">
+        <div class="box-container">
+          <label for="boxNome">Nome</label>
+          <div class="boxNome" id="boxNome">{{ utente?.nome }}</div>
+        </div>
+        <div class="box-container">
+          <label for="boxCognome">Cognome</label>
+          <div class="boxCognome" id="boxCognome">{{ utente?.cognome }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="box-container">
+          <label for="boxNickname">Nickname</label>
+          <div class="boxNickname" id="boxNickname">{{ utente?.nickname }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="box-container">
+          <label for="boxRegione">Regione</label>
+          <div class="boxRegione" id="boxRegione">{{ utente?.regione }}</div>
+        </div>
+        <div class="box-container">
+          <label for="boxIndirizzo">Indirizzo</label>
+          <div class="boxIndirizzo" id="boxIndirizzo">
+            {{ utente?.indirizzo }}
           </div>
-          <div class="box-container">
-            <label for="boxCognome">Cognome</label>
-            <div class="boxCognome" id="boxCognome">{{ utente?.cognome }}</div>
-          </div>
         </div>
-        <div class="row">
-          <div class="box-container">
-            <label for="boxNickname">Nickname</label>
-            <div class="boxNickname" id="boxNickname">{{ utente?.nickname }}</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="box-container">
-            <label for="boxRegione">Regione</label>
-            <div class="boxRegione" id="boxRegione">{{ utente?.regione }}</div>
-          </div>
-          <div class="box-container">
-            <label for="boxIndirizzo">Indirizzo</label>
-            <div class="boxIndirizzo" id="boxIndirizzo">{{ utente?.indirizzo }}</div>
-          </div>
-          
-        </div>
-        <div class="row-BTN">
-          <button class="modificaProfilo-BTN" (click)="modificaProfilo()">modifica profilo</button>
-          <button class="eliminaProfilo-BTN"(click)="openDialogElimina()">elimina profilo</button>
-          <button class="modificaPasswordProfilo-BTN" (click)="openDialogPass()">modifica password</button>
-          <button class="saldo-BTN"(click)="openDialogSaldo()">saldo</button>
-        </div>
-        <div class="links">
-          <label for="links">I tuoi link</label>
-          <div class="link1" placeholder="link1">{{ utente?.link1 }}</div>
-          <div class="link2" placeholder="link2">{{utente?.link2}}</div>
-          <div class="link3" placeholder="link3">{{utente?.link3}}</div>
-        </div>
-        <div class="descrizione">
-          <label for="descrizione">La tua descrizione</label>
-          <div class="boxDescrizione">{{utente?.descrizione}}</div>
-        </div>
-        <div class="foto">
-          <div class="boxFoto" #photoPreview >
-            <img
+      </div>
+      <div class="row-BTN">
+        <button class="modificaProfilo-BTN" (click)="modificaProfilo()">
+          modifica profilo
+        </button>
+        <button class="eliminaProfilo-BTN" (click)="openDialogElimina()">
+          elimina profilo
+        </button>
+        <button class="modificaPasswordProfilo-BTN" (click)="openDialogPass()">
+          modifica password
+        </button>
+        <button class="saldo-BTN" (click)="openDialogSaldo()">saldo</button>
+      </div>
+      <div class="links">
+        <label for="links">I tuoi link</label>
+        <div class="link1" placeholder="link1">{{ utente?.link1 }}</div>
+        <div class="link2" placeholder="link2">{{ utente?.link2 }}</div>
+        <div class="link3" placeholder="link3">{{ utente?.link3 }}</div>
+      </div>
+      <div class="descrizione">
+        <label for="descrizione">La tua descrizione</label>
+        <div class="boxDescrizione">{{ utente?.descrizione }}</div>
+      </div>
+      <div class="foto">
+        <div class="boxFoto" #photoPreview>
+          <img
             [src]="utente?.url || 'assets/placeholder.jpg'"
             alt="Foto profilo"
             class="auction-image"
-        
           />
         </div>
-        </div>
-     
-         
-        
-        </div>
-      
-   
-  
-
-   
+      </div>
+    </div>
 
     <script>
       // Your JavaScript here

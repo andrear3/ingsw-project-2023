@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
- 
-  <link rel="stylesheet" href="productpage.component.scss" />
-  <title>Product</title>
- 
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="stylesheet" href="productpage.component.scss" />
+    <title>Product</title>
+  </head>
+
+  <!-- Google tag (gtag.js) -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-FSGHBNFWGY');
+  </script>
+
+
+  <body>
     <nav>
-        <app-navbar></app-navbar>
-      </nav>
- <div class="square">
-    <div class="nomeProdotto">
+      <app-navbar></app-navbar>
+    </nav>
+    <div class="square">
+      <div class="nomeProdotto">
         <label>Nome Prodotto</label>
-    </div>
-    <div class="tempoRimanente">
+      </div>
+      <div class="tempoRimanente">
         <label>Tempo Rimanete</label>
-    </div>
-    <div class="offertaCorrente">
+      </div>
+      <div class="offertaCorrente">
         <label>Offerta Corrente</label>
-    </div>
-    <div class="tuaOfferta">
+      </div>
+      <div class="tuaOfferta">
         <label>Fai un offerta</label>
+      </div>
+      <div class="foto"></div>
+      <button class="offerta-BTN">Offri</button>
     </div>
-    <div class="foto"></div>
-    <button class="offerta-BTN">Offri</button>
 
-
-
- </div>
- 
-  <main>
-
-  </main>
-</body>
+    <main></main>
+  </body>
 </html>

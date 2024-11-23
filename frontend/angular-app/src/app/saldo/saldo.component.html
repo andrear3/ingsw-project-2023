@@ -1,9 +1,30 @@
+<!DOCTYPE html>
+<head>
+  <title>saldo</title>
+</head>
+
+<!-- Google tag (gtag.js) -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-FSGHBNFWGY');
+  </script>
+
+
 <body>
-<h2>Saldo</h2>
-<h2 calss="saldo-view">{{utente?.saldo}} $</h2>
-<div class="row-BTN">
-    <button class="aggiungi-BTN" (click)="openDialogSaldoAggiungi()">Aggiungi</button>
-    <button class="preleva-BTN"(click)="openDialogSaldoPreleva()">Preleva</button>
-    
+  <h2>Saldo</h2>
+  <h2 calss="saldo-view">{{ utente?.saldo }} $</h2>
+  <div class="row-BTN">
+    <button class="aggiungi-BTN" (click)="openDialogSaldoAggiungi()">
+      Aggiungi
+    </button>
+    <button class="preleva-BTN" (click)="openDialogSaldoPreleva()">
+      Preleva
+    </button>
   </div>
 </body>
