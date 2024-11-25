@@ -65,7 +65,7 @@ export class AstaComponent implements OnInit {
 
   creaAsta() {
     if (this.isFormInvalid()) {
-      this.snackBar.open('Compila tutti i campi richiesti!', 'Close', {
+      this.snackBar.open('Compila correttamente tutti i campi richiesti!', 'Close', {
         duration: 3000,
       });
       return;
@@ -100,7 +100,7 @@ export class AstaComponent implements OnInit {
 
   creaAstaAlRibasso() {
     if (this.isFormInvalid()) {
-      this.snackBar.open('Compila tutti i campi richiesti!', 'Close', {
+      this.snackBar.open('Compila correttamente tutti i campi richiesti!', 'Close', {
         duration: 3000,
       });
       return;
@@ -138,7 +138,7 @@ export class AstaComponent implements OnInit {
 
   creaAstaInversa() {
     if (this.isFormInvalid()) {
-      this.snackBar.open('Compila tutti i campi richiesti!', 'Close', {
+      this.snackBar.open('Compila correttamente tutti i campi richiesti!', 'Close', {
         duration: 3000,
       });
       return;
@@ -210,6 +210,9 @@ export class AstaComponent implements OnInit {
   }
 
   isFormInvalid(): boolean {
+    const prezzoInizNum = Number(this.prezzoIniz);
+    const oreAstaNum = Number(this.oreAsta);
+
     return (
       !this.titoloAsta ||
       !this.nomeProdotto ||
@@ -217,7 +220,11 @@ export class AstaComponent implements OnInit {
       !this.oreAsta ||
       !this.categoria ||
       !this.descrizione ||
-      (!this.imageFile && !this.url)
+      (!this.imageFile && !this.url) ||
+      isNaN(prezzoInizNum) ||
+      isNaN(oreAstaNum) ||
+      prezzoInizNum <= 0 ||
+      oreAstaNum <= 0
     );
   }
 }

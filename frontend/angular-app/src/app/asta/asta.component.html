@@ -7,6 +7,19 @@
     <title>Asta</title>
   </head>
 
+
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-FSGHBNFWGY');
+  </script>
+
+
   <body>
     @if(tipoAsta === "classica"){
 
@@ -160,35 +173,38 @@
         </div>
         <div class="input-group">
           <label for="percentualeDecremento">Percentuale Decremento</label>
-          <input type="text"
-           id="percentualeDecremento" 
-           class="input-field"
-           [(ngModel)]="valoreDecremento"
+          <input
+            type="text"
+            id="percentualeDecremento"
+            class="input-field"
+            [(ngModel)]="valoreDecremento"
             name="valoreDecremento"
             required
-            />
+          />
         </div>
         <div class="input-group">
           <label for="decrementoOrario">Decremento Orario</label>
-          <input type="text"
-           id="decrementoOrario" 
-           class="input-field" 
-           [(ngModel)]="decrementoTimer"
-           name="decrementoTimer"
-           required
-           />
+          <input
+            type="text"
+            id="decrementoOrario"
+            class="input-field"
+            [(ngModel)]="decrementoTimer"
+            name="decrementoTimer"
+            required
+          />
         </div>
         <div class="input-group">
           <label for="prezzoMinSegreto">Prezzo Minimo Segreto</label>
-          <input type="text" 
-          id="prezzoMinSegreto" 
-          class="input-field" 
-          [(ngModel)]="prezzoMinSegreto"
-          name="prezzoMinSegreto"
-          required
+          <input
+            type="text"
+            id="prezzoMinSegreto"
+            class="input-field"
+            [(ngModel)]="prezzoMinSegreto"
+            name="prezzoMinSegreto"
+            required
           />
         </div>
-        
+
         <div class="input-group">
           <label for="categoria">Categoria</label>
           <input
@@ -224,7 +240,9 @@
     </div>
 
     <div class="action-buttons">
-      <button class="create-auction-btn" (click)="creaAstaAlRibasso()">Crea Asta</button>
+      <button class="create-auction-btn" (click)="creaAstaAlRibasso()">
+        Crea Asta
+      </button>
     </div>
 
     } @else if(tipoAsta === "inversa"){
@@ -318,7 +336,9 @@
     </div>
 
     <div class="action-buttons">
-      <button class="create-auction-btn" (click)="creaAstaInversa()">Crea Asta</button>
+      <button class="create-auction-btn" (click)="creaAstaInversa()">
+        Crea Asta
+      </button>
     </div>
 
     }

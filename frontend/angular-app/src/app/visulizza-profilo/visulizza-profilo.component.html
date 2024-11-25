@@ -8,38 +8,45 @@
       rel="stylesheet"
     />
   </head>
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-FSGHBNFWGY');
+  </script>
+
+
   <body>
     <nav>
       <app-navbar></app-navbar>
     </nav>
     <div class="square">
-        <div class="row1">
-            <div class="photoProfileContainer"#photoPreview>
-               
-             
-                <img
-                [src]="'http://localhost:3000/images/' + utente?.url" alt="Foto profilo" 
-                alt="Foto profilo"
-                class="auction-image"
-            
-              />
-            
-    
-           
-            </div>
-            <label class="nome">{{utente?.nome}}</label>
-            <label class="link">{{utente?.link1}}</label>
+      <div class="row1">
+        <div class="photoProfileContainer" #photoPreview>
+          <img
+            [src]="'http://localhost:3000/images/' + utente?.url"
+            alt="Foto profilo"
+            alt="Foto profilo"
+            class="auction-image"
+          />
         </div>
+        <label class="nome">{{ utente?.nome }}</label>
+        <label class="link">{{ utente?.link1 }}</label>
+      </div>
 
-        <div class="row2">
-          <p class="descrizione">{{utente?.descrizione}}</p>
-        </div>
-        
-        <div class="row3">
-          <!-- <button class="asteAttive-BTN">Aste Attive</button> -->
-        </div>
-    </div> 
-    <script>
-    </script>
+      <div class="row2">
+        <p class="descrizione">{{ utente?.descrizione }}</p>
+      </div>
+
+      <div class="row3">
+        <!-- <button class="asteAttive-BTN">Aste Attive</button> -->
+      </div>
+    </div>
+    <script></script>
   </body>
 </html>
