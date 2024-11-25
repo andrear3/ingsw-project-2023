@@ -10,10 +10,7 @@ import { RouterLink } from '@angular/router';
 import { RestService } from '../_services/rest-api.service';
 import { Utente } from '../_models/utente-model';
 import { TipoUtente } from '../_models/tipo-utente-enum';
-<<<<<<< HEAD
-=======
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
->>>>>>> c6660271144bff9a4973c58add6d6b919d911c54
 import { Router } from '@angular/router';
 
 @Component({
@@ -52,17 +49,11 @@ export class RegistrationpageComponent {
     url: '',
   };
 
-<<<<<<< HEAD
-
-
-  constructor(private restApiService: RestService, private router:Router) {}
-=======
   constructor(
     private restApiService: RestService,
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
->>>>>>> c6660271144bff9a4973c58add6d6b919d911c54
 
   register() {
     this.restApiService.register(this.utente).subscribe({
@@ -79,10 +70,4 @@ export class RegistrationpageComponent {
       },
     });
   }
-<<<<<<< HEAD
-  navigateToLoginPage(){
-    this.router.navigate(['/']);
-  }
-=======
->>>>>>> c6660271144bff9a4973c58add6d6b919d911c54
 }

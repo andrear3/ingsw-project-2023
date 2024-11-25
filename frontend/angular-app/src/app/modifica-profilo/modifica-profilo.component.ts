@@ -126,21 +126,6 @@ export class ModificaProfiloComponent implements OnInit {
       formData.append('url', this.url);
     }
 
-<<<<<<< HEAD
-    this.RestService.editProfile(formData).subscribe(
-      (response) => {
-        console.log('Profile updated successfully:', response);
-        this.router.navigate(['/profile']);
-  
-      },
-      (error) => {
-        console.error('Profile update failed:', error);
-      }
-    );
-  }
-
-  
-=======
     this.RestService.editProfile(formData).subscribe({
       next: () =>
         this.snackBar.open('Profilo modificato ✅', 'Close', {
@@ -168,5 +153,4 @@ export class ModificaProfiloComponent implements OnInit {
       !this.link3
     );
   }
->>>>>>> c6660271144bff9a4973c58add6d6b919d911c54
 }
