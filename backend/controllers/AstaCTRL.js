@@ -414,10 +414,18 @@ export class AstaCTRL {
           continue;
         }
 
-        const timeSinceLastDecrement = currentTime - astaRibasso.updatedAt;
+        const timeSinceLastDecrement = currentTime - asta.updatedAt;
+        console.log(currentTime, "< curr - updated >", asta.updatedAt);
+        console.log("timesince :  ", timeSinceLastDecrement);
 
-        if (timeSinceLastDecrement >= astaRibasso.decrementoTimer * 1000) {
+        const decrementInterval = astaRibasso.decrementoTimer * 60 * 1000;
+        console.log("decre :  ", decrementInterval);
+
+        if (timeSinceLastDecrement >= decrementInterval) {
           const newPrice = asta.prezzoiniziale - astaRibasso.valoreDecremento;
+
+          asta.updatedAt = new Date();
+          await asta.save();
 
           if (newPrice <= astaRibasso.prezzoMinSegreto) {
             asta.statusAsta = "nonVenduto";
@@ -568,7 +576,7 @@ export class AstaCTRL {
             statusAsta: "inVendita",
           },
         });
-        if(asta){
+        if (asta) {
           console.log(chalk.bgCyanBright(asta.astaID, "asta in vendita"));
         }
         if (!asta) {
