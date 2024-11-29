@@ -65,9 +65,13 @@ export class AstaComponent implements OnInit {
 
   creaAsta() {
     if (this.isFormInvalid()) {
-      this.snackBar.open('Compila correttamente tutti i campi richiesti!', 'Close', {
-        duration: 3000,
-      });
+      this.snackBar.open(
+        'Compila correttamente tutti i campi richiesti!',
+        'Close',
+        {
+          duration: 3000,
+        }
+      );
       return;
     }
 
@@ -100,9 +104,13 @@ export class AstaComponent implements OnInit {
 
   creaAstaAlRibasso() {
     if (this.isFormInvalid()) {
-      this.snackBar.open('Compila correttamente tutti i campi richiesti!', 'Close', {
-        duration: 3000,
-      });
+      this.snackBar.open(
+        'Compila correttamente tutti i campi richiesti!',
+        'Close',
+        {
+          duration: 3000,
+        }
+      );
       return;
     }
 
@@ -117,6 +125,16 @@ export class AstaComponent implements OnInit {
     formData.append('categoria', this.categoria || '');
     formData.append('descrizione', this.descrizione || '');
 
+    if (Number(this.decrementoTimer) < 1) {
+      this.snackBar.open(
+        'Compila correttamente tutti i campi richiesti!',
+        'Close',
+        {
+          duration: 3000,
+        }
+      );
+      return;
+    }
     if (this.imageFile) {
       formData.append('image', this.imageFile, this.imageFile.name);
     } else if (this.url) {
@@ -138,9 +156,13 @@ export class AstaComponent implements OnInit {
 
   creaAstaInversa() {
     if (this.isFormInvalid()) {
-      this.snackBar.open('Compila correttamente tutti i campi richiesti!', 'Close', {
-        duration: 3000,
-      });
+      this.snackBar.open(
+        'Compila correttamente tutti i campi richiesti!',
+        'Close',
+        {
+          duration: 3000,
+        }
+      );
       return;
     }
 
@@ -212,6 +234,7 @@ export class AstaComponent implements OnInit {
   isFormInvalid(): boolean {
     const prezzoInizNum = Number(this.prezzoIniz);
     const oreAstaNum = Number(this.oreAsta);
+    const dec = Number(this.decrementoTimer);
 
     return (
       !this.titoloAsta ||
@@ -224,7 +247,7 @@ export class AstaComponent implements OnInit {
       isNaN(prezzoInizNum) ||
       isNaN(oreAstaNum) ||
       prezzoInizNum <= 0 ||
-      oreAstaNum <= 0
+      oreAstaNum < 1
     );
   }
 }

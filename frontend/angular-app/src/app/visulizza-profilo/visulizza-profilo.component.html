@@ -9,17 +9,20 @@
     />
   </head>
 
-
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"></script>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"
+  ></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  
-    gtag('config', 'G-FSGHBNFWGY');
-  </script>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
+    gtag("config", "G-FSGHBNFWGY");
+  </script>
 
   <body>
     <nav>
@@ -36,7 +39,9 @@
           />
         </div>
         <label class="nome">{{ utente?.nome }}</label>
-        <label class="link">{{ utente?.link1 }}</label>
+        <a class="link" [href]="utente?.link1" target="_blank">{{
+          utente?.link1
+        }}</a>
       </div>
 
       <div class="row2">
