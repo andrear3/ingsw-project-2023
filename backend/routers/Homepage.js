@@ -158,7 +158,8 @@ homepageRouter.get("/homepage/ribasso", authToken, async (req, res) => {
   }
 });
 
-homepageRouter.get("/aste/utente/:nickname", authToken, async (req, res) => {
+/*
+homepageRouter.post("/aste/utente", authToken, async (req, res) => {
   try {
     const { nickname } = req.params;
 
@@ -175,6 +176,7 @@ homepageRouter.get("/aste/utente/:nickname", authToken, async (req, res) => {
     res.status(500).json({ message: "Errore del server" });
   }
 });
+*/
 
 homepageRouter.get("/images/:filename", (req, res) => {
   const filename = req.params.filename;
