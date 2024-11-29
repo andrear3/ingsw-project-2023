@@ -26,24 +26,7 @@
       <app-navbar></app-navbar>
     </nav>
     <main>
-      <div class="search-container">
-        <input
-          class="boxTipoAsta"
-          type="text"
-          placeholder="Tipo Asta"
-          aria-label="Number"
-          matInput
-          [matAutocomplete]="autoAsta"
-        />
-        <mat-autocomplete
-          #autoAsta="matAutocomplete"
-          (optionSelected)="filterResultsTipoAsta($event)"
-        >
-          <mat-option *ngFor="let option of optionAsta" [value]="option">
-            {{ option }}
-          </mat-option>
-        </mat-autocomplete>
-      </div>
+      
 
       <div class="card-container">
         @for (asta of asteFiltrate; track asteFiltrate) {
@@ -87,19 +70,6 @@
                   <strong
                     >Offerta corrente:
                     {{ asta?.offertaMin || asta?.prezzoiniziale }}€</strong
-                  >
-                </p>
-                } @if (tipoAsta == 'Classica') {
-                <p class="danger">
-                  <strong
-                    >Offerta corrente:
-                    {{ asta?.offertaMax || asta?.prezzoiniziale }}€</strong
-                  >
-                </p>
-                } @if (tipoAsta == 'Al Ribasso') {
-                <p class="danger">
-                  <strong
-                    >Prezzo corrente : {{ asta?.prezzoiniziale || 0 }}€</strong
                   >
                 </p>
                 }
