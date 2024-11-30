@@ -40,9 +40,9 @@ body {
     margin-bottom: 10px;
     border-radius: 20px;
     overflow: hidden;
-    background-size: cover; /* Riempi il contenitore mantenendo le proporzioni */
-    background-position: center; /* Centra l'immagine all'interno del contenitore */
-    background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
 }
 .photo-placeholder img {
     max-width: 100%;
@@ -128,7 +128,6 @@ label {
 }
 
 #ribasso .auction-form, #inversa .auction-form {
-    /* Stessi stili della classica */
     display: flex;
     margin-top: 20px;
     background-color: #fff;
@@ -139,8 +138,8 @@ label {
 
 /* Corregge le dimensioni dei campi */
 #ribasso .input-group, #inversa .input-group {
-    width: 40%; /* Imposta la larghezza coerente con l'asta classica */
-    margin-bottom: 20px; /* Spazio coerente con la classica */
+    width: 40%; 
+    margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {

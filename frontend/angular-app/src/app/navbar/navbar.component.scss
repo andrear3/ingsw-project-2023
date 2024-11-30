@@ -7,13 +7,13 @@
     cursor: pointer;
     display: flex;             
     align-items: center;
-    margin-left: 20px; /* Aggiunge un margine a sinistra */
+    margin-left: 20px; 
 }
 
 .mat-toolbar-row {
     display: flex;
-    justify-content: space-between; /* Spazio tra logo e icone */
-    align-items: center; /* Centra verticalmente */
+    justify-content: space-between; 
+    align-items: center;
 }
   .D,.D2{
     font-size: 50px;
@@ -23,13 +23,13 @@
   
   .icone {
     display: flex;
-    justify-content: center; /* Centra le icone orizzontalmente */
-    align-items: center;     /* Centra le icone verticalmente */
+    justify-content: center;
+    align-items: center;    
     width: 50px;
     height: 50px;
-    margin: 0;               /* Rimuovi tutti i margini */
-    padding-right: 50%;              /* Rimuovi tutti i padding */
-    gap: 60px;               /* Distanza tra le icone */
+    margin: 0;               
+    padding-right: 50%;             
+    gap: 60px;            
 }
 
 
@@ -51,22 +51,22 @@
 .auctionIcon label, .dashboardIcon label, .asteIcon label, .userIcon label, .changeProfile label {
     color: white;
     font-size: 12px;
-    margin-top: 4px; /* Spaziatura tra icona e testo */
+    margin-top: 4px; 
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Regola il contenitore per adattarsi a varie risoluzioni */
+
 @media (max-width: 768px) {
     .icone {
-        gap: 30px; /* Riduce il gap su schermi più piccoli */
+        gap: 30px;
     }
 }
 
 @media (max-width: 480px) {
     .icone {
-        flex-direction: column; /* Dispone le icone in colonna su schermi molto piccoli */
-        gap: 20px;              /* Ulteriore riduzione del gap */
+        flex-direction: column; 
+        gap: 20px;              
     }
 }

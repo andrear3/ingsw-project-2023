@@ -47,7 +47,7 @@ body{
 .boxEmail, .boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxTipoAccount, .boxRegione, .boxIndirizzo {
    // display: flex;
     flex-direction: row;
-    align-items: center; /* Allinea verticalmente gli elementi al centro */
+    align-items: center; 
     margin: 20px auto;
     width: 80%;
     max-width: 500px;
@@ -82,7 +82,7 @@ body{
 .boxIndirizzo label {
     display: block;
     font-size: 14px;
-    color: #727272aa; /* Colore del testo delle etichette */
+    color: #727272aa;
     position: relative;
     left: 19%;
     text-align: left;
@@ -104,7 +104,7 @@ body{
 .boxEmail, .boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxTipoAccount, .boxRegione, .boxIndirizzo {
    // display: flex;
     flex-direction: row;
-    align-items: center; /* Allinea verticalmente gli elementi al centro */
+    align-items: center;
     margin: 20px auto;
     width: 80%;
     max-width: 500px;
