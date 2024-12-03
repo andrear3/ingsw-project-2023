@@ -38,7 +38,7 @@ export class LeMieAsteComponent implements OnInit, OnDestroy {
   asteFiltrate: Asta[] = [];
   astePartecipate: Asta[] = [];
   utente: Utente | null = null;
-  tipoAsta: string = 'Classica';
+  tipoAsta: string = 'Inversa';
   utenteFiltro: string = 'Create da me';
   searchQuery: string = '';
   private subscriptions: Subscription = new Subscription();

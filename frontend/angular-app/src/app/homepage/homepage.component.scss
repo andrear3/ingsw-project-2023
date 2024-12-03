@@ -3,8 +3,8 @@ body {
     font-family: Arial, sans-serif;
   }
   mat-card {
-    background-color: transparent !important; /* Rimuovi qualsiasi colore di sfondo */
-    box-shadow: none !important; /* Rimuovi l'ombra della card se presente */
+    background-color: transparent !important; 
+    box-shadow: none !important; 
   }
 
   .card-container {
@@ -19,7 +19,7 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 800px; /* Adjust as needed */
+    max-width: 800px;
     margin-bottom: 32px;
     border-radius: 8px;
     overflow: hidden;
@@ -29,8 +29,8 @@ body {
   }
 
   .card-image {
-    flex: 0 0 200px; /* Fixed width for the image */
-    height: 200px;   /* Fixed height for the image */
+    flex: 0 0 200px; 
+    height: 200px;  
     overflow: hidden;
   }
 
@@ -62,7 +62,7 @@ body {
   .card-action {
     padding: 16px;
     text-align: right;
-    background-color:   grey; /* Lighter gray for better contrast */
+    background-color:   grey; 
     border-radius: 8px;
     margin-top: 16px;
     
@@ -74,8 +74,8 @@ body {
   }
 
   .card-actions button {
-    background-color: #007bff; /* Button color */
-    color: #fff; /* Text color */
+    background-color: #007bff; 
+    color: #fff;
     border: none;
     padding: 8px 16px;
     border-radius: 4px;
@@ -85,24 +85,24 @@ body {
   }
 
   .card-actions button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3; 
   }
   
     .search-container {
       display: flex;
-      justify-content: center;  /* Centro i campi di ricerca orizzontalmente */
+      justify-content: center;  
       align-items: center;
-      margin-top: 1rem;         /* Spazio tra la navbar e la search-container */
-      gap: 1rem;                /* Spazio tra i due campi */
+      margin-top: 1rem;         
+      gap: 1rem;               
       z-index: 10;
   }
   
 
-/* Stili degli input */
+
 .boxSearch, .boxCategoria, .boxTipoAsta{
     height: 25px;
     border-radius: 20px;
-    padding: 5px 10px; /* Spaziatura interna per rendere il testo più leggibile */
+    padding: 5px 10px;
     text-align: left;
     outline: none;
     border: 1px solid #ccc;
@@ -110,11 +110,11 @@ body {
 }
 
 .boxSearch {
-    width: 200px; /* Larghezza specifica per il campo di ricerca */
+    width: 200px; 
 }
 
 .boxCategoria {
-    width: 150px; /* Larghezza specifica per il campo categoria */
+    width: 150px; 
 }
 
   @media (max-width: 600px) {

@@ -7,8 +7,8 @@
     text-align: center;
     align-items: center;
     position: relative;
-    padding: 20px; /* Aggiungi padding per evitare che il contenuto tocchi i bordi */
-    box-sizing: border-box; /* Includi padding e bordo nel calcolo delle dimensioni */
+    padding: 20px; 
+    box-sizing: border-box; 
     display: flex;
     flex-direction: column;
 
@@ -52,7 +52,7 @@
 .nomeProdotto label,.tempoRimanente label,.offertaCorrente label{
     display: block;
     font-size: 14px;
-    color: #727272aa; /* Colore del testo delle etichette */
+    color: #727272aa; 
     position: absolute;
     margin-top: -12% ;
     
@@ -73,7 +73,7 @@
 .tuaOfferta label{
     display: block;
     font-size: 14px;
-    color: #727272aa; /* Colore del testo delle etichette */
+    color: #727272aa;
     position: relative;
     left: 3%;
     text-align: left;

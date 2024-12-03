@@ -1,8 +1,8 @@
-//prima pagina creata , presenta modi diversi e poco ordinati di posizionamento degli oggetti 
+
 body{
     background-color:white ;
 }
-//box superiore login
+
 .square{
     width: 550px;
     height: 400px;
@@ -11,7 +11,7 @@ body{
     margin:20px auto;
     text-align: center;
 }
-//box inferiore login
+
 .square2{
     width: 550px;
     height: 200px;
@@ -19,7 +19,7 @@ body{
     border-radius: 20px;
     margin:10px auto;
 }
-//logo diviso in sezioni per modificare grandezza singole lettere 
+
 .D{
     color: #22A2EA;
     font-family:"Metamorphos";
@@ -48,7 +48,7 @@ body{
     position:relative;
     top: 20px;
 }
-//box (cambiati in tipo input) inserie email
+
 .box1,.box2,.boxTipoAccount input {
     width:250px;
     height: 25px;
@@ -62,9 +62,7 @@ body{
     margin-top: 20px; 
     top: 20px;
 }
-//box(cambiati in tipo input) dove inserire la password
 
-//box per accedere ,da capire se usare un pulsante o semplicemnte lincare il box alla pagina succesiva
 .boxAccedi{
     width:100px;
     height: 25px;
@@ -84,8 +82,7 @@ body{
     left: 50%;
     transform: translateX(-50%);
 }
-//da capire se sostituire con "accedi con google " usando il client google o aggioungere icona .
-//suggerisco client google se facile da inserire (sarebbe un flexino)
+
 .accediCon{
     color: #727272aa;
     position: absolute;
@@ -114,22 +111,11 @@ body{
     color: #22A2EA;
     text-decoration: none;
 }
-//sottolinea quando papssi il cursore su iscriviti 
+
 .iscriviti a:hover{
     text-decoration: underline;
 }
-/* prova replica sfonto azzurro 
-.backAzz{
-   width: 5000px; /* Adatta la larghezza in base alle tue esigenze 
-   height: 500px; /* Adatta l'altezza in base alle tue esigenze 
-   background-color: #007bff; /* Colore azzurro, modifica se necessario 
-   border-radius: 0 0 0 0; /* Arrotonda l'angolo superiore sinistro 
-   position: absolute;
-   bottom: -100px;
-  
-} 
 
-*/
 .O2{
 color: #727272aa;
 position: relative;
