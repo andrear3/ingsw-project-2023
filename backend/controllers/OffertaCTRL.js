@@ -7,8 +7,7 @@ export class OffertaCTRL {
       let asta = await Asta.findOne({ where: { astaID: AstumAstaID } });
 
       if (!asta) {
-        console.log("Asta non trovata.");
-        return;
+        return "Asta non trovata.";
       }
 
       let utente = await Utente.findOne({
@@ -16,14 +15,15 @@ export class OffertaCTRL {
       });
 
       if (!utente) {
-        console.log("Utente non trovato.");
-        return;
+        
+        return "Utente non trovato";
       }
 
       if (utente.saldo < valore) {
-        console.log("Saldo insufficiente per l'offerta.");
-        console.log(`Saldo disponibile: ${utente.saldo}, Offerta: ${valore}`);
-        return;
+      
+        
+        return "Saldo insufficiente per l'offerta";
+     
       }
 
       if (valore >= asta.prezzoiniziale) {
@@ -34,18 +34,12 @@ export class OffertaCTRL {
         });
 
         await nuovaOfferta.save();
-        console.log("Offerta salvata nel database.");
-        console.log(
-          `Prezzo iniziale: ${asta.prezzoiniziale}, Offerta: ${valore}`
-        );
+      return "Offerta salvata nel database"
       } else {
-        console.log("Offerta troppo bassa.");
-        console.log(
-          `Prezzo iniziale: ${asta.prezzoiniziale}, Offerta: ${valore}`
-        );
+       return "Offerta troppo bassa";
       }
     } catch (error) {
-      console.error("Errore nel creare offerta", error);
+      return "Errore nel creare l'offerta";
     }
   }
 
@@ -69,13 +63,13 @@ export class OffertaCTRL {
         return `Saldo insufficiente per l'offerta. Saldo disponibile: ${utente.saldo}, Offerta: ${valore}`;
       }
 
-      let prezzoCorrente = await OffertaCTRL.trovaOffertaMinimaPerAsta(
-        AstumAstaID
-      ).offertaMin;
-
+      let prezzoCorrente = await OffertaCTRL.trovaOffertaMinimaPerAsta(asta.astaID);
+    
       if (valore > 0 && valore < asta.prezzoiniziale) {
+      
+        if (prezzoCorrente == null || valore < prezzoCorrente.offertaMin) {
         
-        if (prezzoCorrente == null || valore < prezzoCorrente) {
+
           let nuovaOfferta = new Offerta({
             valore: valore,
             UtenteNickname: UtenteNickname,
@@ -84,18 +78,17 @@ export class OffertaCTRL {
 
           await nuovaOfferta.save();
           return (
-            "Offerta salvata nel database. Prezzo iniziale: " +
-            asta.prezzoiniziale +
-            ", Offerta: " +
-            valore
+            "Offerta salvata nel database."
+          );
+        }
+        else {
+          return (
+            "Offerta troppo alta."
           );
         }
       } else {
         return (
-          "Offerta troppo alta. Prezzo iniziale: " +
-          asta.prezzoiniziale +
-          ", Offerta: " +
-          valore
+          "Offerta troppo alta."
         );
       }
     } catch (error) {

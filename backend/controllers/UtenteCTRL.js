@@ -90,10 +90,10 @@ export class UtenteCTRL {
       );
 
       if (result[0] === 0) {
-        throw new Error("Errore nel cambiare tipo");
+        throw new Error("Errore nel cambiare tipo, Utente non trovato");
       }
 
-      console.log("Successo! Tipo cambiato");
+     return "Succeso! Tipo cambiato"
     } catch (error) {
       console.error("Error:", error.message);
     }
