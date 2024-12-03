@@ -171,7 +171,7 @@ export class AstaCTRL {
 
       await transaction.commit();
 
-      console.log("Asta con ribasso creata con successo:", asta);
+      console.log("Asta con ribasso creata con successo CTRL:", asta);
       return asta;
     } catch (error) {
       await transaction.rollback();

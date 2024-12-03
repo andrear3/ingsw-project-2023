@@ -18,45 +18,27 @@ dotenv.config();
 
 
 
-describe("gestisciAstaInversa Test", function () { 
-  it("test1 parametri corretti ", async function () {
-       
-      const result = await AstaCTRL.gestisciAstaInversa(60,38,"TestUtente");
-   
-      expect(result).to.be.true;
-   
-   
+describe("creaOffertaInversa Test", function () {
+  it("test1 parametri corretti", async function () {
+    const result = await OffertaCTRL.creaOffertaInversa(32, "TestUtente", 60);
+    expect(result).to.equal("Offerta salvata ne. Prezzo iniziale: ..."); // Adattare il messaggio atteso
   });
-});
 
-
-describe("gestisciAstaInversa Test", function () { 
   it("test2 offerta maggiore", async function () {
-    await AstaCTRL.gestisciAstaInversa(60,130,"TestUtente")
-     
-      .catch((error) => {
-        expect(error.message).to.equal("L'offerta deve essere inferiore all'offerta più bassa attuale.")
-      });
+    const result = await OffertaCTRL.creaOffertaInversa(96, "TestUtente", 60);
+    expect(result).to.equal("Offerta troppo alta. Prezzo iniziale: ..."); // Adattare il messaggio atteso
   });
-});
-describe("gestisciAstaInversa Test", function () { 
+
   it("test3 utente null", async function () {
-     await AstaCTRL.gestisciAstaInversa(60,50,null)
-     
-      .catch((error) => {
-        expect(error.message).to.equal("Il parametro 'venditoreNickname' non può essere null, undefined o una stringa vuota.")
-      });
+    const result = await OffertaCTRL.creaOffertaInversa(50, null, 60);
+    expect(result).to.equal("Utente non trovato.");
+  });
+
+  it("test4 astaId inesistente", async function () {
+    const result = await OffertaCTRL.creaOffertaInversa(49, 'TestUtente', 2);
+    expect(result).to.equal("Asta non trovata.");
   });
 });
-describe("gestisciAstaInversa Test", function () { 
-  it("test4 astaId inesistente", async function () {
-     await AstaCTRL.gestisciAstaInversa(2,49,'TestUtente')
-     
-      .catch((error) => {
-        expect(error.message).to.equal(`Asta Inversa con ID 2 non trovata.`)
-      });
-  });
-});    
 
 describe("creOfferta Test", function () { 
   it("test5 parametri corretti ", async function () {

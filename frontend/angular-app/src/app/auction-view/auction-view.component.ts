@@ -34,7 +34,7 @@ export class AuctionViewComponent {
   newOfferta: number | null = null;
 
   constructor(
-    private route: ActivatedRoute,
+    
     private restService: RestService,
     private authService: AuthService,
     private router: Router

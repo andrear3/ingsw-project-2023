@@ -85,7 +85,7 @@ export class RestService {
   }
   creaAstaRibasso(formData: FormData): Observable<any> {
     const token = this.authService.getToken();
-
+   
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`,
@@ -267,7 +267,7 @@ export class RestService {
 
   editProfile(formData: FormData): Observable<any> {
     const token = this.authService.getToken();
-
+    console.log("restapiChiamta")
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`,
