@@ -81,12 +81,6 @@ export class OffertaCTRL {
             AstumAstaID: AstumAstaID,
           });
 
-<<<<<<< HEAD
-        await nuovaOfferta.save();
-        return "Offerta salvata nel database. Prezzo iniziale: ";
-
-        
-=======
           await nuovaOfferta.save();
           return (
             "Offerta salvata nel database. Prezzo iniziale: " +
@@ -95,7 +89,6 @@ export class OffertaCTRL {
             valore
           );
         }
->>>>>>> 180c8e12c81cf4a621293d6b33427b33b852af4b
       } else {
         return (
           "Offerta troppo alta. Prezzo iniziale: " +
