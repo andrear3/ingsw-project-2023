@@ -626,6 +626,7 @@ export class AstaCTRL {
           }
 
           await asta.save();
+          return true;
         }
       }
     } catch (error) {
