@@ -74,6 +74,7 @@ export class OffertaCTRL {
       ).offertaMin;
 
       if (valore > 0 && valore < asta.prezzoiniziale) {
+        
         if (prezzoCorrente == null || valore < prezzoCorrente) {
           let nuovaOfferta = new Offerta({
             valore: valore,
