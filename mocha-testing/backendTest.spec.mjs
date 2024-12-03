@@ -21,7 +21,7 @@ dotenv.config();
 describe("creaOffertaInversa Test", function () {
   it("test1 parametri corretti", async function () {
     const result = await OffertaCTRL.creaOffertaInversa(32, "TestUtente", 60);
-    expect(result).to.equal("Offerta salvata ne. Prezzo iniziale: ..."); // Adattare il messaggio atteso
+    expect(result).to.equal("Offerta salvata nel database. Prezzo iniziale: "); 
   });
 
   it("test2 offerta maggiore", async function () {

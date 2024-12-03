@@ -76,7 +76,7 @@ export class OffertaCTRL {
         });
 
         await nuovaOfferta.save();
-        return "Offerta salvata nel database. Prezzo iniziale: " + asta.prezzoiniziale + ", Offerta: " + valore;
+        return "Offerta salvata nel database. Prezzo iniziale: ";
 
         
       } else {
