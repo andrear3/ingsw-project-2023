@@ -39,19 +39,11 @@ export class LeMieAsteComponent implements OnInit, OnDestroy {
   astePartecipate: Asta[] = [];
   utente: Utente | null = null;
   tipoAsta: string = 'Classica';
-  categoriaFiltro: string | null = null;
-  utenteFiltro: string | null = null;
+  utenteFiltro: string = 'Create da me';
   searchQuery: string = '';
   private subscriptions: Subscription = new Subscription();
   private intervalId: any;
 
-  options: string[] = [
-    'informatica',
-    'videogames',
-    'musica',
-    'sport',
-    'collezionismo',
-  ];
   optionAsta: string[] = ['Classica', 'Inversa', 'Al Ribasso'];
   optionUtente: string[] = ['Create da me', 'Partecipando'];
 
@@ -66,23 +58,25 @@ export class LeMieAsteComponent implements OnInit, OnDestroy {
       this.restService.getAsta().subscribe({
         next: (response: { aste: Asta[]; userInfo: Utente }) => {
           this.aste = response.aste;
-          this.asteFiltrate = [...this.aste];
           this.utente = response.userInfo;
           this.authService.setUtente(this.utente);
           this.authService.setStatus(true);
+          this.applyFilters();
 
+          /*
           if (this.utente) {
             this.subscriptions.add(
               this.restService.offerteByUtente().subscribe({
                 next: (astePartecipate) => {
                   this.astePartecipate = astePartecipate;
-                  console.log('Aste partecipate:', astePartecipate);
                 },
                 error: (err) =>
                   console.error('Errore nel recuperare le aste:', err),
               })
             );
           }
+          
+          */
 
           this.startDecrementTimer();
         },
@@ -93,61 +87,15 @@ export class LeMieAsteComponent implements OnInit, OnDestroy {
   }
 
   applyFilters() {
-    if (this.utenteFiltro === 'Partecipando') {
-      this.asteFiltrate = this.astePartecipate.filter((asta) => {
-        if (
-          this.searchQuery &&
-          !asta.nomeBeneInVendita.toLowerCase().includes(this.searchQuery)
-        ) {
-          return false;
-        }
-        if (
-          this.categoriaFiltro &&
-          String(asta.categoria) !== this.categoriaFiltro
-        ) {
-          return false;
-        }
-        return true;
-      });
-    } else {
-      this.asteFiltrate = this.aste.filter((asta) => {
-        if (
-          this.searchQuery &&
-          !asta.nomeBeneInVendita.toLowerCase().includes(this.searchQuery)
-        ) {
-          return false;
-        }
-        if (
-          this.categoriaFiltro &&
-          String(asta.categoria) !== this.categoriaFiltro
-        ) {
-          return false;
-        }
-        if (
-          this.utenteFiltro === 'Create da me' &&
-          asta.UtenteNickname !== this.utente?.nickname
-        ) {
-          return false;
-        }
-        return true;
-      });
-    }
-  }
-
-  filtraUtente(event: MatAutocompleteSelectedEvent) {
-    this.utenteFiltro = event.option.value;
-    this.applyFilters();
-  }
-
-  filterResults(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.searchQuery = inputElement?.value?.toLowerCase() || '';
-    this.applyFilters();
-  }
-
-  filterResultsCategoria(event: MatAutocompleteSelectedEvent) {
-    this.categoriaFiltro = event.option.value;
-    this.applyFilters();
+    this.asteFiltrate = this.aste.filter((asta) => {
+      if (
+        this.utenteFiltro === 'Create da me' &&
+        asta.UtenteNickname !== this.utente?.nickname
+      ) {
+        return false;
+      }
+      return true;
+    });
   }
 
   filterResultsTipoAsta(event: MatAutocompleteSelectedEvent) {

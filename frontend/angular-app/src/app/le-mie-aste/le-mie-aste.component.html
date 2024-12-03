@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homepage</title>
   </head>
-  
+
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"></script>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-FSGHBNFWGY"
+  ></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  
-    gtag('config', 'G-FSGHBNFWGY');
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-FSGHBNFWGY");
   </script>
 
   <body>
@@ -23,40 +28,6 @@
     <main>
       <div class="search-container">
         <input
-          class="boxUtente"
-          type="text"
-          placeholder="Partecipando/Create"
-          aria-label="Number"
-          matInput
-          [matAutocomplete]="autoUtente"
-        />
-        <mat-autocomplete
-          #autoCat="matAutocomplete"
-          (optionSelected)="filterResultsCategoria($event)"
-        >
-          <mat-option *ngFor="let option of options" [value]="option">{{
-            option
-          }}</mat-option>
-        </mat-autocomplete>
-
-        <mat-autocomplete
-          #autoAsta="matAutocomplete"
-          (optionSelected)="filterResultsTipoAsta($event)"
-        >
-          <mat-option *ngFor="let option of optionAsta" [value]="option">{{
-            option
-          }}</mat-option>
-        </mat-autocomplete>
-        <mat-autocomplete
-          #autoUtente="matAutocomplete"
-          (optionSelected)="filtraUtente($event)"
-        >
-          <mat-option *ngFor="let option of optionUtente" [value]="option">{{
-            option
-          }}</mat-option>
-        </mat-autocomplete>
-
-        <input
           class="boxTipoAsta"
           type="text"
           placeholder="Tipo Asta"
@@ -64,6 +35,14 @@
           matInput
           [matAutocomplete]="autoAsta"
         />
+        <mat-autocomplete
+          #autoAsta="matAutocomplete"
+          (optionSelected)="filterResultsTipoAsta($event)"
+        >
+          <mat-option *ngFor="let option of optionAsta" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
       </div>
 
       <div class="card-container">
@@ -91,7 +70,7 @@
                 <p>
                   <strong>Categoria:</strong> {{ asta?.categoria || "N/A" }}
                 </p>
-                <p><strong>TIpo asta:</strong> {{ tipoAsta || "N/A" }}</p>
+                <p><strong>Tipo asta:</strong> {{ tipoAsta || "N/A" }}</p>
                 <p>
                   <strong>Tipo:</strong> {{ asta?.tipoBeneInVendita || "N/A" }}
                 </p>
@@ -103,21 +82,21 @@
                   <strong>Creata da:</strong>
                   {{ asta?.UtenteNickname || "N/A" }}
                 </p>
-                @if(tipoAsta=='Inversa'){
+                @if (tipoAsta == 'Inversa') {
                 <p class="danger">
                   <strong
                     >Offerta corrente:
                     {{ asta?.offertaMin || asta?.prezzoiniziale }}€</strong
                   >
                 </p>
-                } @if(tipoAsta=='Classica'){
+                } @if (tipoAsta == 'Classica') {
                 <p class="danger">
                   <strong
                     >Offerta corrente:
                     {{ asta?.offertaMax || asta?.prezzoiniziale }}€</strong
                   >
                 </p>
-                } @if(tipoAsta=='Al Ribasso'){
+                } @if (tipoAsta == 'Al Ribasso') {
                 <p class="danger">
                   <strong
                     >Prezzo corrente : {{ asta?.prezzoiniziale || 0 }}€</strong

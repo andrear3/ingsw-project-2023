@@ -54,8 +54,7 @@ export class OffertaCTRL {
       let asta = await Asta.findOne({ where: { astaID: AstumAstaID } });
 
       if (!asta) {
-        console.log("Asta non trovata.");
-        return;
+        return "Asta non trovata.";      
       }
 
       let utente = await Utente.findOne({
@@ -63,17 +62,13 @@ export class OffertaCTRL {
       });
 
       if (!utente) {
-        console.log("Utente non trovato.");
-        return;
-      }
+        return "Utente non trovato.";      }
 
       if (utente.saldo < valore) {
-        console.log("Saldo insufficiente per l'offerta.");
-        console.log(`Saldo disponibile: ${utente.saldo}, Offerta: ${valore}`);
-        return;
+        return `Saldo insufficiente per l'offerta. Saldo disponibile: ${utente.saldo}, Offerta: ${valore}`;
       }
 
-      if (valore < asta.prezzoiniziale && valore > 0) {
+      if (valore > 0 && valore < asta.prezzoiniziale) {
         let nuovaOfferta = new Offerta({
           valore: valore,
           UtenteNickname: UtenteNickname,
@@ -81,19 +76,14 @@ export class OffertaCTRL {
         });
 
         await nuovaOfferta.save();
-        console.log("Offerta salvata nel database.");
-        console.log(
-          `Prezzo iniziale: ${asta.prezzoiniziale}, Offerta: ${valore}`
-        );
+        return "Offerta salvata nel database. Prezzo iniziale: " + asta.prezzoiniziale + ", Offerta: " + valore;
+
+        
       } else {
-        console.log("Offerta troppo alta.");
-        console.log(
-          `Prezzo iniziale: ${asta.prezzoiniziale}, Offerta: ${valore}`
-        );
+        return "Offerta troppo alta. Prezzo iniziale: " + asta.prezzoiniziale + ", Offerta: " + valore;
       }
     } catch (error) {
-      console.error("Errore nel creare offerta", error);
-    }
+      return "Errore nel creare offerta: " + error.message;    }
   }
 
   static async trovaOffertaMassima(ids) {
