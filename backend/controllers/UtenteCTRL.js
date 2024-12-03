@@ -1,10 +1,9 @@
-import { Utente } from "../models/Database.js";
-import { Offerta } from "../models/Database.js";
-import { Asta } from "../models/Database.js";
+import { Utente,Offerta,Asta } from "../models/Database.js";
 import { Op } from "sequelize";
 import chalk from "chalk";
 
 export class UtenteCTRL {
+  /*
   static async salvaUtente(
     nickname,
     nome,
@@ -33,6 +32,7 @@ export class UtenteCTRL {
     });
     await utente.save();
   }
+    */
 
   static async recuperaUtenteByEmail(email) {
     try {

@@ -54,7 +54,7 @@ export class OffertaCTRL {
       let asta = await Asta.findOne({ where: { astaID: AstumAstaID } });
 
       if (!asta) {
-        return "Asta non trovata.";      
+        return "Asta non trovata.";
       }
 
       let utente = await Utente.findOne({
@@ -62,28 +62,51 @@ export class OffertaCTRL {
       });
 
       if (!utente) {
-        return "Utente non trovato.";      }
+        return "Utente non trovato.";
+      }
 
       if (utente.saldo < valore) {
         return `Saldo insufficiente per l'offerta. Saldo disponibile: ${utente.saldo}, Offerta: ${valore}`;
       }
 
-      if (valore > 0 && valore < asta.prezzoiniziale) {
-        let nuovaOfferta = new Offerta({
-          valore: valore,
-          UtenteNickname: UtenteNickname,
-          AstumAstaID: AstumAstaID,
-        });
+      let prezzoCorrente = await OffertaCTRL.trovaOffertaMinimaPerAsta(
+        AstumAstaID
+      );
 
+      if (valore > 0 && valore < asta.prezzoiniziale) {
+        if (prezzoCorrente == NULL || valore < prezzoCorrente) {
+          let nuovaOfferta = new Offerta({
+            valore: valore,
+            UtenteNickname: UtenteNickname,
+            AstumAstaID: AstumAstaID,
+          });
+
+<<<<<<< HEAD
         await nuovaOfferta.save();
         return "Offerta salvata nel database. Prezzo iniziale: ";
 
         
+=======
+          await nuovaOfferta.save();
+          return (
+            "Offerta salvata nel database. Prezzo iniziale: " +
+            asta.prezzoiniziale +
+            ", Offerta: " +
+            valore
+          );
+        }
+>>>>>>> 180c8e12c81cf4a621293d6b33427b33b852af4b
       } else {
-        return "Offerta troppo alta. Prezzo iniziale: " + asta.prezzoiniziale + ", Offerta: " + valore;
+        return (
+          "Offerta troppo alta. Prezzo iniziale: " +
+          asta.prezzoiniziale +
+          ", Offerta: " +
+          valore
+        );
       }
     } catch (error) {
-      return "Errore nel creare offerta: " + error.message;    }
+      return "Errore nel creare offerta: " + error.message;
+    }
   }
 
   static async trovaOffertaMassima(ids) {

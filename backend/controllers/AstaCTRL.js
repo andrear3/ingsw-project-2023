@@ -4,8 +4,7 @@ import {
   Asta,
   AstaAlRibasso,
   AstaInversa,
-  Utente,
-  Offerta,
+  Utente
 } from "../models/Database.js";
 import { Op } from "sequelize";
 import chalk from "chalk";
@@ -520,7 +519,6 @@ export class AstaCTRL {
         prezzoIniz,
         oreAsta,
         categoria,
-        url,
         descrizione,
       } = req.body;
       const fileUrl = req.file ? req.file.filename : null;
@@ -628,6 +626,7 @@ export class AstaCTRL {
           }
 
           await asta.save();
+          return true;
         }
       }
     } catch (error) {
