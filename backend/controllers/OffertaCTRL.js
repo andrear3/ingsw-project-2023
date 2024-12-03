@@ -71,10 +71,10 @@ export class OffertaCTRL {
 
       let prezzoCorrente = await OffertaCTRL.trovaOffertaMinimaPerAsta(
         AstumAstaID
-      );
+      ).offertaMin;
 
       if (valore > 0 && valore < asta.prezzoiniziale) {
-        if (prezzoCorrente == NULL || valore < prezzoCorrente) {
+        if (prezzoCorrente == null || valore < prezzoCorrente) {
           let nuovaOfferta = new Offerta({
             valore: valore,
             UtenteNickname: UtenteNickname,
