@@ -1,30 +1,25 @@
-# Usa un'immagine di Node.js
 FROM node:18
 
 # Creare una directory di lavoro
 WORKDIR /usr/src/app
 
-# Installare le dipendenze necessarie per compilare sqlite3
+# Installare i pacchetti necessari
 RUN apt-get update && apt-get install -y \
     build-essential \
     sqlite3 \
-    libsqlite3-dev \
-    python3 \
-    python3-pip \
-    g++ \
-    make
+    libsqlite3-dev
 
-# Copiare il file package.json e package-lock.json (se esiste)
+# Copiare i file di configurazione per installare le dipendenze
 COPY package*.json ./
 
-
+# Installa le dipendenze
 RUN npm install --build-from-source --unsafe-perm
 
-# Copiare il codice sorgente nel contenitore
+# Copiare il resto del codice sorgente
 COPY . .
 
-# Esporre la porta 3000 per l'applicazione
+# Esporre la porta
 EXPOSE 3000
 
-# Comando per avviare l'applicazione
+# Comando di avvio
 CMD ["node", "server.js"]
