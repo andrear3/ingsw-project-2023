@@ -1,0 +1,26 @@
+# Usa un'immagine base di Node.js
+FROM node:18
+
+# Creare una directory di lavoro
+WORKDIR /usr/src/app
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    sqlite3 \
+    libsqlite3-dev
+# Copiare i file package.json e package-lock.json
+COPY package*.json ./
+
+# Installare le dipendenze
+RUN npm install --build-from-source
+
+# Copiare il codice sorgente
+COPY . .
+
+# Costruire l'applicazione Angular (o React/Vue)
+RUN npm run build --prod
+
+# Esporre la porta per il frontend (porta 4200)
+EXPOSE 4200
+
+# Comando per avviare il server di sviluppo di Angular
+CMD ["npm", "start"]
