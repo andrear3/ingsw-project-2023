@@ -37,6 +37,7 @@ app.use(bodyParser.json()); // Parsing JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
+    origin: 'http://localhost:4200', 
     credentials: true,
   })
 ); //CORS SETTINGS

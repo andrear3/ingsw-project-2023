@@ -1,0 +1,26 @@
+
+
+services:
+  frontend:
+    build:
+      context: ./frontend/angular-app
+      dockerfile: Dockerfile.frontend  # Specifica il Dockerfile del frontend
+    ports:
+      - "4200:4200"  # Mappa la porta del frontend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend  # Specifica il Dockerfile del backend
+    ports:
+      - "3000:3000"  # Mappa la porta del backend
+    volumes:
+      - ./backend:/usr/src/app  # Volumes per fare il mount del codice, se necessario
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
