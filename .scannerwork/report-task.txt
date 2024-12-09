@@ -2,5 +2,5 @@ projectKey=dieti_deals_24
 serverUrl=http://localhost:9000
 serverVersion=10.7.0.96327
 dashboardUrl=http://localhost:9000/dashboard?id=dieti_deals_24
-ceTaskId=3f6cbc40-51c0-40a6-80d3-ceeca4dca3d5
-ceTaskUrl=http://localhost:9000/api/ce/task?id=3f6cbc40-51c0-40a6-80d3-ceeca4dca3d5
+ceTaskId=0a8cf512-70fe-44ae-a779-d4f8684f5799
+ceTaskUrl=http://localhost:9000/api/ce/task?id=0a8cf512-70fe-44ae-a779-d4f8684f5799
