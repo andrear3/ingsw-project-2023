@@ -78,7 +78,7 @@ describe('creaOfferta Test', function() {
 
 
 describe('setTipoUtente Test', function () {
-  it('test12 cambai il tipo utente con successo "', async function () {
+  it('test12 cambia il tipo utente con successo "', async function () {
     const result = await UtenteCTRL.setTipoUtente('compratore', 'TestUtente@mail.it');
    
     expect(result).to.be.equal("Succeso! Tipo cambiato");
@@ -101,7 +101,6 @@ describe('setTipoUtente Test', function () {
   it('test15 campo Email vuoto', async function () {
     await UtenteCTRL.setTipoUtente('compratore', '')
       .catch((error) => {
-        // Assumendo che venga lanciato un errore per email vuota
         expect(error.message).to.match(/email/i);
       });
   });
