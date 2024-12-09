@@ -26,62 +26,61 @@
       <app-navbar></app-navbar>
     </nav>
     <main>
-      
-
       <div class="card-container">
-        @for (asta of asteFiltrate; track asteFiltrate) {
-        <mat-card
-          (click)="navigateToviewAsta(asta, tipoAsta)"
-          class="card"
-          *ngIf="asta"
-        >
-          <div class="card-item">
-            <div class="card-image">
-              <img
-                [src]="asta?.url || 'placeholder.jpg'"
-                alt="Immagine di {{ asta?.nomeBeneInVendita || 'N/A' }}"
-              />
-            </div>
-            <div class="card-content">
-              <h2 class="card-title">
-                {{ asta?.titolo || "Titolo non disponibile" }}
-              </h2>
-              <h3 class="card-subtitle">
-                {{ asta?.nomeBeneInVendita || "Nome non disponibile" }}
-              </h3>
-              <div class="card-info">
-                <p>
-                  <strong>Categoria:</strong> {{ asta?.categoria || "N/A" }}
-                </p>
-                <p><strong>Tipo asta:</strong> {{ tipoAsta || "N/A" }}</p>
-                <p>
-                  <strong>Tipo:</strong> {{ asta?.tipoBeneInVendita || "N/A" }}
-                </p>
-                <p>
-                  <strong>Data di Fine Asta:</strong>
-                  {{ asta?.dataFineAsta ? (asta.dataFineAsta | date) : "N/A" }}
-                </p>
-                <p>
-                  <strong>Creata da:</strong>
-                  {{ asta?.UtenteNickname || "N/A" }}
-                </p>
-                @if (tipoAsta == 'Inversa') {
-                <p class="danger">
-                  <strong
-                    >Offerta corrente:
-                    {{ asta?.offertaMin || asta?.prezzoiniziale }}€</strong
-                  >
-                </p>
-                }
-
-                <p class="danger">
-                  <strong>Tempo restante: {{ getFormattedTime(asta) }}</strong>
-                </p>
+        <div *ngIf="asteFiltrate.length > 0; else noAstaMessage">
+          <mat-card
+            *ngFor="let asta of asteFiltrate; track asteFiltrate"
+            (click)="navigateToviewAsta(asta, tipoAsta)"
+            class="card"
+          >
+            <div class="card-item">
+              <div class="card-image">
+                <img
+                  [src]="asta?.url || 'placeholder.jpg'"
+                  alt="Immagine di {{ asta?.nomeBeneInVendita || 'N/A' }}"
+                />
+              </div>
+              <div class="card-content">
+                <h2 class="card-title">
+                  {{ asta?.titolo || "Titolo non disponibile" }}
+                </h2>
+                <h3 class="card-subtitle">
+                  {{ asta?.nomeBeneInVendita || "Nome non disponibile" }}
+                </h3>
+                <div class="card-info">
+                  <p>
+                    <strong>Categoria:</strong> {{ asta?.categoria || "N/A" }}
+                  </p>
+                  <p><strong>Tipo asta:</strong> {{ tipoAsta || "N/A" }}</p>
+                  <p>
+                    <strong>Tipo:</strong> {{ asta?.tipoBeneInVendita || "N/A" }}
+                  </p>
+                  <p>
+                    <strong>Data di Fine Asta:</strong>
+                    {{ asta?.dataFineAsta ? (asta.dataFineAsta | date) : "N/A" }}
+                  </p>
+                  <p>
+                    <strong>Creata da:</strong>
+                    {{ asta?.UtenteNickname || "N/A" }}
+                  </p>
+                  <p class="danger" *ngIf="tipoAsta === 'Inversa'">
+                    <strong
+                      >Offerta corrente:
+                      {{ asta?.offertaMin || asta?.prezzoiniziale }}€</strong
+                    >
+                  </p>
+                  <p class="danger">
+                    <strong>Tempo restante: {{ getFormattedTime(asta) }}</strong>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </mat-card>
-        }
+          </mat-card>
+        </div>
+        
+        <ng-template #noAstaMessage>
+          <p>Nessuna asta trovata.</p>
+        </ng-template>
       </div>
     </main>
   </body>
