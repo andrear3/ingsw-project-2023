@@ -88,7 +88,7 @@ export class OffertaCTRL {
         }
       } else {
         return (
-          "Offerta troppo alta."
+          "Offerta non valida."
         );
       }
     } catch (error) {

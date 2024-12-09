@@ -38,31 +38,39 @@ describe("creaOffertaInversa Test", function () {
     const result = await OffertaCTRL.creaOffertaInversa(49, 'TestUtente', 2);
     expect(result).to.equal("Asta non trovata.");
   });
+  it("test5 offerta negativa", async function () {
+    const result = await OffertaCTRL.creaOffertaInversa(-10, 'TestUtente', 60);
+    expect(result).to.equal("Offerta non valida.");
+  });
 });
 
 describe('creaOfferta Test', function() {
-  it('test5 crea offerta con successo ', async function() {
+  it('test6 crea offerta con successo ', async function() {
     const result = await OffertaCTRL.creaOfferta(103, 'TestUtente', 50);
     expect(result).to.equal('Offerta salvata nel database');
   });
 
-  it('test6 ritorna errore asta non trovata', async function() {
+  it('test7 id asta inesistente', async function() {
     const result = await OffertaCTRL.creaOfferta(103, 'TestUtente', 3);
     expect(result).to.equal('Asta non trovata.');
   });
 
-  it('test7 ritorna errore saldo insufficiente', async function() {
+  it('test8 saldo non sufficiente per coprire offerta', async function() {
     const result = await OffertaCTRL.creaOfferta(1400, 'TestUtente', 50);
     expect(result).to.equal('Saldo insufficiente per l\'offerta');
   });
 
-  it('test8 ritorna errore utente non trovato', async function() {
+  it('test9 utente inesistente', async function() {
     const result = await OffertaCTRL.creaOfferta(1400, 'TestUtente102', 50);
     expect(result).to.equal('Utente non trovato');
   });
 
-  it('test9 ritorna erroe offerta troppo bassa', async function() {
+  it('test10 offerta minore ', async function() {
     const result = await OffertaCTRL.creaOfferta(49, 'TestUtente', 50);
+    expect(result).to.equal('Offerta troppo bassa');
+  });
+  it('test11 offerta negativa', async function() {
+    const result = await OffertaCTRL.creaOfferta(-10, 'TestUtente', 50);
     expect(result).to.equal('Offerta troppo bassa');
   });
 });
@@ -70,27 +78,27 @@ describe('creaOfferta Test', function() {
 
 
 describe('setTipoUtente Test', function () {
-  it('test10 cambai il tipo utente con successo "', async function () {
+  it('test12 cambai il tipo utente con successo "', async function () {
     const result = await UtenteCTRL.setTipoUtente('compratore', 'TestUtente@mail.it');
    
     expect(result).to.be.equal("Succeso! Tipo cambiato");
   });
 
-  it('test11 ritorna errore Tipo utente non valido', async function () {
+  it('test13 ritorna errore Tipo utente non valido', async function () {
     await UtenteCTRL.setTipoUtente('admin', 'TestUtente@mail.it')
       .catch((error) => {
         expect(error.message).to.equal("Tipo utente non valido. Deve essere 'venditore' o 'compratore'.");
       });
   });
 
-  it('test12 errore Utente non trovato', async function () {
+  it('test14 errore Utente non trovato', async function () {
     await UtenteCTRL.setTipoUtente('compratore', 'nonEsistente@mail.it')
       .catch((error) => {
         expect(error.message).to.equal("Errore nel cambiare tipo, Utente non trovato");
       });
   });
 
-  it('test13 campo Email vuoto', async function () {
+  it('test15 campo Email vuoto', async function () {
     await UtenteCTRL.setTipoUtente('compratore', '')
       .catch((error) => {
         // Assumendo che venga lanciato un errore per email vuota
@@ -107,8 +115,8 @@ app.use('/login', loginRouter);
 process.env.ACCESS_TOKEN_SECRET = 'token';
 
 
-describe('Login API', function () {
-  it('test 14 credeziali corrette ritorna access token ', async function () {
+describe('Login', function () {
+  it('test 16 credeziali corrette  ', async function () {
     const res = await supertest(app)
 
       .post('/login')
@@ -117,7 +125,7 @@ describe('Login API', function () {
     expect(res.body).to.have.property('accessToken');
   });
 
-  it('test 15 password non corretta error code 401', async function () {
+  it('test 17 password non corretta ', async function () {
     const res = await supertest(app)
 
       .post('/login')
@@ -126,7 +134,7 @@ describe('Login API', function () {
     expect(res.body.message).to.equal("Incorrect password.");
   });
 
-  it('test 16 utente inesistente error code 401', async function () {
+  it('test 18 utente inesistente', async function () {
     const res = await supertest(app)
 
       .post('/login')
