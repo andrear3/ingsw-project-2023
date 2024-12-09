@@ -1,24 +1,24 @@
 FROM node:18
 
-# Creare una directory di lavoro
+# Crea una directory di lavoro
 WORKDIR /usr/src/app
 
-# Installare i pacchetti necessari
+# Installa i pacchetti necessari
 RUN apt-get update && apt-get install -y \
     build-essential \
     sqlite3 \
     libsqlite3-dev
 
-# Copiare i file di configurazione per installare le dipendenze
+# Copia i file di configurazione per installare le dipendenze
 COPY package*.json ./
 
 # Installa le dipendenze
 RUN npm install --build-from-source --unsafe-perm
 
-# Copiare il resto del codice sorgente
+# Copia il resto del codice sorgente
 COPY . .
 
-# Esporre la porta
+# porta
 EXPOSE 3000
 
 # Comando di avvio

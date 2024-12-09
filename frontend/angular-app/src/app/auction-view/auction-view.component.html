@@ -79,7 +79,7 @@
     } @if(tipoAsta=="Al Ribasso"){
     <div class="square">
       <div class="row1">
-        <div class="photoProfileContainer">
+        <div class="photoProfileContainer" (click)="visualProfile()">
           <img
             [src]="'http://localhost:3000/images/' + utenteAsta?.url"
             alt="Foto profilo"
