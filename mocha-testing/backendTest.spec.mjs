@@ -1,16 +1,7 @@
 import { expect } from 'chai';
-import { AstaCTRL } from "../backend/controllers/AstaCTRL.js";
 import { OffertaCTRL } from '../backend/controllers/OffertaCTRL.js';
-import { Offerta } from '../backend/models/Database.js';
-import { Utente } from '../backend/models/Database.js';
 import { UtenteCTRL } from '../backend/controllers/UtenteCTRL.js';
-
-
-import request from 'supertest';
-import sinon from 'sinon';
-import jwt from 'jsonwebtoken';
 import  {loginRouter} from '../backend/routers/LogIn.js';
-import { createHash } from 'crypto';
 import supertest from 'supertest';
 import express from 'express';
 import dotenv from 'dotenv';

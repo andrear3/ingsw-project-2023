@@ -39,7 +39,7 @@ export class RestService {
     return this.http.get<{ aste: Asta[]; userInfo: Utente }>(url, httpOptions);
   }
 
-  //DA TESTARE
+  
   getAstaInversa(): Observable<{ aste: Asta[]; userInfo: Utente }> {
     const url = `${this.apiUrl}/homepage/inversa`;
     const token = this.authService.getToken();

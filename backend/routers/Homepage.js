@@ -61,7 +61,7 @@ homepageRouter.get("/homepage", authToken, async (req, res) => {
   }
 });
 
-// DA TESTARE
+
 homepageRouter.get("/homepage/inversa", authToken, async (req, res) => {
   try {
 
@@ -110,7 +110,7 @@ homepageRouter.get("/homepage/inversa", authToken, async (req, res) => {
   }
 });
 
-//nuova
+
 homepageRouter.get("/homepage/ribasso", authToken, async (req, res) => {
   try {
     let asteAlRibasso = await AstaCTRL.recuperaAsteAlRibassoAttive(); 
@@ -158,25 +158,7 @@ homepageRouter.get("/homepage/ribasso", authToken, async (req, res) => {
   }
 });
 
-/*
-homepageRouter.post("/aste/utente", authToken, async (req, res) => {
-  try {
-    const { nickname } = req.params;
 
-
-    const asteConOfferte = await AstaCTRL.recuperaAsteConOfferteUtente(nickname);
-
-    if (!asteConOfferte || asteConOfferte.length === 0) {
-      return res.status(404).json({ message: `Nessuna asta attiva trovata per l'utente ${nickname}` });
-    }
-
-    res.json({ aste: asteConOfferte });
-  } catch (error) {
-    console.error("Errore nel recupero delle aste con offerte dell'utente:", error);
-    res.status(500).json({ message: "Errore del server" });
-  }
-});
-*/
 
 homepageRouter.get("/images/:filename", (req, res) => {
   const filename = req.params.filename;

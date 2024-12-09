@@ -18,7 +18,7 @@ export class AppComponent {
   title = 'angular-app';
   showNavbar: boolean = true;
   
-  //singleton?
+
  constructor(private router:Router,  private authService: AuthService, private navbarService:NavbarService,private cdr: ChangeDetectorRef) {} 
  
  nascondiNavBar(){

@@ -22,7 +22,7 @@ productRouter.post("/auctionView", authToken, async (req, res) => {
   }
 });
 
-//DA TESTAREEEEEEEEEEEEEEEEEEE
+
 productRouter.post("/auctionInversaView", authToken, async (req, res) => {
   const { valore, UtenteNickname, AstumAstaID } = req.body;
 

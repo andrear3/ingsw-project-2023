@@ -16,7 +16,7 @@ RUN npm install --build-from-source
 # Copia il codice sorgente
 COPY . .
 
-# Costruisce l'applicazione Angular (o React/Vue)
+# Costruisce l'applicazione Angular 
 RUN npm run build --prod
 
 # porta

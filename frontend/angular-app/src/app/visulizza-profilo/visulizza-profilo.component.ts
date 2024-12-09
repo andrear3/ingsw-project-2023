@@ -53,7 +53,7 @@ export class VisulizzaProfiloComponent {
     if (this.nickname) {
       this.RestService.getUtenteByNickname(this.nickname).subscribe({
         next: (data) => {
-          this.utente = data; // Memorizza i dati dell'utente
+          this.utente = data; 
           console.log('Utente trovato:', this.utente);
         },
         error: (err) => {

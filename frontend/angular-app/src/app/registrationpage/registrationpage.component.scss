@@ -9,7 +9,7 @@ body{
     margin:20px auto;
     text-align: center;
     position: relative;
-    //right: 5%;
+ 
   
 }
 .logo{
@@ -45,7 +45,7 @@ body{
     top: 20px;
 }
 .boxEmail, .boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxTipoAccount, .boxRegione, .boxIndirizzo {
-   // display: flex;
+
     flex-direction: row;
     align-items: center; 
     margin: 20px auto;
@@ -102,7 +102,7 @@ body{
     color:white;
 }
 .boxEmail, .boxNome, .boxCognome, .boxDataNascita, .boxPassword, .boxNickname, .boxTipoAccount, .boxRegione, .boxIndirizzo {
-   // display: flex;
+
     flex-direction: row;
     align-items: center;
     margin: 20px auto;

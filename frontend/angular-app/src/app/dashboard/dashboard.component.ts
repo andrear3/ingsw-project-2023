@@ -43,13 +43,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.callPostDashboard();
 
-    //SET TIPO UTENTE
-    /*this.restService.setTipoUtente('').subscribe({
-      next: (response) => {},
-      error: (err) => {
-        console.error('Error', err);
-      },
-    });*/
   }
 
   callPostDashboard() {

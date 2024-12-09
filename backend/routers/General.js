@@ -13,7 +13,6 @@ export const general = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const dir = path.join(__dirname, "../resources/images");
@@ -28,7 +27,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Route to set user type
 general.post("/setUser", authToken, async (req, res) => {
   try {
     console.log("Request to set user type received");
@@ -43,7 +41,6 @@ general.post("/setUser", authToken, async (req, res) => {
   }
 });
 
-// Route to create a classical auction
 general.post(
   "/creaAsta",
   authToken,
@@ -66,7 +63,6 @@ general.post(
   }
 );
 
-// Route to create
 general.post(
   "/creaAstaRibasso",
   authToken,

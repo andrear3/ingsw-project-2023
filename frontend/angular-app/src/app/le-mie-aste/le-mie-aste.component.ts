@@ -64,20 +64,7 @@ export class LeMieAsteComponent implements OnInit, OnDestroy {
           this.authService.setStatus(true);
           this.applyFilters();
 
-          /*
-          if (this.utente) {
-            this.subscriptions.add(
-              this.restService.offerteByUtente().subscribe({
-                next: (astePartecipate) => {
-                  this.astePartecipate = astePartecipate;
-                },
-                error: (err) =>
-                  console.error('Errore nel recuperare le aste:', err),
-              })
-            );
-          }
-          
-          */
+        
 
           this.startDecrementTimer();
         },
