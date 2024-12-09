@@ -55,7 +55,8 @@ export class LeMieAsteComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscriptions.add(
-      this.restService.getAsta().subscribe({
+      /* solo asta inversa */
+      this.restService.getAstaInversa().subscribe({
         next: (response: { aste: Asta[]; userInfo: Utente }) => {
           this.aste = response.aste;
           this.utente = response.userInfo;

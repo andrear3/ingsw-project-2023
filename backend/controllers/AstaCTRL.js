@@ -4,7 +4,7 @@ import {
   Asta,
   AstaAlRibasso,
   AstaInversa,
-  Utente
+  Utente,
 } from "../models/Database.js";
 import { Op } from "sequelize";
 import chalk from "chalk";
@@ -451,9 +451,13 @@ export class AstaCTRL {
 
         if (offertaMassima) {
           asta.statusAsta = "venduto";
-          asta.prezzofinale = offertaMassima.valore;
-          await asta.save();
+          asta.prezzofinale = offertaMassima.offertaMax;
 
+          await asta.save();
+          await UtenteCTRL.diminuisciSaldo(
+            offertaMassima.UtenteNickname,
+            offertaMassima.offertaMax
+          );
           console.log(
             `Asta al ribasso venduta a ${offertaMassima.UtenteNickname} per il prezzo di ${offertaMassima.valore}`
           );

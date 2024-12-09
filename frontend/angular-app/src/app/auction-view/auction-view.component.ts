@@ -10,6 +10,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { RestService } from '../_services/rest-api.service';
 import { AuthService } from '../_services/auth.service';
 import { Utente } from '../_models/utente-model';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { state } from '@angular/animations';
 @Component({
@@ -34,10 +35,10 @@ export class AuctionViewComponent {
   newOfferta: number | null = null;
 
   constructor(
-    
     private restService: RestService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
   public tipoAsta: string = '';
   utenteAsta: Utente | null = null;
@@ -85,13 +86,20 @@ export class AuctionViewComponent {
           offerData.AstumAstaID
         )
         .subscribe({
-          next: (response) => {
-            console.log('Offerta:', response);
-          },
-          error: (err) => {
-            console.error('Errore:', err);
-          },
+          next: () =>
+            this.snackBar.open('Offerta proposta con successo! ✅', 'Close', {
+              duration: 3000,
+            }),
+          error: () =>
+            this.snackBar.open(
+              'Errore durante la proposta di offerta!',
+              'Close',
+              {
+                duration: 3000,
+              }
+            ),
         });
+      this.router.navigate(['/homepage']);
     } else {
       console.log(this.newOfferta);
       console.log('Offerta non valida');
@@ -115,13 +123,20 @@ export class AuctionViewComponent {
           offerData.AstumAstaID
         )
         .subscribe({
-          next: (response) => {
-            console.log('Offerta:', response);
-          },
-          error: (err) => {
-            console.error('Errore:', err);
-          },
+          next: () =>
+            this.snackBar.open('Offerta proposta con successo! ✅', 'Close', {
+              duration: 3000,
+            }),
+          error: () =>
+            this.snackBar.open(
+              'Errore durante la proposta di offerta!',
+              'Close',
+              {
+                duration: 3000,
+              }
+            ),
         });
+      this.router.navigate(['/homepage']);
     } else {
       console.log(this.newOfferta);
       console.log('Offerta non valida');
@@ -139,13 +154,20 @@ export class AuctionViewComponent {
     this.restService
       .postOfferRibasso(String(offerData.UtenteNickname), offerData.AstumAstaID)
       .subscribe({
-        next: (response) => {
-          console.log('Offerta:', response);
-        },
-        error: (err) => {
-          console.error('Errore:', err);
-        },
+        next: () =>
+          this.snackBar.open('Asta aggiudicata! ✅', 'Close', {
+            duration: 3000,
+          }),
+        error: () =>
+          this.snackBar.open(
+            'Errore durante la proposta di offerta!',
+            'Close',
+            {
+              duration: 3000,
+            }
+          ),
       });
+    this.router.navigate(['/homepage']);
   }
 
   startDecrementTimer() {
